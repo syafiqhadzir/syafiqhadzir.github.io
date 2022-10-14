@@ -348,3 +348,13 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Nuxt
+node_modules
+*.log*
+.nuxt
+.nitro
+.cache
+.output
+.env
+dist
