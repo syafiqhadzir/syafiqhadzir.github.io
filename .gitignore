@@ -358,3 +358,6 @@ node_modules
 .output
 .env
 dist
+
+# PWA
+sw.*
