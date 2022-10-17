@@ -1,5 +1,6 @@
 // https://v3.nuxtjs.org/api/configuration/nuxt.config
 export default defineNuxtConfig({
+    modules: ["@nuxt/content"],
     buildModules: [
         '@nuxtjs/pwa', '@nuxt/typescript-build'
     ],
@@ -18,5 +19,8 @@ export default defineNuxtConfig({
     noscript: [
         // <noscript>Javascript is required</noscript>
         { children: 'Javascript is required' }
-    ]
+    ],
+    content: {
+        // https://content.nuxtjs.org/api/configuration
+    }
 })
