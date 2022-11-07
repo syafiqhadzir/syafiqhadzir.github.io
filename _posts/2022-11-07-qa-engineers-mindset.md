@@ -2,7 +2,7 @@
 layout: post
 title: "QA Engineer's Mindset"
 category: QA
-slug: /posts/2022/11/07/qa-engineers-mindset
+slug: qa-engineers-mindset
 ---
 
 ## [Table of Contents](#toc)
