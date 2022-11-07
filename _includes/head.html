@@ -4,14 +4,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>
-    {%- if page.title -%}
-    {{ page.title }}
-    {%- else -%}
-    {{ site.title }}
-    {%- endif -%}
+    {{ site.title | page.title }}
   </title>
 
-  {%- seo -%}
+  {%- seo title=false -%}
   {%- feed_meta -%}
 
   <link rel="shortcut icon" type="image/x-icon" href="{{ site.favicon | relative_url }}" />
