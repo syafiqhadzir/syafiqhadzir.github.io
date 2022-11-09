@@ -16,7 +16,7 @@ slug: qa-engineers-must-code
 
 Quality assurance (QA) engineers may not be as technical as developers; but that doesn't mean QA shouldn't learn nor write codes. 
 
-It is a ludicrous lack of understanding in concept of assurance when assigning an illiterate person to ensure a masterpiece, software, quality to customers.
+It is a ludicrous lack of understanding in concept of assurance when assigning an illiterate person to ensure a masterpiece (read: software) quality to customers.
 
 ## [Everyone Should Write Something](#everyone-should-write-something)
 
@@ -28,11 +28,11 @@ There are plenty of testing methodologies that require code literacy. Unit testi
 
 ## [QA Engineers Should Review Code](#qa-engineers-should-review-code)
 
-The concept of code review is often misunderstood. Thus, people tend to think that end-to-end testing is suffice. But it's not. This confusion could bounce back with consequences to deal with.
+The concept of code review is often misunderstood. Thus, people tend to think that end-to-end testing is sufficient. But it is not. This confusion could bounce back with consequences to deal with.
 
 In the age of Agile, code review is a must-have practice where the source code is broken into small pieces, which then is inspected by the supervisor. This should be done not only by developers, but QA testers as well.
 
-Code review is the process where mistakes are detected and early bugs are caught. Also, this will be the time when you realize the importance of code comments.
+Code review is the process where mistakes are detected and early bugs are caught. This will also be the time when you realise the importance of code comments.
 
 ## [Conclusion](#conclusion)
 
