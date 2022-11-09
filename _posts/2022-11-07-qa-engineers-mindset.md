@@ -5,12 +5,15 @@ category: QA
 slug: qa-engineers-mindset
 ---
 
+# [QA Engineer's Mindset](#qa-engineers-mindset)
+
 ## [Table of Contents](#toc)
-- [Table of Contents](#table-of-contents)
-- [Who is a QA Engineer?](#who-is-a-qa-engineer)
-- [How to be QA Engineers?](#how-to-be-qa-engineers)
-- [QA Misconceptions](#qa-misconceptions)
-- [Conclusion](#conclusion)
+- [QA Engineer's Mindset](#qa-engineers-mindset)
+  - [Table of Contents](#table-of-contents)
+  - [Who is a QA Engineer?](#who-is-a-qa-engineer)
+  - [How to be QA Engineers?](#how-to-be-qa-engineers)
+  - [QA Misconceptions](#qa-misconceptions)
+  - [Conclusion](#conclusion)
 
 ## [Who is a QA Engineer?](#who-is-a-qa-engineer)
 

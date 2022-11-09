@@ -5,12 +5,15 @@ category: QA
 slug: qa-engineers-must-code
 ---
 
+# [QA Engineers Must Code](#qa-engineers-must-code)
+
 ## [Table of Contents](#toc)
-- [Table of Contents](#table-of-contents)
-- [Should QA Engineers Code?](#should-qa-engineers-code)
-- [Everyone Should Write Something](#everyone-should-write-something)
-- [QA Engineers Should Review Code](#qa-engineers-should-review-code)
-- [Conclusion](#conclusion)
+- [QA Engineers Must Code](#qa-engineers-must-code)
+  - [Table of Contents](#table-of-contents)
+  - [Should QA Engineers Code?](#should-qa-engineers-code)
+  - [Everyone Should Write Something](#everyone-should-write-something)
+  - [QA Engineers Should Review Code](#qa-engineers-should-review-code)
+  - [Conclusion](#conclusion)
 
 ## [Should QA Engineers Code?](#should-qa-engineers-code)
 
