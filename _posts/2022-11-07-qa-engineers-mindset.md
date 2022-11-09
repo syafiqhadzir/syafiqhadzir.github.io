@@ -16,13 +16,13 @@ slug: qa-engineers-mindset
 
 A quality assurance (QA) engineer is an utter perfectionist who looks and evaluates something another way around, to the certain extent, divergently.
 
-Being a QA engineer is not just about a position in structured organizations, but inquisitiveness of life which requires that extreme curiousity, or that sense to not let broken things stay broken. It is something that one can't acquire but to be born with. As the saying goes, “Quality is not an act; it is a habit.”
+Being a QA engineer is not just about a position in structured organisations, but inquisitiveness of life which requires that extreme curiosity, or that sense of not letting broken things stay broken. It is something that one can't acquire but to be born with. As the saying goes, “Quality is not an act; it is a habit.”
 
 We, who sit in this position, should have the ability to vigilantly prepare for whatever life throws our way, because we work in the intersections, between a wide variety of machines and people. Otherwise, there won't be any difference with the developers and the project managers.
 
 ## [How to be QA Engineers?](#how-to-be-qa-engineers)
 
-QA engineers are the ones who possesses an analytical mindset, good communication skills and an aptitude for manual & automated processes.
+QA engineers are the ones who possess an analytical mindset, good communication skills and an aptitude for manual & automated processes.
 
 You should have (or at least have the effort to have) all the attributes listed.
 
