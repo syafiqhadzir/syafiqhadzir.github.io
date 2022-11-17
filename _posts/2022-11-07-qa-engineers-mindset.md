@@ -12,7 +12,7 @@ slug: qa-engineers-mindset
 - [QA Misconceptions](#qa-misconceptions)
 - [Conclusion](#conclusion)
 
-## [Who is a QA Engineer?](#who-is-a-qa-engineer)
+## Who is a QA Engineer?
 
 A quality assurance (QA) engineer is an utter perfectionist who looks and evaluates something another way around, to the certain extent, divergently.
 
@@ -20,13 +20,13 @@ Being a QA engineer is not just about a position in structured organisations, bu
 
 We, who sit in this position, should have the ability to vigilantly prepare for whatever life throws our way, because we work in the intersections, between a wide variety of machines and people. Otherwise, there won't be any difference with the developers and the project managers.
 
-## [How to be QA Engineers?](#how-to-be-qa-engineers)
+## How to be QA Engineers?
 
 QA engineers are the ones who possess an analytical mindset, good communication skills and an aptitude for manual & automated processes.
 
 You should have (or at least have the effort to have) all the attributes listed.
 
-## [QA Misconceptions](#qa-misconceptions)
+## QA Misconceptions
 
 The most widespread myths that I have encountered are "quality assurance should be done last" and "it is all just about finding bugs & errors".
 
@@ -36,7 +36,7 @@ The truth is, it is the definition of quality assurance, that we fail to underst
 
 Quality assurance is not about the process, it is about the mindset. Also, it is not just about bugs and errors, it is about the point of reliability for the customers. To ensure that the deliverable does what it promises, while also behaving reasonably in difficult or unexpected circumstances.
 
-## [Conclusion](#conclusion)
+## Conclusion
 
 We should spread the awareness about the importance of QA in a software development life cycle (SDLC). Each of us, QA engineers, should be an evangelist on promoting the habits. Shifting from a "gatekeeper" to an "enabler", we empower users and we enable developers.
 
