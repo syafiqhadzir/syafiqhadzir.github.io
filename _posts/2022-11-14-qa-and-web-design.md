@@ -5,7 +5,7 @@ category: QA
 slug: qa-and-web-design
 ---
 
-## [Table of Contents](#toc)
+## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Who Are QA Engineers?](#who-are-qa-engineers)
 - [Why Is QA Related to Design?](#why-is-qa-related-to-design)

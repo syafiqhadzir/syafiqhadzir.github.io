@@ -5,7 +5,7 @@ category: QA
 slug: software-testing-fundamentals
 ---
 
-## [Table of Contents](#toc)
+## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [All Codes Are Guilty Until Proven Innocent](#all-codes-are-guilty-until-proven-innocent)

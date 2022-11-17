@@ -5,7 +5,7 @@ category: QA
 slug: qa-engineers-mindset
 ---
 
-## [Table of Contents](#toc)
+## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [Who is a QA Engineer?](#who-is-a-qa-engineer)
 - [How to be QA Engineers?](#how-to-be-qa-engineers)

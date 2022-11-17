@@ -5,7 +5,7 @@ category: QA
 slug: qa-engineers-for-seo
 ---
 
-## [Table of Contents](#toc)
+## Table of Contents
 - [Table of Contents](#table-of-contents)
 - [SEO Helps to Improve Web Quality](#seo-helps-to-improve-web-quality)
 - [Will QA Engineers Replace SEO Analysts?](#will-qa-engineers-replace-seo-analysts)
