@@ -3,6 +3,7 @@ layout: post
 title: "QA Engineers Must Code"
 category: QA
 slug: qa-engineers-must-code
+gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents

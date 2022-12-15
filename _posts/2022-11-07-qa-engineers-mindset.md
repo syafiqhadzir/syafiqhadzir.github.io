@@ -3,6 +3,7 @@ layout: post
 title: "QA Engineer's Mindset"
 category: QA
 slug: qa-engineers-mindset
+gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents

@@ -3,6 +3,7 @@ layout: post
 title: "Software Testing Fundamentals"
 category: QA
 slug: software-testing-fundamentals
+gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents
