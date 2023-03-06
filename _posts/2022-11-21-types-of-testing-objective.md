@@ -3,7 +3,7 @@ layout: post
 title: "Types of Testing Objective"
 category: QA
 slug: types-of-testing-objective
-gpgkey: "4AEE 18F8 3AFD EB23"
+gpgkey: "D25D D0AD 3FDB F7C6"
 ---
 
 ## Table of Contents
