@@ -7,6 +7,7 @@ gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents
+
 - [Table of Contents](#table-of-contents)
 - [Who Are QA Engineers?](#who-are-qa-engineers)
 - [Why Is QA Related to Design?](#why-is-qa-related-to-design)

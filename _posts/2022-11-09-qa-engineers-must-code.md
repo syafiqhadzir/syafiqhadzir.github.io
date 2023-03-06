@@ -7,6 +7,7 @@ gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents
+
 - [Table of Contents](#table-of-contents)
 - [Should QA Engineers Code?](#should-qa-engineers-code)
 - [Everyone Should Write Something](#everyone-should-write-something)
@@ -15,7 +16,7 @@ gpgkey: "EBE8 BD81 6838 1BAF"
 
 ## Should QA Engineers Code?
 
-Quality assurance (QA) engineers may not be as technical as developers; but that doesn't mean QA shouldn't learn nor write codes. 
+Quality assurance (QA) engineers may not be as technical as developers; but that doesn't mean QA shouldn't learn nor write codes.
 
 It is a ludicrous lack of understanding in concept of assurance when assigning an illiterate person to ensure a masterpiece (read: software) quality to customers.
 

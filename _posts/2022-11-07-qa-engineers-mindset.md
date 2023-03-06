@@ -7,6 +7,7 @@ gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents
+
 - [Table of Contents](#table-of-contents)
 - [Who is a QA Engineer?](#who-is-a-qa-engineer)
 - [How to be QA Engineers?](#how-to-be-qa-engineers)

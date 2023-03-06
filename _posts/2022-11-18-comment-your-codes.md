@@ -7,17 +7,19 @@ gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents
+
+- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Document The Work](#document-the-work)
 - [Conclusion](#conclusion)
 
-# Introduction
+## Introduction
 
 Communication is essential. Nobody dares to deny the fact of communication. Nat Turner, believed, once said, "Good communication is the bridge between confusion and clarity". As QA engineers, we should be experts in this dexterity. Effective communication promotes trust.
 
 There are the seven (7) C's, a list of communication principles, for both spoken and written, to ensure clear, correct, complete, concrete, concise, considered and courteous conversation. That's it. I have just listed it down. As the saying goes, "Communication works for those who work at it".
 
-# Document The Work
+## Document The Work
 
 Let's talk about how hard it is to document the code. I am aware of this concern. That is why I am always suggesting "coding the documentation" instead.
 
@@ -31,6 +33,6 @@ But how is it to code the documentation? Here are another 3 C's from Nigel Wilso
 
 3. Completeness: The holy grail of documentation. Without it, things may take the trail off into nothing, leaving team members halfway through tasks with nowhere to go but down.
 
-# Conclusion
+## Conclusion
 
 Code commenting is a science as well as an art of coding. An eloquence art to precisely exchange thoughts and ideas.

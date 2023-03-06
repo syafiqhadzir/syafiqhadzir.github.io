@@ -7,6 +7,7 @@ gpgkey: "EBE8 BD81 6838 1BAF"
 ---
 
 ## Table of Contents
+
 - [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [All Codes Are Guilty Until Proven Innocent](#all-codes-are-guilty-until-proven-innocent)
@@ -30,6 +31,7 @@ Defects may exist either in the code or in its design. To a certain extent, it i
 ## What are Severity and Priority?
 
 Severity defines the degree of impact that a defect has on the development or operation of a component or system. The severity can be of one of the following types (and I use all the definitions from ISTQB):-
+
 1. Critical (S1): The defect affects critical functionality or critical data. It does not have a workaround.
 2. Major (S2): The defect affects major functionality or major data. It has a workaround but is not obvious and is difficult.
 3. Minor (S3): The defect affects minor functionality or non-critical data. It has an easy workaround.
@@ -37,4 +39,4 @@ Severity defines the degree of impact that a defect has on the development or op
 
 ## Conclusion
 
-Fundamentals are the foundation to understand that software testing is not just a process, but a solution. 
+Fundamentals are the foundation to understand that software testing is not just a process, but a solution.
