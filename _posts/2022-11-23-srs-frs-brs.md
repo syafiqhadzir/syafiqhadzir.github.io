@@ -3,7 +3,7 @@ layout: post
 title: "SRS, FRS & BRS"
 category: QA
 slug: srs-frs-brs
-gpgkey: "4AEE 18F8 3AFD EB23"
+gpgkey: "D25D D0AD 3FDB F7C6"
 ---
 
 ## Table of Contents
