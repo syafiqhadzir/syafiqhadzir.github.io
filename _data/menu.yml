@@ -13,4 +13,6 @@ entries:
       show_more_url: archive.html
   - title: RSS
     url: feed.xml
+  - title: Readings
+    url: readings.html
   - title: Powered by GitHub Pages & Cloudflare
