@@ -5,6 +5,8 @@ entries:
   - title: About
     entries:
       - title: As both a linguist and a programmer, codes are my poetries.
+      - title: Read more...
+        url: about.html
   - title: All Posts
     post_list:
       limit: 5
