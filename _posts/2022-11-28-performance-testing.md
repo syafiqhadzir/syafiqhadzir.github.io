@@ -53,6 +53,6 @@ For any inquiry, kindly help yourself to Google it.
 
 ## Conclusion
 
-It is all about reputation, based on the performance and efficiency in delivering something. It is not just about software quality but how prepared we are to face any inevitable challenges in life.
+It is all about reputation, based on performance and efficiency in delivering something. It is not just about software quality but how prepared we are to face any inevitable challenges in life.
 
 J. R. D. Tata, believed, once said, "Productivity and efficiency, can be achieved, only step by step, with sustained hard work, relentless attention to details and insistence on the highest standards of quality and performance."
