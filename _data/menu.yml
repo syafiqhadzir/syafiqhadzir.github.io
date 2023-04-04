@@ -17,4 +17,6 @@ entries:
     url: feed.xml
   - title: Readings
     url: readings.html
+  - title: Publications
+    url: publications.html
   - title: Powered by GitHub Pages & Cloudflare
