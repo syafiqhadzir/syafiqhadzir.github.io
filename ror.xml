@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<channel>
+  <title>ROR Sitemap for https://amp.syafiqhadzir.dev/</title>
+  <link>https://amp.syafiqhadzir.dev/</link>
+
+<item>
+     <link>https://amp.syafiqhadzir.dev/</link>
+     <title>Syafiq Hadzir™ - Home</title>
+     <description>Just another guy who codes and writes. Copyright &amp;#169; 2017 - 2022 Syafiq Hadzir. All rights reserved.</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>0</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://amp.syafiqhadzir.dev/About/</link>
+     <title>Syafiq Hadzir™ - About</title>
+     <description>Just another guy who codes and writes. Copyright &amp;#169; 2017 - 2022 Syafiq Hadzir. All rights reserved.</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://amp.syafiqhadzir.dev/Readings/</link>
+     <title>Syafiq Hadzir™ - Readings</title>
+     <description>Just another guy who codes and writes. Copyright &amp;#169; 2017 - 2022 Syafiq Hadzir. All rights reserved.</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+</channel>
+</rss>
+  
