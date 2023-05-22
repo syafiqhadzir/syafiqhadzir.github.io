@@ -1,4 +1,0 @@
----
-layout: readings
-title: Readings
----
