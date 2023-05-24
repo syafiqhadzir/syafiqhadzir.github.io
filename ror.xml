@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
 <channel>
-  <title>ROR Sitemap for https://amp.syafiqhadzir.dev/</title>
-  <link>https://amp.syafiqhadzir.dev/</link>
+  <title>ROR Sitemap for https://syafiqhadzir.github.io/</title>
+  <link>https://syafiqhadzir.github.io/</link>
 
 <item>
-     <link>https://amp.syafiqhadzir.dev/</link>
+     <link>https://syafiqhadzir.github.io/</link>
      <title>Syafiq Hadzir™ - Home</title>
      <description>Just another guy who codes and writes. Copyright &amp;#169; 2017 - 2022 Syafiq Hadzir. All rights reserved.</description>
      <ror:updatePeriod></ror:updatePeriod>
@@ -13,7 +13,7 @@
      <ror:resourceOf>sitemap</ror:resourceOf>
 </item>
 <item>
-     <link>https://amp.syafiqhadzir.dev/About/</link>
+     <link>https://syafiqhadzir.github.io/About/</link>
      <title>Syafiq Hadzir™ - About</title>
      <description>Just another guy who codes and writes. Copyright &amp;#169; 2017 - 2022 Syafiq Hadzir. All rights reserved.</description>
      <ror:updatePeriod></ror:updatePeriod>
@@ -21,7 +21,7 @@
      <ror:resourceOf>sitemap</ror:resourceOf>
 </item>
 <item>
-     <link>https://amp.syafiqhadzir.dev/Readings/</link>
+     <link>https://syafiqhadzir.github.io/Readings/</link>
      <title>Syafiq Hadzir™ - Readings</title>
      <description>Just another guy who codes and writes. Copyright &amp;#169; 2017 - 2022 Syafiq Hadzir. All rights reserved.</description>
      <ror:updatePeriod></ror:updatePeriod>
