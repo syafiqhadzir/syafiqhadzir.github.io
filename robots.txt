@@ -250,4 +250,4 @@ Disallow: /lib/
 Disallow: /scgi-bin/
 Disallow: /cgi-bin/
 
-Sitemap: https://syafiqhadzir.github.io/sitemap.xml
+Sitemap: https://syafiqhadzir.dev/sitemap.xml
