@@ -1,0 +1,22 @@
+{
+  "name": "syafiqhadzir.github.io",
+  "version": "1.0.0",
+  "description": "Just another guy who codes and writes.",
+  "homepage": "https://github.com/syafiqhadzir/syafiqhadzir.github.io#readme",
+  "bugs": {
+    "email": "syafiqhadzir@live.com.my",
+    "url": "https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/syafiqhadzir/syafiqhadzir.github.io.git"
+  },
+  "license": "CC0-1.0",
+  "author": {
+    "name": "Syafiq Hadzir",
+    "url": "https://www.syafiqhadzir.dev/"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
