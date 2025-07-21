@@ -1,115 +1,116 @@
 describe('Syafiq Hadzir Homepage E2E', () => {
 
-  // Visit the homepage before each test
+  // Always start from the homepage before each test
   beforeEach(() => {
-    cy.visit('/')
+    cy.visit('/');
   });
 
 
-  it('displays the correct page title and meta', () => {
-    // Check the page title
+  it('displays the correct page title and meta tags', () => {
+    // Page title should match
     cy.title().should('eq', 'Syafiq Hadzir™');
-    // Check meta description
+    // Meta description should be present and correct
     cy.get('meta[name="description"]').should('have.attr', 'content').and('include', 'Just another guy who codes and writes');
-    // Check meta keywords
+    // Meta keywords should be present and correct
     cy.get('meta[name="keywords"]').should('have.attr', 'content').and('include', 'Syafiq Hadzir');
-    // Check canonical link
+    // Canonical link should point to the correct domain
     cy.get('link[rel="canonical"]').should('have.attr', 'href').and('include', 'syafiqhadzir.dev');
   });
 
 
   it('shows the author name and role', () => {
-    // Check for author name
+    // Author name should be visible
     cy.get('#author-name').should('contain', 'Syafiq Hadzir');
-    // Check for role subtitle
+    // Role subtitle should be visible
     cy.contains('Software QA Engineer').should('be.visible');
   });
 
 
-  it('shows the About section with profile image', () => {
-    // Check About section header
+  it('shows the About section with profile image and company link', () => {
+    // About section header should be present
     cy.get('#about').should('contain', 'About');
-    // Check profile image alt text
-    cy.get('amp-img.profile-picture').should('have.attr', 'alt', 'Syafiq Hadzir');
-    // Check profile image src
-    cy.get('amp-img.profile-picture').should('have.attr', 'src').and('include', 'headshot.webp');
-    // Check Cloud Connect link
-    cy.contains('Cloud Connect').should('have.attr', 'href', 'https://www.cloud-connect.asia/');
+    // Profile image should have correct alt and src
+    cy.get('amp-img.profile-picture')
+      .should('have.attr', 'alt', 'Syafiq Hadzir')
+      .and('have.attr', 'src').and('include', 'headshot.webp');
+    // Cloud Connect company link should be correct
+    cy.contains('Cloud Connect')
+      .should('have.attr', 'href', 'https://www.cloud-connect.asia/');
   });
 
 
-  it('shows the Blog button and navigates correctly', () => {
-    // Check Blog button/link
-    cy.get('a').contains('Blog').should('have.attr', 'href', 'https://blog.syafiqhadzir.dev/');
+  it('shows the Blog button with correct link', () => {
+    // Blog button should link to the blog
+    cy.get('a').contains('Blog')
+      .should('have.attr', 'href', 'https://blog.syafiqhadzir.dev/');
   });
 
 
-  it('shows the Proficiencies section and lists key skills', () => {
-    // Check Proficiencies section header
+  it('shows the Proficiencies section and key skills', () => {
+    // Proficiencies section header should be present
     cy.get('#proficiencies').should('contain', 'Proficiencies');
-    // Check for key skills
-    cy.contains('Designing and executing comprehensive test plans').should('be.visible');
-    cy.contains('Identifying critical defects').should('be.visible');
-    cy.contains('ensuring the delivery of high-quality software products').should('be.visible');
+    // Each key skill should be visible
+    [
+      'Designing and executing comprehensive test plans',
+      'Identifying critical defects',
+      'ensuring the delivery of high-quality software products'
+    ].forEach(skill => cy.contains(skill).should('be.visible'));
   });
 
 
   it('shows GitHub and GitLab links', () => {
-    // Check GitHub link
-    cy.get('a').contains('GitHub').should('have.attr', 'href', 'https://github.com/SyafiqHadzir');
-    // Check GitLab link
-    cy.get('a').contains('GitLab').should('have.attr', 'href', 'https://gitlab.com/syafiqhadzir');
+    // Social links should be present and correct
+    cy.get('a').contains('GitHub')
+      .should('have.attr', 'href', 'https://github.com/SyafiqHadzir');
+    cy.get('a').contains('GitLab')
+      .should('have.attr', 'href', 'https://gitlab.com/syafiqhadzir');
   });
 
 
   it('shows the Interests section and all interest items', () => {
-    // Check Interests section header
+    // Interests section header should be present
     cy.get('#interest').should('contain', 'Interests');
-    // Check for each interest item
-    cy.contains('AI Exploration').should('be.visible');
-    cy.contains('CI/CD Intergration').should('be.visible');
-    cy.contains('Code Assessment').should('be.visible');
-    cy.contains('Test Automation').should('be.visible');
-    cy.contains('Web Application').should('be.visible');
+    // All interest items should be visible
+    [
+      'AI Exploration',
+      'CI/CD Intergration',
+      'Code Assessment',
+      'Test Automation',
+      'Web Application'
+    ].forEach(interest => cy.contains(interest).should('be.visible'));
   });
 
 
   it('shows the footer with copyright and last update', () => {
-    // Check copyright
+    // Footer should contain copyright, powered by, and last update
     cy.get('footer').should('contain', '© 2017-2025 Syafiq Hadzir');
-    // Check powered by text
     cy.get('footer').should('contain', 'Powered by');
-    // Check last update text
     cy.get('footer').should('contain', 'Last Update:');
   });
 
 
   it('has all favicon and manifest links', () => {
-    // Check apple touch icon
+    // Favicon and manifest links should exist
     cy.get('link[rel="apple-touch-icon"]').should('exist');
-    // Check 32x32 favicon
     cy.get('link[rel="icon"][sizes="32x32"]').should('exist');
-    // Check 16x16 favicon
     cy.get('link[rel="icon"][sizes="16x16"]').should('exist');
-    // Check mask icon
     cy.get('link[rel="mask-icon"]').should('exist');
-    // Check theme color meta
     cy.get('meta[name="theme-color"]').should('have.attr', 'content');
   });
 
 
   it('has AMP and FontAwesome scripts/styles', () => {
-    // Check AMP script
+    // AMP script should be present and async
     cy.get('script[src*="cdn.ampproject.org/v0.js"]').should('have.attr', 'async');
-    // Check Google Fonts stylesheet
+    // Google Fonts stylesheet should be present
     cy.get('link[href*="fonts.googleapis.com"]').should('exist');
-    // Check FontAwesome stylesheet
+    // FontAwesome stylesheet should be present
     cy.get('link[href*="fontawesome"]').should('exist');
   });
 
 
   it('is responsive for mobile widths', () => {
-    // Set viewport to mobile size and check main elements
+    // Simulate mobile viewport and check main elements remain visible
     cy.viewport(375, 667); // iPhone 6/7/8
     cy.get('.container').should('be.visible');
     cy.get('#author-name').should('be.visible');
