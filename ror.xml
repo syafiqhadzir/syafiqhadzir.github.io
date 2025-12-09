@@ -7,27 +7,10 @@
 <item>
      <link>https://syafiqhadzir.dev/</link>
      <title>Syafiq Hadzir™ - Home</title>
-     <description>Just another guy who codes and writes. Copyright © 2017 - 2024 Syafiq Hadzir. All rights reserved.</description>
-     <ror:updatePeriod></ror:updatePeriod>
+     <description>Just another guy who codes and writes. Copyright © 2017 - 2025 Syafiq Hadzir. All rights reserved.</description>
+     <ror:updatePeriod>monthly</ror:updatePeriod>
      <ror:sortOrder>0</ror:sortOrder>
-     <ror:resourceOf>sitemap</ror:resourceOf>
-</item>
-<item>
-     <link>https://syafiqhadzir.dev/About/</link>
-     <title>Syafiq Hadzir™ - About</title>
-     <description>Just another guy who codes and writes. Copyright © 2017 - 2024 Syafiq Hadzir. All rights reserved.</description>
-     <ror:updatePeriod></ror:updatePeriod>
-     <ror:sortOrder>1</ror:sortOrder>
-     <ror:resourceOf>sitemap</ror:resourceOf>
-</item>
-<item>
-     <link>https://syafiqhadzir.dev/Readings/</link>
-     <title>Syafiq Hadzir™ - Readings</title>
-     <description>Just another guy who codes and writes. Copyright © 2017 - 2024 Syafiq Hadzir. All rights reserved.</description>
-     <ror:updatePeriod></ror:updatePeriod>
-     <ror:sortOrder>1</ror:sortOrder>
      <ror:resourceOf>sitemap</ror:resourceOf>
 </item>
 </channel>
 </rss>
-  

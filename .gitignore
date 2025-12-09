@@ -359,8 +359,7 @@ node_modules
 .env
 dist
 
-# PWA
-sw.*
+# PWA - allow sw.js for service worker
 
 # Jekyll
 _site/
