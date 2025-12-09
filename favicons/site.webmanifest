@@ -1,8 +1,12 @@
 {
   "name": "Syafiq Hadzir™ - Official Website",
-  "short_name": "Syafiq Hadzir™ - Official Website",
+  "short_name": "Syafiq Hadzir",
+  "description": "Software QA Engineer portfolio - AI-assisted testing, test automation, and web application development.",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
+  "orientation": "portrait-primary",
+  "prefer_related_applications": false,
   "icons": [
     {
       "src": "https://syafiqhadzir.dev/favicons/android-chrome-36x36.png",
@@ -32,7 +36,8 @@
     {
       "src": "https://syafiqhadzir.dev/favicons/android-chrome-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "https://syafiqhadzir.dev/favicons/android-chrome-256x256.png",
@@ -47,9 +52,26 @@
     {
       "src": "https://syafiqhadzir.dev/favicons/android-chrome-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
-  "theme_color": "#ffffff",
+  "shortcuts": [
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Read my latest blog posts",
+      "url": "https://blog.syafiqhadzir.dev/",
+      "icons": [{ "src": "https://syafiqhadzir.dev/favicons/android-chrome-96x96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "GitHub",
+      "short_name": "GitHub",
+      "description": "View my GitHub profile",
+      "url": "https://github.com/SyafiqHadzir",
+      "icons": [{ "src": "https://syafiqhadzir.dev/favicons/android-chrome-96x96.png", "sizes": "96x96" }]
+    }
+  ],
+  "theme_color": "#000000",
   "background_color": "#ffffff"
 }
