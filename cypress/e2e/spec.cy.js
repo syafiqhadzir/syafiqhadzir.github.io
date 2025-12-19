@@ -115,4 +115,62 @@ describe('Syafiq Hadzir Homepage E2E', () => {
     cy.get('.container').should('be.visible');
     cy.get('#author-name').should('be.visible');
   });
+
+  // ARIA Accessibility Tests
+
+  describe('ARIA Accessibility', () => {
+
+    it('has skip-to-content link that targets main content', () => {
+      // Skip link should exist and point to main content
+      cy.get('.skip-link').should('exist');
+      cy.get('.skip-link').should('have.attr', 'href', '#main-content');
+      // Main content target should exist
+      cy.get('#main-content').should('exist');
+    });
+
+
+    it('has proper landmark roles', () => {
+      // Main landmark should exist
+      cy.get('main[role="main"]').should('exist');
+      // Footer with contentinfo role should exist
+      cy.get('footer[role="contentinfo"]').should('exist');
+    });
+
+
+    it('decorative icons have aria-hidden attribute', () => {
+      // All Font Awesome icons should be hidden from screen readers
+      cy.get('i.fa-solid').each($icon => {
+        cy.wrap($icon).should('have.attr', 'aria-hidden', 'true');
+      });
+      cy.get('i.fa-brands').each($icon => {
+        cy.wrap($icon).should('have.attr', 'aria-hidden', 'true');
+      });
+    });
+
+
+    it('interactive button links have descriptive aria-labels', () => {
+      // All w3-button links should have aria-label for screen readers
+      cy.get('a.w3-button').each($link => {
+        cy.wrap($link).should('have.attr', 'aria-label');
+      });
+    });
+
+
+    it('main content area has descriptive aria-label', () => {
+      // Main landmark should have aria-label
+      cy.get('main[role="main"]')
+        .should('have.attr', 'aria-label')
+        .and('include', 'Portfolio');
+    });
+
+
+    it('footer has descriptive aria-label', () => {
+      // Footer should have aria-label
+      cy.get('footer[role="contentinfo"]')
+        .should('have.attr', 'aria-label')
+        .and('include', 'footer');
+    });
+
+  });
+
 });
