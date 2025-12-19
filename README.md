@@ -14,9 +14,10 @@ Personal portfolio website for **Syafiq Hadzir**, a Software QA Engineer special
 
 - ⚡ **AMP-Powered** — Built with Accelerated Mobile Pages for blazing-fast load times
 - 📱 **PWA Ready** — Installable as a Progressive Web App with offline support
-- ♿ **Accessible** — WCAG-compliant with proper ARIA labels and semantic HTML
-- 🎨 **Dark Theme** — Modern, sleek dark design with smooth animations
-- 🔍 **SEO Optimized** — Schema.org structured data, meta tags, and sitemaps
+- 🌙 **Dark/Light Theme** — Auto-switches based on system preference (`prefers-color-scheme`)
+- ♿ **Accessible** — WCAG-compliant with ARIA labels, skip links, and semantic HTML
+- 🔍 **SEO Optimized** — Schema.org structured data, Open Graph, Twitter Cards, and sitemaps
+- 🔒 **Security Hardened** — `security.txt`, `noreferrer` on external links
 
 ---
 
@@ -25,10 +26,11 @@ Personal portfolio website for **Syafiq Hadzir**, a Software QA Engineer special
 | Category | Technology |
 |----------|------------|
 | **Framework** | Static HTML + AMP |
-| **Styling** | W3.CSS + Custom CSS |
-| **Icons** | Font Awesome 6 |
+| **Styling** | W3.CSS + CSS Variables |
+| **Icons** | Font Awesome 6 (self-hosted) |
 | **Fonts** | Google Fonts (Inconsolata) |
-| **Testing** | Cypress E2E |
+| **Testing** | Cypress 15 E2E |
+| **Language** | TypeScript 5.9 |
 | **CI/CD** | GitHub Actions |
 | **Hosting** | GitHub Pages / Netlify |
 
@@ -38,19 +40,28 @@ Personal portfolio website for **Syafiq Hadzir**, a Software QA Engineer special
 
 ```
 syafiqhadzir.github.io/
-├── .github/workflows/    # GitHub Actions CI/CD
-├── cypress/              # E2E test suite
-│   ├── e2e/              # Test specifications
-│   └── support/          # Custom commands
-├── favicons/             # App icons & manifest
-├── Images/               # Site images
-├── assets/               # Static assets
-├── index.html            # Main page
-├── offline.html          # PWA offline fallback
-├── sw.js                 # Service worker
-├── sitemap.xml           # XML sitemap
-├── robots.txt            # Crawler directives
-└── browserconfig.xml     # Windows tile config
+├── .github/
+│   ├── dependabot.yml        # Automated dependency updates
+│   └── workflows/
+│       └── static.yml        # CI/CD pipeline
+├── .well-known/
+│   └── security.txt          # Security contact info
+├── cypress/
+│   ├── e2e/                  # Test specifications
+│   └── support/              # Custom commands
+├── favicons/                 # App icons & manifest
+├── Images/                   # Site images
+├── 404.html                  # Custom error page
+├── index.html                # Main page (AMP)
+├── offline.html              # PWA offline fallback
+├── sitemap.html              # Human-readable sitemap
+├── sw.js                     # Service worker
+├── sitemap.xml               # XML sitemap
+├── robots.txt                # Crawler directives
+├── browserconfig.xml         # Windows tile config
+├── .editorconfig             # Editor settings
+├── .nvmrc                    # Node.js version
+└── tsconfig.json             # TypeScript config
 ```
 
 ---
@@ -59,7 +70,7 @@ syafiqhadzir.github.io/
 
 ### Prerequisites
 
-- [Node.js](https://nodejs.org/) v22+
+- [Node.js](https://nodejs.org/) v22+ (see `.nvmrc`)
 - npm v10+
 
 ### Installation
@@ -73,39 +84,47 @@ cd syafiqhadzir.github.io
 npm install
 ```
 
-### Local Development
+### Available Scripts
 
 ```bash
-# Serve locally (requires npx serve or similar)
-npx serve . -l 8080
-
-# Open in browser
-# http://localhost:8080
-```
-
-### Running Tests
-
-```bash
-# Run Cypress E2E tests (headless)
-npx cypress run
-
-# Open Cypress Test Runner (interactive)
-npx cypress open
+npm run serve       # Start local server on port 8080
+npm run test        # Run Cypress E2E tests (headless)
+npm run test:open   # Open Cypress Test Runner (interactive)
+npm run typecheck   # Run TypeScript type checking
 ```
 
 ---
 
 ## 🧪 Testing
 
-This project uses [Cypress](https://www.cypress.io/) for end-to-end testing. Tests cover:
+This project uses [Cypress 15](https://www.cypress.io/) for end-to-end testing. Tests cover:
 
 - ✅ Page title and meta tags
 - ✅ Content visibility (About, Proficiencies, Interests)
 - ✅ Navigation links (Blog, GitHub, GitLab)
 - ✅ Favicon and manifest presence
 - ✅ AMP script loading
-- ✅ Responsive design
+- ✅ Font Awesome icons rendering
+- ✅ Responsive design (mobile viewport)
 - ✅ ARIA accessibility compliance
+
+### Test Configuration
+
+- **Viewport**: 1280×720
+- **Retries**: 2 (CI), 0 (local)
+- **Screenshots**: On failure only
+
+---
+
+## 🔧 Configuration Files
+
+| File | Purpose |
+|------|---------|
+| `.editorconfig` | Consistent coding style across editors |
+| `.nvmrc` | Node.js version for nvm users |
+| `tsconfig.json` | TypeScript ES2022 configuration |
+| `cypress.config.ts` | Cypress test settings |
+| `.github/dependabot.yml` | Weekly dependency updates |
 
 ---
 
