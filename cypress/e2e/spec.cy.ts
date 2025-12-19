@@ -76,7 +76,7 @@ describe('Syafiq Hadzir Homepage E2E', () => {
         // All interest items should be visible
         const interests: string[] = [
             'AI Exploration',
-            'CI/CD Intergration',
+            'CI/CD Integration',
             'Code Assessment',
             'Test Automation',
             'Web Application'
@@ -108,8 +108,9 @@ describe('Syafiq Hadzir Homepage E2E', () => {
         cy.get('script[src*="cdn.ampproject.org/v0.js"]').should('have.attr', 'async');
         // Google Fonts stylesheet should be present
         cy.get('link[href*="fonts.googleapis.com"]').should('exist');
-        // FontAwesome stylesheet should be present
-        cy.get('link[href*="fontawesome"]').should('exist');
+        // FontAwesome icons should be rendered (self-hosted via @font-face)
+        cy.get('i.fa-solid').should('exist');
+        cy.get('i.fa-brands').should('exist');
     });
 
 

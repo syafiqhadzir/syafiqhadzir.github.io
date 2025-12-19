@@ -1,8 +1,8 @@
 {
   "name": "syafiqhadzir.github.io",
   "version": "1.0.0",
-  "description": "Just another guy who codes and writes.",
-  "homepage": "https://github.com/syafiqhadzir/syafiqhadzir.github.io#readme",
+  "description": "Personal portfolio website for Syafiq Hadzir - Software QA Engineer",
+  "homepage": "https://syafiqhadzir.dev",
   "bugs": {
     "email": "syafiqhadzir@live.com.my",
     "url": "https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues"
@@ -14,13 +14,21 @@
   "license": "CC0-1.0",
   "author": {
     "name": "Syafiq Hadzir",
-    "url": "https://www.syafiqhadzir.dev/"
+    "email": "syafiqhadzir@live.com.my",
+    "url": "https://syafiqhadzir.dev"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "npx serve . -l 8080",
+    "test": "cypress run",
+    "test:open": "cypress open",
+    "typecheck": "tsc --noEmit"
   },
   "devDependencies": {
-    "cypress": "^14.5.2",
+    "cypress": "^15.8.1",
     "typescript": "^5.9.3"
+  },
+  "engines": {
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
   }
 }

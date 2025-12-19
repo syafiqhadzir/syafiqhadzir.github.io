@@ -1,7 +1,8 @@
 // Service Worker for Syafiq Hadzir Portfolio
-// Version: 1.0.0
+// Version: 2.0.0 (2025-12-19)
 
-const CACHE_NAME = 'syafiq-portfolio-v1';
+const CACHE_VERSION = '2025-12-19';
+const CACHE_NAME = `syafiq-portfolio-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
 
 // Assets to cache on install
@@ -9,8 +10,8 @@ const PRECACHE_ASSETS = [
     '/',
     '/index.html',
     '/offline.html',
-    '/favicon.ico',
-    '/assets/icons.css',
+    '/404.html',
+    '/favicons/favicon.ico',
     '/favicons/android-chrome-192x192.png',
     '/favicons/android-chrome-512x512.png',
     '/Images/headshot.webp'
@@ -35,7 +36,7 @@ self.addEventListener('activate', (event) => {
             .then((cacheNames) => {
                 return Promise.all(
                     cacheNames
-                        .filter((name) => name !== CACHE_NAME)
+                        .filter((name) => name.startsWith('syafiq-portfolio-') && name !== CACHE_NAME)
                         .map((name) => {
                             console.log('[SW] Deleting old cache:', name);
                             return caches.delete(name);

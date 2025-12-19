@@ -31,16 +31,18 @@
     content="Just another guy who codes and writes. Software QA Engineer specializing in AI-assisted testing.">
   <meta name=twitter:image content=https://syafiqhadzir.dev/Images/headshot.webp>
   <script
-    type=application/ld+json>{"@context":"https://schema.org","@type":"ProfilePage","dateModified":"2025-07-08","url":"https://syafiqhadzir.dev","name":"Syafiq Hadzir™","headline":"Software QA Engineer Portfolio","description":"Just another guy who codes and writes. Copyright © 2017 - 2025 Syafiq Hadzir. All rights reserved.","mainEntity":{"@type":"Person","name":"Syafiq Hadzir","jobTitle":"Software QA Engineer","description":"AI-assisted software quality assurance engineer with 5+ years of experience in software development and 3+ years in network security research.","image":"https://syafiqhadzir.dev/Images/headshot.webp","url":"https://syafiqhadzir.dev","worksFor":{"@type":"Organization","name":"Cloud Connect","url":"https://www.cloud-connect.asia/"},"sameAs":["https://github.com/SyafiqHadzir","https://gitlab.com/syafiqhadzir","https://blog.syafiqhadzir.dev"],"knowsAbout":["Test Automation","AI Exploration","CI/CD Integration","Code Assessment","Web Application Testing"]},"publisher":{"@type":"Person","name":"Syafiq Hadzir"}}</script>
+    type=application/ld+json>{"@context":"https://schema.org","@type":"ProfilePage","dateModified":"2025-12-19","url":"https://syafiqhadzir.dev","name":"Syafiq Hadzir™","headline":"Software QA Engineer Portfolio","description":"Just another guy who codes and writes. Copyright © 2017 - 2025 Syafiq Hadzir. All rights reserved.","mainEntity":{"@type":"Person","name":"Syafiq Hadzir","jobTitle":"Software QA Engineer","description":"AI-assisted software quality assurance engineer with 5+ years of experience in software development and 3+ years in network security research.","image":"https://syafiqhadzir.dev/Images/headshot.webp","url":"https://syafiqhadzir.dev","worksFor":{"@type":"Organization","name":"Cloud Connect","url":"https://www.cloud-connect.asia/"},"sameAs":["https://github.com/SyafiqHadzir","https://gitlab.com/syafiqhadzir","https://blog.syafiqhadzir.dev"],"knowsAbout":["Test Automation","AI Exploration","CI/CD Integration","Code Assessment","Web Application Testing"]},"publisher":{"@type":"Person","name":"Syafiq Hadzir"}}</script>
   <link rel=apple-touch-icon sizes=180x180 href=/favicons/apple-touch-icon.png>
+  <link rel="shortcut icon" href=/favicons/favicon.ico>
   <link rel=icon type=image/png sizes=32x32 href=/favicons/favicon-32x32.png>
   <link rel=icon type=image/png sizes=192x192 href=/favicons/android-chrome-192x192.png>
   <link rel=icon type=image/png sizes=16x16 href=/favicons/favicon-16x16.png>
   <link rel=mask-icon href=/favicons/safari-pinned-tab.svg color=#5bbad5>
   <link rel=manifest href=/favicons/site.webmanifest>
-  <meta name=msapplication-TileColor content=#b91d47>
+  <meta name=msapplication-TileColor content=#000000>
   <meta name=msapplication-TileImage content=/favicons/mstile-144x144.png>
-  <meta name=theme-color content=#000000>
+  <meta name=theme-color content=#0a0a0a media="(prefers-color-scheme: dark)">
+  <meta name=theme-color content=#ffffff media="(prefers-color-scheme: light)">
   <meta name=viewport content="width=device-width,initial-scale=1">
   <script async src=https://cdn.ampproject.org/v0.js></script>
   <script async custom-element=amp-install-serviceworker
@@ -218,6 +220,38 @@
       content: "\e07d"
     }
 
+    :root {
+      --bg-primary: #0a0a0a;
+      --bg-secondary: #141414;
+      --text-primary: #e5e5e5;
+      --text-secondary: #a3a3a3;
+      --text-muted: #737373;
+      --accent: #3b82f6;
+      --accent-hover: #60a5fa;
+      --border: rgba(255, 255, 255, 0.1);
+      --border-light: rgba(255, 255, 255, 0.05);
+      --button-bg: #1f1f1f;
+      --button-hover: #2a2a2a;
+      color-scheme: dark
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f5f5f5;
+        --text-primary: #171717;
+        --text-secondary: #404040;
+        --text-muted: #737373;
+        --accent: #2563eb;
+        --accent-hover: #1d4ed8;
+        --border: rgba(0, 0, 0, 0.1);
+        --border-light: rgba(0, 0, 0, 0.05);
+        --button-bg: #171717;
+        --button-hover: #404040;
+        color-scheme: light
+      }
+    }
+
     html {
       box-sizing: border-box;
       height: 100%;
@@ -233,7 +267,10 @@
 
     body {
       margin: 0;
-      font: 15px/1.5 Inconsolata, Verdana, sans-serif
+      font: 15px/1.5 Inconsolata, Verdana, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      transition: background-color 0.3s ease, color 0.3s ease
     }
 
     footer,
@@ -246,14 +283,16 @@
     }
 
     a {
-      background-color: #fff0;
-      color: #ff0f00;
-      text-decoration: none
+      background-color: transparent;
+      color: var(--accent);
+      text-decoration: none;
+      transition: color 0.2s ease
     }
 
     a:active,
     a:hover {
       outline-width: 0;
+      color: var(--accent-hover);
       text-decoration: underline
     }
 
@@ -267,8 +306,7 @@
       height: 0;
       overflow: visible;
       border: 0;
-      border-top: 1px solid #0000001a;
-      border-bottom: 1px solid #ffffff4d;
+      border-top: 1px solid var(--border);
       margin: 20px 0
     }
 
@@ -280,7 +318,8 @@
     h6 {
       font-family: Inconsolata;
       font-weight: 700;
-      margin: 10px 0
+      margin: 10px 0;
+      color: var(--text-primary)
     }
 
     h1 {
@@ -322,8 +361,8 @@
     }
 
     .w3-button:hover {
-      color: #000;
-      background-color: #ccc
+      color: var(--text-primary);
+      background-color: var(--button-hover)
     }
 
     .w3-button:disabled {
@@ -347,13 +386,22 @@
     }
 
     .w3-black {
-      color: #fff;
-      background-color: #000
+      color: var(--bg-primary);
+      background-color: var(--text-primary);
+      transition: background-color 0.2s ease
+    }
+
+    .w3-black:hover {
+      background-color: var(--text-secondary)
     }
 
     #author-name {
       font-size: 30px;
-      color: #272727
+      color: var(--text-primary)
+    }
+
+    .subtitle {
+      color: var(--text-secondary)
     }
 
     .alignable {
@@ -422,7 +470,7 @@
     }
 
     .footer {
-      color: #000;
+      color: var(--text-muted);
       font-size: .75rem;
       margin-bottom: 10px;
       padding-bottom: 1rem
@@ -433,9 +481,10 @@
       left: -9999px;
       z-index: 999;
       padding: 8px 16px;
-      background: #000;
-      color: #fff;
-      text-decoration: none
+      background: var(--text-primary);
+      color: var(--bg-primary);
+      text-decoration: none;
+      border-radius: 4px
     }
 
     .skip-link:focus {
@@ -453,22 +502,25 @@
       <hr>
       <main id="main-content" role="main" aria-label="Portfolio content">
         <h1 id=author-name class=w3-center>Syafiq Hadzir</h1>
-        <h3 class=w3-center>Software QA Engineer</h3>
+        <h3 class="w3-center subtitle">Software QA Engineer</h3>
         <h2 id=about><i class="fa-solid fa-user-tie fa-fw" aria-hidden="true"></i>&nbsp;About</h2>
-        <p><amp-img class=profile-picture width=640 height=640 src=https://syafiqhadzir.dev/Images/headshot.webp
-            alt="Syafiq Hadzir" title="Syafiq Hadzir" layout=responsive></amp-img></p>
+        <p><amp-img class=profile-picture width=640 height=640 src=/Images/headshot.webp alt="Syafiq Hadzir"
+            title="Syafiq Hadzir" layout=responsive></amp-img></p>
         <p>Syafiq Hadzir, an artificial intelligence (AI) assisted software quality assurance (QA) engineer at <a
             class=main-link href=https://www.cloud-connect.asia/ rel="nofollow noreferrer noopener external">Cloud
             Connect</a>, actively leverages cutting-edge AI tools and methodologies to enhance the efficiency and
           effectiveness of the software testing lifecycle.</p>
         <ul class=alignable>
-          <li class=alignable><a class="w3-button w3-black w3-round" href="https://blog.syafiqhadzir.dev/" aria-label="Visit Syafiq's Blog"><i
-              class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>&nbsp;Blog</a></li>
+          <li class=alignable><a class="w3-button w3-black w3-round" href="https://blog.syafiqhadzir.dev/"
+              rel="noopener noreferrer external" aria-label="Visit Syafiq's Blog"><i class="fa-solid fa-rss fa-fw"
+                aria-hidden="true"></i>&nbsp;Blog</a>
+          </li>
         </ul>
-        <h2 id=proficiencies><i class="fa-solid fa-diagram-project fa-fw" aria-hidden="true"></i>&nbsp;Proficiencies</h2>
+        <h2 id=proficiencies><i class="fa-solid fa-diagram-project fa-fw" aria-hidden="true"></i>&nbsp;Proficiencies
+        </h2>
         <p>As an experienced software QA engineer (with 5+ years of experience) in software development and (with 3+
           years of experience) in network security research, he has a keen eye for detail and an aptitude for quickly
-          understanding complex software systems. His experties lies in:-</p>
+          understanding complex software systems. His expertise lies in:-</p>
         <ul>
           <li>Designing and executing comprehensive test plans;</li>
           <li>Identifying critical defects;</li>
@@ -476,8 +528,10 @@
         </ul>
         <ul class=alignable>
           <li class=alignable><a class="w3-button w3-black w3-round" href="https://github.com/SyafiqHadzir"
-              rel="noopener external" aria-label="Syafiq's GitHub profile"><i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;GitHub</a>&nbsp;<a
-              class="w3-button w3-black w3-round" href="https://gitlab.com/syafiqhadzir" rel="noopener external" aria-label="Syafiq's GitLab profile"><i
+              rel="noopener noreferrer external" aria-label="Syafiq's GitHub profile"><i
+                class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;GitHub</a>&nbsp;<a
+              class="w3-button w3-black w3-round" href="https://gitlab.com/syafiqhadzir"
+              rel="noopener noreferrer external" aria-label="Syafiq's GitLab profile"><i
                 class="fa-brands fa-gitlab fa-fw" aria-hidden="true"></i>&nbsp;GitLab</a></li>
         </ul>
         <p>Note: kindly visit my Github profile for more information.</p>
@@ -486,16 +540,18 @@
           interplay between AI and software testing, focusing specifically on these areas:</p>
         <ul>
           <li><i class="fa-solid fa-brain fa-fw" aria-hidden="true"></i>&emsp;AI Exploration</li>
-          <li><i class="fa-solid fa-infinity fa-fw" aria-hidden="true"></i>&emsp;CI/CD Intergration</li>
+          <li><i class="fa-solid fa-infinity fa-fw" aria-hidden="true"></i>&emsp;CI/CD Integration</li>
           <li><i class="fa-solid fa-code fa-fw" aria-hidden="true"></i>&emsp;Code Assessment</li>
           <li><i class="fa-solid fa-robot fa-fw" aria-hidden="true"></i>&emsp;Test Automation</li>
           <li><i class="fa-solid fa-window-maximize fa-fw" aria-hidden="true"></i>&emsp;Web Application</li>
         </ul>
         <hr>
-        <footer class="w3-center footer" role="contentinfo" aria-label="Site footer"><i class="fa-brands fa-creative-commons fa-fw" aria-hidden="true"></i><i
+        <footer class="w3-center footer" role="contentinfo" aria-label="Site footer"><i
+            class="fa-brands fa-creative-commons fa-fw" aria-hidden="true"></i><i
             class="fa-brands fa-creative-commons-zero fa-fw" aria-hidden="true"></i> © 2017-2025 Syafiq Hadzir<br><span
             id=powered-by-amp>Powered by <i class="fa-brands fa-google fa-fw" aria-hidden="true"></i> AMP & <i
-              class="fa-brands fa-cloudflare fa-fw" aria-hidden="true"></i> Cloudflare</span><br>Last Update: Tuesday, Jul 8th, 2025, 15:27
+              class="fa-brands fa-cloudflare fa-fw" aria-hidden="true"></i> Cloudflare</span><br>Last Update: Friday,
+          Dec 19th, 2025
         </footer>
       </main>
     </div>

@@ -1,8 +1,10 @@
 {
   "id": "dev.syafiqhadzir.portfolio",
-  "name": "Syafiq Hadzir™ - Official Website",
+  "name": "Syafiq Hadzir™ - Portfolio",
   "short_name": "Syafiq Hadzir",
   "description": "Software QA Engineer portfolio - AI-assisted testing, test automation, and web application development.",
+  "lang": "en",
+  "dir": "ltr",
   "categories": [
     "portfolio",
     "technology",
@@ -59,41 +61,6 @@
       "purpose": "maskable"
     }
   ],
-  "shortcuts": [
-    {
-      "name": "Blog",
-      "short_name": "Blog",
-      "description": "Read my latest blog posts",
-      "url": "https://blog.syafiqhadzir.dev/",
-      "icons": [
-        {
-          "src": "/favicons/android-chrome-96x96.png",
-          "sizes": "96x96"
-        }
-      ]
-    },
-    {
-      "name": "GitHub",
-      "short_name": "GitHub",
-      "description": "View my GitHub profile",
-      "url": "https://github.com/SyafiqHadzir",
-      "icons": [
-        {
-          "src": "/favicons/android-chrome-96x96.png",
-          "sizes": "96x96"
-        }
-      ]
-    }
-  ],
-  "screenshots": [
-    {
-      "src": "/Images/headshot.webp",
-      "sizes": "640x640",
-      "type": "image/webp",
-      "form_factor": "wide",
-      "label": "Syafiq Hadzir - Software QA Engineer"
-    }
-  ],
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0a0a0a",
+  "background_color": "#0a0a0a"
 }

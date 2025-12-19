@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Syafiq Hadzir™</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0a0a0a" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --text: #e5e5e5;
+            --text-muted: #a3a3a3;
+            --accent: #3b82f6;
+            --button-bg: #e5e5e5;
+            --button-text: #0a0a0a;
+            color-scheme: dark
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #ffffff;
+                --text: #171717;
+                --text-muted: #525252;
+                --accent: #2563eb;
+                --button-bg: #171717;
+                --button-text: #ffffff;
+                color-scheme: light
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Inconsolata', monospace;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 2rem;
+            transition: background-color 0.3s ease, color 0.3s ease
+        }
+
+        .container {
+            max-width: 500px
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent), #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            margin-bottom: 1rem;
+            font-weight: 600
+        }
+
+        p {
+            font-size: 1rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            line-height: 1.6
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.875rem 2rem;
+            background: var(--button-bg);
+            color: var(--button-text);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: transform 0.2s, opacity 0.2s
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9
+        }
+
+        .links {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(128, 128, 128, 0.2)
+        }
+
+        .links a {
+            color: var(--accent);
+            text-decoration: none;
+            margin: 0 0.75rem;
+            font-size: 0.9rem
+        }
+
+        .links a:hover {
+            text-decoration: underline
+        }
+    </style>
+</head>
+
+<body>
+    <main class="container" role="main" aria-label="404 Error Page">
+        <div class="error-code">404</div>
+        <h1>Page Not Found</h1>
+        <p>The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+        <a href="/" class="btn" aria-label="Return to homepage">Go Home</a>
+        <nav class="links" aria-label="Quick links">
+            <a href="https://blog.syafiqhadzir.dev/">Blog</a>
+            <a href="https://github.com/SyafiqHadzir">GitHub</a>
+            <a href="/sitemap.html">Sitemap</a>
+        </nav>
+    </main>
+</body>
+
+</html>

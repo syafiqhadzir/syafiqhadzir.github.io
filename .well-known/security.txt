@@ -1,0 +1,10 @@
+# Security Policy for syafiqhadzir.dev
+# https://securitytxt.org/
+
+Contact: mailto:syafiqhadzir@live.com.my
+Expires: 2026-12-31T23:59:59.000Z
+Preferred-Languages: en, ms
+Canonical: https://syafiqhadzir.dev/.well-known/security.txt
+
+# This is a static portfolio website with no user data collection.
+# If you discover a security issue, please contact the email above.

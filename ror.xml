@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/">
 <channel>
   <title>ROR Sitemap for https://syafiqhadzir.dev/</title>
   <link>https://syafiqhadzir.dev/</link>
 
-<item>
-     <link>https://syafiqhadzir.dev/</link>
-     <title>Syafiq Hadzir™ - Home</title>
-     <description>Just another guy who codes and writes. Copyright © 2017 - 2025 Syafiq Hadzir. All rights reserved.</description>
-     <ror:updatePeriod>monthly</ror:updatePeriod>
-     <ror:sortOrder>0</ror:sortOrder>
-     <ror:resourceOf>sitemap</ror:resourceOf>
-</item>
+  <item>
+    <link>https://syafiqhadzir.dev/</link>
+    <title>Syafiq Hadzir™ - Portfolio</title>
+    <description>Software QA Engineer portfolio. Just another guy who codes and writes.</description>
+    <ror:updatePeriod>monthly</ror:updatePeriod>
+    <ror:sortOrder>0</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+
+  <item>
+    <link>https://syafiqhadzir.dev/sitemap.html</link>
+    <title>Syafiq Hadzir™ - Site Map</title>
+    <description>HTML sitemap for syafiqhadzir.dev</description>
+    <ror:updatePeriod>monthly</ror:updatePeriod>
+    <ror:sortOrder>1</ror:sortOrder>
+    <ror:resourceOf>sitemap</ror:resourceOf>
+  </item>
+
 </channel>
 </rss>
