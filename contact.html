@@ -6,25 +6,48 @@
     <link rel=dns-prefetch href=https://cdn.ampproject.org/ crossorigin>
     <link rel=preconnect href=https://fonts.googleapis.com>
     <link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+
     <link rel=preload as=script href=https://cdn.ampproject.org/v0.js>
     <link rel=preload as=font type=font/woff2 href=./fonts/fa-solid-900.woff2 crossorigin>
     <link rel=preload as=font type=font/woff2 href=./fonts/fa-brands-400.woff2 crossorigin>
     <meta charset=UTF-8>
-    <title>Offline - Syafiq Hadzir</title>
-    <meta name=description content="You are currently offline.">
+    <title>Contact - Syafiq Hadzir</title>
+    <meta name=description content="Get in touch with Syafiq Hadzir, Software QA Engineer.">
+    <meta name=keywords content="Syafiq Hadzir, Contact, Software QA Engineer">
+    <meta name=robots content="index, follow">
+    <meta name=author content="Syafiq Hadzir">
+    <link rel=canonical href=https://syafiqhadzir.dev/contact.html />
     <meta property=og:type content=website>
-    <meta property=og:title content="Offline - Syafiq Hadzir">
-    <meta property=og:description content="You are currently offline.">
-    <meta property=og:url content=https://syafiqhadzir.dev/offline.html>
+    <meta property=og:title content="Contact - Syafiq Hadzir">
+    <meta property=og:description content="Get in touch with Syafiq Hadzir, Software QA Engineer.">
+    <meta property=og:url content=https://syafiqhadzir.dev/contact.html />
     <meta property=og:image content=https://syafiqhadzir.dev/Images/headshot.webp>
     <meta property=og:site_name content="Syafiq Hadzir">
     <meta property=og:locale content=en_GB>
     <meta name=twitter:card content=summary>
-    <meta name=twitter:title content="Offline - Syafiq Hadzir">
-    <meta name=twitter:description content="You are currently offline.">
+    <meta name=twitter:title content="Contact - Syafiq Hadzir">
+    <meta name=twitter:description content="Get in touch with Syafiq Hadzir, Software QA Engineer.">
     <meta name=twitter:image content=https://syafiqhadzir.dev/Images/headshot.webp>
-    <meta name=theme-color content=#ffffff>
-    <meta name=viewport content="width=device-width,initial-scale=1">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact - Syafiq Hadzir",
+      "description": "Get in touch with Syafiq Hadzir, Software QA Engineer.",
+      "url": "https://syafiqhadzir.dev/contact.html",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Syafiq Hadzir",
+        "jobTitle": "Software QA Engineer",
+        "email": "syafiqhadzir@live.com.my",
+        "url": "https://syafiqhadzir.dev",
+        "sameAs": [
+          "https://github.com/SyafiqHadzir",
+          "https://gitlab.com/syafiqhadzir"
+        ]
+      }
+    }
+    </script>
     <link rel=apple-touch-icon sizes=180x180 href=/favicons/apple-touch-icon.png>
     <link rel="shortcut icon" href=/favicons/favicon.ico>
     <link rel=icon type=image/png sizes=32x32 href=/favicons/favicon-32x32.png>
@@ -34,7 +57,12 @@
     <link rel=manifest href=/favicons/site.webmanifest>
     <meta name=msapplication-TileColor content=#ffffff>
     <meta name=msapplication-TileImage content=/favicons/mstile-144x144.png>
+    <meta name=theme-color content=#ffffff>
+    <meta name=viewport content="width=device-width,initial-scale=1">
     <script async src=https://cdn.ampproject.org/v0.js></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script async custom-element="amp-install-serviceworker"
+        src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
     <link rel=stylesheet href=https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap>
     <style amp-boilerplate>
         body {
@@ -122,7 +150,104 @@
             src: url("./fonts/fa-brands-400.woff2") format("woff2")
         }
 
-        /* Base Font Awesome Styles */
+        /* CSS Variables - Researcher Theme (Light Primary) */
+        :root {
+            /* Light Mode (Default/Primary) */
+            --bg-primary: #ffffff;
+            --bg-secondary: #f4f4f4;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-muted: #828282;
+
+            /* Researcher Red Accent */
+            --accent: #FF0F00;
+            --accent-hover: #CC0C00;
+
+            --border: #e8e8e8;
+            --border-light: #f0f0f0;
+            --button-bg: #FF0F00;
+            --button-text: #ffffff;
+            --button-hover: #CC0C00;
+
+            /* Font Settings */
+            --fa-display: inline-block;
+
+            /* Legacy Mappings */
+            --bg-color: var(--bg-primary);
+            --text-color: var(--text-primary);
+            --heading-color: #111111;
+            --link-color: var(--accent);
+            --footer-text: var(--text-muted);
+            --blockquote-border: #eeeeee;
+            --table-border: #e8e8e8;
+            --table-stripe: #f9f9f9;
+        }
+
+        /* Dark Mode Overrides (System Preference & Explicit Class) */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg-primary: #121212;
+                --bg-secondary: #1E1E1E;
+                --text-primary: #E0E0E0;
+                --text-secondary: #A0A0A0;
+                --text-muted: #737373;
+
+                --accent: #FF6B6B;
+                /* Lighter Red for Dark Mode */
+                --accent-hover: #FF8787;
+
+                --border: #333333;
+                --border-light: #222222;
+                --button-bg: #FF6B6B;
+                --button-text: #ffffff;
+
+                --bg-color: var(--bg-primary);
+                --text-color: var(--text-primary);
+                --heading-color: #ffffff;
+                --link-color: var(--accent);
+                --footer-text: var(--text-muted);
+                --blockquote-border: #333333;
+                --table-border: #333333;
+                --table-stripe: #161618;
+            }
+        }
+
+        /* Explicit Overrides (State-based) */
+        body.light {
+            --bg-primary: #ffffff;
+            --bg-secondary: #f4f4f4;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --text-muted: #828282;
+            --accent: #FF0F00;
+            --accent-hover: #CC0C00;
+            --border: #e8e8e8;
+            --border-light: #f0f0f0;
+
+            --bg-color: var(--bg-primary);
+            --text-color: var(--text-primary);
+            --heading-color: #111111;
+            --link-color: var(--accent);
+        }
+
+        body.dark {
+            --bg-primary: #121212;
+            --bg-secondary: #1E1E1E;
+            --text-primary: #E0E0E0;
+            --text-secondary: #A0A0A0;
+            --text-muted: #737373;
+            --accent: #FF6B6B;
+            --accent-hover: #FF8787;
+            --border: #333333;
+            --border-light: #222222;
+
+            --bg-color: var(--bg-primary);
+            --text-color: var(--text-primary);
+            --heading-color: #ffffff;
+            --link-color: var(--accent);
+        }
+
+        /* Font Awesome Base */
         .fa,
         .fa-brands,
         .fa-solid {
@@ -142,53 +267,42 @@
 
         .fa-solid {
             font-family: "Font Awesome 6 Free";
-            font-weight: 900
+            font-weight: 900;
         }
 
         .fa-brands {
             font-family: "Font Awesome 6 Brands";
-            font-weight: 400
+            font-weight: 400;
         }
 
-        /* Icon Mappings */
+        .fa-fw {
+            text-align: center;
+            width: 1.25em;
+        }
+
+        /* Icons */
         .fa-user-tie:before {
-            content: "\f508"
+            content: "\f508";
         }
 
         .fa-envelope:before {
-            content: "\f0e0"
+            content: "\f0e0";
         }
 
         .fa-sitemap:before {
-            content: "\f0e8"
+            content: "\f0e8";
         }
 
         .fa-rss:before {
-            content: "\f09e"
+            content: "\f09e";
         }
 
         .fa-github:before {
-            content: "\f09b"
+            content: "\f09b";
         }
 
         .fa-gitlab:before {
-            content: "\f296"
-        }
-
-        .fa-creative-commons:before {
-            content: "\f25e"
-        }
-
-        .fa-creative-commons-zero:before {
-            content: "\f4f3"
-        }
-
-        .fa-google:before {
-            content: "\f1a0"
-        }
-
-        .fa-cloudflare:before {
-            content: "\e07d"
+            content: "\f296";
         }
 
         .fa-diagram-project:before {
@@ -219,6 +333,22 @@
             content: "\f2d0";
         }
 
+        .fa-creative-commons:before {
+            content: "\f25e";
+        }
+
+        .fa-creative-commons-zero:before {
+            content: "\f4f3";
+        }
+
+        .fa-google:before {
+            content: "\f1a0";
+        }
+
+        .fa-cloudflare:before {
+            content: "\e07d";
+        }
+
         .fa-link:before {
             content: "\f0c1";
         }
@@ -235,11 +365,6 @@
             content: "\f15c";
         }
 
-        /* Offline Specific Icons */
-        .fa-wifi:before {
-            content: "\f1eb";
-        }
-
         /* Toggle Icons */
         .fa-moon:before {
             content: "\f186";
@@ -249,130 +374,23 @@
             content: "\f185";
         }
 
-        /* CSS Variables - Researcher Theme (Light Primary) */
-        :root {
-            /* Light Mode (Default/Primary) */
-            --bg-primary: #ffffff;
-            --bg-secondary: #f4f4f4;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --text-muted: #828282;
-            /* Researcher Red Accent */
-            --accent: #FF0F00;
-            --accent-hover: #CC0C00;
-            --border: #e8e8e8;
-            --border-light: #f0f0f0;
-            --button-bg: #FF0F00;
-            --button-text: #ffffff;
-            --button-hover: #CC0C00;
-
-            /* Legacy Variables Mapped */
-            --bg-color: var(--bg-primary);
-            --text-color: var(--text-primary);
-            --heading-color: #ffffff;
-            --link-color: var(--accent);
-            --footer-text: var(--text-muted);
-            --blockquote-border: #e0e0e0;
-            --table-border: #444444;
-            --table-stripe: #1e1e1e;
-        }
-
-        /* Light Mode Overrides */
-        body.light {
-            --bg-primary: #ffffff;
-            --bg-secondary: #f4f4f4;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --text-muted: #828282;
-            --accent: #FF0F00;
-            --accent-hover: #CC0C00;
-            --border: #e8e8e8;
-            --border-light: #f0f0f0;
-            --button-bg: #FF0F00;
-            --button-text: #ffffff;
-            --button-hover: #CC0C00;
-
-            --bg-color: var(--bg-primary);
-            --text-color: var(--text-primary);
-            --heading-color: #111111;
-            --link-color: var(--accent);
-            --footer-text: var(--text-muted);
-            --blockquote-border: #333333;
-            --table-border: #cccccc;
-            --table-stripe: #f8f8f8;
-        }
-
-        /* Dark Mode Overrides */
-        body.dark {
-            --bg-primary: #121212;
-            --bg-secondary: #1E1E1E;
-            --text-primary: #E0E0E0;
-            --text-secondary: #A0A0A0;
-            --text-muted: #737373;
-            --accent: #FF6B6B;
-            --accent-hover: #FF8787;
-            --border: #333333;
-            --border-light: #222222;
-
-            --bg-color: var(--bg-primary);
-            --text-color: var(--text-primary);
-            --heading-color: #ffffff;
-            --link-color: var(--accent);
-            --footer-text: var(--text-muted);
-        }
-
-        /* Theme Toggle Visibility */
-        @media (prefers-color-scheme: dark) {
-            .moon-icon {
-                display: none;
-            }
-
-            .sun-icon {
-                display: inline-block;
-            }
-        }
-
-        .moon-icon {
-            display: inline-block;
-        }
-
-        .sun-icon {
-            display: none;
-        }
-
-        body.light .moon-icon {
-            display: inline-block;
-        }
-
-        body.light .sun-icon {
-            display: none;
-        }
-
-        body.dark .moon-icon {
-            display: none;
-        }
-
-        body.dark .sun-icon {
-            display: inline-block;
-        }
-
-        /* Base Layout & Typography */
+        /* Base Layout */
         html {
             box-sizing: border-box;
             height: 100%;
-            padding: 0;
-            overflow-x: hidden
+            overflow-x: hidden;
         }
 
         *,
         :after,
         :before {
-            box-sizing: inherit
+            box-sizing: inherit;
         }
 
         body {
             margin: 0;
             font: 16px/1.6 "Inconsolata", monospace;
+            /* Uniform Monospace for Researcher Look */
             background-color: var(--bg-primary);
             color: var(--text-primary);
             transition: background-color 0.3s ease, color 0.3s ease;
@@ -404,12 +422,20 @@
         h6 {
             font-family: "Inconsolata", monospace;
             font-weight: 700;
-            margin: 1.5rem 0 0.5rem;
             color: var(--heading-color, var(--text-primary));
+            margin: 1.5rem 0 0.5rem;
         }
 
         h1 {
             font-size: 2.25rem;
+        }
+
+        h2 {
+            font-size: 1.875rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
         }
 
         /* Layout */
@@ -421,6 +447,7 @@
 
         .container {
             max-width: 760px;
+            /* Slightly wider */
             margin: 0 auto;
             padding: 0 20px;
             flex: 1;
@@ -463,6 +490,7 @@
             font-weight: 700;
         }
 
+        /* Utilities */
         .alignable {
             display: inline-block;
         }
@@ -475,49 +503,25 @@
             float: left;
         }
 
-        /* Mobile */
-        @media (max-width: 600px) {
-            .navbar {
-                flex-direction: column;
-                text-align: center;
-            }
-
-            .navbar-ul {
-                margin-top: 15px;
-            }
-
-            #author-name {
-                width: 100%;
-            }
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border);
+            margin: 30px 0;
         }
 
-        /* Utilities */
         .w3-button {
             border: 0;
             display: inline-block;
             padding: 8px 16px;
             cursor: pointer;
             border-radius: 4px;
-            color: var(--button-text);
-            background-color: var(--button-bg);
-            text-align: center;
-        }
-
-        .w3-button:hover {
-            background-color: var(--button-hover);
-        }
-
-        .w3-black {
-            /* Fallback/Legacy Override */
-            color: var(--button-text);
-            background-color: var(--button-bg);
         }
 
         .w3-center {
             text-align: center;
         }
 
-        /* Theme Toggle Button */
+        /* Theme Toggle Logic */
         .theme-toggle {
             background: none;
             border: none;
@@ -532,30 +536,41 @@
             outline: none;
         }
 
-        /* Accessibility */
-        .skip-link {
-            position: absolute;
-            left: -9999px;
-            z-index: 999;
-            padding: 8px 16px;
-            background: var(--text-primary);
-            color: var(--bg-primary);
+        /* Default (Light) */
+        .moon-icon {
+            display: inline-block;
         }
 
-        .skip-link:focus {
-            left: 10px;
-            top: 10px;
+        .sun-icon {
+            display: none;
         }
 
-        /* Offline Specific */
-        .content {
-            text-align: center;
-            padding-top: 2rem;
+        /* System Dark - only if no overrides and system prefers dark */
+        @media (prefers-color-scheme: dark) {
+            .moon-icon {
+                display: none;
+            }
+
+            .sun-icon {
+                display: inline-block;
+            }
         }
 
-        .offline-icon {
-            font-size: 4rem;
-            margin-bottom: 1.5rem;
+        /* Explicit Overrides */
+        body.light .moon-icon {
+            display: inline-block;
+        }
+
+        body.light .sun-icon {
+            display: none;
+        }
+
+        body.dark .moon-icon {
+            display: none;
+        }
+
+        body.dark .sun-icon {
+            display: inline-block;
         }
 
         /* Footer */
@@ -576,6 +591,66 @@
             color: var(--accent);
             border-bottom-color: var(--accent);
         }
+
+        /* Accessibility */
+        .skip-link {
+            position: absolute;
+            left: -9999px;
+            z-index: 999;
+            padding: 8px 16px;
+            background: var(--text-primary);
+            color: var(--bg-primary);
+        }
+
+        .skip-link:focus {
+            left: 10px;
+            top: 10px;
+        }
+
+        /* Images */
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            float: right;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .content amp-img {
+            width: 100%;
+        }
+
+        .content ul {
+            padding: 0 20px;
+        }
+
+        .content ul>li {
+            margin: 5px 0;
+        }
+
+        /* Mobile */
+        @media (max-width: 600px) {
+            .navbar {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .navbar-ul {
+                margin-top: 15px;
+            }
+
+            .profile-picture {
+                float: none;
+                display: block;
+                margin: 0 auto 20px;
+            }
+
+            #author-name {
+                width: 100%;
+            }
+        }
     </style>
 </head>
 
@@ -594,8 +669,9 @@
                                     aria-hidden="true"></i>&nbsp;About</a></li>
                         <li class="alignable pull-left nav-list"><span class=nav-separator aria-hidden=true>/</span>
                         </li>
-                        <li class="alignable pull-left nav-list"><a href=./contact.html><i
-                                    class="fa-solid fa-envelope fa-fw" aria-hidden="true"></i>&nbsp;Contact</a></li>
+                        <li class="alignable pull-left nav-list"><a href=./contact.html class=active
+                                aria-current=page><i class="fa-solid fa-envelope fa-fw"
+                                    aria-hidden="true"></i>&nbsp;Contact</a></li>
                         <li class="alignable pull-left nav-list"><span class=nav-separator aria-hidden=true>/</span>
                         </li>
                         <li class="alignable pull-left nav-list"><a href=./sitemap.html><i
@@ -612,26 +688,41 @@
                     </ul>
                 </nav>
             </header>
-            <main id=main-content class=content role=main aria-label="Offline notification">
-                <div class=offline-icon role=img aria-label="Disconnected signal icon">📡</div>
-                <h1 id=offline>You're Offline</h1>
-                <p>It looks like you've lost your internet connection. Please check your connection and try again.</p>
-                <div class=w3-center style="margin-top:2rem">
-                    <a href=./ class="w3-button w3-black w3-round" aria-label="Reload page to try connecting again">Try
-                        Again</a>
-                </div>
+            <main id=main-content class=content role=main aria-label="Contact information">
+                <h1 id=contact><i class="fa-solid fa-envelope fa-fw" aria-hidden="true"></i>&nbsp;Contact</h1>
+                <p>Feel free to reach out to me via email or connect with me on social media.</p>
 
-                <footer class=footer role=contentinfo aria-label="Site footer" style="margin-top:4rem">
-                    <i class="fa-brands fa-creative-commons fa-fw" aria-hidden=true></i><i
+                <h3 id=professional>Professional</h3>
+                <ul>
+                    <li><i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;<a
+                            href=https://github.com/SyafiqHadzir rel="noopener noreferrer external"
+                            aria-label="Syafiq's GitHub">GitHub</a></li>
+                    <li><i class="fa-brands fa-gitlab fa-fw" aria-hidden="true"></i>&nbsp;<a
+                            href=https://gitlab.com/syafiqhadzir rel="noopener noreferrer external"
+                            aria-label="Syafiq's GitLab">GitLab</a></li>
+                </ul>
+
+                <h3 id=blog>Blog</h3>
+                <ul>
+                    <li><i class="fa-solid fa-signature fa-fw" aria-hidden="true"></i>&nbsp;<a
+                            href=https://blog.syafiqhadzir.dev/ rel="noopener noreferrer external"
+                            aria-label="Syafiq's Blog">blog.syafiqhadzir.dev</a></li>
+                </ul>
+
+                <hr>
+
+                <footer class=footer role=contentinfo aria-label="Site footer"><i
+                        class="fa-brands fa-creative-commons fa-fw" aria-hidden=true></i><i
                         class="fa-brands fa-creative-commons-zero fa-fw" aria-hidden=true></i> © 2017-2025 Syafiq
-                    Hadzir<br>
-                    <span id=powered-by-amp>Powered by <i class="fa-brands fa-google fa-fw" aria-hidden=true></i> AMP &
-                        <i class="fa-brands fa-cloudflare fa-fw" aria-hidden=true></i> Cloudflare</span><br>
-                    Last Update: Friday, Dec 19th, 2025
+                    Hadzir<br><span id=powered-by-amp>Powered by <i class="fa-brands fa-google fa-fw"
+                            aria-hidden=true></i> AMP & <i class="fa-brands fa-cloudflare fa-fw" aria-hidden=true></i>
+                        Cloudflare</span><br>Last Update: Friday,
+                    Dec 19th, 2025
                 </footer>
             </main>
         </div>
     </div>
+    <amp-install-serviceworker src=/sw.js data-iframe-src=/sw.html layout=nodisplay></amp-install-serviceworker>
 </body>
 
 </html>

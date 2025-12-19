@@ -10,9 +10,9 @@ describe('Syafiq Hadzir Homepage E2E', () => {
 
     it('displays the correct page title and meta tags', () => {
         // Page title should match
-        cy.title().should('eq', 'Syafiq Hadzir™');
+        cy.title().should('eq', 'Syafiq Hadzir');
         // Meta description should be present and correct
-        cy.get('meta[name="description"]').should('have.attr', 'content').and('include', 'Just another guy who codes and writes');
+        cy.get('meta[name="description"]').should('have.attr', 'content').and('include', 'Software QA Engineer');
         // Meta keywords should be present and correct
         cy.get('meta[name="keywords"]').should('have.attr', 'content').and('include', 'Syafiq Hadzir');
         // Canonical link should point to the correct domain
@@ -30,7 +30,7 @@ describe('Syafiq Hadzir Homepage E2E', () => {
 
     it('shows the About section with profile image and company link', () => {
         // About section header should be present
-        cy.get('#about').should('contain', 'About');
+        cy.get('#about-me').should('contain', 'About');
         // Profile image should have correct alt and src
         cy.get('amp-img.profile-picture')
             .should('have.attr', 'alt', 'Syafiq Hadzir')

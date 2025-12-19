@@ -9,8 +9,12 @@ const OFFLINE_URL = '/offline.html';
 const PRECACHE_ASSETS = [
     '/',
     '/index.html',
+    '/contact.html',
+    '/sitemap.html',
     '/offline.html',
     '/404.html',
+    '/fonts/fa-solid-900.woff2',
+    '/fonts/fa-brands-400.woff2',
     '/favicons/favicon.ico',
     '/favicons/android-chrome-192x192.png',
     '/favicons/android-chrome-512x512.png',

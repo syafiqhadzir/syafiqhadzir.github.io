@@ -6,8 +6,8 @@
 
   <item>
     <link>https://syafiqhadzir.dev/</link>
-    <title>Syafiq Hadzir™ - Portfolio</title>
-    <description>Software QA Engineer portfolio. Just another guy who codes and writes.</description>
+    <title>Syafiq Hadzir - Portfolio</title>
+    <description>Software QA Engineer specializing in AI-assisted testing.</description>
     <ror:updatePeriod>monthly</ror:updatePeriod>
     <ror:sortOrder>0</ror:sortOrder>
     <ror:resourceOf>sitemap</ror:resourceOf>
@@ -15,7 +15,7 @@
 
   <item>
     <link>https://syafiqhadzir.dev/sitemap.html</link>
-    <title>Syafiq Hadzir™ - Site Map</title>
+    <title>Syafiq Hadzir - Site Map</title>
     <description>HTML sitemap for syafiqhadzir.dev</description>
     <ror:updatePeriod>monthly</ror:updatePeriod>
     <ror:sortOrder>1</ror:sortOrder>

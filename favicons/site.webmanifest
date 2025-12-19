@@ -61,6 +61,22 @@
       "purpose": "maskable"
     }
   ],
-  "theme_color": "#0a0a0a",
-  "background_color": "#0a0a0a"
+  "screenshots": [
+    {
+      "src": "/Images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Syafiq Hadzir Portfolio - Desktop View"
+    },
+    {
+      "src": "/Images/screenshot-mobile.png",
+      "sizes": "375x667",
+      "type": "image/png",
+      "form_factor": "narrow",
+      "label": "Syafiq Hadzir Portfolio - Mobile View"
+    }
+  ],
+  "theme_color": "#ffffff",
+  "background_color": "#ffffff"
 }
