@@ -2,10 +2,16 @@
 
 /**
  * Dedicated Accessibility Test Suite
- * Tests all pages for WCAG 2.0/2.1 AA compliance
+ * Tests all pages for WCAG 2.0/2.1/2.2 AA compliance
  */
 
 describe('Accessibility Suite', () => {
+
+    // Log axe-core version at start of suite
+    before(() => {
+        cy.visit('/');
+        cy.logAxeVersion();
+    });
 
     // ==============================================
     // HOMEPAGE A11Y
@@ -41,6 +47,10 @@ describe('Accessibility Suite', () => {
         it('passes mobile viewport A11y audit', () => {
             cy.validateMobileA11y();
         });
+
+        it('passes tablet viewport A11y audit', () => {
+            cy.validateTabletA11y();
+        });
     });
 
     // ==============================================
@@ -67,6 +77,10 @@ describe('Accessibility Suite', () => {
         it('passes mobile viewport A11y audit', () => {
             cy.validateMobileA11y();
         });
+
+        it('passes tablet viewport A11y audit', () => {
+            cy.validateTabletA11y();
+        });
     });
 
     // ==============================================
@@ -88,6 +102,10 @@ describe('Accessibility Suite', () => {
 
         it('passes mobile viewport A11y audit', () => {
             cy.validateMobileA11y();
+        });
+
+        it('passes tablet viewport A11y audit', () => {
+            cy.validateTabletA11y();
         });
     });
 
@@ -111,6 +129,10 @@ describe('Accessibility Suite', () => {
         it('passes mobile viewport A11y audit', () => {
             cy.validateMobileA11y();
         });
+
+        it('passes tablet viewport A11y audit', () => {
+            cy.validateTabletA11y();
+        });
     });
 
     // ==============================================
@@ -132,6 +154,10 @@ describe('Accessibility Suite', () => {
 
         it('passes mobile viewport A11y audit', () => {
             cy.validateMobileA11y();
+        });
+
+        it('passes tablet viewport A11y audit', () => {
+            cy.validateTabletA11y();
         });
     });
 

@@ -29,6 +29,16 @@ function terminalLog(violations: any[]) {
     cy.task('log', '\n' + '='.repeat(60) + '\n');
 }
 
+// Log axe-core version for traceability
+function logAxeVersion() {
+    cy.window().then((win) => {
+        // @ts-ignore - axe is injected by cypress-axe
+        if (win.axe) {
+            cy.task('log', `📦 axe-core version: ${win.axe.version}`);
+        }
+    });
+}
+
 declare global {
     namespace Cypress {
         interface Chainable {
@@ -69,6 +79,16 @@ declare global {
              * Validates accessibility at mobile viewport
              */
             validateMobileA11y(): Chainable<void>;
+
+            /**
+             * Validates accessibility at tablet viewport
+             */
+            validateTabletA11y(): Chainable<void>;
+
+            /**
+             * Logs the axe-core version being used
+             */
+            logAxeVersion(): Chainable<void>;
         }
     }
 }
@@ -107,7 +127,7 @@ Cypress.Commands.add('validateA11y', (skipFailures = true) => {
     cy.checkA11y(undefined, {
         runOnly: {
             type: 'tag',
-            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice']
+            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
         },
         rules: {
             // AMP-specific exclusions
@@ -156,10 +176,35 @@ Cypress.Commands.add('validateMobileA11y', () => {
     cy.checkA11y(undefined, {
         runOnly: {
             type: 'tag',
-            values: ['wcag2a', 'wcag2aa']
+            values: ['wcag2a', 'wcag2aa', 'wcag22aa']
         },
         rules: {
             'color-contrast': { enabled: false }
         }
     }, terminalLog, true);
+});
+
+/**
+ * Tablet viewport A11y check
+ */
+Cypress.Commands.add('validateTabletA11y', () => {
+    cy.viewport('ipad-2');
+    cy.injectAxe();
+    cy.checkA11y(undefined, {
+        runOnly: {
+            type: 'tag',
+            values: ['wcag2a', 'wcag2aa', 'wcag22aa']
+        },
+        rules: {
+            'color-contrast': { enabled: false }
+        }
+    }, terminalLog, true);
+});
+
+/**
+ * Log axe-core version
+ */
+Cypress.Commands.add('logAxeVersion', () => {
+    cy.injectAxe();
+    logAxeVersion();
 });
