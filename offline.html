@@ -12,6 +12,7 @@
     <meta charset=UTF-8>
     <title>Offline - Syafiq Hadzir</title>
     <meta name=description content="You are currently offline.">
+    <link rel=canonical href=https://syafiqhadzir.dev/offline.html />
     <meta property=og:type content=website>
     <meta property=og:title content="Offline - Syafiq Hadzir">
     <meta property=og:description content="You are currently offline.">
@@ -35,6 +36,7 @@
     <meta name=msapplication-TileColor content=#ffffff>
     <meta name=msapplication-TileImage content=/favicons/mstile-144x144.png>
     <script async src=https://cdn.ampproject.org/v0.js></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     <link rel=stylesheet href=https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap>
     <style amp-boilerplate>
         body {
@@ -604,9 +606,8 @@
                             <button class="theme-toggle"
                                 on="tap:AMP.setState({theme: {mode: theme.mode == 'dark' ? 'light' : 'dark'}})"
                                 aria-label="Toggle Dark Mode">
-                                <i class="fa-solid fa-moon moon-icon"
-                                    on="tap:AMP.setState({theme: {mode: 'dark'}})"></i>
-                                <i class="fa-solid fa-sun sun-icon" on="tap:AMP.setState({theme: {mode: 'light'}})"></i>
+                                <i class="fa-solid fa-moon moon-icon" aria-hidden="true"></i>
+                                <i class="fa-solid fa-sun sun-icon" aria-hidden="true"></i>
                             </button>
                         </li>
                     </ul>

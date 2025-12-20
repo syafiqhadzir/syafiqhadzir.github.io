@@ -12,6 +12,7 @@
     <meta charset=UTF-8>
     <title>404 - Page Not Found | Syafiq Hadzir</title>
     <meta name=description content="404 Page Not Found.">
+    <link rel=canonical href=https://syafiqhadzir.dev/404.html />
     <meta property=og:type content=website>
     <meta property=og:title content="404 - Page Not Found | Syafiq Hadzir">
     <meta property=og:description content="404 Page Not Found.">
@@ -667,9 +668,8 @@
                             <button class="theme-toggle"
                                 on="tap:AMP.setState({theme: {mode: theme.mode == 'dark' ? 'light' : 'dark'}})"
                                 aria-label="Toggle Dark Mode">
-                                <i class="fa-solid fa-moon moon-icon"
-                                    on="tap:AMP.setState({theme: {mode: 'dark'}})"></i>
-                                <i class="fa-solid fa-sun sun-icon" on="tap:AMP.setState({theme: {mode: 'light'}})"></i>
+                                <i class="fa-solid fa-moon moon-icon" aria-hidden="true"></i>
+                                <i class="fa-solid fa-sun sun-icon" aria-hidden="true"></i>
                             </button>
                         </li>
                     </ul>
