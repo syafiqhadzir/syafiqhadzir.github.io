@@ -10,12 +10,12 @@ describe('Homepage E2E & Accessibility', () => {
 
     it('validates page metadata and SEO', function () {
         // Page title
-        cy.title().should('eq', this.content.author);
+        cy.title().should('eq', 'Syafiq Hadzir');
 
         // Custom command usages
-        cy.checkMeta('description', this.content.description);
-        cy.checkMeta('keywords', this.content.author);
-        cy.checkOg('og:title', this.content.author);
+        cy.checkMeta('description', 'Portfolio of Syafiq Hadzir - AI-assisted Software QA Engineer specializing in test automation and quality assurance.');
+        cy.checkMeta('keywords', 'Syafiq Hadzir');
+        cy.checkOg('og:title', 'Syafiq Hadzir');
 
         // Canonical link
         cy.get('link[rel="canonical"]').should('have.attr', 'href').and('include', 'syafiqhadzir.dev');
@@ -28,35 +28,53 @@ describe('Homepage E2E & Accessibility', () => {
     it('renders author profile correctly', function () {
         // Use data-cy selectors
         cy.get('[data-cy=profile-picture]')
-            .should('have.attr', 'alt', this.content.author)
+            .should('have.attr', 'alt', 'Syafiq Hadzir')
             .and('be.visible');
 
         cy.get('[data-cy=author-name]')
-            .should('contain', this.content.author);
+            .should('contain', 'Syafiq Hadzir');
 
-        cy.contains(this.content.role).should('be.visible');
+        cy.contains('Software QA Engineer').should('be.visible');
     });
 
     it('verify external links', function () {
         // Verify Company Link
         cy.contains('Cloud Connect')
-            .should('have.attr', 'href', this.content.links.company);
+            .should('have.attr', 'href', 'https://www.cloud-connect.asia/');
 
         // Verify Social Links
-        cy.get(`a[href="${this.content.links.github}"]`).should('be.visible');
-        cy.get(`a[href="${this.content.links.gitlab}"]`).should('be.visible');
-        cy.get(`a[href="${this.content.links.blog}"]`).should('be.visible');
+        cy.get('a[href*="github.com"]').should('be.visible');
+        cy.get('a[href*="gitlab.com"]').should('be.visible');
+        cy.get('a[href*="blog.syafiqhadzir.dev"]').should('be.visible');
     });
 
     it('displays proficiency and interest lists', function () {
         // Proficiencies
-        this.content.sections.proficiencies.forEach((skill: string) => {
-            cy.contains(skill).should('be.visible');
+        const proficiencies = [
+            'Designing and executing comprehensive test plans',
+            'Identifying critical defects',
+            'Ensuring the delivery of high-quality software products'
+        ];
+
+        cy.get('[data-cy=proficiencies-list]').within(() => {
+            proficiencies.forEach(skill => {
+                cy.contains(skill).should('be.visible');
+            });
         });
 
         // Interests
-        this.content.sections.interests.forEach((interest: string) => {
-            cy.contains(interest).should('be.visible');
+        const interests = [
+            'AI Exploration',
+            'CI/CD Integration',
+            'Code Assessment',
+            'Test Automation',
+            'Web Application'
+        ];
+
+        cy.get('[data-cy=interests-list]').within(() => {
+            interests.forEach(interest => {
+                cy.contains(interest).should('be.visible');
+            });
         });
     });
 

@@ -27,15 +27,15 @@ describe('Accessibility Suite', () => {
         });
 
         it('navigation is accessible', () => {
-            cy.validateComponentA11y('nav');
+            cy.validateComponentA11y('[data-cy=nav-list]');
         });
 
         it('main content is accessible', () => {
-            cy.validateComponentA11y('main');
+            cy.validateComponentA11y('[data-cy=main-content]');
         });
 
         it('footer is accessible', () => {
-            cy.validateComponentA11y('footer');
+            cy.validateComponentA11y('[data-cy=site-footer]');
         });
 
         it('passes A11y audit in dark mode', () => {

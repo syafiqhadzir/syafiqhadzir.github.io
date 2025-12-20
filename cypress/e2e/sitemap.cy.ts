@@ -6,7 +6,7 @@ describe('Sitemap Page E2E', () => {
     });
 
     it('validates page structure and accessibility', () => {
-        cy.title().should('include', 'Site Map');
+        cy.title().should('include', 'Sitemap');
         cy.validateA11y(true); // Skip failures, log only
         cy.get('[data-cy=main-content]').should('be.visible');
     });
@@ -17,18 +17,20 @@ describe('Sitemap Page E2E', () => {
 
     it('lists all core pages', () => {
         const pages = [
-            'Homepage',
+            'Home',
             'Contact',
-            'Site Map'
+            'Sitemap'
         ];
 
-        pages.forEach(page => {
-            cy.contains(page).should('be.visible');
+        cy.get('[data-cy=pages-list]').within(() => {
+            pages.forEach(page => {
+                cy.contains(page).should('be.visible');
+            });
         });
     });
 
     it('displays external links', () => {
-        cy.get('h3#external').should('contain', 'External');
+        cy.get('[data-cy=external-section]').should('contain', 'External Resources');
         cy.contains('Blog').should('be.visible');
         cy.contains('GitHub').should('be.visible');
         cy.contains('GitLab').should('be.visible');

@@ -13,8 +13,9 @@ describe('Contact Page E2E', () => {
     });
 
     it('displays correct email contact info', function () {
-        cy.contains(this.content.email)
-            .should('have.attr', 'href', `mailto:${this.content.email}`);
+        cy.get('[data-cy=email-link]')
+            .should('contain', this.content.email)
+            .and('have.attr', 'href', `mailto:${this.content.email}`);
     });
 
     it('validates referrer policy', () => {
@@ -23,8 +24,8 @@ describe('Contact Page E2E', () => {
 
     it('verifies social links', function () {
         const links = this.content.links;
-        cy.checkSocialLink('a[href*="github"]', links.github);
-        cy.checkSocialLink('a[href*="gitlab"]', links.gitlab);
-        cy.checkSocialLink('a[href*="blog"]', links.blog);
+        cy.get('[data-cy=social-github]').should('have.attr', 'href', links.github).and('be.visible');
+        cy.get('[data-cy=social-gitlab]').should('have.attr', 'href', links.gitlab).and('be.visible');
+        cy.get('[data-cy=blog-link]').should('have.attr', 'href', links.blog).and('be.visible');
     });
 });

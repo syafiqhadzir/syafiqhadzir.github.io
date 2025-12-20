@@ -7,9 +7,9 @@
 <header class="navbar" role="banner">
     <a id="author-name" class="alignable" href="/" aria-label="Homepage" data-cy="author-name">{{ site.title }}</a>
     <nav role="navigation" aria-label="Main navigation" class="alignable pull-right">
-        <ul id="navlist" class="navbar-ul">
+        <ul id="navlist" class="navbar-ul" data-cy="nav-list">
             <li class="alignable pull-left nav-list">
-                <a href="/" {% if page.url == "/" %}class="active" aria-current="page"{% endif %}>
+                <a href="/" {% if page.url == "/" %}class="active" aria-current="page"{% endif %} data-cy="nav-about">
                     <i class="fa-solid fa-user-tie fa-fw" aria-hidden="true"></i>&nbsp;About
                 </a>
             </li>
@@ -17,7 +17,7 @@
                 <span class="nav-separator" aria-hidden="true">/</span>
             </li>
             <li class="alignable pull-left nav-list">
-                <a href="/contact.html" {% if page.url == "/contact.html" or page.url == "/contact/" %}class="active" aria-current="page"{% endif %}>
+                <a href="/contact.html" {% if page.url == "/contact.html" or page.url == "/contact/" %}class="active" aria-current="page"{% endif %} data-cy="nav-contact">
                     <i class="fa-solid fa-envelope fa-fw" aria-hidden="true"></i>&nbsp;Contact
                 </a>
             </li>
@@ -25,7 +25,7 @@
                 <span class="nav-separator" aria-hidden="true">/</span>
             </li>
             <li class="alignable pull-left nav-list">
-                <a href="/sitemap.html" {% if page.url == "/sitemap.html" or page.url == "/sitemap/" %}class="active" aria-current="page"{% endif %}>
+                <a href="/sitemap.html" {% if page.url == "/sitemap.html" or page.url == "/sitemap/" %}class="active" aria-current="page"{% endif %} data-cy="nav-sitemap">
                     <i class="fa-solid fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;Sitemap
                 </a>
             </li>

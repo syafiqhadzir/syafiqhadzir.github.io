@@ -251,7 +251,7 @@ jobs:
           path: ./
 
       - name: Install Lighthouse CI
-        run: npm install -g @lhci/cli@0.14.x
+        run: npm install -g @lhci/cli@latest
 
       - name: Run Lighthouse CI
         run: lhci autorun

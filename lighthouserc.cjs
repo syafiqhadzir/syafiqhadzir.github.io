@@ -24,21 +24,11 @@ module.exports = {
 
             // Chrome settings optimized for CI
             settings: {
-                preset: 'desktop',
                 // AMP pages should be tested with throttling disabled
                 // since AMP runtime handles performance
                 throttlingMethod: 'provided',
                 // Skip network throttling for AMP (CDN handles this)
                 disableNetworkThrottling: true,
-                // Form factor
-                formFactor: 'desktop',
-                screenEmulation: {
-                    mobile: false,
-                    width: 1350,
-                    height: 940,
-                    deviceScaleFactor: 1,
-                    disabled: false,
-                },
             },
         },
 

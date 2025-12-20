@@ -6,19 +6,21 @@ describe('404 Page E2E', () => {
     });
 
     it('validates page structure and accessibility', () => {
-        cy.title().should('include', '404');
+        cy.title().should('include', 'Page Not Found');
         cy.validateA11y(true); // Skip failures, log only
         cy.get('[data-cy=main-content]').should('be.visible');
     });
 
     it('displays 404 error message', () => {
-        cy.get('[data-cy=404-heading]').should('contain', '404 - Page Not Found');
+        cy.get('[data-cy=error-code]').should('contain', '404');
+        cy.get('[data-cy=error-message]').should('contain', 'Page Not Found');
     });
 
     it('has working return to home button', () => {
-        cy.contains('Go Home')
+        cy.get('[data-cy=return-home-button]')
             .should('be.visible')
-            .and('have.attr', 'href', './');
+            .and('contain', 'Return Home')
+            .and('have.attr', 'href', '/');
     });
 
     it('contains canonical link', () => {

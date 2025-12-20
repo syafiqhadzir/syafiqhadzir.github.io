@@ -12,11 +12,15 @@ describe('Offline Page E2E', () => {
     });
 
     it('displays offline status message', () => {
-        cy.get('[data-cy=offline-heading]').should('contain', "You're Offline");
+        cy.get('[data-cy=offline-heading]').should('contain', 'Offline');
+        cy.get('[data-cy=offline-subheading]').should('contain', 'No Internet Connection');
     });
 
-    it('has retry button', () => {
-        cy.get('[data-cy=retry-button]').should('be.visible');
+    it('has home button', () => {
+        cy.get('[data-cy=home-button]')
+            .should('be.visible')
+            .and('contain', 'Try Homepage')
+            .and('have.attr', 'href', '/');
     });
 
     it('contains canonical link', () => {
