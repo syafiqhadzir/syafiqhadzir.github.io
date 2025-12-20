@@ -264,7 +264,7 @@ jobs:
         run: npm install -g @lhci/cli@latest
 
       - name: Run Lighthouse CI
-        run: lhci autorun
+        run: lhci autorun --outputDir=.lighthouseci
         # Note: LHCI_GITHUB_APP_TOKEN is optional - enables GitHub status checks
         env:
           # yamllint disable-line rule:truthy
