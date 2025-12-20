@@ -267,9 +267,18 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@latest
 
-      - name: Run Lighthouse CI
-        run: lhci autorun --outputDir=lhci-reports
-        # Note: LHCI_GITHUB_APP_TOKEN is optional - enables GitHub status checks
+      - name: Run Lighthouse CI (Collect)
+        run: lhci collect
+        env:
+          # yamllint disable-line rule:truthy
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }} # pragma: allowlist secret
+
+      - name: Generate Lighthouse Reports
+        run: lhci report --outputDir=lhci-reports --reporter=html --reporter=json
+        if: always()
+
+      - name: Run Lighthouse CI (Assert)
+        run: lhci assert
         env:
           # yamllint disable-line rule:truthy
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }} # pragma: allowlist secret
