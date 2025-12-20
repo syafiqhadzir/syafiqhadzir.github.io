@@ -27,8 +27,6 @@ on:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -60,11 +58,9 @@ jobs:
 
       - name: Run ESLint
         run: npm run lint:js -- --format json --output-file eslint-report.json
-        continue-on-error: true
 
       - name: Run Stylelint
         run: npm run lint:css -- --formatter json --output-file stylelint-report.json
-        continue-on-error: true
 
       - name: TypeScript type check
         run: npm run typecheck
@@ -147,7 +143,8 @@ jobs:
   build:
     name: Build Site
     runs-on: ubuntu-latest
-    needs: [sonarcloud]
+    # Build runs in parallel with Lint/Tests/Sonar to speed up feedback loop
+    # needs: [] # No dependencies, starts immediately using source code
     timeout-minutes: 10
     steps:
       - name: Checkout repository
@@ -166,7 +163,7 @@ jobs:
         run: npm run build
 
       - name: Validate AMP HTML (Generated)
-        run: npx amphtml-validator _site/*.html
+        run: npm run validate:amp
 
       - name: Upload build artifact
         uses: actions/upload-artifact@v4
@@ -275,12 +272,17 @@ jobs:
   deploy:
     name: Deploy
     runs-on: ubuntu-latest
-    needs: [e2e-tests, lighthouse]
+    # Ensure deployment waits for ALL checks to pass (Quality + Functional)
+    needs: [e2e-tests, lighthouse, sonarcloud]
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     timeout-minutes: 5
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
     steps:
       - name: Download build artifact
         uses: actions/download-artifact@v4

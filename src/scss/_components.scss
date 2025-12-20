@@ -18,7 +18,7 @@
     --border: #{$light-border};
     --border-light: #{$light-border-light};
     --button-bg: #{$color-accent};
-    --button-text: #ffffff;
+    --button-text: #fff;
     --button-hover: #{$color-accent-hover};
 
     // Font Settings
@@ -29,7 +29,7 @@
     --text-color: var(--text-primary);
     --link-color: var(--accent);
     --footer-text: var(--text-muted);
-    --blockquote-border: #eeeeee;
+    --blockquote-border: #eee;
     --table-border: #{$light-border};
     --table-stripe: #f9f9f9;
 }
@@ -48,7 +48,6 @@
         --border: #{$dark-border};
         --border-light: #{$dark-border-light};
         --button-bg: #{$color-accent-light};
-
         --bg-color: var(--bg-primary);
         --text-color: var(--text-primary);
         --link-color: var(--accent);
@@ -71,10 +70,17 @@ body.light {
     --accent-hover: #{$color-accent-hover};
     --border: #{$light-border};
     --border-light: #{$light-border-light};
-
     --bg-color: var(--bg-primary);
     --text-color: var(--text-primary);
     --link-color: var(--accent);
+
+    .moon-icon {
+        display: inline-block;
+    }
+
+    .sun-icon {
+        display: none;
+    }
 }
 
 // Explicit Dark Override
@@ -89,10 +95,17 @@ body.dark {
     --accent-hover: #{$color-accent-light-hover};
     --border: #{$dark-border};
     --border-light: #{$dark-border-light};
-
     --bg-color: var(--bg-primary);
     --text-color: var(--text-primary);
     --link-color: var(--accent);
+
+    .moon-icon {
+        display: none;
+    }
+
+    .sun-icon {
+        display: inline-block;
+    }
 }
 
 // BASE STYLES
@@ -290,25 +303,7 @@ hr {
     }
 }
 
-body.light {
-    .moon-icon {
-        display: inline-block;
-    }
-
-    .sun-icon {
-        display: none;
-    }
-}
-
-body.dark {
-    .moon-icon {
-        display: none;
-    }
-
-    .sun-icon {
-        display: inline-block;
-    }
-}
+// Merged into primary definition
 
 // FOOTER
 
@@ -366,6 +361,7 @@ body.dark {
     padding: 0;
     margin: -1px;
     overflow: hidden;
+    /* stylelint-disable-next-line property-no-deprecated -- Allow clip for sr-only support */
     clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
@@ -373,7 +369,6 @@ body.dark {
 
 // Reduced Motion (AMP does not allow !important)
 @media (prefers-reduced-motion: reduce) {
-
     *,
     *::before,
     *::after {
@@ -387,11 +382,11 @@ body.dark {
 // High Contrast
 @media (prefers-contrast: high) {
     :root {
-        --text-primary: #000000;
-        --bg-primary: #ffffff;
-        --accent: #0000ee;
-        --accent-hover: #0000cc;
-        --border: #000000;
+        --text-primary: #000;
+        --bg-primary: #fff;
+        --accent: #00e;
+        --accent-hover: #00c;
+        --border: #000;
     }
 
     a {
@@ -452,8 +447,8 @@ body.dark {
 
 @media print {
     body {
-        background: white;
-        color: black;
+        background: #fff;
+        color: #000;
     }
 
     .skip-link,

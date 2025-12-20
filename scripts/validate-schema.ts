@@ -184,6 +184,8 @@ async function main(): Promise<void> {
     }
 }
 
-main().catch(console.error);
+if (process.env.NODE_ENV !== 'test') {
+    main().catch(console.error);
+}
 
-export { extractJsonLd, validateSchema, validateDirectory };
+export { extractJsonLd, validateSchema, validateDirectory, main };

@@ -77,16 +77,6 @@ export default defineConfig({
         // Timeout for tests (ms)
         testTimeout: 10000,
 
-        // Pool configuration for parallel execution
-        pool: 'threads',
-        poolOptions: {
-            threads: {
-                singleThread: false,
-                maxThreads: 4,
-                minThreads: 1,
-            },
-        },
-
         // Retry failed tests
         retry: 0,
 

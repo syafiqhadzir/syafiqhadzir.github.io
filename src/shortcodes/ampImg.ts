@@ -96,7 +96,7 @@ export function ampImg(
     width: number,
     height: number,
     layout: AmpLayout = 'responsive',
-    className: string = ''
+    className = ''
 ): string {
     // Validate inputs
     validateOptions({ src, alt, width, height });

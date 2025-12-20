@@ -74,6 +74,12 @@ async function validateFile(
     filePath: string
 ): Promise<{ file: string; result: ValidatorResult }> {
     const html = readFileSync(filePath, 'utf-8');
+
+    // Check if file is AMP
+    if (!/<html\s+[^>]*(\bamp\b|⚡)/i.test(html)) {
+        return { file: filePath, result: { status: 'PASS', errors: [] } };
+    }
+
     const result = validator.validateString(html);
     return { file: filePath, result };
 }

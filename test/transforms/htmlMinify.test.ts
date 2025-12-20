@@ -85,7 +85,7 @@ describe('htmlMinify transform', () => {
         const originalEnv = process.env.NODE_ENV;
 
         beforeEach(() => {
-            vi.spyOn(console, 'log').mockImplementation(() => { });
+            vi.spyOn(console, 'log').mockImplementation(vi.fn());
         });
 
         afterEach(() => {

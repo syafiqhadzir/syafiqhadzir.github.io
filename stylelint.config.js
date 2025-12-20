@@ -61,7 +61,7 @@ export default {
         ],
 
         // Declaration order (optional, enhances readability)
-        'order/properties-alphabetical-order': null,
+
 
         // Max nesting depth (aligned with SonarQube)
         'max-nesting-depth': [

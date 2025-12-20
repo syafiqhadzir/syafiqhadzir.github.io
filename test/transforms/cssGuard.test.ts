@@ -15,7 +15,7 @@ import {
 describe('cssGuard transform', () => {
     // Silence console.log during tests
     beforeEach(() => {
-        vi.spyOn(console, 'log').mockImplementation(() => { });
+        vi.spyOn(console, 'log').mockImplementation(vi.fn());
     });
 
     afterEach(() => {
