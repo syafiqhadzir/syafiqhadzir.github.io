@@ -89,6 +89,17 @@ declare global {
              * Logs the axe-core version being used
              */
             logAxeVersion(): Chainable<void>;
+
+            /**
+             * SDET-Standard A11y Audit with detailed violation logging
+             * Logs violations clearly with impact, description, and affected elements
+             * @param context - Optional CSS selector to scope the audit
+             * @param options - Optional configuration { failOnViolations, includedImpacts }
+             */
+            auditA11y(context?: string, options?: {
+                failOnViolations?: boolean;
+                includedImpacts?: ('minor' | 'moderate' | 'serious' | 'critical')[];
+            }): Chainable<void>;
         }
     }
 }
@@ -207,4 +218,76 @@ Cypress.Commands.add('validateTabletA11y', () => {
 Cypress.Commands.add('logAxeVersion', () => {
     cy.injectAxe();
     logAxeVersion();
+});
+
+/**
+ * SDET-Standard A11y Audit Command
+ * Clear, actionable violation logging for CI/CD pipelines
+ */
+Cypress.Commands.add('auditA11y', (context?: string, options = {}) => {
+    const { failOnViolations = false, includedImpacts } = options;
+
+    cy.injectAxe();
+
+    // Detailed violation logger
+    const detailedLog = (violations: any[]) => {
+        if (violations.length === 0) {
+            cy.task('log', '\n✅ A11Y AUDIT PASSED: No violations found\n');
+            return;
+        }
+
+        cy.task('log', '\n' + '╔' + '═'.repeat(70) + '╗');
+        cy.task('log', `║ 🚨 A11Y AUDIT FAILED: ${violations.length} violation(s) detected`);
+        cy.task('log', '╠' + '═'.repeat(70) + '╣');
+
+        violations.forEach((violation, index) => {
+            const impactMap: Record<string, string> = {
+                critical: '🔴',
+                serious: '🟠',
+                moderate: '🟡',
+                minor: '🟢'
+            };
+            const impactEmoji = impactMap[violation.impact as string] || '⚪';
+
+            cy.task('log', `║`);
+            cy.task('log', `║ ${impactEmoji} [${index + 1}/${violations.length}] ${violation.id}`);
+            cy.task('log', `║   Impact: ${violation.impact?.toUpperCase() || 'UNKNOWN'}`);
+            cy.task('log', `║   Description: ${violation.description}`);
+            cy.task('log', `║   Help: ${violation.helpUrl}`);
+            cy.task('log', `║   WCAG: ${violation.tags.filter((t: string) => t.startsWith('wcag')).join(', ')}`);
+            cy.task('log', `║   Affected Elements (${violation.nodes.length}):`);
+
+            violation.nodes.slice(0, 3).forEach((node: any, nodeIndex: number) => {
+                cy.task('log', `║     ${nodeIndex + 1}. ${node.target.join(' > ')}`);
+                if (node.failureSummary) {
+                    const summary = node.failureSummary.split('\n')[0].trim();
+                    cy.task('log', `║        → ${summary.substring(0, 60)}...`);
+                }
+            });
+
+            if (violation.nodes.length > 3) {
+                cy.task('log', `║     ... and ${violation.nodes.length - 3} more elements`);
+            }
+        });
+
+        cy.task('log', '╚' + '═'.repeat(70) + '╝\n');
+    };
+
+    const axeOptions: any = {
+        runOnly: {
+            type: 'tag',
+            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
+        },
+        rules: {
+            // AMP-specific exclusions
+            'color-contrast': { enabled: false },
+            'meta-viewport': { enabled: false }
+        }
+    };
+
+    if (includedImpacts && includedImpacts.length > 0) {
+        axeOptions.includedImpacts = includedImpacts;
+    }
+
+    cy.checkA11y(context || undefined, axeOptions, detailedLog, !failOnViolations);
 });

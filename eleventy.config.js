@@ -84,14 +84,12 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy('fonts');
     eleventyConfig.addPassthroughCopy('Images');
     eleventyConfig.addPassthroughCopy('CNAME');
-    eleventyConfig.addPassthroughCopy('robots.txt');
-    eleventyConfig.addPassthroughCopy('sitemap.xml');
-    eleventyConfig.addPassthroughCopy('ror.xml');
     eleventyConfig.addPassthroughCopy('humans.txt');
     eleventyConfig.addPassthroughCopy('browserconfig.xml');
     eleventyConfig.addPassthroughCopy('sw.js');
     eleventyConfig.addPassthroughCopy('sw.html');
     eleventyConfig.addPassthroughCopy('.well-known');
+    eleventyConfig.addPassthroughCopy('_headers'); // Security headers
 
     // GLOBAL DATA
 
@@ -125,6 +123,12 @@ export default function (eleventyConfig) {
         }
         return content;
     });
+
+    // HTML Minification Transform (production only)
+    // Note: Implemented in src/transforms/htmlMinify.ts
+    // Uncomment below and add import when ready for production minification:
+    // import { htmlMinifyTransform } from './dist/transforms/htmlMinify.js';
+    // eleventyConfig.addTransform('htmlMinify', htmlMinifyTransform);
 
     // WATCH TARGETS
     eleventyConfig.addWatchTarget('./src/scss/');

@@ -22,9 +22,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     {# Preload Critical Resources #}
-    <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
+    {# AMP Core Script - Critical for rendering #}
+    <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js" crossorigin>
+    
+    {# AMP Extension Scripts - Modulepreload for better caching #}
+    <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-bind-0.1.js" crossorigin>
+    <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin>
+    
+    {# Critical Fonts - WOFF2 for modern browsers #}
     <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-solid-900.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-brands-400.woff2" crossorigin>
+    
+    {# Google Font Preload #}
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
 
     {# Required Meta Tags #}
     <meta charset="UTF-8">

@@ -8,33 +8,93 @@ permalink: /
 
 {% block structuredData %}
 <script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Syafiq Hadzir",
-    "jobTitle": "Software QA Engineer",
-    "description": "AI-assisted Software QA Engineer specializing in test automation and quality assurance.",
-    "url": "{{ site.url }}",
-    "image": "{{ site.url }}/Images/headshot.webp",
-    "email": "{{ site.email }}",
-    "sameAs": [
-        "{{ site.social.github }}",
-        "{{ site.social.gitlab }}",
-        "{{ site.social.blog }}"
-    ],
-    "worksFor": {
-        "@type": "Organization",
-        "name": "{{ site.company.name }}",
-        "url": "{{ site.company.url }}"
+[
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "@id": "{{ site.url }}/#person",
+        "name": "Syafiq Hadzir",
+        "givenName": "Syafiq",
+        "familyName": "Hadzir",
+        "jobTitle": "Software QA Engineer",
+        "description": "AI-assisted Software QA Engineer specializing in test automation and quality assurance.",
+        "url": "{{ site.url }}",
+        "image": {
+            "@type": "ImageObject",
+            "url": "{{ site.url }}/Images/headshot.webp",
+            "width": 400,
+            "height": 400
+        },
+        "email": "{{ site.email }}",
+        "sameAs": [
+            "{{ site.social.github }}",
+            "{{ site.social.gitlab }}",
+            "{{ site.social.blog }}"
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "{{ site.company.name }}",
+            "url": "{{ site.company.url }}"
+        },
+        "alumniOf": {
+            "@type": "Organization",
+            "name": "University of Cyberjaya"
+        },
+        "knowsAbout": [
+            "Software Testing",
+            "Test Automation",
+            "Quality Assurance",
+            "CI/CD Integration",
+            "AI in Testing",
+            "Network Security",
+            "Static Code Analysis"
+        ],
+        "hasOccupation": {
+            "@type": "Occupation",
+            "name": "Software Development Engineer in Test",
+            "occupationalCategory": "15-1256.00",
+            "skills": ["Test Automation", "CI/CD", "Cypress", "Vitest", "SonarQube"]
+        }
     },
-    "knowsAbout": [
-        "Software Testing",
-        "Test Automation",
-        "Quality Assurance",
-        "CI/CD Integration",
-        "AI in Testing"
-    ]
-}
+    {
+        "@context": "https://schema.org",
+        "@type": "ResearchProject",
+        "@id": "{{ site.url }}/#research",
+        "name": "AI-Assisted Quality Assurance Research",
+        "description": "Exploring the intersection of artificial intelligence and software testing methodologies to enhance defect detection and test automation efficiency.",
+        "url": "{{ site.url }}",
+        "funder": {
+            "@type": "Person",
+            "@id": "{{ site.url }}/#person"
+        },
+        "member": {
+            "@type": "Person",
+            "@id": "{{ site.url }}/#person"
+        },
+        "keywords": [
+            "AI Testing",
+            "Machine Learning QA",
+            "Automated Test Generation",
+            "Defect Prediction",
+            "Continuous Testing"
+        ],
+        "startDate": "2020-01",
+        "about": [
+            {
+                "@type": "Thing",
+                "name": "Artificial Intelligence"
+            },
+            {
+                "@type": "Thing",
+                "name": "Software Quality Assurance"
+            },
+            {
+                "@type": "Thing",
+                "name": "Test Automation"
+            }
+        ]
+    }
+]
 </script>
 {% endblock %}
 
