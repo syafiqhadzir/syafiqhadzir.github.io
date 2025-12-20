@@ -35,9 +35,10 @@ export default defineConfig({
             reportsDirectory: './coverage',
 
             // Files to include in coverage
-            include: ['src/**/*.ts'],
+            include: ['src/**/*.ts', 'scripts/**/*.ts'],
 
             // Files to exclude from coverage
+            // Note: CLI scripts (validate-amp.ts main functions) are integration-tested
             exclude: [
                 'node_modules/**',
                 'test/**',
@@ -46,14 +47,15 @@ export default defineConfig({
                 '**/*.spec.ts',
                 '**/*.d.ts',
                 '**/types/**',
+                'scripts/validate-amp.ts', // CLI script - integration tested
             ],
 
-            // Coverage thresholds (strict for filters)
+            // Coverage thresholds (strict for full pyramid)
             thresholds: {
-                statements: 80,
-                branches: 80,
-                functions: 80,
-                lines: 80,
+                statements: 90,
+                branches: 85,
+                functions: 90,
+                lines: 90,
             },
 
             // Clean coverage before running
