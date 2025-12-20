@@ -69,7 +69,12 @@ export default defineConfig({
         },
 
         // Reporter configuration
-        reporters: ['default', 'verbose'],
+        reporters: ['default', 'verbose', 'junit'],
+
+        // Output file for JUnit report
+        outputFile: {
+            junit: './test-report.xml',
+        },
 
         // Watch mode configuration
         watch: false,

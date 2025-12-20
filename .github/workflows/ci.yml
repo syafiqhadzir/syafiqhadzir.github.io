@@ -95,11 +95,13 @@ jobs:
       - name: Run Vitest with coverage
         run: npm run test:unit -- --coverage
 
-      - name: Upload coverage reports
+      - name: Upload coverage and test reports
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-reports
-          path: coverage/
+          name: test-reports
+          path: |
+            coverage/
+            test-report.xml
           retention-days: 7
 
   # STAGE 3: SONARCLOUD ANALYSIS
@@ -124,11 +126,10 @@ jobs:
           name: lint-reports
         continue-on-error: true
 
-      - name: Download coverage reports
+      - name: Download test and coverage reports
         uses: actions/download-artifact@v4
         with:
-          name: coverage-reports
-          path: coverage/
+          name: test-reports
 
       - name: SonarCloud Scan
         if: env.SONAR_TOKEN != ''
