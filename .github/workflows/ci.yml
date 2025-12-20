@@ -135,6 +135,7 @@ jobs:
         uses: SonarSource/sonarcloud-github-action@v3
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       # Note: Quality Gate check is handled by sonar.qualitygate.wait=true
       # in sonar-project.properties - the scan will fail if gate fails

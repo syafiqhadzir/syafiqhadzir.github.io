@@ -4,7 +4,7 @@
 /*
   # Content Security Policy for AMP
   # AMP requires specific sources for scripts and styles
-  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.ampproject.org https://*.ampproject.org 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://cdn.ampproject.org https://*.ampproject.org; frame-src 'self' https://www.google.com; base-uri 'self'; form-action 'self'
+  Content-Security-Policy: default-src 'self'; script-src 'self' https://cdn.ampproject.org https://*.ampproject.org 'unsafe-inline'; worker-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://cdn.ampproject.org https://*.ampproject.org; frame-src 'self' https://www.google.com; base-uri 'self'; form-action 'self'
   
   # Prevent clickjacking
   X-Frame-Options: SAMEORIGIN
