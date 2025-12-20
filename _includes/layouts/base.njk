@@ -93,10 +93,18 @@
     <meta name="theme-color" content="#ffffff">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
+    {# AMP Runtime Optimization #}
+    {# Indicates this page is AMP-first (no separate canonical) #}
+    <meta name="amp-script-src" content="sha384-*">
+    
+    {# AMP Transform Indicator - Signals to AMP Cache this is pre-optimized #}
+    <meta name="amp-google-client-id-api" content="googleanalytics">
+
     {# AMP Scripts #}
     <script async src="https://cdn.ampproject.org/v0.js"></script>
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
     <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
 
     {# Google Fonts #}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
@@ -190,6 +198,104 @@
         data-iframe-src="/sw.html"
         layout="nodisplay">
     </amp-install-serviceworker>
+
+    {# Google Analytics 4 via amp-analytics #}
+    {# Measurement ID: G-8B9YX48TMV #}
+    <amp-analytics type="gtag" data-credentials="include">
+        <script type="application/json">
+        {
+            "vars": {
+                "gtag_id": "G-8B9YX48TMV",
+                "config": {
+                    "G-8B9YX48TMV": {
+                        "groups": "default",
+                        "page_title": "{{ title }}",
+                        "page_location": "{{ site.url }}{{ page.url }}",
+                        "send_page_view": true
+                    }
+                }
+            },
+            "triggers": {
+                "pageView": {
+                    "on": "visible",
+                    "request": "pageview",
+                    "vars": {
+                        "page_title": "{{ title }}",
+                        "page_path": "{{ page.url }}"
+                    }
+                },
+                "scrollDepth25": {
+                    "on": "scroll",
+                    "scrollSpec": {
+                        "verticalBoundaries": [25]
+                    },
+                    "request": "event",
+                    "vars": {
+                        "event_name": "scroll",
+                        "event_category": "Engagement",
+                        "event_label": "25%"
+                    }
+                },
+                "scrollDepth50": {
+                    "on": "scroll",
+                    "scrollSpec": {
+                        "verticalBoundaries": [50]
+                    },
+                    "request": "event",
+                    "vars": {
+                        "event_name": "scroll",
+                        "event_category": "Engagement",
+                        "event_label": "50%"
+                    }
+                },
+                "scrollDepth75": {
+                    "on": "scroll",
+                    "scrollSpec": {
+                        "verticalBoundaries": [75]
+                    },
+                    "request": "event",
+                    "vars": {
+                        "event_name": "scroll",
+                        "event_category": "Engagement",
+                        "event_label": "75%"
+                    }
+                },
+                "scrollDepth100": {
+                    "on": "scroll",
+                    "scrollSpec": {
+                        "verticalBoundaries": [100]
+                    },
+                    "request": "event",
+                    "vars": {
+                        "event_name": "scroll",
+                        "event_category": "Engagement",
+                        "event_label": "100%"
+                    }
+                },
+                "outboundLinks": {
+                    "on": "click",
+                    "selector": "a[rel*='external']",
+                    "request": "event",
+                    "vars": {
+                        "event_name": "click",
+                        "event_category": "Outbound",
+                        "event_label": "${outboundLink}"
+                    }
+                },
+                "themeToggle": {
+                    "on": "click",
+                    "selector": ".theme-toggle",
+                    "request": "event",
+                    "vars": {
+                        "event_name": "theme_toggle",
+                        "event_category": "Engagement",
+                        "event_label": "Theme Changed"
+                    }
+                }
+            }
+        }
+        </script>
+    </amp-analytics>
 </body>
 
 </html>

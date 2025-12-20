@@ -22,10 +22,23 @@
   Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
   
   # Strict Transport Security (HSTS)
-  # Enable only after confirming HTTPS works correctly
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  
+  # AMP Cache Optimization
+  # Allows Google AMP Cache to serve optimized versions
+  Access-Control-Allow-Origin: https://cdn.ampproject.org
+  
+  # AMP Signed Exchange Preparation (for future SXG support)
+  # Accept-CH: Sec-CH-UA, Sec-CH-UA-Mobile, Sec-CH-UA-Platform
 
-# Cache static assets aggressively
+# AMP HTML Pages - Optimized Caching
+/*.html
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  # Link preload for AMP runtime
+  Link: <https://cdn.ampproject.org/v0.js>; rel=preload; as=script
+  Link: <https://cdn.ampproject.org/v0/amp-bind-0.1.js>; rel=preload; as=script
+
+# Cache static assets aggressively (1 year)
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
@@ -35,10 +48,16 @@
 /favicons/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Cache HTML with revalidation
-/*.html
-  Cache-Control: public, max-age=0, must-revalidate
+# XML files (sitemap, RSS)
+/*.xml
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
+  Content-Type: application/xml; charset=utf-8
 
-# Service Worker
+# Service Worker - No caching
 /sw.js
   Cache-Control: public, max-age=0, must-revalidate
+
+# Manifest file
+/favicons/site.webmanifest
+  Cache-Control: public, max-age=86400
+  Content-Type: application/manifest+json
