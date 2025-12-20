@@ -641,6 +641,84 @@
             margin-bottom: 1rem;
             color: var(--accent);
         }
+
+        /* ============================================
+           ACCESSIBILITY ENHANCEMENTS
+           ============================================ */
+
+        /* Focus Visible - Keyboard Navigation */
+        :focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+            border-radius: 2px;
+        }
+
+        /* Remove focus outline for mouse users */
+        :focus:not(:focus-visible) {
+            outline: none;
+        }
+
+        /* Reduced Motion Preference */
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+
+        /* High Contrast Mode Support */
+        @media (prefers-contrast: high) {
+            :root {
+                --text-primary: #000000;
+                --bg-primary: #ffffff;
+                --accent: #0000EE;
+                --accent-hover: #0000CC;
+                --border: #000000;
+            }
+
+            a {
+                text-decoration: underline !important;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background: white !important;
+                color: black !important;
+            }
+
+            .skip-link,
+            .theme-toggle,
+            nav {
+                display: none !important;
+            }
+        }
+
+        /* Minimum Touch Target Size (44x44px) */
+        .theme-toggle,
+        .w3-button {
+            min-width: 44px;
+            min-height: 44px;
+        }
+
+        /* Screen Reader Only - Visually Hidden */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
     </style>
 </head>
 
@@ -649,6 +727,8 @@
         <script type="application/json">{"mode": null}</script>
     </amp-state>
     <a href=#main-content class=skip-link>Skip to main content</a>
+    <div aria-live="polite" aria-atomic="true" class="sr-only" id="theme-announcement"
+        [text]="theme.mode == 'dark' ? 'Dark mode enabled' : theme.mode == 'light' ? 'Light mode enabled' : ''"></div>
     <div class=wrapper>
         <div class=container>
             <header class=navbar role=banner>
