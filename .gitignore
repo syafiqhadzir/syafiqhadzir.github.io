@@ -1,22 +1,64 @@
-# Syafiq Hadzir Portfolio - Git Ignore Configuration
-
-# Dependencies
+# --- Dependencies ---
 node_modules/
+.pnp
+.pnp.js
 
-# Build & Output
+# --- Build & Output ---
+# Eleventy/Generic build output
+_site/
 dist/
 build/
 .output/
+.parcel-cache
+.turbo
+.vercel
+.netlify
 *.tsbuildinfo
 
-# Cypress Testing
-# Test artifacts (screenshots, videos, downloads, reports)
+# --- Testing & Reports ---
+# Coverage
+coverage/
+.nyc_output/
+
+# Vitest & Jest
+.vitest-results.json
+junit.xml
+
+# Cypress
 cypress/screenshots/
 cypress/videos/
 cypress/downloads/
 cypress/reports/
+cypress/.run/
+cypress-log.txt
 
-# IDE & Editor
+# Lighthouse CI
+.lighthouseci/
+lhci-reports/
+
+# SonarCloud / Static Analysis
+.scannerwork/
+sonar-project.properties.bak
+sonar-report.xml
+eslint-report.json
+stylelint-report.json
+
+# --- Environment & Secrets ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+.node_repl_history
+
+# --- Logs & Debug ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# --- IDE & Editor ---
 # VS Code
 .vscode/*
 !.vscode/settings.json
@@ -24,17 +66,17 @@ cypress/reports/
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# JetBrains IDEs (WebStorm, IntelliJ)
+# JetBrains
 .idea/
 
 # Visual Studio
 .vs/
+*.sln.docstates
 *.suo
 *.user
 *.userosscache
-*.sln.docstates
 
-# Operating System
+# --- Operating System ---
 # macOS
 .DS_Store
 .AppleDouble
@@ -45,81 +87,29 @@ cypress/reports/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+$RECYCLE.BIN/
 
-# Linux
-*~
-
-# Environment & Secrets
-.env
-.env.local
-.env.*.local
-*.pem
-*.key
-
-# Logs & Debug
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
-
-# Cache & Temp
+# --- Cache & Temp ---
 .cache/
 *.cache
 .temp/
 .tmp/
+.eslintcache
+.stylelintcache
 
-# Jekyll (if used for GitHub Pages processing)
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-.bundle/
-vendor/
-
-# TypeScript
-# Build output (don't commit compiled JS from TS sources)
-# Note: Keep sw.js as it's a browser service worker, not compiled TS
-*.js.map
-
-# Package Manager Locks (keep package-lock.json, ignore others if present)
-yarn.lock
-pnpm-lock.yaml
-bun.lockb
-
-# Misc
-# Backup files
+# --- Misc ---
 *.bak
 *.backup
 *~
-
-# Archive files
 *.zip
 *.tar.gz
 *.rar
-
-# Coverage reports
-coverage/
-.nyc_output/
-
-# Debug output files
-cypress-log.txt
-*.txt.log
-
-# Cypress Cloud artifacts
-cypress/.run/
-
-# Deployment platforms (future-proofing)
-.vercel/
-.netlify/
-.turbo/
-
-# Git conflict files
 *.orig
 *.BACKUP.*
 *.BASE.*
 *.LOCAL.*
 *.REMOTE.*
 
-# Gemini AI artifacts (local development)
+# AI & Local Tools
 .gemini/
+.agent/

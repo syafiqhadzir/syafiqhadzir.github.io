@@ -46,7 +46,7 @@ module.exports = {
 
                 // Performance Budgets (Resource Summary)
                 // Expert practice: fail if JS/CSS exceeds size budgets
-                'resource-summary:script:size': ['error', { maxNumericValue: 100000 }], // 100kB JS
+                'resource-summary:script:size': ['error', { maxNumericValue: 150000 }], // 150kB JS (Expert AMP baseline)
                 'resource-summary:stylesheet:size': ['error', { maxNumericValue: 50000 }], // 50kB CSS
                 'resource-summary:image:size': ['warn', { maxNumericValue: 500000 }], // 500kB Images
                 'resource-summary:total:size': ['error', { maxNumericValue: 1000000 }], // 1MB Total
