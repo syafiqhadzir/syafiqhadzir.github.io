@@ -267,18 +267,8 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@latest
 
-      - name: Run Lighthouse CI (Collect)
-        run: lhci collect
-        env:
-          # yamllint disable-line rule:truthy
-          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }} # pragma: allowlist secret
-
-      - name: Generate Lighthouse Reports
-        run: lhci report --outputDir=lhci-reports --reporter=html --reporter=json
-        if: always()
-
-      - name: Run Lighthouse CI (Assert)
-        run: lhci assert
+      - name: Run Lighthouse CI
+        run: lhci autorun
         env:
           # yamllint disable-line rule:truthy
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }} # pragma: allowlist secret
@@ -288,7 +278,7 @@ jobs:
         if: always()
         with:
           name: lighthouse-reports
-          path: lhci-reports/
+          path: .lighthouseci/
           retention-days: 7
           if-no-files-found: warn
 
