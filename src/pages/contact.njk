@@ -1,0 +1,61 @@
+---
+layout: base.njk
+title: Contact
+description: Get in touch with Syafiq Hadzir, Software QA Engineer.
+contentLabel: Contact information
+permalink: /contact.html
+---
+
+{% block structuredData %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact - Syafiq Hadzir",
+    "description": "Get in touch with Syafiq Hadzir, Software QA Engineer.",
+    "url": "{{ site.url }}/contact.html",
+    "mainEntity": {
+        "@type": "Person",
+        "name": "{{ site.author }}",
+        "jobTitle": "{{ site.jobTitle }}",
+        "email": "{{ site.email }}",
+        "url": "{{ site.url }}",
+        "sameAs": [
+            "{{ site.social.github }}",
+            "{{ site.social.gitlab }}"
+        ]
+    }
+}
+</script>
+{% endblock %}
+
+<h1 id="contact">
+    <i class="fa-solid fa-envelope fa-fw" aria-hidden="true"></i>&nbsp;Contact
+</h1>
+<p>Feel free to reach out to me via email or connect with me on social media.</p>
+<p class="email-address">
+    <i class="fa-solid fa-envelope" aria-hidden="true"></i>&nbsp;
+    <a href="mailto:{{ site.email }}" data-cy="email-link">{{ site.email }}</a>
+</p>
+
+<h3 id="professional">Professional</h3>
+<ul>
+    <li>
+        <i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="{{ site.social.github }}" rel="noopener noreferrer external" aria-label="Syafiq's GitHub">GitHub</a>
+    </li>
+    <li>
+        <i class="fa-brands fa-gitlab fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="{{ site.social.gitlab }}" rel="noopener noreferrer external" aria-label="Syafiq's GitLab">GitLab</a>
+    </li>
+</ul>
+
+<h3 id="blog">Blog</h3>
+<ul>
+    <li>
+        <i class="fa-solid fa-signature fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="{{ site.social.blog }}" rel="noopener noreferrer external" aria-label="Syafiq's Blog">blog.syafiqhadzir.dev</a>
+    </li>
+</ul>
+
+<hr>

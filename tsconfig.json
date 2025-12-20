@@ -7,24 +7,57 @@
             "DOM.Iterable"
         ],
         "module": "ESNext",
-        "moduleResolution": "bundler",
+        "moduleResolution": "Bundler",
         "strict": true,
         "esModuleInterop": true,
         "skipLibCheck": true,
-        "types": [
-            "cypress"
-        ],
         "isolatedModules": true,
         "noEmit": true,
         "resolveJsonModule": true,
         "allowSyntheticDefaultImports": true,
-        "forceConsistentCasingInFileNames": true
+        "forceConsistentCasingInFileNames": true,
+        "declaration": true,
+        "declarationMap": true,
+        "sourceMap": true,
+        "outDir": "./dist",
+        "rootDir": ".",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./src/*"
+            ],
+            "@filters/*": [
+                "./src/filters/*"
+            ],
+            "@transforms/*": [
+                "./src/transforms/*"
+            ],
+            "@shortcodes/*": [
+                "./src/shortcodes/*"
+            ]
+        },
+        "types": [
+            "node",
+            "cypress"
+        ],
+        "typeRoots": [
+            "./node_modules/@types",
+            "./types"
+        ]
     },
     "include": [
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "scripts/**/*.ts",
         "cypress/**/*.ts",
-        "cypress.config.ts"
+        "cypress.config.ts",
+        "vitest.config.ts"
     ],
     "exclude": [
-        "node_modules"
+        "node_modules",
+        "_site",
+        "dist",
+        "coverage",
+        "eleventy.config.js"
     ]
 }

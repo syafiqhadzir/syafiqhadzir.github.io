@@ -1,0 +1,100 @@
+---
+layout: base.njk
+title: Syafiq Hadzir
+description: Portfolio of Syafiq Hadzir - AI-assisted Software QA Engineer specializing in test automation and quality assurance.
+contentLabel: Portfolio content
+permalink: /
+---
+
+{% block structuredData %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Syafiq Hadzir",
+    "jobTitle": "Software QA Engineer",
+    "description": "AI-assisted Software QA Engineer specializing in test automation and quality assurance.",
+    "url": "{{ site.url }}",
+    "image": "{{ site.url }}/Images/headshot.webp",
+    "email": "{{ site.email }}",
+    "sameAs": [
+        "{{ site.social.github }}",
+        "{{ site.social.gitlab }}",
+        "{{ site.social.blog }}"
+    ],
+    "worksFor": {
+        "@type": "Organization",
+        "name": "{{ site.company.name }}",
+        "url": "{{ site.company.url }}"
+    },
+    "knowsAbout": [
+        "Software Testing",
+        "Test Automation",
+        "Quality Assurance",
+        "CI/CD Integration",
+        "AI in Testing"
+    ]
+}
+</script>
+{% endblock %}
+
+<h1 style="display:none">Portfolio of Syafiq Hadzir</h1>
+
+<h2 id="about-me">
+    <i class="fa-solid fa-user-tie fa-fw" aria-hidden="true"></i>&nbsp;About Me
+</h2>
+<p>
+    <span class="profile-picture">
+        <amp-img width="85" height="85" src="/Images/headshot.webp" alt="Syafiq Hadzir" title="Syafiq Hadzir"
+            layout="responsive" data-cy="profile-picture"></amp-img>
+    </span>
+    Hi! I am Syafiq Hadzir, an AI-assisted Software QA Engineer at <a href="{{ site.company.url }}"
+        rel="nofollow noreferrer noopener external" aria-label="Cloud Connect company website">Cloud Connect</a>. I
+    actively leverage cutting-edge AI tools
+    and methodologies to enhance the efficiency and effectiveness of the software testing lifecycle.
+</p>
+
+<h2 id="proficiencies">
+    <i class="fa-solid fa-diagram-project fa-fw" aria-hidden="true"></i>&nbsp;Proficiencies
+</h2>
+<p>As an experienced software QA engineer with 5+ years of experience in software development and 3+ years in
+    network security research, I have a keen eye for detail and an aptitude for quickly understanding complex
+    software systems. My expertise lies in:</p>
+<ul>
+    <li>Designing and executing comprehensive test plans</li>
+    <li>Identifying critical defects</li>
+    <li>Ensuring the delivery of high-quality software products</li>
+</ul>
+<p>Note: kindly visit my Github profile for more information.</p>
+
+<h2 id="interest">
+    <i class="fa-solid fa-hexagon-nodes fa-fw" aria-hidden="true"></i>&nbsp;Interests
+</h2>
+<p>At the forefront of evolving technology, I constantly learn and adapt to the dynamic interplay between AI
+    and software testing, focusing specifically on these areas:</p>
+<ul>
+    <li><i class="fa-solid fa-brain fa-fw" aria-hidden="true"></i>&emsp;AI Exploration</li>
+    <li><i class="fa-solid fa-infinity fa-fw" aria-hidden="true"></i>&emsp;CI/CD Integration</li>
+    <li><i class="fa-solid fa-code fa-fw" aria-hidden="true"></i>&emsp;Code Assessment</li>
+    <li><i class="fa-solid fa-robot fa-fw" aria-hidden="true"></i>&emsp;Test Automation</li>
+    <li><i class="fa-solid fa-window-maximize fa-fw" aria-hidden="true"></i>&emsp;Web Application</li>
+</ul>
+
+<hr>
+
+<h2 id="references">
+    <i class="fa-solid fa-rss fa-fw" aria-hidden="true"></i>&nbsp;References
+</h2>
+<ul>
+    <li><i class="fa-solid fa-signature fa-fw" aria-hidden="true"></i>&nbsp;<a href="{{ site.social.blog }}"
+            rel="noopener noreferrer external" aria-label="Syafiq's Blog">Blog</a>: My blog where I share my thoughts
+        and experiences</li>
+    <li><i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;<a href="{{ site.social.github }}"
+            rel="noopener noreferrer external" aria-label="Syafiq's GitHub profile">GitHub</a>: View my open source
+        contributions and projects</li>
+    <li><i class="fa-brands fa-gitlab fa-fw" aria-hidden="true"></i>&nbsp;<a href="{{ site.social.gitlab }}"
+            rel="noopener noreferrer external" aria-label="Syafiq's GitLab profile">GitLab</a>: Additional
+        repositories and work</li>
+</ul>
+
+<hr>

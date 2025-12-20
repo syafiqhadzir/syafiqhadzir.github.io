@@ -1,0 +1,18 @@
+{
+    "title": "Syafiq Hadzir",
+    "description": "Portfolio of Syafiq Hadzir - AI-assisted Software QA Engineer specializing in test automation and quality assurance.",
+    "url": "https://syafiqhadzir.dev",
+    "author": "Syafiq Hadzir",
+    "email": "syafiqhadzir@live.com.my",
+    "jobTitle": "Software QA Engineer",
+    "company": {
+        "name": "Cloud Connect",
+        "url": "https://www.cloud-connect.asia/"
+    },
+    "social": {
+        "github": "https://github.com/SyafiqHadzir",
+        "gitlab": "https://gitlab.com/syafiqhadzir",
+        "blog": "https://blog.syafiqhadzir.dev/"
+    },
+    "buildTime": "2025-12-20"
+}

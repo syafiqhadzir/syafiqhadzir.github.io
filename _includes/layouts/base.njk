@@ -1,0 +1,185 @@
+{#
+    Base Layout Template for AMP Pages
+    Golden Layout with Automated CSS Injection
+
+    Features:
+    - AMP-compliant HTML structure
+    - Automatic CSS injection from compiled SCSS
+    - Theme toggle with amp-bind
+    - Service worker integration
+    - Responsive design
+
+    @module _includes/layouts/base.njk
+#}
+<!DOCTYPE html>
+<html ⚡ lang="{{ lang | default('en-GB') }}">
+
+<head>
+    {# Preconnect for Performance #}
+    <link rel="preconnect" href="https://cdn.ampproject.org/" crossorigin>
+    <link rel="dns-prefetch" href="https://cdn.ampproject.org/" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    {# Preload Critical Resources #}
+    <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js">
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-solid-900.woff2" crossorigin>
+    <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-brands-400.woff2" crossorigin>
+
+    {# Required Meta Tags #}
+    <meta charset="UTF-8">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+
+    {# Page Title #}
+    <title>{{ title }}{% if title != site.title %} - {{ site.title }}{% endif %}</title>
+
+    {# SEO Meta Tags #}
+    <meta name="description" content="{{ description | default(site.description) }}">
+    <meta name="keywords" content="{{ keywords | default('Syafiq Hadzir, Software QA Engineer, Test Automation') }}">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="{{ site.author }}">
+
+    {# Canonical URL #}
+    <link rel="canonical" href="{{ canonical | default(site.url + page.url) }}">
+
+    {# Open Graph Tags #}
+    <meta property="og:type" content="{{ ogType | default('website') }}">
+    <meta property="og:title" content="{{ ogTitle | default(title) }}">
+    <meta property="og:description" content="{{ ogDescription | default(description) | default(site.description) }}">
+    <meta property="og:url" content="{{ site.url }}{{ page.url }}">
+    <meta property="og:image" content="{{ ogImage | default(site.url + '/Images/headshot.webp') }}">
+    <meta property="og:site_name" content="{{ site.title }}">
+    <meta property="og:locale" content="en_GB">
+
+    {# Twitter Card Tags #}
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="{{ title }}">
+    <meta name="twitter:description" content="{{ description | default(site.description) }}">
+    <meta name="twitter:image" content="{{ site.url }}/Images/headshot.webp">
+
+    {# Structured Data #}
+    {% block structuredData %}
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "{{ title }}",
+            "description": "{{ description | default(site.description) }}",
+            "url": "{{ site.url }}{{ page.url }}"
+        }
+    </script>
+    {% endblock %}
+
+    {# Favicons #}
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#FF0F00">
+    <link rel="manifest" href="/favicons/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    {# AMP Scripts #}
+    <script async src="https://cdn.ampproject.org/v0.js"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
+    <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
+
+    {# Google Fonts #}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
+
+    {# AMP Boilerplate (Required) #}
+    <style amp-boilerplate>
+        body {
+            -webkit-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+            -moz-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+            -ms-animation: -amp-start 8s steps(1, end) 0s 1 normal both;
+            animation: -amp-start 8s steps(1, end) 0s 1 normal both
+        }
+
+        @-webkit-keyframes -amp-start {
+            from { visibility: hidden }
+            to { visibility: visible }
+        }
+
+        @-moz-keyframes -amp-start {
+            from { visibility: hidden }
+            to { visibility: visible }
+        }
+
+        @-ms-keyframes -amp-start {
+            from { visibility: hidden }
+            to { visibility: visible }
+        }
+
+        @-o-keyframes -amp-start {
+            from { visibility: hidden }
+            to { visibility: visible }
+        }
+
+        @keyframes -amp-start {
+            from { visibility: hidden }
+            to { visibility: visible }
+        }
+    </style>
+    <noscript>
+        <style amp-boilerplate>
+            body {
+                -webkit-animation: none;
+                -moz-animation: none;
+                -ms-animation: none;
+                animation: none
+            }
+        </style>
+    </noscript>
+
+    {# Automated CSS Injection from Compiled SCSS #}
+    <style amp-custom>
+        {{ compiledCSS | safe }}
+    </style>
+</head>
+
+<body [class]="theme.mode || ''">
+    {# Theme State Management #}
+    <amp-state id="theme">
+        <script type="application/json">{"mode": null}</script>
+    </amp-state>
+
+    {# Skip Link for Accessibility #}
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    {# Screen Reader Theme Announcement #}
+    <div aria-live="polite" aria-atomic="true" class="sr-only" id="theme-announcement"
+        [text]="theme.mode == 'dark' ? 'Dark mode enabled' : theme.mode == 'light' ? 'Light mode enabled' : ''">
+    </div>
+
+    <div class="wrapper">
+        <div class="container">
+            {# Navigation #}
+            {% include "partials/nav.njk" %}
+
+            {# Main Content Area #}
+            <main id="main-content" class="content" role="main" aria-label="{{ contentLabel | default('Page content') }}" data-cy="main-content">
+                {{ content | safe }}
+            </main>
+        </div>
+    </div>
+
+    {# Horizontal Rule Before Footer #}
+    <hr>
+
+    {# Footer #}
+    {% include "partials/footer.njk" %}
+
+    {# Service Worker Installation #}
+    <amp-install-serviceworker
+        src="/sw.js"
+        data-iframe-src="/sw.html"
+        layout="nodisplay">
+    </amp-install-serviceworker>
+</body>
+
+</html>

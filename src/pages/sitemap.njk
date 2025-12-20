@@ -1,0 +1,74 @@
+---
+layout: base.njk
+title: Sitemap
+description: Complete sitemap of Syafiq Hadzir's portfolio website.
+contentLabel: Sitemap
+permalink: /sitemap.html
+---
+
+{% block structuredData %}
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Sitemap - Syafiq Hadzir",
+    "description": "Complete sitemap of Syafiq Hadzir's portfolio website.",
+    "url": "{{ site.url }}/sitemap.html"
+}
+</script>
+{% endblock %}
+
+<h1 id="sitemap">
+    <i class="fa-solid fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;Sitemap
+</h1>
+<p>A complete list of all pages available on this website.</p>
+
+<h3 id="pages">Pages</h3>
+<ul>
+    <li>
+        <i class="fa-solid fa-house fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="/" aria-label="Homepage">Home</a> - About Me, Proficiencies, and Interests
+    </li>
+    <li>
+        <i class="fa-solid fa-envelope fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="/contact.html" aria-label="Contact page">Contact</a> - Get in touch with me
+    </li>
+    <li>
+        <i class="fa-solid fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="/sitemap.html" aria-label="Sitemap page">Sitemap</a> - This page
+    </li>
+</ul>
+
+<h3 id="external-resources">External Resources</h3>
+<ul>
+    <li>
+        <i class="fa-solid fa-signature fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="{{ site.social.blog }}" rel="noopener noreferrer external" aria-label="Syafiq's Blog">Blog</a> - My personal blog
+    </li>
+    <li>
+        <i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="{{ site.social.github }}" rel="noopener noreferrer external" aria-label="Syafiq's GitHub">GitHub</a> - Open source projects
+    </li>
+    <li>
+        <i class="fa-brands fa-gitlab fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="{{ site.social.gitlab }}" rel="noopener noreferrer external" aria-label="Syafiq's GitLab">GitLab</a> - Additional repositories
+    </li>
+</ul>
+
+<h3 id="technical-files">Technical Files</h3>
+<ul>
+    <li>
+        <i class="fa-solid fa-file-lines fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="/sitemap.xml" aria-label="XML Sitemap">sitemap.xml</a> - XML Sitemap for search engines
+    </li>
+    <li>
+        <i class="fa-solid fa-file-lines fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="/robots.txt" aria-label="Robots.txt">robots.txt</a> - Crawler instructions
+    </li>
+    <li>
+        <i class="fa-solid fa-file-lines fa-fw" aria-hidden="true"></i>&nbsp;
+        <a href="/humans.txt" aria-label="Humans.txt">humans.txt</a> - About the humans behind the site
+    </li>
+</ul>
+
+<hr>

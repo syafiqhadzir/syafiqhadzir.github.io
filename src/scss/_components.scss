@@ -1,0 +1,474 @@
+// SCSS Architecture - Component Styles
+// Google AMP Portfolio - Researcher Theme
+
+@use 'variables' as *;
+
+// CSS CUSTOM PROPERTIES (Runtime Variables)
+
+:root {
+    // Light Mode (Default)
+    --bg-primary: #{$light-bg-primary};
+    --bg-secondary: #{$light-bg-secondary};
+    --text-primary: #{$light-text-primary};
+    --text-secondary: #{$light-text-secondary};
+    --text-muted: #{$light-text-muted};
+    --heading-color: #{$light-heading};
+    --accent: #{$color-accent};
+    --accent-hover: #{$color-accent-hover};
+    --border: #{$light-border};
+    --border-light: #{$light-border-light};
+    --button-bg: #{$color-accent};
+    --button-text: #ffffff;
+    --button-hover: #{$color-accent-hover};
+
+    // Font Settings
+    --fa-display: inline-block;
+
+    // Legacy Mappings
+    --bg-color: var(--bg-primary);
+    --text-color: var(--text-primary);
+    --link-color: var(--accent);
+    --footer-text: var(--text-muted);
+    --blockquote-border: #eeeeee;
+    --table-border: #{$light-border};
+    --table-stripe: #f9f9f9;
+}
+
+// Dark Mode (System Preference)
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg-primary: #{$dark-bg-primary};
+        --bg-secondary: #{$dark-bg-secondary};
+        --text-primary: #{$dark-text-primary};
+        --text-secondary: #{$dark-text-secondary};
+        --text-muted: #{$dark-text-muted};
+        --heading-color: #{$dark-heading};
+        --accent: #{$color-accent-light};
+        --accent-hover: #{$color-accent-light-hover};
+        --border: #{$dark-border};
+        --border-light: #{$dark-border-light};
+        --button-bg: #{$color-accent-light};
+
+        --bg-color: var(--bg-primary);
+        --text-color: var(--text-primary);
+        --link-color: var(--accent);
+        --footer-text: var(--text-muted);
+        --blockquote-border: #{$dark-border};
+        --table-border: #{$dark-border};
+        --table-stripe: #161618;
+    }
+}
+
+// Explicit Light Override
+body.light {
+    --bg-primary: #{$light-bg-primary};
+    --bg-secondary: #{$light-bg-secondary};
+    --text-primary: #{$light-text-primary};
+    --text-secondary: #{$light-text-secondary};
+    --text-muted: #{$light-text-muted};
+    --heading-color: #{$light-heading};
+    --accent: #{$color-accent};
+    --accent-hover: #{$color-accent-hover};
+    --border: #{$light-border};
+    --border-light: #{$light-border-light};
+
+    --bg-color: var(--bg-primary);
+    --text-color: var(--text-primary);
+    --link-color: var(--accent);
+}
+
+// Explicit Dark Override
+body.dark {
+    --bg-primary: #{$dark-bg-primary};
+    --bg-secondary: #{$dark-bg-secondary};
+    --text-primary: #{$dark-text-primary};
+    --text-secondary: #{$dark-text-secondary};
+    --text-muted: #{$dark-text-muted};
+    --heading-color: #{$dark-heading};
+    --accent: #{$color-accent-light};
+    --accent-hover: #{$color-accent-light-hover};
+    --border: #{$dark-border};
+    --border-light: #{$dark-border-light};
+
+    --bg-color: var(--bg-primary);
+    --text-color: var(--text-primary);
+    --link-color: var(--accent);
+}
+
+// BASE STYLES
+
+html {
+    box-sizing: border-box;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+body {
+    margin: 0;
+    font: #{$font-size-base}/#{$line-height-base} #{$font-family-base};
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color $transition-slow, color $transition-slow;
+}
+
+// TYPOGRAPHY
+
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color $transition-base;
+    background-color: transparent;
+
+    &:hover {
+        color: var(--accent-hover);
+        text-decoration: underline;
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: $font-family-base;
+    font-weight: $font-weight-bold;
+    color: var(--heading-color);
+    margin: 1.5rem 0 0.5rem;
+    line-height: $line-height-heading;
+}
+
+h1 {
+    font-size: $h1-size;
+}
+
+h2 {
+    font-size: $h2-size;
+}
+
+h3 {
+    font-size: $h3-size;
+}
+
+h4 {
+    font-size: $h4-size;
+}
+
+h5 {
+    font-size: $h5-size;
+}
+
+h6 {
+    font-size: $h6-size;
+}
+
+// LAYOUT
+
+.wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    max-width: $container-max-width;
+    margin: 0 auto;
+    padding: 0 $container-padding;
+    flex: 1;
+}
+
+// NAVBAR
+
+.navbar {
+    padding: $navbar-padding 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#author-name {
+    font-size: 1.5rem;
+    font-weight: $font-weight-bold;
+    color: var(--heading-color);
+}
+
+.navbar-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-list {
+    margin-left: 15px;
+    font-size: 1rem;
+}
+
+.nav-separator {
+    margin: 0 5px;
+    color: var(--text-muted);
+}
+
+.active {
+    font-weight: $font-weight-bold;
+}
+
+// UTILITIES
+
+.alignable {
+    display: inline-block;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+hr {
+    border: 0;
+    border-top: $border-width solid var(--border);
+    margin: 30px 0;
+}
+
+.w3-button {
+    border: 0;
+    display: inline-block;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+    border-radius: $border-radius-md;
+}
+
+.w3-center {
+    text-align: center;
+}
+
+// THEME TOGGLE
+
+.theme-toggle {
+    background: none;
+    border: none;
+    color: var(--heading-color);
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 1rem;
+    min-width: $touch-target-min;
+    min-height: $touch-target-min;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+// Toggle Icon Visibility
+.moon-icon {
+    display: inline-block;
+}
+
+.sun-icon {
+    display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+    .moon-icon {
+        display: none;
+    }
+
+    .sun-icon {
+        display: inline-block;
+    }
+}
+
+body.light {
+    .moon-icon {
+        display: inline-block;
+    }
+
+    .sun-icon {
+        display: none;
+    }
+}
+
+body.dark {
+    .moon-icon {
+        display: none;
+    }
+
+    .sun-icon {
+        display: inline-block;
+    }
+}
+
+// FOOTER
+
+.footer {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: $font-size-sm;
+    padding: $footer-padding 0;
+    margin-top: auto;
+
+    a {
+        color: var(--text-muted);
+        border-bottom: 1px dotted var(--text-muted);
+
+        &:hover {
+            color: var(--accent);
+            border-bottom-color: var(--accent);
+        }
+    }
+}
+
+// ACCESSIBILITY
+
+// Skip Link
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: $z-index-fixed;
+    padding: $spacing-sm $spacing-md;
+    background: var(--text-primary);
+    color: var(--bg-primary);
+
+    &:focus {
+        left: 10px;
+        top: 10px;
+    }
+}
+
+// Focus Visible
+:focus-visible {
+    outline: $focus-ring-width solid var(--accent);
+    outline-offset: $focus-ring-offset;
+    border-radius: $border-radius-sm;
+}
+
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+// Screen Reader Only
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+// Reduced Motion (AMP does not allow !important)
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        transition-duration: 0.01ms;
+        scroll-behavior: auto;
+    }
+}
+
+// High Contrast
+@media (prefers-contrast: high) {
+    :root {
+        --text-primary: #000000;
+        --bg-primary: #ffffff;
+        --accent: #0000ee;
+        --accent-hover: #0000cc;
+        --border: #000000;
+    }
+
+    a {
+        text-decoration: underline;
+    }
+}
+
+// IMAGES
+
+.profile-picture {
+    width: 120px;
+    height: 120px;
+    border-radius: $border-radius-full;
+    float: right;
+    margin-left: $spacing-lg;
+    margin-bottom: $spacing-lg;
+    overflow: hidden;
+}
+
+.content {
+    amp-img {
+        width: 100%;
+    }
+
+    ul {
+        padding: 0 $spacing-lg;
+
+        >li {
+            margin: 5px 0;
+        }
+    }
+}
+
+// RESPONSIVE
+
+@media (max-width: $breakpoint-md) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-ul {
+        margin-top: 15px;
+    }
+
+    .profile-picture {
+        float: none;
+        display: block;
+        margin: 0 auto $spacing-lg;
+    }
+
+    #author-name {
+        width: 100%;
+    }
+}
+
+// PRINT STYLES
+
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .skip-link,
+    .theme-toggle,
+    nav {
+        display: none;
+    }
+
+    a[href]::after {
+        content: ' (' attr(href) ')';
+        font-size: 0.8em;
+    }
+
+    a[href^='#']::after,
+    a[href^='javascript:']::after {
+        content: '';
+    }
+}

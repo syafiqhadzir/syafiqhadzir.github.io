@@ -1,0 +1,186 @@
+/**
+ * Eleventy Configuration
+ * Google AMP Portfolio with Dart Sass + PostCSS + CSSO
+ *
+ * @see https://www.11ty.dev/docs/config/
+ */
+
+import * as sass from 'sass';
+import postcss from 'postcss';
+import autoprefixer from 'autoprefixer';
+import { minify as cssoMinify } from 'csso';
+import { readFileSync, existsSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+
+// Import custom filters (compiled from TypeScript)
+import { dateFormat, isoDate, relativeDate } from './dist/filters/dateFormat.js';
+import { readingTime, wordCount } from './dist/filters/readingTime.js';
+
+// Import custom shortcodes
+import { ampImg } from './dist/shortcodes/ampImg.js';
+
+// Import transforms
+import { cssGuard } from './dist/transforms/cssGuard.js';
+
+/** @type {number} Maximum allowed CSS size in bytes (75KB) */
+const MAX_CSS_SIZE_BYTES = 75 * 1024;
+
+/** @type {string} SCSS entry point */
+const SCSS_ENTRY = './src/scss/main.scss';
+
+/**
+ * Compile SCSS to optimized CSS string
+ * Pipeline: Dart Sass → PostCSS (autoprefixer) → CSSO (minification)
+ *
+ * @returns {Promise<string>} Minified CSS string
+ */
+async function compileSCSS() {
+    // Check if SCSS file exists
+    if (!existsSync(SCSS_ENTRY)) {
+        console.warn(`[11ty] SCSS entry not found: ${SCSS_ENTRY}`);
+        return '';
+    }
+
+    try {
+        // Step 1: Compile SCSS with Dart Sass
+        const sassResult = sass.compile(SCSS_ENTRY, {
+            style: 'expanded',
+            sourceMap: false,
+            loadPaths: ['./src/scss', './node_modules'],
+        });
+
+        // Step 2: Process with PostCSS (autoprefixer)
+        const postcssResult = await postcss([
+            autoprefixer({
+                // Target modern browsers for AMP
+                overrideBrowserslist: ['> 1%', 'last 2 versions', 'not dead'],
+            }),
+        ]).process(sassResult.css, { from: undefined });
+
+        // Step 3: Minify with CSSO
+        const minified = cssoMinify(postcssResult.css, {
+            restructure: true,
+            forceMediaMerge: true,
+        });
+
+        return minified.css;
+    } catch (error) {
+        console.error('[11ty] SCSS compilation failed:', error.message);
+        throw error;
+    }
+}
+
+/**
+ * Eleventy Configuration Export
+ *
+ * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
+ * @returns {object} Eleventy configuration object
+ */
+export default function (eleventyConfig) {
+    // PASSTHROUGH COPY
+
+    // Static assets
+    eleventyConfig.addPassthroughCopy('favicons');
+    eleventyConfig.addPassthroughCopy('fonts');
+    eleventyConfig.addPassthroughCopy('Images');
+    eleventyConfig.addPassthroughCopy('CNAME');
+    eleventyConfig.addPassthroughCopy('robots.txt');
+    eleventyConfig.addPassthroughCopy('sitemap.xml');
+    eleventyConfig.addPassthroughCopy('ror.xml');
+    eleventyConfig.addPassthroughCopy('humans.txt');
+    eleventyConfig.addPassthroughCopy('browserconfig.xml');
+    eleventyConfig.addPassthroughCopy('sw.js');
+    eleventyConfig.addPassthroughCopy('sw.html');
+    eleventyConfig.addPassthroughCopy('.well-known');
+
+    // GLOBAL DATA
+
+    // Add compiled CSS as global data
+    eleventyConfig.addGlobalData('compiledCSS', async () => {
+        return await compileSCSS();
+    });
+
+    // Note: Site metadata is loaded automatically from src/_data/site.json
+
+    // FILTERS
+
+    // Date formatting filters
+    eleventyConfig.addFilter('dateFormat', dateFormat);
+    eleventyConfig.addFilter('isoDate', isoDate);
+    eleventyConfig.addFilter('relativeDate', relativeDate);
+
+    // Reading time filters
+    eleventyConfig.addFilter('readingTime', readingTime);
+    eleventyConfig.addFilter('wordCount', wordCount);
+
+    // SHORTCODES
+    // AMP Image shortcode: {% ampImg src, alt, width, height, layout %}
+    eleventyConfig.addShortcode('ampImg', ampImg);
+
+    // TRANSFORMS
+    // CSS Size Guard Transform (75KB limit for AMP)
+    eleventyConfig.addTransform('cssGuard', (content, outputPath) => {
+        if (outputPath && outputPath.endsWith('.html')) {
+            return cssGuard(content, MAX_CSS_SIZE_BYTES);
+        }
+        return content;
+    });
+
+    // WATCH TARGETS
+    eleventyConfig.addWatchTarget('./src/scss/');
+    eleventyConfig.addWatchTarget('./src/filters/');
+    eleventyConfig.addWatchTarget('./src/shortcodes/');
+    eleventyConfig.addWatchTarget('./src/pages/');
+
+    // IGNORES (don't process these as templates)
+    eleventyConfig.ignores.add('node_modules');
+    eleventyConfig.ignores.add('dist');
+    eleventyConfig.ignores.add('coverage');
+    eleventyConfig.ignores.add('cypress');
+    eleventyConfig.ignores.add('test');
+    eleventyConfig.ignores.add('src/filters');
+    eleventyConfig.ignores.add('src/shortcodes');
+    eleventyConfig.ignores.add('src/transforms');
+    eleventyConfig.ignores.add('src/scss');
+    eleventyConfig.ignores.add('src/_data');
+
+    // Ignore existing static HTML files (replaced by Nunjucks templates)
+    eleventyConfig.ignores.add('index.html');
+    eleventyConfig.ignores.add('contact.html');
+    eleventyConfig.ignores.add('sitemap.html');
+    eleventyConfig.ignores.add('404.html');
+    eleventyConfig.ignores.add('offline.html');
+    eleventyConfig.ignores.add('sw.html');
+    eleventyConfig.ignores.add('README.md');
+
+    // PLUGINS
+    // No external plugins - keeping it minimal for AMP
+    // BROWSER SYNC (Development)
+    eleventyConfig.setServerOptions({
+        port: 8080,
+        showAllHosts: true,
+        watch: true,
+    });
+
+    // CONFIGURATION RETURN
+    return {
+        // Template formats to process
+        templateFormats: ['njk', 'md', 'html'],
+
+        // Default template engine
+        markdownTemplateEngine: 'njk',
+        htmlTemplateEngine: 'njk',
+
+        // Directory configuration
+        dir: {
+            input: '.',
+            includes: '_includes',
+            layouts: '_includes/layouts',
+            data: 'src/_data',
+            output: '_site',
+        },
+
+        // Pathprefix for deployment
+        pathPrefix: '/',
+    };
+}
