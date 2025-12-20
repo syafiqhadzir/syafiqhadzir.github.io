@@ -1,0 +1,29 @@
+{
+    "author": "Syafiq Hadzir",
+    "role": "Software QA Engineer",
+    "email": "syafiqhadzir@live.com.my",
+    "description": "Software QA Engineer specializing in AI-assisted testing.",
+    "links": {
+        "blog": "https://blog.syafiqhadzir.dev/",
+        "company": "https://www.cloud-connect.asia/",
+        "github": "https://github.com/SyafiqHadzir",
+        "gitlab": "https://gitlab.com/syafiqhadzir"
+    },
+    "sections": {
+        "proficiencies": [
+            "Designing and executing comprehensive test plans",
+            "Identifying critical defects",
+            "Ensuring the delivery of high-quality software products"
+        ],
+        "interests": [
+            "AI Exploration",
+            "CI/CD Integration",
+            "Code Assessment",
+            "Test Automation",
+            "Web Application"
+        ]
+    },
+    "footer": {
+        "copyright": "© 2017-2025 Syafiq Hadzir"
+    }
+}

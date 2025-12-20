@@ -21,12 +21,23 @@
     "serve": "npx serve . -l 8080",
     "test": "cypress run",
     "test:open": "cypress open",
+    "test:ci": "cypress run --browser chrome --headless",
+    "test:a11y": "cypress run --spec 'cypress/e2e/a11y.cy.ts'",
+    "test:smoke": "cypress run --spec 'cypress/e2e/spec.cy.ts'",
+    "test:report": "npx mochawesome-merge cypress/reports/*.json -o cypress/reports/combined.json && npx marge cypress/reports/combined.json -o cypress/reports -f report",
+    "test:clean": "rimraf cypress/reports cypress/screenshots",
     "typecheck": "tsc --noEmit",
     "validate": "amphtml-validator index.html contact.html sitemap.html 404.html offline.html"
   },
   "devDependencies": {
     "amphtml-validator": "^1.0.38",
+    "axe-core": "^4.11.0",
     "cypress": "^15.8.1",
+    "cypress-axe": "^1.7.0",
+    "mochawesome": "^7.1.4",
+    "mochawesome-merge": "^5.1.0",
+    "mochawesome-report-generator": "^6.3.2",
+    "rimraf": "^6.1.2",
     "typescript": "^5.9.3"
   },
   "engines": {

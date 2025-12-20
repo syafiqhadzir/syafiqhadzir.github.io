@@ -696,7 +696,7 @@
   <div class=wrapper>
     <div class=container>
       <header class=navbar role=banner>
-        <a id=author-name class=alignable href=./ aria-label="Homepage">Syafiq Hadzir</a>
+        <a id=author-name class=alignable href=./ aria-label="Homepage" data-cy="author-name">Syafiq Hadzir</a>
         <nav role=navigation aria-label="Main navigation" class="alignable pull-right">
           <ul id=navlist class="navbar-ul">
             <li class="alignable pull-left nav-list"><a href=./ class=active aria-current=page><i
@@ -708,7 +708,7 @@
             <li class="alignable pull-left nav-list"><a href=./sitemap.html><i class="fa-solid fa-sitemap fa-fw"
                   aria-hidden="true"></i>&nbsp;Sitemap</a></li>
             <li class="alignable pull-left nav-list">
-              <button class="theme-toggle"
+              <button class="theme-toggle" data-cy="theme-toggle"
                 on="tap:AMP.setState({theme: {mode: theme.mode == 'dark' ? 'light' : 'dark'}})"
                 aria-label="Toggle Dark Mode">
                 <i class="fa-solid fa-moon moon-icon" aria-hidden="true"></i>
@@ -718,16 +718,17 @@
           </ul>
         </nav>
       </header>
-      <main id=main-content class=content role=main aria-label="Portfolio content">
+      <main id=main-content class=content role=main aria-label="Portfolio content" data-cy="main-content">
         <h1 style="display:none">Portfolio of Syafiq Hadzir</h1>
         <h2 id=about-me><i class="fa-solid fa-user-tie fa-fw" aria-hidden="true"></i>&nbsp;About Me</h2>
         <p>
           <span class=profile-picture>
             <amp-img width=85 height=85 src=./Images/headshot.webp alt="Syafiq Hadzir" title="Syafiq Hadzir"
-              layout=responsive></amp-img>
+              layout=responsive data-cy="profile-picture"></amp-img>
           </span>
           Hi! I am Syafiq Hadzir, an AI-assisted Software QA Engineer at <a href=https://www.cloud-connect.asia/
-            rel="nofollow noreferrer noopener external">Cloud Connect</a>. I actively leverage cutting-edge AI tools
+            rel="nofollow noreferrer noopener external" aria-label="Cloud Connect company website">Cloud Connect</a>. I
+          actively leverage cutting-edge AI tools
           and methodologies to enhance the efficiency and effectiveness of the software testing lifecycle.
         </p>
 

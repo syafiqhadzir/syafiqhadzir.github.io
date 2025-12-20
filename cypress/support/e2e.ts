@@ -17,3 +17,23 @@
 
 // Import commands.ts using ES2015 syntax:
 import './commands';
+import 'cypress-axe';
+
+// Type definitions are loaded automatically from index.d.ts
+
+// Graceful handling of uncaught exceptions
+// Prevents test failures due to third-party script errors
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // Log the error for debugging
+    console.error('Uncaught exception:', err.message);
+
+    // Returning false prevents Cypress from failing the test
+    // Only for known non-critical errors (e.g., AMP runtime issues)
+    if (err.message.includes('ampproject') || err.message.includes('Script error')) {
+        return false;
+    }
+
+    // Let other errors fail the test
+    return true;
+});
+

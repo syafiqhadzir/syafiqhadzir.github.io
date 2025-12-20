@@ -10,10 +10,11 @@ build/
 *.tsbuildinfo
 
 # Cypress Testing
-# Test artifacts (screenshots, videos, downloads)
+# Test artifacts (screenshots, videos, downloads, reports)
 cypress/screenshots/
 cypress/videos/
 cypress/downloads/
+cypress/reports/
 
 # IDE & Editor
 # VS Code
@@ -100,3 +101,25 @@ bun.lockb
 # Coverage reports
 coverage/
 .nyc_output/
+
+# Debug output files
+cypress-log.txt
+*.txt.log
+
+# Cypress Cloud artifacts
+cypress/.run/
+
+# Deployment platforms (future-proofing)
+.vercel/
+.netlify/
+.turbo/
+
+# Git conflict files
+*.orig
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+
+# Gemini AI artifacts (local development)
+.gemini/
