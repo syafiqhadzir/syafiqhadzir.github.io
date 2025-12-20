@@ -8,15 +8,16 @@
 module.exports = {
     ci: {
         collect: {
-            // Use static server to serve built site
-            staticDistDir: './_site',
+            // Start server with a fixed port for predictable URLs
+            startServerCommand: 'npx serve _site -l 8080',
+            // Ensure the server is fully ready before starting audits
+            startServerReadyPattern: 'Accepting connections at',
 
-            // URLs to test (all pages)
             url: [
-                'http://localhost/index.html',
-                'http://localhost/contact.html',
-                'http://localhost/sitemap.html',
-                'http://localhost/404.html',
+                'http://localhost:8080/index.html',
+                'http://localhost:8080/contact.html',
+                'http://localhost:8080/sitemap.html',
+                'http://localhost:8080/404.html',
             ],
 
             // Number of runs per URL for statistical accuracy
@@ -24,10 +25,12 @@ module.exports = {
 
             // Chrome settings optimized for CI
             settings: {
+                // Hardcode mobile factors for consistent AMP auditing
+                emulatedFormFactor: 'mobile',
+                // Headless flags for CI environment
+                chromeFlags: ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
                 // AMP pages should be tested with throttling disabled
-                // since AMP runtime handles performance
                 throttlingMethod: 'provided',
-                // Skip network throttling for AMP (CDN handles this)
                 disableNetworkThrottling: true,
             },
         },
@@ -36,20 +39,27 @@ module.exports = {
             // Performance budgets aligned with AMP best practices
             assertions: {
                 // Core Web Vitals
-                'categories:performance': ['error', { minScore: 0.9 }],
-                'categories:accessibility': ['error', { minScore: 0.9 }],
-                'categories:best-practices': ['error', { minScore: 0.9 }],
-                'categories:seo': ['error', { minScore: 0.9 }],
+                'categories:performance': ['error', { minScore: 0.95 }],
+                'categories:accessibility': ['error', { minScore: 1.0 }],
+                'categories:best-practices': ['error', { minScore: 0.95 }],
+                'categories:seo': ['error', { minScore: 1.0 }],
+
+                // Performance Budgets (Resource Summary)
+                // Expert practice: fail if JS/CSS exceeds size budgets
+                'resource-summary:script:size': ['error', { maxNumericValue: 100000 }], // 100kB JS
+                'resource-summary:stylesheet:size': ['error', { maxNumericValue: 50000 }], // 50kB CSS
+                'resource-summary:image:size': ['warn', { maxNumericValue: 500000 }], // 500kB Images
+                'resource-summary:total:size': ['error', { maxNumericValue: 1000000 }], // 1MB Total
 
                 // Specific metrics
-                'first-contentful-paint': ['warn', { maxNumericValue: 2000 }],
-                'largest-contentful-paint': ['warn', { maxNumericValue: 2500 }],
+                'first-contentful-paint': ['error', { maxNumericValue: 1500 }],
+                'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
                 'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
-                'total-blocking-time': ['warn', { maxNumericValue: 300 }],
-                'speed-index': ['warn', { maxNumericValue: 3000 }],
+                'total-blocking-time': ['error', { maxNumericValue: 200 }],
+                'speed-index': ['warn', { maxNumericValue: 2500 }],
 
                 // AMP-specific: Interactive should be fast
-                interactive: ['warn', { maxNumericValue: 3500 }],
+                interactive: ['error', { maxNumericValue: 3000 }],
 
                 // Resource hints
                 'uses-rel-preconnect': 'off', // Already implemented
