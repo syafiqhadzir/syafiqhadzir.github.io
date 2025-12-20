@@ -21,9 +21,11 @@
     "serve": "npx serve . -l 8080",
     "test": "cypress run",
     "test:open": "cypress open",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "validate": "amphtml-validator index.html contact.html sitemap.html 404.html offline.html"
   },
   "devDependencies": {
+    "amphtml-validator": "^1.0.38",
     "cypress": "^15.8.1",
     "typescript": "^5.9.3"
   },
