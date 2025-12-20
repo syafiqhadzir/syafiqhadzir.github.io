@@ -230,6 +230,11 @@ jobs:
           start: npx serve _site -l 8080
           wait-on: "http://localhost:8080"
           wait-on-timeout: 60
+          # Cypress Cloud Recording (optional: requires CYPRESS_RECORD_KEY secret)
+          record: ${{ secrets.CYPRESS_RECORD_KEY != '' }}
+        env:
+          # yamllint disable-line rule:truthy
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }} # pragma: allowlist secret
 
       - name: Upload Cypress artifacts
         uses: actions/upload-artifact@v6
