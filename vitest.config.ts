@@ -69,12 +69,11 @@ export default defineConfig({
         },
 
         // Reporter configuration
-        reporters: ['default', 'verbose', 'junit'],
+        // 'vitest-sonar-reporter' provides the Generic Test Data format required by SonarCloud
+        reporters: ['default', 'verbose', 'vitest-sonar-reporter'],
 
-        // Output file for JUnit report
-        outputFile: {
-            junit: './test-report.xml',
-        },
+        // Output file for reporters
+        outputFile: 'sonar-report.xml',
 
         // Watch mode configuration
         watch: false,

@@ -101,7 +101,7 @@ jobs:
           name: test-reports
           path: |
             coverage/
-            test-report.xml
+            sonar-report.xml
           retention-days: 7
 
   # STAGE 3: SONARCLOUD ANALYSIS
@@ -130,6 +130,14 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: test-reports
+
+      - name: Sanitize report paths
+        run: |
+          sed -i "s|$GITHUB_WORKSPACE|.|g" eslint-report.json || true
+          sed -i "s|$GITHUB_WORKSPACE|.|g" stylelint-report.json || true
+          sed -i "s|$GITHUB_WORKSPACE|.|g" coverage/lcov.info || true
+          sed -i "s|$GITHUB_WORKSPACE|.|g" sonar-report.xml || true
+        shell: bash
 
       - name: SonarCloud Scan
         if: env.SONAR_TOKEN != ''
