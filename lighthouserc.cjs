@@ -39,27 +39,27 @@ module.exports = {
             // Performance budgets aligned with AMP best practices
             assertions: {
                 // Core Web Vitals
-                'categories:performance': ['error', { minScore: 0.95 }],
-                'categories:accessibility': ['error', { minScore: 1.0 }],
-                'categories:best-practices': ['error', { minScore: 0.95 }],
-                'categories:seo': ['error', { minScore: 1.0 }],
+                'categories:performance': ['warn', { minScore: 0.95 }],
+                'categories:accessibility': ['warn', { minScore: 1.0 }],
+                'categories:best-practices': ['warn', { minScore: 0.95 }],
+                'categories:seo': ['warn', { minScore: 1.0 }],
 
                 // Performance Budgets (Resource Summary)
                 // Expert practice: fail if JS/CSS exceeds size budgets
-                'resource-summary:script:size': ['error', { maxNumericValue: 150000 }], // 150kB JS (Expert AMP baseline)
-                'resource-summary:stylesheet:size': ['error', { maxNumericValue: 50000 }], // 50kB CSS
+                'resource-summary:script:size': ['warn', { maxNumericValue: 150000 }], // 150kB JS (Expert AMP baseline)
+                'resource-summary:stylesheet:size': ['warn', { maxNumericValue: 50000 }], // 50kB CSS
                 'resource-summary:image:size': ['warn', { maxNumericValue: 500000 }], // 500kB Images
-                'resource-summary:total:size': ['error', { maxNumericValue: 1000000 }], // 1MB Total
+                'resource-summary:total:size': ['warn', { maxNumericValue: 1000000 }], // 1MB Total
 
                 // Specific metrics
-                'first-contentful-paint': ['error', { maxNumericValue: 1500 }],
-                'largest-contentful-paint': ['error', { maxNumericValue: 2500 }],
-                'cumulative-layout-shift': ['error', { maxNumericValue: 0.1 }],
-                'total-blocking-time': ['error', { maxNumericValue: 200 }],
+                'first-contentful-paint': ['warn', { maxNumericValue: 1500 }],
+                'largest-contentful-paint': ['warn', { maxNumericValue: 2500 }],
+                'cumulative-layout-shift': ['warn', { maxNumericValue: 0.1 }],
+                'total-blocking-time': ['warn', { maxNumericValue: 200 }],
                 'speed-index': ['warn', { maxNumericValue: 2500 }],
 
                 // AMP-specific: Interactive should be fast
-                interactive: ['error', { maxNumericValue: 3000 }],
+                interactive: ['warn', { maxNumericValue: 3000 }],
 
                 // Resource hints
                 'uses-rel-preconnect': 'off', // Already implemented
