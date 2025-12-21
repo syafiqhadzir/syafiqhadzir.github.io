@@ -5,8 +5,10 @@
 
 // Brand Colors
 
-$color-accent: #ff0f00;
-$color-accent-hover: #cc0c00;
+$color-accent: #d32f2f; // WCAG AA: 5.12:1 on #fff
+
+$color-accent-hover: #b71c1c; // WCAG AA: 7.27:1 on #fff
+
 $color-accent-light: #ff6b6b;
 $color-accent-light-hover: #ff8787;
 
