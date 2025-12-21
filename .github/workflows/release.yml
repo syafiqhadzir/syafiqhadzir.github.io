@@ -1,0 +1,32 @@
+name: Release
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: write # Required for creating tags and releases
+  issues: write # Required for commenting on issues (if configured)
+  pull-requests: write # Required for commenting on PRs
+
+jobs:
+  release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Required for semantic-release to analyze commits
+          persist-credentials: false # We use a token for semantic-release
+
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
+        with:
+          node-version: '24'
+
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
