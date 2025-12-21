@@ -1,3 +1,10 @@
+# [1.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.0.0...v1.1.0) (2025-12-21)
+
+
+### Features
+
+* **docker:** add containerization with multi-stage build ([52813a8](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/52813a8b7ba2700c77d5c2208dad52405c636656))
+
 # 1.0.0 (2025-12-21)
 
 
