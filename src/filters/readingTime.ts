@@ -33,7 +33,7 @@ function stripHtml(content: string): string {
  * @param content - Text content
  * @returns Word count
  */
-export function wordCount(content: string | undefined | null): number {
+export function wordCount(content?: string | null): number {
     if (!content || typeof content !== 'string') {
         return 0;
     }
@@ -59,7 +59,7 @@ export function wordCount(content: string | undefined | null): number {
  * readingTimeMinutes(longArticle) // 5
  */
 export function readingTimeMinutes(
-    content: string | undefined | null,
+    content?: string | null,
     wordsPerMinute: number = WORDS_PER_MINUTE
 ): number {
     const words = wordCount(content);
@@ -79,7 +79,7 @@ export function readingTimeMinutes(
  * readingTime(longArticle, { suffix: 'minutes' }) // "5 minutes"
  */
 export function readingTime(
-    content: string | undefined | null,
+    content?: string | null,
     options: { wordsPerMinute?: number; suffix?: string } = {}
 ): string {
     const { wordsPerMinute = WORDS_PER_MINUTE, suffix = 'min read' } = options;
@@ -93,7 +93,7 @@ export function readingTime(
  * @param content - Text or HTML content
  * @returns Statistics object
  */
-export function readingStats(content: string | undefined | null): {
+export function readingStats(content?: string | null): {
     wordCount: number;
     readingTime: number;
     readingTimeFormatted: string;

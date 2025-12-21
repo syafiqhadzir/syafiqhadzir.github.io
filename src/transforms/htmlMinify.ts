@@ -68,10 +68,7 @@ export async function minifyHtml(content: string): Promise<string> {
  * @param outputPath - Output file path
  * @returns Processed content
  */
-export async function htmlMinifyTransform(
-    content: string,
-    outputPath: string | undefined
-): Promise<string> {
+export async function htmlMinifyTransform(content: string, outputPath?: string): Promise<string> {
     if (!outputPath?.endsWith('.html')) {
         return content;
     }
@@ -92,7 +89,10 @@ export async function htmlMinifyTransform(
  * @param minified - Minified HTML
  * @returns Statistics object
  */
-export function getMinifyStats(original: string, minified: string): {
+export function getMinifyStats(
+    original: string,
+    minified: string
+): {
     originalSize: number;
     minifiedSize: number;
     savings: number;

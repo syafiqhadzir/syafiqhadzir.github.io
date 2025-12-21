@@ -1,216 +1,126 @@
-# syafiqhadzir.dev
+# Syafiq Hadzir - Software QA Engineer
 
-[![CI/CD Pipeline](https://github.com/SyafiqHadzir/syafiqhadzir.github.io/actions/workflows/ci.yml/badge.svg)](https://github.com/SyafiqHadzir/syafiqhadzir.github.io/actions/workflows/ci.yml)
-[![Security Scan](https://github.com/SyafiqHadzir/syafiqhadzir.github.io/actions/workflows/security.yml/badge.svg)](https://github.com/SyafiqHadzir/syafiqhadzir.github.io/actions/workflows/security.yml)
-[![Cypress Cloud](https://img.shields.io/endpoint?url=https://cloud.cypress.io/badge/simple/1y2ryf/main&style=flat&logo=cypress)](https://cloud.cypress.io/projects/1y2ryf/runs)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=syafiqhadzir.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=syafiqhadzir.github.io)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=syafiqhadzir.github.io&metric=coverage)](https://sonarcloud.io/summary/new_code?id=syafiqhadzir.github.io)
-[![License: CC0-1.0](https://img.shields.io/badge/License-CC0_1.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
+[![Nightly Quality](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/nightly-quality.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/nightly-quality.yml)
+[![PR Validation](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/pr-validation.yml)
+[![Performance](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/lighthouse.yml)
+[![Coverage](https://img.shields.io/badge/Coverage-99.5%25-brightgreen)](https://github.com/syafiqhadzir/syafiqhadzir.github.io)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=syafiqhadzir_syafiqhadzir.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=syafiqhadzir_syafiqhadzir.github.io)
+[![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
-Personal portfolio website for **Syafiq Hadzir**, an AI-assisted Software QA Engineer specializing in test automation and quality assurance.
+High-performance portfolio website engineered with **Google AMP**, **Eleventy**, and **TypeScript**.
+Designed for speed, accessibility, and zero-defect quality.
 
-🌐 **Live Site**: [syafiqhadzir.dev](https://syafiqhadzir.dev)
+## 🚀 Features
 
----
-
-## ✨ Features
-
-| Feature | Description |
-|---------|-------------|
-| ⚡ **AMP-Powered** | Built with Accelerated Mobile Pages for sub-second load times |
-| 📱 **PWA Ready** | Installable with offline support via service worker |
-| 🌙 **Dark/Light Mode** | Theme switcher with system preference detection |
-| ♿ **Accessible** | WCAG 2.1 AA compliant with ARIA, skip links, focus states |
-| 🔍 **SEO Optimized** | Schema.org, Open Graph, Twitter Cards, XML sitemap |
-| 🔒 **Security Hardened** | CSP, Permissions-Policy, HSTS, security.txt |
-
----
+- **Google AMP Compliant:** Valid AMP HTML for instant loading and SEO dominance.
+- **Static Site Generation:** Built with Eleventy (v3) for optimal build-time rendering.
+- **Progressive Web App:** Offline-first capability with Service Workers and obscure auditing.
+- **Type-Safe:** 100% strict TypeScript codebase.
+- **Advanced Minification:** Custom pipeline using `html-minifier-terser` and `lightningcss`.
+- **Dark Mode:** System-preference aware with toggle switch.
 
 ## 🛠️ Tech Stack
 
-| Category | Technology |
-|----------|------------|
-| **SSG** | [Eleventy 3.x](https://www.11ty.dev/) |
-| **Language** | TypeScript 5.9 (strict mode) |
-| **Styling** | SCSS + CSS Variables |
-| **Icons** | Font Awesome 6 (self-hosted subset) |
-| **Unit Tests** | Vitest 4 + V8 Coverage (90% threshold) |
-| **E2E Tests** | Cypress 15 + cypress-axe |
-| **Performance** | Lighthouse CI |
-| **Code Quality** | ESLint 9 + Stylelint 16 + SonarCloud |
-| **CI/CD** | GitHub Actions (7-stage pipeline) |
-| **Container** | Docker + Nginx Alpine |
-| **Hosting** | GitHub Pages + Cloudflare CDN |
+- **Core:** [Eleventy](https://www.11ty.dev/) (SSG), [TypeScript](https://www.typescriptlang.org/)
+- **Styles:** [SCSS](https://sass-lang.com/), [LightningCSS](https://lightningcss.dev/)
+- **Testing:** [Vitest](https://vitest.dev/) (Unit), [Cypress](https://www.cypress.io/) (E2E)
+- **Quality:** ESLint (Strict), Stylelint, SonarQube, Knip (Dead Code)
+- **CI/CD:** GitHub Actions (Split + Reusable Architecture)
+- **Performance:** Lighthouse CI (100/100 Enforcement)
 
----
-
-## 🚀 Quick Start
+## 🏁 Getting Started
 
 ### Prerequisites
 
-- Node.js 22+ (see `.nvmrc`)
-- npm 10+
+- Node.js 24.x
+- npm 10.x
 
 ### Installation
 
 ```bash
-git clone https://github.com/SyafiqHadzir/syafiqhadzir.github.io.git
-cd syafiqhadzir.github.io
+# Clone the repository
+git clone https://github.com/syafiqhadzir/syafiqhadzir.github.io.git
+
+# Install dependencies
 npm ci
+
+# Prepare Git hooks
+npm run prepare
 ```
 
-### Development
+### Development Server
 
 ```bash
-npm run dev          # Start dev server with hot reload
-npm run build        # Build production site to _site/
-npm run serve        # Serve built site on localhost:8080
+# Start local development server with hot reload
+npm run dev
 ```
 
-### Testing
+Visit `http://localhost:8080`.
+
+## ✅ Testing & Quality
+
+Strict quality gates are enforced via Husky hooks and CI pipelines.
 
 ```bash
-npm run test:unit           # Run Vitest unit tests
-npm run test:unit:coverage  # With coverage report
-npm run test:e2e            # Run Cypress E2E tests
-npm run test:a11y           # Run accessibility tests
-npm run lint                # ESLint + Stylelint
-npm run typecheck           # TypeScript type checking
-npm run validate:amp        # Validate AMP HTML
+# Unit Tests (Vitest)
+npm run test:unit
+
+# E2E Tests (Cypress)
+npm run test:e2e
+
+# Type Check
+npm run typecheck
+
+# Linting (ESLint + Stylelint)
+npm run lint
+
+# AMP Compliance Validation
+npm run validate:amp
 ```
 
----
+### Performance
 
-## 🐳 Docker
-
-### Quick Start
+We enforce a strict 100/100 Lighthouse score.
 
 ```bash
-# Build and run production container
-docker compose up -d
-
-# Or build manually
-docker build -t syafiqhadzir-portfolio .
-docker run -d -p 80:80 --name portfolio syafiqhadzir-portfolio
+# Run local Lighthouse audit (requires Chrome)
+npm run perf:local
 ```
 
-### Development with Docker
+## 🏗️ Architecture
 
-```bash
-# Start development server with live reload
-docker compose --profile dev up
-```
+### CI/CD Pipeline
 
-### Docker Commands
+Refactored into a modular "Split + Reusable" architecture:
 
-| Command | Description |
-|---------|-------------|
-| `docker compose up -d` | Run production container |
-| `docker compose --profile dev up` | Run development server |
-| `docker compose down` | Stop containers |
-| `docker compose build --no-cache` | Rebuild image |
+- **PR Validation:** Fast feedback (Lint, Unit, Build Dry-Run).
+- **Nightly Quality:** Deep audit (E2E, Sonar, A11y).
+- **Deployment:** Production release on `v*` tags.
+- **Bootstrap:** Shared Composite Action (`.github/actions/bootstrap-env`).
 
-### Best Practices Applied
-
-- ✅ Multi-stage build (Node.js → Nginx)
-- ✅ Alpine-based images (~11MB final)
-- ✅ Non-root user (nginx)
-- ✅ Security hardening
-- ✅ Gzip compression
-- ✅ Efficient caching headers
-- ✅ Health checks
-
----
-
-## 🧪 Testing Pyramid
-
-| Layer | Framework | Coverage |
-|-------|-----------|----------|
-| **Unit** | Vitest | 90% threshold |
-| **E2E** | Cypress | All pages |
-| **A11y** | cypress-axe | WCAG 2.1 AA |
-| **Performance** | Lighthouse CI | Core Web Vitals |
-
----
-
-## 📁 Project Structure
+### Directory Structure
 
 ```
-syafiqhadzir.github.io/
-├── .github/
-│   ├── dependabot.yml         # Automated dependency updates
-│   └── workflows/
-│       ├── ci.yml             # Main CI/CD pipeline
-│       ├── release.yml        # Semantic versioning
-│       └── security.yml       # Secrets scanning
+├── .github/            # CI/CD Workflows & Actions
 ├── src/
-│   ├── pages/                 # Page templates (.njk)
-│   ├── filters/               # Eleventy filters
-│   ├── transforms/            # HTML transforms
-│   └── styles/                # SCSS stylesheets
-├── test/                      # Vitest unit tests
-├── cypress/
-│   ├── e2e/                   # E2E test specs
-│   └── support/               # Custom commands
-├── _includes/                 # Layout templates
-├── eleventy.config.js         # Eleventy configuration
-├── lighthouserc.cjs           # LHCI configuration
-└── sonar-project.properties   # SonarCloud config
+│   ├── _data/          # Global Data
+│   ├── filters/        # Nunjucks Filters (TS)
+│   ├── lib/            # Build Utilities
+│   ├── transforms/     # Output Transforms (Minification)
+│   └── ...
+├── test/               # Unit Tests
+├── cypress/            # End-to-End Tests
+└── scripts/            # CLI utilities (Housekeeping, Validation)
 ```
-
----
-
-## 🔧 Configuration
-
-| File | Purpose |
-|------|---------|
-| `eleventy.config.js` | SSG configuration |
-| `tsconfig.json` | TypeScript strict mode |
-| `vitest.config.ts` | Unit test settings + coverage |
-| `cypress.config.ts` | E2E test configuration |
-| `lighthouserc.cjs` | Lighthouse CI budgets |
-| `sonar-project.properties` | SonarCloud analysis |
-| `.releaserc.json` | Semantic release config |
-
----
-
-## 🔐 Security
-
-This project implements comprehensive security measures:
-
-- **Content Security Policy** — Strict CSP for AMP compatibility
-- **Permissions-Policy** — Disabled unused browser features
-- **HSTS** — Enforced HTTPS with preload
-- **Secrets Scanning** — Gitleaks in CI
-- **Dependency Scanning** — npm audit + Dependabot
-
-See [SECURITY.md](SECURITY.md) for vulnerability reporting.
-
----
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
----
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 📄 License
 
-[CC0 1.0 Universal](LICENSE) — Public domain dedication.
-
----
-
-## 👨‍💻 Author
-
-**Syafiq Hadzir** — AI-assisted Software QA Engineer
-
-- 🌐 [syafiqhadzir.dev](https://syafiqhadzir.dev)
-- 📝 [blog.syafiqhadzir.dev](https://blog.syafiqhadzir.dev)
-- 💼 [GitHub](https://github.com/SyafiqHadzir)
-- 🦊 [GitLab](https://gitlab.com/syafiqhadzir)
-
----
-
-<p align="center">
-  <sub>Built with ❤️ and ☕ in Malaysia</sub>
-</p>
+Distributed under the CC0-1.0 License. See `LICENSE` for more information.
