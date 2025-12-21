@@ -1,0 +1,11 @@
+# Netlify Redirect Rules
+# https://docs.netlify.com/routing/redirects/
+
+# Fallback for Single Page App / 404 handling
+/* /404.html 404
+
+# Force SSL (Optional if not enabled in settings, standard practice)
+# http://:domain/* https://:domain/:splat 301!
+
+# Shortlinks (Example)
+# /linkedin  https://linkedin.com/in/syafiqhadzir

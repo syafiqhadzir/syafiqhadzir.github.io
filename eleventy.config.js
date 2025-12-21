@@ -3,7 +3,6 @@
  * Google AMP Portfolio with Extreme Minification Pipeline
  *
  * Pipeline: Sass → PostCSS → CSSO → Inline → Extreme HTML Minify
- *
  * @see https://www.11ty.dev/docs/config/
  */
 
@@ -11,8 +10,7 @@ import * as sass from 'sass';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
 import { minify as cssoMinify } from 'csso';
-import { readFileSync, existsSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { existsSync } from 'node:fs';
 
 // Import custom filters (compiled from TypeScript)
 import { dateFormat, isoDate, relativeDate } from './dist/filters/dateFormat.js';
@@ -24,10 +22,10 @@ import { ampImg } from './dist/shortcodes/ampImg.js';
 // Import transforms
 import { cssGuard } from './dist/transforms/cssGuard.js';
 
-/** @type {number} Maximum allowed CSS size in bytes (75KB) */
+/** Maximum allowed CSS size in bytes (75KB) */
 const MAX_CSS_SIZE_BYTES = 75 * 1024;
 
-/** @type {string} SCSS entry point */
+/** SCSS entry point */
 const SCSS_ENTRY = './src/scss/main.scss';
 
 /**
@@ -36,8 +34,7 @@ const SCSS_ENTRY = './src/scss/main.scss';
  *
  * Note: LightningCSS was tested but outputs media query range syntax
  * which is not supported by AMP validator. CSSO is AMP-safe.
- *
- * @returns {Promise<string>} Minified CSS string
+ * @returns Minified CSS string
  */
 async function compileSCSS() {
     // Check if SCSS file exists
@@ -89,14 +86,12 @@ async function compileSCSS() {
     }
 }
 
-
 /**
  * Eleventy Configuration Export
- *
- * @param {import("@11ty/eleventy").UserConfig} eleventyConfig
+ * @param {import("@11ty/eleventy").UserConfig} eleventyConfig - The Eleventy configuration object
  * @returns {object} Eleventy configuration object
  */
-export default function (eleventyConfig) {
+export default function configureEleventy(eleventyConfig) {
     // PASSTHROUGH COPY
 
     // Static assets
@@ -110,6 +105,7 @@ export default function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy('sw.html');
     eleventyConfig.addPassthroughCopy('.well-known');
     eleventyConfig.addPassthroughCopy('_headers'); // Security headers
+    eleventyConfig.addPassthroughCopy('_redirects'); // Netlify rules
 
     // GLOBAL DATA
 
@@ -138,7 +134,7 @@ export default function (eleventyConfig) {
     // TRANSFORMS
     // CSS Size Guard Transform (75KB limit for AMP)
     eleventyConfig.addTransform('cssGuard', (content, outputPath) => {
-        if (outputPath && outputPath.endsWith('.html')) {
+        if (outputPath?.endsWith('.html')) {
             return cssGuard(content, MAX_CSS_SIZE_BYTES);
         }
         return content;
