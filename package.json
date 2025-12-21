@@ -64,7 +64,9 @@
         "validate:schema": "npx ts-node scripts/validate-schema.ts _site"
     },
     "overrides": {
+        "glob": "^10.4.5",
         "node-forge": "^1.3.3",
+        "rimraf": "^6.1.2",
         "tmp": "^0.2.5"
     },
     "devDependencies": {
