@@ -2,8 +2,8 @@
 
 [![Nightly Quality](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/nightly-quality.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/nightly-quality.yml)
 [![PR Validation](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/pr-validation.yml)
-[![Performance](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/lighthouse.yml)
-[![Coverage](https://img.shields.io/badge/Coverage-99.5%25-brightgreen)](https://github.com/syafiqhadzir/syafiqhadzir.github.io)
+[![Deploy Production](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/deploy.yml)
+[![Accessibility: WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA-blue)](https://syafiqhadzir.dev)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=syafiqhadzir_syafiqhadzir.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=syafiqhadzir_syafiqhadzir.github.io)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
@@ -93,10 +93,10 @@ npm run perf:local
 
 Refactored into a modular "Split + Reusable" architecture:
 
-- **PR Validation:** Fast feedback (Lint, Unit, Build Dry-Run).
-- **Nightly Quality:** Deep audit (E2E, Sonar, A11y).
-- **Deployment:** Production release on `v*` tags.
-- **Bootstrap:** Shared Composite Action (`.github/actions/bootstrap-env`).
+- **PR Validation:** Fast feedback (Lint, Unit, Type Check).
+- **Nightly Quality:** Deep audit (E2E, Sonar, A11y, Smoke).
+- **Deployment:** Production release on `v*` tags with Lighthouse Gates.
+- **Bootstrap:** Shared Composite Action (`.github/actions/bootstrap-env`) for consistent caching.
 
 ### Directory Structure
 
