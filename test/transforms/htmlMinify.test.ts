@@ -11,6 +11,15 @@ import {
     getMinifyStats,
 } from '../../src/transforms/htmlMinify';
 
+// Mock html-minifier-terser for error handling tests
+vi.mock('html-minifier-terser', async (importOriginal) => {
+    const actual = await importOriginal<typeof import('html-minifier-terser')>();
+    return {
+        ...actual,
+        minify: vi.fn(actual.minify),
+    };
+});
+
 describe('htmlMinify transform', () => {
     describe('minifyHtml()', () => {
         it('minifies basic HTML content', async () => {
@@ -78,6 +87,28 @@ describe('htmlMinify transform', () => {
 
             // CSS should be preserved
             expect(result).toContain('.class');
+        });
+
+        it('returns original content and warns when minification fails', async () => {
+            // Mock console.warn to verify it's called
+            const warnSpy = vi.spyOn(console, 'warn').mockImplementation(vi.fn());
+
+            // Create HTML that will cause minification to fail
+            // Using a mock to simulate failure
+            const { minify } = await import('html-minifier-terser');
+            vi.mocked(minify).mockRejectedValueOnce(new Error('Minification error'));
+
+            const input = '<div>Content</div>';
+            const result = await minifyHtml(input);
+
+            // Should return original content when minification fails
+            expect(result).toBe(input);
+            expect(warnSpy).toHaveBeenCalledWith(
+                expect.stringContaining('[HTML Minify] Failed to minify'),
+                expect.any(Error)
+            );
+
+            warnSpy.mockRestore();
         });
     });
 

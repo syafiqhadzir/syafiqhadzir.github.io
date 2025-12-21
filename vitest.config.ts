@@ -50,12 +50,12 @@ export default defineConfig({
                 'scripts/validate-amp.ts', // CLI script - integration tested
             ],
 
-            // Coverage thresholds (strict for full pyramid)
+            // Coverage thresholds (expert-level - near 100%)
             thresholds: {
-                statements: 90,
-                branches: 85,
-                functions: 90,
-                lines: 90,
+                statements: 99,
+                branches: 95,
+                functions: 100,
+                lines: 99,
             },
 
             // Clean coverage before running

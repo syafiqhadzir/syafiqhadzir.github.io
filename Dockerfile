@@ -79,11 +79,18 @@ COPY --from=builder /app/_site ./
 RUN chown -R nginx:nginx /usr/share/nginx/html && \
     chmod -R 755 /usr/share/nginx/html
 
-# Security: Create required directories with proper permissions
-# Nginx needs write access to these directories for pid and cache
-RUN mkdir -p /var/cache/nginx /var/run && \
-    chown -R nginx:nginx /var/cache/nginx /var/run && \
-    chmod -R 755 /var/cache/nginx /var/run
+# Security: Configure Nginx for non-root operation
+# Create temp directories with proper ownership for nginx worker processes
+RUN mkdir -p /var/cache/nginx/client_temp \
+    /var/cache/nginx/proxy_temp \
+    /var/cache/nginx/fastcgi_temp \
+    /var/cache/nginx/uwsgi_temp \
+    /var/cache/nginx/scgi_temp && \
+    chown -R nginx:nginx /var/cache/nginx && \
+    chmod -R 755 /var/cache/nginx && \
+    # Allow nginx to write PID file to /tmp
+    touch /tmp/nginx.pid && \
+    chown nginx:nginx /tmp/nginx.pid
 
 # Security: Remove unnecessary packages and clear cache
 RUN rm -rf /var/cache/apk/*

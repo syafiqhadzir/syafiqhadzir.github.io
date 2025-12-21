@@ -307,6 +307,18 @@ describe('validateDirectory()', () => {
         expect(result).toEqual([]);
         expect(console.error).toHaveBeenCalled();
     });
+
+    it('adds warning when HTML file has no JSON-LD schemas', async () => {
+        // Mock fs to return HTML without JSON-LD
+        vi.mocked(fs.readdir).mockResolvedValue(['empty.html'] as any);
+        vi.mocked(fs.readFile).mockResolvedValue('<html><head></head><body>No schemas here</body></html>');
+
+        const result = await validateDirectory('_site');
+
+        expect(result).toHaveLength(1);
+        expect(result[0].warnings).toContain('No JSON-LD schemas found');
+        expect(result[0].schemas).toBe(0);
+    });
 });
 describe('main()', () => {
     let exitSpy: ReturnType<typeof vi.spyOn>;
