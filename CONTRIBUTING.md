@@ -1,11 +1,15 @@
 # Contributing to syafiqhadzir.github.io
 
-Thank you for your interest in contributing! This project is a personal portfolio, but suggestions and improvements are welcome.
+Thank you for your interest in contributing! This project is a personal portfolio, but suggestions
+and improvements are welcome.
 
 ## Ways to Contribute
 
 ### 🐛 Bug Reports
-If you find a bug, please [open an issue](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/new) with:
+
+If you find a bug, please
+[open an issue](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/new) with:
+
 - A clear, descriptive title
 - Steps to reproduce the behavior
 - Expected vs actual behavior
@@ -13,9 +17,11 @@ If you find a bug, please [open an issue](https://github.com/syafiqhadzir/syafiq
 - Browser/OS information
 
 ### 💡 Feature Suggestions
+
 Feature requests are welcome! Please check existing issues first to avoid duplicates.
 
 ### 🔧 Pull Requests
+
 1. Fork the repository
 2. Create a feature branch: `git checkout -b feature/your-feature-name`
 3. Make your changes
@@ -44,16 +50,24 @@ npm run test
 
 - **TypeScript**: Strict mode enabled
 - **Linting**: ESLint + Stylelint (run `npm run lint`)
-- **Testing**: Vitest for unit tests, Cypress for E2E
+- **Testing**:
+  - Unit: `npm run test:unit` (Vitest)
+  - E2E: `npm run test:e2e` (Cypress)
 - **Commits**: Follow [Conventional Commits](https://conventionalcommits.org/)
+- **Workflows**:
+  - `pr-validation`: Fast feedback (Lint, Unit, Build Dry Run).
+  - `nightly-quality`: Deep audit (Cypress, SonarQube).
+  - `deploy`: Production release (Lighthouse CI, GitHub Pages).
 
 ## AMP Compliance
 
 This is a Google AMP site. All HTML must pass AMP validation:
+
 ```bash
 npm run validate:amp
 ```
 
 ## License
 
-By contributing, you agree that your contributions will be licensed under the [CC0-1.0 License](LICENSE).
+By contributing, you agree that your contributions will be licensed under the
+[CC0-1.0 License](LICENSE).
