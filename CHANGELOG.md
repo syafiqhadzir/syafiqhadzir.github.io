@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.1.0...v1.1.1) (2025-12-21)
+
+
+### Bug Fixes
+
+* **a11y:** improve color contrast to meet WCAG AA requirements ([1e044df](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/1e044df4be7cd6228a85959795b730f005fad356)), closes [#828282](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/828282) [#595959](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/595959) [#fff](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/fff) [#737373](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/737373) [#9a9a9a](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/9a9a9a) [#121212](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/121212)
+
 # [1.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.0.0...v1.1.0) (2025-12-21)
 
 
