@@ -17,6 +17,9 @@ jobs:
       name: production
       url: https://syafiqhadzir.dev
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Bootstrap Environment
         uses: ./.github/actions/bootstrap-env
         with:

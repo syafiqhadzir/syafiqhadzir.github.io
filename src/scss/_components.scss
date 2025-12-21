@@ -133,7 +133,8 @@ body {
 // TYPOGRAPHY
 
 a {
-    text-decoration: none;
+    text-decoration: underline;
+    text-decoration-skip-ink: auto;
     color: var(--accent);
     background-color: transparent;
     transition: color $transition-base;
@@ -204,6 +205,10 @@ h6 {
     justify-content: space-between;
     align-items: center;
     padding: $navbar-padding 0;
+
+    a {
+        text-decoration: none;
+    }
 }
 
 #author-name {
@@ -315,6 +320,7 @@ hr {
     color: var(--text-muted);
 
     a {
+        text-decoration: none;
         color: var(--text-muted);
         border-bottom: 1px dotted var(--text-muted);
 
