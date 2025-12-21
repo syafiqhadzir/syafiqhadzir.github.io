@@ -1,3 +1,10 @@
+## [2.1.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.1...v2.1.2) (2025-12-21)
+
+
+### Bug Fixes
+
+* **ci:** ensure cypress binary is cached and installed in github actions ([30b8124](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/30b81241356bbf36f78e578fafb8c33612f66006))
+
 ## [2.1.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.0...v2.1.1) (2025-12-21)
 
 
