@@ -19,10 +19,12 @@ runs:
       id: node-modules-cache
       uses: actions/cache@v4
       with:
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ inputs.node-version }}-modules-${{ hashFiles('package-lock.json') }}
+        path: |
+          node_modules
+          ~/.cache/Cypress
+        key: ${{ runner.os }}-node-${{ inputs.node-version }}-modules-${{ hashFiles('package-lock.json') }}-v1
 
     - name: Install Dependencies
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
-      run: npm ci --ignore-scripts
+      run: npm ci --ignore-scripts && npx cypress install
       shell: bash
