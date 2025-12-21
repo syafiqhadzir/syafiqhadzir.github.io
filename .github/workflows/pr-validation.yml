@@ -20,6 +20,11 @@ jobs:
       - name: Lint Code
         run: npm run lint
 
+      - name: 'notify vercel'
+        uses: 'vercel/repository-dispatch/actions/status@v1'
+        with:
+          name: 'Vercel - syafiqhadzir-github-io: lint'
+
       - name: Unit Tests
         run: npm run test:unit
 
