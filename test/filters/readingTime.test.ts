@@ -1,6 +1,5 @@
 /**
  * Unit Tests for Reading Time Filter
- *
  * @module test/filters/readingTime.test
  */
 
@@ -33,7 +32,7 @@ describe('readingTime filter', () => {
         });
 
         it('returns 0 for undefined', () => {
-            expect(wordCount(undefined)).toBe(0);
+            expect(wordCount()).toBe(0);
         });
 
         it('handles multiple whitespace characters', () => {
@@ -65,27 +64,27 @@ describe('readingTime filter', () => {
         });
 
         it('calculates correct time for 200-word content', () => {
-            const words = Array(200).fill('word').join(' ');
+            const words = Array.from({length: 200}).fill('word').join(' ');
             expect(readingTimeMinutes(words)).toBe(1);
         });
 
         it('calculates correct time for 400-word content', () => {
-            const words = Array(400).fill('word').join(' ');
+            const words = Array.from({length: 400}).fill('word').join(' ');
             expect(readingTimeMinutes(words)).toBe(2);
         });
 
         it('calculates correct time for 1000-word content', () => {
-            const words = Array(1000).fill('word').join(' ');
+            const words = Array.from({length: 1000}).fill('word').join(' ');
             expect(readingTimeMinutes(words)).toBe(5);
         });
 
         it('rounds up to nearest minute', () => {
-            const words = Array(250).fill('word').join(' ');
+            const words = Array.from({length: 250}).fill('word').join(' ');
             expect(readingTimeMinutes(words)).toBe(2);
         });
 
         it('uses custom words per minute', () => {
-            const words = Array(300).fill('word').join(' ');
+            const words = Array.from({length: 300}).fill('word').join(' ');
             expect(readingTimeMinutes(words, 100)).toBe(3);
         });
 
@@ -105,7 +104,7 @@ describe('readingTime filter', () => {
         });
 
         it('returns correct time for longer content', () => {
-            const words = Array(1000).fill('word').join(' ');
+            const words = Array.from({length: 1000}).fill('word').join(' ');
             expect(readingTime(words)).toBe('5 min read');
         });
 
@@ -115,12 +114,12 @@ describe('readingTime filter', () => {
         });
 
         it('uses custom words per minute', () => {
-            const words = Array(300).fill('word').join(' ');
+            const words = Array.from({length: 300}).fill('word').join(' ');
             expect(readingTime(words, { wordsPerMinute: 100 })).toBe('3 min read');
         });
 
         it('uses both custom options', () => {
-            const words = Array(500).fill('word').join(' ');
+            const words = Array.from({length: 500}).fill('word').join(' ');
             const result = readingTime(words, {
                 wordsPerMinute: 100,
                 suffix: 'min',
@@ -131,7 +130,7 @@ describe('readingTime filter', () => {
 
     describe('readingStats()', () => {
         it('returns complete statistics object', () => {
-            const words = Array(450).fill('word').join(' ');
+            const words = Array.from({length: 450}).fill('word').join(' ');
             const stats = readingStats(words);
 
             expect(stats).toHaveProperty('wordCount');
@@ -146,13 +145,13 @@ describe('readingTime filter', () => {
         });
 
         it('returns correct reading time', () => {
-            const words = Array(600).fill('word').join(' ');
+            const words = Array.from({length: 600}).fill('word').join(' ');
             const stats = readingStats(words);
             expect(stats.readingTime).toBe(3);
         });
 
         it('returns formatted reading time', () => {
-            const words = Array(400).fill('word').join(' ');
+            const words = Array.from({length: 400}).fill('word').join(' ');
             const stats = readingStats(words);
             expect(stats.readingTimeFormatted).toBe('2 min read');
         });

@@ -1,7 +1,6 @@
 /**
  * Date Formatting Filters for Eleventy
  * Provides various date formatting utilities for templates
- *
  * @module filters/dateFormat
  */
 
@@ -34,33 +33,30 @@ const DATE_FORMATS = {
 
 /**
  * Parse a date input to a Date object
- *
- * @param {Date | string | number} date - Date input
- * @returns {Date} Parsed Date object
+ * @param date - Date input
+ * @returns Parsed Date object
  * @throws {Error} If date is invalid
  */
 function parseDate(date: Date | string | number): Date {
     if (date instanceof Date) {
-        if (isNaN(date.getTime())) {
-            throw new Error('Invalid Date object provided');
+        if (Number.isNaN(date.getTime())) {
+            throw new TypeError('Invalid Date object provided');
         }
         return date;
     }
 
     const parsed = new Date(date);
-    if (isNaN(parsed.getTime())) {
-        throw new Error(`Cannot parse date: ${date}`);
+    if (Number.isNaN(parsed.getTime())) {
+        throw new TypeError(`Cannot parse date: ${String(date)}`);
     }
     return parsed;
 }
 
 /**
  * Format a date to a human-readable string
- *
- * @param {Date | string | number} date - Date to format
- * @param {keyof typeof DATE_FORMATS | string} format - Format style or custom format
- * @returns {string} Formatted date string
- *
+ * @param date - Date to format
+ * @param format - Format style or custom format
+ * @returns Formatted date string
  * @example
  * dateFormat(new Date('2024-01-15'), 'long') // "15 January 2024"
  * dateFormat('2024-01-15', 'short') // "15 Jan 2024"
@@ -70,7 +66,7 @@ export function dateFormat(
     format: keyof typeof DATE_FORMATS = 'long'
 ): string {
     const parsedDate = parseDate(date);
-    const formatOptions = DATE_FORMATS[format] || DATE_FORMATS.long;
+    const formatOptions = DATE_FORMATS[format] ?? DATE_FORMATS.long;
 
     return new Intl.DateTimeFormat(LOCALE, formatOptions).format(parsedDate);
 }
@@ -78,10 +74,8 @@ export function dateFormat(
 /**
  * Format a date to ISO 8601 format (YYYY-MM-DD)
  * Useful for Schema.org structured data and attributes
- *
- * @param {Date | string | number} date - Date to format
- * @returns {string} ISO formatted date string
- *
+ * @param date - Date to format
+ * @returns ISO formatted date string
  * @example
  * isoDate(new Date('2024-01-15')) // "2024-01-15"
  */
@@ -92,10 +86,8 @@ export function isoDate(date: Date | string | number): string {
 
 /**
  * Format a date as a relative time string (e.g., "2 days ago")
- *
- * @param {Date | string | number} date - Date to format
- * @returns {string} Relative time string
- *
+ * @param date - Date to format
+ * @returns Relative time string
  * @example
  * relativeDate(new Date(Date.now() - 86400000)) // "yesterday"
  */
@@ -136,8 +128,7 @@ export function relativeDate(date: Date | string | number): string {
 
 /**
  * Get the current year (useful for copyright notices)
- *
- * @returns {number} Current year
+ * @returns Current year
  */
 export function currentYear(): number {
     return new Date().getFullYear();

@@ -1,0 +1,28 @@
+# Hadolint Configuration
+# https://github.com/hadolint/hadolint
+
+# Failure threshold - fail on error, warn on others
+failure-threshold: error
+
+# Trusted registries for base images
+trustedRegistries:
+  - docker.io
+  - gcr.io
+  - ghcr.io
+
+# Rules configuration
+ignored:
+  # Allow COPY --from for multi-stage builds
+  - DL3022
+
+# Strict rules for production
+strict-labels: true
+
+# Override specific rules
+override:
+  warning:
+    # Warn on missing HEALTHCHECK (we have it)
+    - DL3025
+  info:
+    # Info on maintainer deprecation
+    - DL4000

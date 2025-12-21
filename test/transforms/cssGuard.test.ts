@@ -1,6 +1,5 @@
 /**
  * Unit Tests for CSS Guard Transform
- *
  * @module test/transforms/cssGuard.test
  */
 
@@ -155,12 +154,10 @@ describe('cssGuard transform', () => {
             expect(cssGuard('')).toBe('');
         });
 
-        it('logs CSS size', () => {
+        it('returns content without logging', () => {
             const html = '<style amp-custom>body{}</style>';
-            cssGuard(html);
-            expect(console.log).toHaveBeenCalledWith(
-                expect.stringContaining('[CSS Guard]')
-            );
+            const result = cssGuard(html);
+            expect(result).toBe(html);
         });
 
         it('includes helpful tips in error message', () => {
@@ -194,7 +191,7 @@ describe('cssGuard transform', () => {
             const stats = getCssStats(html);
 
             const expectedPercentage = (7500 / (75 * 1024)) * 100;
-            expect(parseFloat(stats.percentage)).toBeCloseTo(expectedPercentage, 0);
+            expect(Number.parseFloat(stats.percentage)).toBeCloseTo(expectedPercentage, 0);
         });
 
         it('handles missing amp-custom style', () => {
@@ -211,7 +208,7 @@ describe('cssGuard transform', () => {
             const html = `<style amp-custom>${css}</style>`;
             const stats = getCssStats(html, 1000);
 
-            expect(parseFloat(stats.percentage)).toBeCloseTo(50.0, 0);
+            expect(Number.parseFloat(stats.percentage)).toBeCloseTo(50, 0);
         });
     });
 });

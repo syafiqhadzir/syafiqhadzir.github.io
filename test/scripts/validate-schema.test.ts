@@ -1,6 +1,5 @@
 /**
  * JSON-LD Schema Validation Script Tests
- *
  * @module test/scripts/validate-schema.test
  */
 

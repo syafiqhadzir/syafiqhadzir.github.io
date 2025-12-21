@@ -1,7 +1,6 @@
 /**
  * AMP Image Shortcode for Eleventy
  * Generates proper <amp-img> elements with responsive layouts
- *
  * @module shortcodes/ampImg
  */
 
@@ -42,22 +41,20 @@ interface AmpImgOptions {
 
 /**
  * Escape HTML attribute values
- *
- * @param {string} value - Attribute value
- * @returns {string} Escaped value
+ * @param value - Attribute value
+ * @returns Escaped value
  */
-function escapeAttr(value: string): string {
+function escapeAttribute(value: string): string {
     return value
-        .replace(/&/g, '&amp;')
-        .replace(/"/g, '&quot;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;');
+        .replaceAll('&', '&amp;')
+        .replaceAll('"', '&quot;')
+        .replaceAll('<', '&lt;')
+        .replaceAll('>', '&gt;');
 }
 
 /**
  * Validate required parameters
- *
- * @param {AmpImgOptions} options - Image options
+ * @param options - Image options
  * @throws {Error} If required parameters are missing
  */
 function validateOptions(options: Partial<AmpImgOptions>): void {
@@ -75,36 +72,33 @@ function validateOptions(options: Partial<AmpImgOptions>): void {
     }
 }
 
+/** Options for basic ampImg shortcode */
+interface AmpImgShortcodeOptions {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+    layout?: AmpLayout;
+    className?: string;
+}
+
 /**
  * Generate an AMP-compliant image element
- *
- * @param {string} src - Image source URL
- * @param {string} alt - Alt text for accessibility
- * @param {number} width - Image width in pixels
- * @param {number} height - Image height in pixels
- * @param {AmpLayout} layout - AMP layout type
- * @param {string} className - Additional CSS classes
- * @returns {string} HTML string for amp-img element
- *
+ * @param options - Image options
+ * @returns HTML string for amp-img element
  * @example
- * {% ampImg "./images/hero.webp", "Hero image", 1200, 600 %}
- * {% ampImg "./images/avatar.webp", "Profile photo", 120, 120, "fixed", "profile-picture" %}
+ * {% ampImg { src: "./images/hero.webp", alt: "Hero image", width: 1200, height: 600 } %}
  */
-export function ampImg(
-    src: string,
-    alt: string,
-    width: number,
-    height: number,
-    layout: AmpLayout = 'responsive',
-    className = ''
-): string {
+export function ampImg(options: AmpImgShortcodeOptions): string {
+    const { src, alt, width, height, layout = 'responsive', className = '' } = options;
+
     // Validate inputs
     validateOptions({ src, alt, width, height });
 
     // Build attributes
     const attributes: string[] = [
-        `src="${escapeAttr(src)}"`,
-        `alt="${escapeAttr(alt)}"`,
+        `src="${escapeAttribute(src)}"`,
+        `alt="${escapeAttribute(alt)}"`,
         `width="${width}"`,
         `height="${height}"`,
         `layout="${layout}"`,
@@ -112,7 +106,7 @@ export function ampImg(
 
     // Add optional class
     if (className) {
-        attributes.push(`class="${escapeAttr(className)}"`);
+        attributes.push(`class="${escapeAttribute(className)}"`);
     }
 
     // Add loading strategy for responsive/intrinsic layouts
@@ -125,9 +119,8 @@ export function ampImg(
 
 /**
  * Generate amp-img with srcset for multiple resolutions
- *
- * @param {AmpImgOptions} options - Full image options
- * @returns {string} HTML string for amp-img element with srcset
+ * @param options - Full image options
+ * @returns HTML string for amp-img element with srcset
  */
 export function ampImgResponsive(options: AmpImgOptions): string {
     validateOptions(options);
@@ -144,23 +137,23 @@ export function ampImgResponsive(options: AmpImgOptions): string {
     } = options;
 
     const attributes: string[] = [
-        `src="${escapeAttr(src)}"`,
-        `alt="${escapeAttr(alt)}"`,
+        `src="${escapeAttribute(src)}"`,
+        `alt="${escapeAttribute(alt)}"`,
         `width="${width}"`,
         `height="${height}"`,
         `layout="${layout}"`,
     ];
 
     if (className) {
-        attributes.push(`class="${escapeAttr(className)}"`);
+        attributes.push(`class="${escapeAttribute(className)}"`);
     }
 
     if (srcset) {
-        attributes.push(`srcset="${escapeAttr(srcset)}"`);
+        attributes.push(`srcset="${escapeAttribute(srcset)}"`);
     }
 
     if (sizes) {
-        attributes.push(`sizes="${escapeAttr(sizes)}"`);
+        attributes.push(`sizes="${escapeAttribute(sizes)}"`);
     }
 
     if (layout === 'responsive' || layout === 'intrinsic') {
@@ -170,30 +163,29 @@ export function ampImgResponsive(options: AmpImgOptions): string {
     return `<amp-img ${attributes.join(' ')}></amp-img>`;
 }
 
+/** Options for ampImgWithFallback shortcode */
+interface AmpImgFallbackOptions {
+    webpSrc: string;
+    fallbackSrc: string;
+    alt: string;
+    width: number;
+    height: number;
+    layout?: AmpLayout;
+}
+
 /**
  * Generate amp-img with WebP fallback
- *
- * @param {string} webpSrc - WebP image source
- * @param {string} fallbackSrc - Fallback image source (JPEG/PNG)
- * @param {string} alt - Alt text
- * @param {number} width - Width
- * @param {number} height - Height
- * @param {AmpLayout} layout - Layout type
- * @returns {string} HTML with amp-img and fallback
+ * @param options - Image options with fallback
+ * @returns HTML with amp-img and fallback
  */
-export function ampImgWithFallback(
-    webpSrc: string,
-    fallbackSrc: string,
-    alt: string,
-    width: number,
-    height: number,
-    layout: AmpLayout = 'responsive'
-): string {
+export function ampImgWithFallback(options: AmpImgFallbackOptions): string {
+    const { webpSrc, fallbackSrc, alt, width, height, layout = 'responsive' } = options;
+
     validateOptions({ src: webpSrc, alt, width, height });
 
     return `<amp-img
-    src="${escapeAttr(webpSrc)}"
-    alt="${escapeAttr(alt)}"
+    src="${escapeAttribute(webpSrc)}"
+    alt="${escapeAttribute(alt)}"
     width="${width}"
     height="${height}"
     layout="${layout}"
@@ -201,8 +193,8 @@ export function ampImgWithFallback(
 >
     <amp-img
         fallback
-        src="${escapeAttr(fallbackSrc)}"
-        alt="${escapeAttr(alt)}"
+        src="${escapeAttribute(fallbackSrc)}"
+        alt="${escapeAttribute(alt)}"
         width="${width}"
         height="${height}"
         layout="${layout}"

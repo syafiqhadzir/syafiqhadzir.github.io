@@ -1,7 +1,6 @@
 /**
  * CSS Guard Transform for Eleventy
  * Enforces the 75KB CSS limit for AMP pages
- *
  * @module transforms/cssGuard
  */
 
@@ -29,31 +28,29 @@ interface CssGuardResult {
 
 /**
  * Calculate the byte size of a string (UTF-8)
- *
- * @param {string} str - String to measure
- * @returns {number} Size in bytes
+ * @param str - String to measure
+ * @param string_
+ * @returns Size in bytes
  */
-function getByteSize(str: string): number {
-    return new TextEncoder().encode(str).length;
+function getByteSize(string_: string): number {
+    return new TextEncoder().encode(string_).length;
 }
 
 /**
  * Extract CSS from <style amp-custom> tag
- *
- * @param {string} html - HTML content
- * @returns {string | null} CSS content or null if not found
+ * @param html - HTML content
+ * @returns CSS content or null if not found
  */
 export function extractAmpCustomCSS(html: string): string | null {
-    const match = html.match(AMP_CUSTOM_STYLE_REGEX);
+    const match = AMP_CUSTOM_STYLE_REGEX.exec(html);
     return match ? match[1] : null;
 }
 
 /**
  * Check if CSS size is within AMP limits
- *
- * @param {string} css - CSS content
- * @param {number} maxBytes - Maximum allowed size in bytes
- * @returns {CssGuardResult} Validation result
+ * @param css - CSS content
+ * @param maxBytes - Maximum allowed size in bytes
+ * @returns Validation result
  */
 export function checkCssSize(
     css: string,
@@ -77,12 +74,10 @@ export function checkCssSize(
 /**
  * CSS Guard Transform for Eleventy
  * Fails the build if inlined CSS exceeds the specified limit
- *
- * @param {string} content - HTML content
- * @param {number} maxSizeBytes - Maximum allowed CSS size in bytes (default: 75KB)
- * @returns {string} Original content if valid
+ * @param content - HTML content
+ * @param maxSizeBytes - Maximum allowed CSS size in bytes (default: 75KB)
+ * @returns Original content if valid
  * @throws {Error} If CSS exceeds the limit
- *
  * @example
  * // In eleventy.config.js
  * eleventyConfig.addTransform('cssGuard', (content, outputPath) => {
@@ -96,8 +91,7 @@ export function cssGuard(
     content: string,
     maxSizeBytes: number = DEFAULT_MAX_SIZE
 ): string {
-    // Skip if no content
-    if (!content) {
+    if (content === '') {
         return content;
     }
 
@@ -112,8 +106,7 @@ export function cssGuard(
     // Check CSS size
     const result = checkCssSize(css, maxSizeBytes);
 
-    // Log size for visibility
-    console.log(`[CSS Guard] Size: ${result.sizeKB} / ${(maxSizeBytes / 1024).toFixed(0)}KB`);
+    // Build logging removed for strict lint compliance
 
     // Fail build if over limit
     if (!result.valid) {
@@ -133,10 +126,9 @@ export function cssGuard(
 /**
  * Get CSS size statistics for a page
  * Useful for build reports
- *
- * @param {string} html - HTML content
- * @param {number} maxBytes - Maximum allowed size
- * @returns {CssGuardResult & { percentage: string }} Size stats with percentage
+ * @param html - HTML content
+ * @param maxBytes - Maximum allowed size
+ * @returns Size stats with percentage
  */
 export function getCssStats(
     html: string,

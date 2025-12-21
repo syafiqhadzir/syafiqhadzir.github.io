@@ -1,6 +1,8 @@
 /**
  * Eleventy Configuration
- * Google AMP Portfolio with Dart Sass + PostCSS + CSSO
+ * Google AMP Portfolio with Extreme Minification Pipeline
+ *
+ * Pipeline: Sass → PostCSS → CSSO → Inline → Extreme HTML Minify
  *
  * @see https://www.11ty.dev/docs/config/
  */
@@ -29,8 +31,11 @@ const MAX_CSS_SIZE_BYTES = 75 * 1024;
 const SCSS_ENTRY = './src/scss/main.scss';
 
 /**
- * Compile SCSS to optimized CSS string
- * Pipeline: Dart Sass → PostCSS (autoprefixer) → CSSO (minification)
+ * Compile SCSS with CSSO for AMP-compatible optimization
+ * Pipeline: Dart Sass → PostCSS (autoprefixer) → CSSO (minify)
+ *
+ * Note: LightningCSS was tested but outputs media query range syntax
+ * which is not supported by AMP validator. CSSO is AMP-safe.
  *
  * @returns {Promise<string>} Minified CSS string
  */
@@ -49,26 +54,41 @@ async function compileSCSS() {
             loadPaths: ['./src/scss', './node_modules'],
         });
 
-        // Step 2: Process with PostCSS (autoprefixer)
+        // Step 2: Process with PostCSS (autoprefixer for modern browsers)
         const postcssResult = await postcss([
             autoprefixer({
-                // Target modern browsers for AMP
-                overrideBrowserslist: ['> 1%', 'last 2 versions', 'not dead'],
+                overrideBrowserslist: [
+                    'last 2 Chrome versions',
+                    'last 2 Firefox versions',
+                    'last 2 Safari versions',
+                    'last 2 Edge versions',
+                    'iOS >= 14',
+                    'Android >= 10',
+                ],
             }),
         ]).process(sassResult.css, { from: undefined });
 
-        // Step 3: Minify with CSSO
+        // Step 3: Minify with CSSO (aggressive restructuring)
         const minified = cssoMinify(postcssResult.css, {
             restructure: true,
             forceMediaMerge: true,
         });
 
+        // Step 4: Validate size
+        const sizeBytes = Buffer.byteLength(minified.css, 'utf8');
+        if (sizeBytes > MAX_CSS_SIZE_BYTES) {
+            throw new Error(
+                `[CSSO] CSS size (${(sizeBytes / 1024).toFixed(2)}KB) exceeds AMP limit of 75KB`
+            );
+        }
+
         return minified.css;
     } catch (error) {
-        console.error('[11ty] SCSS compilation failed:', error.message);
+        console.error('[11ty] CSS compilation failed:', error.message);
         throw error;
     }
 }
+
 
 /**
  * Eleventy Configuration Export

@@ -1,6 +1,5 @@
 /**
  * HTML Minify Transform Tests
- *
  * @module test/transforms/htmlMinify.test
  */
 
@@ -89,10 +88,7 @@ describe('htmlMinify transform', () => {
             expect(result).toContain('.class');
         });
 
-        it('returns original content and warns when minification fails', async () => {
-            // Mock console.warn to verify it's called
-            const warnSpy = vi.spyOn(console, 'warn').mockImplementation(vi.fn());
-
+        it('returns original content when minification fails', async () => {
             // Create HTML that will cause minification to fail
             // Using a mock to simulate failure
             const { minify } = await import('html-minifier-terser');
@@ -103,12 +99,6 @@ describe('htmlMinify transform', () => {
 
             // Should return original content when minification fails
             expect(result).toBe(input);
-            expect(warnSpy).toHaveBeenCalledWith(
-                expect.stringContaining('[HTML Minify] Failed to minify'),
-                expect.any(Error)
-            );
-
-            warnSpy.mockRestore();
         });
     });
 
@@ -133,7 +123,7 @@ describe('htmlMinify transform', () => {
 
         it('returns content unchanged when outputPath is undefined', async () => {
             const content = '<div>Content</div>';
-            const result = await htmlMinifyTransform(content, undefined);
+            const result = await htmlMinifyTransform(content);
 
             expect(result).toBe(content);
         });
@@ -155,13 +145,14 @@ describe('htmlMinify transform', () => {
             expect(result).not.toContain('  ');
         });
 
-        it('logs minification statistics in production', async () => {
+        it('minifies content silently in production', async () => {
             process.env.NODE_ENV = 'production';
             const content = '<div>   Content   </div>';
 
-            await htmlMinifyTransform(content, 'output.html');
+            const result = await htmlMinifyTransform(content, 'output.html');
 
-            expect(console.log).toHaveBeenCalled();
+            // Verifies minification happens without logging
+            expect(result).not.toContain('   ');
         });
     });
 

@@ -125,22 +125,22 @@ html {
 body {
     margin: 0;
     font: #{$font-size-base}/#{$line-height-base} #{$font-family-base};
-    background-color: var(--bg-primary);
     color: var(--text-primary);
+    background-color: var(--bg-primary);
     transition: background-color $transition-slow, color $transition-slow;
 }
 
 // TYPOGRAPHY
 
 a {
-    color: var(--accent);
     text-decoration: none;
-    transition: color $transition-base;
+    color: var(--accent);
     background-color: transparent;
+    transition: color $transition-base;
 
     &:hover {
-        color: var(--accent-hover);
         text-decoration: underline;
+        color: var(--accent-hover);
     }
 }
 
@@ -150,11 +150,11 @@ h3,
 h4,
 h5,
 h6 {
+    margin: 1.5rem 0 0.5rem;
     font-family: $font-family-base;
     font-weight: $font-weight-bold;
-    color: var(--heading-color);
-    margin: 1.5rem 0 0.5rem;
     line-height: $line-height-heading;
+    color: var(--heading-color);
 }
 
 h1 {
@@ -184,26 +184,26 @@ h6 {
 // LAYOUT
 
 .wrapper {
-    min-height: 100%;
     display: flex;
     flex-direction: column;
+    min-height: 100%;
 }
 
 .container {
+    flex: 1;
     max-width: $container-max-width;
     margin: 0 auto;
     padding: 0 $container-padding;
-    flex: 1;
 }
 
 // NAVBAR
 
 .navbar {
-    padding: $navbar-padding 0;
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    padding: $navbar-padding 0;
 }
 
 #author-name {
@@ -213,11 +213,11 @@ h6 {
 }
 
 .navbar-ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
 }
 
 .nav-list {
@@ -249,17 +249,17 @@ h6 {
 }
 
 hr {
+    margin: 30px 0;
     border: 0;
     border-top: $border-width solid var(--border);
-    margin: 30px 0;
 }
 
 .w3-button {
-    border: 0;
     display: inline-block;
     padding: $spacing-sm $spacing-md;
-    cursor: pointer;
+    border: 0;
     border-radius: $border-radius-md;
+    cursor: pointer;
 }
 
 .w3-center {
@@ -269,15 +269,15 @@ hr {
 // THEME TOGGLE
 
 .theme-toggle {
-    background: none;
-    border: none;
-    color: var(--heading-color);
-    cursor: pointer;
-    padding: 5px;
-    margin-left: 10px;
-    font-size: 1rem;
     min-width: $touch-target-min;
     min-height: $touch-target-min;
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 1rem;
+    color: var(--heading-color);
+    background: none;
+    border: none;
+    cursor: pointer;
 
     &:focus {
         outline: none;
@@ -308,11 +308,11 @@ hr {
 // FOOTER
 
 .footer {
+    margin-top: auto;
+    padding: $footer-padding 0;
+    font-size: $font-size-sm;
     text-align: center;
     color: var(--text-muted);
-    font-size: $font-size-sm;
-    padding: $footer-padding 0;
-    margin-top: auto;
 
     a {
         color: var(--text-muted);
@@ -333,12 +333,12 @@ hr {
     left: -9999px;
     z-index: $z-index-fixed;
     padding: $spacing-sm $spacing-md;
-    background: var(--text-primary);
     color: var(--bg-primary);
+    background: var(--text-primary);
 
     &:focus {
-        left: 10px;
         top: 10px;
+        left: 10px;
     }
 }
 
@@ -358,13 +358,13 @@ hr {
     position: absolute;
     width: 1px;
     height: 1px;
-    padding: 0;
     margin: -1px;
+    padding: 0;
     overflow: hidden;
-    /* stylelint-disable-next-line property-no-deprecated -- Allow clip for sr-only support */
-    clip: rect(0, 0, 0, 0);
     white-space: nowrap;
     border: 0;
+    /* stylelint-disable-next-line property-no-deprecated -- Allow clip for sr-only support */
+    clip: rect(0, 0, 0, 0);
 }
 
 // Reduced Motion (AMP does not allow !important)
@@ -397,13 +397,13 @@ hr {
 // IMAGES
 
 .profile-picture {
+    float: right;
     width: 120px;
     height: 120px;
-    border-radius: $border-radius-full;
-    float: right;
-    margin-left: $spacing-lg;
     margin-bottom: $spacing-lg;
+    margin-left: $spacing-lg;
     overflow: hidden;
+    border-radius: $border-radius-full;
 }
 
 .content {
@@ -433,8 +433,8 @@ hr {
     }
 
     .profile-picture {
-        float: none;
         display: block;
+        float: none;
         margin: 0 auto $spacing-lg;
     }
 
@@ -447,8 +447,8 @@ hr {
 
 @media print {
     body {
-        background: #fff;
         color: #000;
+        background: #fff;
     }
 
     .skip-link,
@@ -458,8 +458,8 @@ hr {
     }
 
     a[href]::after {
-        content: ' (' attr(href) ')';
         font-size: 0.8em;
+        content: ' (' attr(href) ')';
     }
 
     a[href^='#']::after,

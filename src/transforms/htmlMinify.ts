@@ -1,7 +1,6 @@
 /**
  * HTML Minification Transform for Eleventy
  * Uses html-minifier-terser for aggressive minification
- *
  * @module transforms/htmlMinify
  */
 
@@ -45,20 +44,19 @@ const MINIFIER_OPTIONS = {
 
 /**
  * Minify HTML content
- *
- * @param {string} content - HTML content to minify
- * @returns {Promise<string>} Minified HTML
+ * @param content - HTML content to minify
+ * @returns Minified HTML
  */
 export async function minifyHtml(content: string): Promise<string> {
-    if (!content || typeof content !== 'string') {
+    if (content === '' || typeof content !== 'string') {
         return content;
     }
 
     try {
         const minified = await minify(content, MINIFIER_OPTIONS);
         return minified;
-    } catch (error) {
-        console.warn('[HTML Minify] Failed to minify, returning original:', error);
+    } catch {
+        // Minification failed, return original content
         return content;
     }
 }
@@ -66,17 +64,15 @@ export async function minifyHtml(content: string): Promise<string> {
 /**
  * Eleventy transform for HTML minification
  * Only minifies in production mode
- *
- * @param {string} content - HTML content
- * @param {string} outputPath - Output file path
- * @returns {Promise<string>} Processed content
+ * @param content - HTML content
+ * @param outputPath - Output file path
+ * @returns Processed content
  */
 export async function htmlMinifyTransform(
     content: string,
     outputPath: string | undefined
 ): Promise<string> {
-    // Only minify HTML files
-    if (!outputPath || !outputPath.endsWith('.html')) {
+    if (!outputPath?.endsWith('.html')) {
         return content;
     }
 
@@ -85,24 +81,16 @@ export async function htmlMinifyTransform(
         return content;
     }
 
-    const originalSize = Buffer.byteLength(content, 'utf8');
     const minified = await minifyHtml(content);
-    const minifiedSize = Buffer.byteLength(minified, 'utf8');
-
-    const savings = originalSize - minifiedSize;
-    const percent = ((savings / originalSize) * 100).toFixed(1);
-
-    console.log(`[HTML Minify] ${outputPath}: ${(originalSize / 1024).toFixed(2)}KB → ${(minifiedSize / 1024).toFixed(2)}KB (-${percent}%)`);
 
     return minified;
 }
 
 /**
  * Get minification statistics
- *
- * @param {string} original - Original HTML
- * @param {string} minified - Minified HTML
- * @returns {object} Statistics object
+ * @param original - Original HTML
+ * @param minified - Minified HTML
+ * @returns Statistics object
  */
 export function getMinifyStats(original: string, minified: string): {
     originalSize: number;

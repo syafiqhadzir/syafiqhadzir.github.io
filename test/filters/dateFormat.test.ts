@@ -1,6 +1,5 @@
 /**
  * Unit Tests for Date Formatting Filters
- *
  * @module test/filters/dateFormat.test
  */
 

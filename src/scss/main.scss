@@ -13,16 +13,16 @@
 
 @font-face {
     font-family: 'Font Awesome 6 Free';
-    font-style: normal;
     font-weight: 900;
+    font-style: normal;
     font-display: swap;
     src: url('./fonts/fa-solid-900.woff2') format('woff2');
 }
 
 @font-face {
     font-family: 'Font Awesome 6 Brands';
-    font-style: normal;
     font-weight: 400;
+    font-style: normal;
     font-display: swap;
     src: url('./fonts/fa-brands-400.woff2') format('woff2');
 }
@@ -42,8 +42,8 @@
 }
 
 .fa-fw {
-    text-align: center;
     width: 1.25em;
+    text-align: center;
 }
 
 .fa-solid {
