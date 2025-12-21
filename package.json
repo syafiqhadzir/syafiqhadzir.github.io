@@ -28,7 +28,7 @@
     "scripts": {
         "prebuild": "npm run compile:ts",
         "build": "eleventy",
-        "build:prod": "cross-env NODE_ENV=production eleventy && npm run build:size-report",
+        "build:prod": "npm run compile:ts && cross-env NODE_ENV=production eleventy && npm run build:size-report",
         "build:size-report": "npx ts-node scripts/build-size-report.ts _site",
         "clean": "rimraf _site coverage cypress/reports dist",
         "compile:ts": "tsc src/filters/dateFormat.ts src/filters/readingTime.ts src/shortcodes/ampImg.ts src/transforms/cssGuard.ts src/transforms/htmlMinify.ts src/transforms/extremeMinify.ts src/lib/lightningCss.ts src/lib/svgoOptimize.ts --outDir dist --module ESNext --moduleResolution Bundler --declaration false --target ES2022 --esModuleInterop true",
