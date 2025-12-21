@@ -1,33 +1,17 @@
-﻿################################# ROBOTS.TXT ###################################
-#                                                                              #
-# Allow all legitimate crawlers, disallow bad bots                             #
-# https://syafiqhadzir.dev                                                     #
-#                                                                              #
-################################################################################
+﻿# https://www.robotstxt.org/robotstxt.html
 
-# Allow all search engines
-User-agent: Googlebot
-User-agent: Googlebot-Image
-User-agent: Googlebot-News
-User-agent: Googlebot-Video
-User-agent: Bingbot
-User-agent: Slurp
-User-agent: DuckDuckBot
-User-agent: Baiduspider
-User-agent: YandexBot
-User-agent: facebookexternalhit
-User-agent: Twitterbot
-User-agent: LinkedInBot
-User-agent: Applebot
-Allow: /
-
-# Default rule for all other bots
+# Allow all legitimate bots
 User-agent: *
 Allow: /
 
-# Disallow utility pages from indexing
+# Disallow utility and system pages
 Disallow: /sw.html
 Disallow: /offline.html
+Disallow: /404.html
+Disallow: /google*.html
 
-# Sitemap location
+# Host
+Host: https://syafiqhadzir.dev
+
+# Sitemaps
 Sitemap: https://syafiqhadzir.dev/sitemap.xml

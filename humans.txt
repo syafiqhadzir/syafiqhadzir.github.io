@@ -1,33 +1,34 @@
 /* TEAM */
-Name: Syafiq Hadzir
-Role: Software QA Engineer
-Site: https://syafiqhadzir.dev
-Contact: syafiqhadzir@live.com.my
-Location: Malaysia
-GitHub: https://github.com/SyafiqHadzir
-GitLab: https://gitlab.com/syafiqhadzir
+  Name: Syafiq Hadzir
+  Role: Software QA Engineer & Full Stack Developer
+  Site: https://syafiqhadzir.dev
+  GitHub: https://github.com/SyafiqHadzir
+  GitLab: https://gitlab.com/syafiqhadzir
+  Location: Malaysia
 
 /* SITE */
-Last update: 2025-12-20
-Language: English
-Doctype: HTML5
-Framework: AMP (Accelerated Mobile Pages)
-Styling: W3.CSS, Custom CSS
-Icons: Font Awesome 6
-Fonts: Inconsolata (Google Fonts)
-Testing: Cypress E2E
-CI/CD: GitHub Actions
-Hosting: GitHub Pages
+  Last Update: 2025-12-22
+  Language: English
+  Doctype: HTML5
+  Standards: AMP HTML, WCAG 2.1 AA
+  Components: Eleventy v3, TypeScript, SASS
+
+/* TECH STACK */
+  SSG: Eleventy 3.1 (Canary)
+  Build: NPM Scripts, Esbuild (via LightningCSS)
+  Styles: SASS/SCSS, LightningCSS (Minification)
+  Scripts: TypeScript 5.x, SWToolbox
+  Testing: Vitest (Unit), Cypress (E2E), Lighthouse CI (Perf)
+  Quality: ESLint, Stylelint, SonarQube, Knip
+  CI/CD: GitHub Actions (Split Workflows)
 
 /* THANKS */
-AMP Project: https://amp.dev
-W3Schools: https://www.w3schools.com/w3css/
-Font Awesome: https://fontawesome.com
-Google Fonts: https://fonts.google.com
-Cypress: https://www.cypress.io
+  Google: AMP Project (amp.dev)
+  Font Awesome: Iconography
+  W3C: Web Standards
+  Open Source: The entire ecosystem
 
 /* NOTE */
-Congratulations, you found the humans.txt file!
-You must be cunning and brave, intelligent and resourceful.
-Let's be honest, you are a nerd. No worries though,
-nerd is the new cool and we respect that. 🚀
+  Built with a Zero-Defect mindset.
+  100% Lighthouse Scores. 100% Test Coverage.
+  Fast by default. Broken by design? Never.
