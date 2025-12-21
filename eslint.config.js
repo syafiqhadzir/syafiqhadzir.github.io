@@ -15,7 +15,6 @@ import jsdoc from 'eslint-plugin-jsdoc';
  * - eslint-plugin-unicorn (modern JS patterns)
  * - eslint-plugin-sonarjs (code quality)
  * - eslint-plugin-jsdoc (documentation)
- *
  * @see https://eslint.org/docs/latest/use/configure/configuration-files-new
  */
 export default tseslint.config(
@@ -61,7 +60,7 @@ export default tseslint.config(
                 ...globals.es2024,
             },
             parserOptions: {
-                project: './tsconfig.json',
+                project: './tsconfig.eslint.json',
                 tsconfigRootDir: import.meta.dirname,
             },
         },
@@ -72,9 +71,12 @@ export default tseslint.config(
         files: ['src/**/*.ts', 'scripts/**/*.ts'],
         rules: {
             // ========== COGNITIVE COMPLEXITY (SonarQube aligned) ==========
-            'complexity': ['error', 12],
+            complexity: ['error', 12],
             'max-depth': ['error', 4],
-            'max-lines-per-function': ['error', { max: 75, skipBlankLines: true, skipComments: true }],
+            'max-lines-per-function': [
+                'error',
+                { max: 75, skipBlankLines: true, skipComments: true },
+            ],
             'max-statements': ['error', 25],
             'max-params': ['error', 5],
             'max-nested-callbacks': ['error', 3],
@@ -82,20 +84,26 @@ export default tseslint.config(
             // ========== TYPESCRIPT STRICT ==========
             '@typescript-eslint/explicit-function-return-type': 'error',
             '@typescript-eslint/explicit-module-boundary-types': 'error',
-            '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', varsIgnorePattern: '^_' }],
+            '@typescript-eslint/no-unused-vars': [
+                'error',
+                { argsIgnorePattern: '^_', varsIgnorePattern: '^_' },
+            ],
             '@typescript-eslint/no-explicit-any': 'error',
             '@typescript-eslint/no-unsafe-assignment': 'error',
             '@typescript-eslint/no-unsafe-call': 'error',
             '@typescript-eslint/no-unsafe-member-access': 'error',
             '@typescript-eslint/no-unsafe-return': 'error',
-            '@typescript-eslint/strict-boolean-expressions': ['error', {
-                allowString: true,
-                allowNumber: true,
-                allowNullableObject: true,
-                allowNullableString: true,
-                allowNullableNumber: true,
-                allowNullableBoolean: true,
-            }],
+            '@typescript-eslint/strict-boolean-expressions': [
+                'error',
+                {
+                    allowString: true,
+                    allowNumber: true,
+                    allowNullableObject: true,
+                    allowNullableString: true,
+                    allowNullableNumber: true,
+                    allowNullableBoolean: true,
+                },
+            ],
             '@typescript-eslint/no-floating-promises': 'error',
             '@typescript-eslint/await-thenable': 'error',
             '@typescript-eslint/no-misused-promises': 'error',
@@ -103,30 +111,36 @@ export default tseslint.config(
             '@typescript-eslint/prefer-optional-chain': 'error',
             '@typescript-eslint/no-unnecessary-condition': 'off',
             '@typescript-eslint/no-non-null-assertion': 'error',
-            '@typescript-eslint/restrict-template-expressions': ['error', {
-                allowNumber: true,
-                allowBoolean: true,
-            }],
+            '@typescript-eslint/restrict-template-expressions': [
+                'error',
+                {
+                    allowNumber: true,
+                    allowBoolean: true,
+                },
+            ],
 
             // ========== UNICORN (Modern JS) ==========
             'unicorn/filename-case': ['error', { case: 'camelCase' }],
             'unicorn/no-null': 'off', // Allow null for DOM APIs
-            'unicorn/prevent-abbreviations': ['error', {
-                allowList: {
-                    props: true,
-                    env: true,
-                    args: true,
-                    err: true,
-                    doc: true,
-                    docs: true,
-                    src: true,
-                    dest: true,
-                    fn: true,
-                    el: true,
-                    i: true,
-                    j: true,
+            'unicorn/prevent-abbreviations': [
+                'error',
+                {
+                    allowList: {
+                        props: true,
+                        env: true,
+                        args: true,
+                        err: true,
+                        doc: true,
+                        docs: true,
+                        src: true,
+                        dest: true,
+                        fn: true,
+                        el: true,
+                        i: true,
+                        j: true,
+                    },
                 },
-            }],
+            ],
             'unicorn/prefer-module': 'error',
             'unicorn/prefer-node-protocol': 'error',
             'unicorn/prefer-top-level-await': 'off', // Not always applicable
@@ -142,14 +156,17 @@ export default tseslint.config(
             'sonarjs/no-clear-text-protocols': 'warn', // Schema.org uses http
 
             // ========== JSDOC (Documentation) ==========
-            'jsdoc/require-jsdoc': ['warn', {
-                require: {
-                    FunctionDeclaration: true,
-                    MethodDefinition: true,
-                    ClassDeclaration: true,
+            'jsdoc/require-jsdoc': [
+                'warn',
+                {
+                    require: {
+                        FunctionDeclaration: true,
+                        MethodDefinition: true,
+                        ClassDeclaration: true,
+                    },
+                    publicOnly: true,
                 },
-                publicOnly: true,
-            }],
+            ],
             'jsdoc/require-description': 'warn',
             'jsdoc/require-param-description': 'off', // Types are sufficient
             'jsdoc/require-returns-description': 'off',
@@ -157,8 +174,8 @@ export default tseslint.config(
 
             // ========== CODE QUALITY ==========
             'no-console': 'error',
-            'eqeqeq': ['error', 'always', { null: 'ignore' }],
-            'curly': ['error', 'all'],
+            eqeqeq: ['error', 'always', { null: 'ignore' }],
+            curly: ['error', 'all'],
             'no-else-return': 'error',
             'no-lonely-if': 'error',
             'no-unneeded-ternary': 'error',
@@ -182,7 +199,10 @@ export default tseslint.config(
         files: ['scripts/**/*.ts'],
         rules: {
             'no-console': 'off',
-            'max-lines-per-function': ['error', { max: 80, skipBlankLines: true, skipComments: true }],
+            'max-lines-per-function': [
+                'error',
+                { max: 80, skipBlankLines: true, skipComments: true },
+            ],
             '@typescript-eslint/strict-boolean-expressions': 'off',
             '@typescript-eslint/no-unsafe-argument': 'off',
             'unicorn/no-process-exit': 'off',
@@ -253,7 +273,15 @@ export default tseslint.config(
             '@typescript-eslint/no-require-imports': 'off',
             'jsdoc/require-jsdoc': 'off',
             'unicorn/prefer-module': 'off',
+            '@typescript-eslint/no-unsafe-assignment': 'off',
+            '@typescript-eslint/no-unsafe-argument': 'off',
+            '@typescript-eslint/no-unsafe-member-access': 'off',
+            '@typescript-eslint/no-unsafe-call': 'off',
+            '@typescript-eslint/no-unsafe-return': 'off',
+            '@typescript-eslint/explicit-module-boundary-types': 'off',
+            'jsdoc/no-types': 'off',
+            'sonarjs/deprecation': 'off',
+            '@typescript-eslint/no-deprecated': 'off',
         },
     }
 );
-

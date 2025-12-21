@@ -1,0 +1,20 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+        "allowJs": true,
+        "noEmit": true
+    },
+    "include": [
+        "src/**/*.ts",
+        "test/**/*.ts",
+        "scripts/**/*.ts",
+        "cypress/**/*.ts",
+        "cypress.config.ts",
+        "vitest.config.ts",
+        "eleventy.config.js",
+        "eslint.config.js",
+        "stylelint.config.js",
+        "*.config.js"
+    ],
+    "exclude": ["node_modules", "_site", "dist", "coverage"]
+}
