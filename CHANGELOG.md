@@ -1,3 +1,10 @@
+## [2.1.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.0...v2.1.1) (2025-12-21)
+
+
+### Bug Fixes
+
+* trigger release for maintenance updates ([d7c0d4a](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/d7c0d4aa394b11e39a66218d0f819b2ccd99f8e6))
+
 # [2.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.0.0...v2.1.0) (2025-12-21)
 
 
