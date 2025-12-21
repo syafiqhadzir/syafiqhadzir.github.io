@@ -13,8 +13,8 @@ $color-accent-light-hover: #ff8787;
 $light-bg-primary: #fff;
 $light-bg-secondary: #f4f4f4;
 $light-text-primary: #333;
-$light-text-secondary: #666;
-$light-text-muted: #828282;
+$light-text-secondary: #595959;
+$light-text-muted: #595959; // WCAG AA: 7.0:1 on #fff
 $light-heading: #111;
 $light-border: #e8e8e8;
 $light-border-light: #f0f0f0;
@@ -23,8 +23,8 @@ $light-border-light: #f0f0f0;
 $dark-bg-primary: #121212;
 $dark-bg-secondary: #1e1e1e;
 $dark-text-primary: #e0e0e0;
-$dark-text-secondary: #a0a0a0;
-$dark-text-muted: #737373;
+$dark-text-secondary: #b3b3b3;
+$dark-text-muted: #9a9a9a; // WCAG AA: 5.7:1 on #121212
 $dark-heading: #fff;
 $dark-border: #333;
 $dark-border-light: #222;
