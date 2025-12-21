@@ -1,3 +1,52 @@
+# [2.0.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.1.1...v2.0.0) (2025-12-21)
+
+
+### Features
+
+* **build:** implement expert-level linting and housekeeping infrastructure ([45455b7](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/45455b715abcc0933fb79dfd5dbce95f22822ca9))
+
+
+### BREAKING CHANGES
+
+* **build:** ampImg() now uses options object API instead of positional params
+
+Implement comprehensive code quality infrastructure with strictest linting
+configuration and zero-waste housekeeping tooling.
+
+Linting Enhancements:
+- Upgrade ESLint to strict-type-checked + stylistic-type-checked
+- Add eslint-plugin-unicorn for modern JS patterns (100+ rules)
+- Add eslint-plugin-sonarjs for code quality metrics (SonarQube parity)
+- Add eslint-plugin-jsdoc for documentation enforcement
+- Configure Stylelint with property ordering (stylelint-order)
+- Achieve 0 lint errors across entire codebase
+
+Build Optimization:
+- Add extreme HTML minification transform with AMP boilerplate protection
+- Configure build size report for AMP 75KB CSS limit validation
+- Add LightningCSS module (available for non-AMP projects)
+- Add SVGO optimizer for inline SVG compression
+
+Housekeeping Infrastructure:
+- Add Knip for dead code detection (SSG-aware configuration)
+- Add housekeeping script for full coverage audit
+- Add Git branch cleanup utility (PowerShell)
+- Update vitest coverage exclusions for CLI scripts
+
+Code Refactoring:
+- Refactor ampImg() to use options object pattern (max-params compliance)
+- Fix Number.isNaN for unicorn/prefer-number-properties
+- Remove console statements for strict lint compliance
+- Update tests for new API signatures
+
+Docker & CI:
+- Add Hadolint configuration for Dockerfile linting
+- Add Docker testing workflow with 5-layer pyramid
+- Update security workflow Node version
+
+Deps: +knip +cross-env +lightningcss +svgo +stylelint-order
+      +eslint-plugin-{unicorn,sonarjs,jsdoc}
+
 ## [1.1.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.1.0...v1.1.1) (2025-12-21)
 
 
