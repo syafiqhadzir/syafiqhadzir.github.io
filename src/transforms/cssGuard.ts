@@ -28,8 +28,7 @@ interface CssGuardResult {
 
 /**
  * Calculate the byte size of a string (UTF-8)
- * @param str - String to measure
- * @param string_
+ * @param string_ - String to measure
  * @returns Size in bytes
  */
 function getByteSize(string_: string): number {
@@ -52,10 +51,7 @@ export function extractAmpCustomCSS(html: string): string | null {
  * @param maxBytes - Maximum allowed size in bytes
  * @returns Validation result
  */
-export function checkCssSize(
-    css: string,
-    maxBytes: number = DEFAULT_MAX_SIZE
-): CssGuardResult {
+export function checkCssSize(css: string, maxBytes: number = DEFAULT_MAX_SIZE): CssGuardResult {
     const sizeBytes = getByteSize(css);
     const sizeKB = (sizeBytes / 1024).toFixed(2);
     const valid = sizeBytes <= maxBytes;
@@ -87,10 +83,7 @@ export function checkCssSize(
  *     return content;
  * });
  */
-export function cssGuard(
-    content: string,
-    maxSizeBytes: number = DEFAULT_MAX_SIZE
-): string {
+export function cssGuard(content: string, maxSizeBytes: number = DEFAULT_MAX_SIZE): string {
     if (content === '') {
         return content;
     }
@@ -112,11 +105,11 @@ export function cssGuard(
     if (!result.valid) {
         throw new Error(
             `[CSS Guard] BUILD FAILED: ${result.error}\n` +
-            `Reduce your CSS to stay within the AMP limit.\n` +
-            `Tips:\n` +
-            `  - Remove unused styles\n` +
-            `  - Use CSSO for minification\n` +
-            `  - Split critical/non-critical CSS`
+                `Reduce your CSS to stay within the AMP limit.\n` +
+                `Tips:\n` +
+                `  - Remove unused styles\n` +
+                `  - Use CSSO for minification\n` +
+                `  - Split critical/non-critical CSS`
         );
     }
 
