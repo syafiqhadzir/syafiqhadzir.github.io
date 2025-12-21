@@ -1,0 +1,80 @@
+# ==============================================================================
+# Docker Compose Configuration
+# ==============================================================================
+# Portfolio: syafiqhadzir.dev
+# Usage:
+#   Production:  docker compose up -d
+#   Development: docker compose --profile dev up
+#   Build only:  docker compose build
+# ==============================================================================
+
+services:
+  # ----------------------------------------------------------------------------
+  # Production Service
+  # ----------------------------------------------------------------------------
+  portfolio:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    image: syafiqhadzir-portfolio:latest
+    container_name: portfolio
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    # Resource limits for production stability
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 128M
+        reservations:
+          cpus: "0.1"
+          memory: 32M
+    # Health check
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:80/health" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s
+    # Security options
+    security_opt:
+      - no-new-privileges:true
+    # Read-only root filesystem (optional, for maximum security)
+    # read_only: true
+    # tmpfs:
+    #   - /var/cache/nginx
+    #   - /var/run
+
+    # ----------------------------------------------------------------------------
+    # Development Service
+    # ----------------------------------------------------------------------------
+  dev:
+    profiles:
+      - dev
+    image: node:22-alpine
+    container_name: portfolio-dev
+    working_dir: /app
+    volumes:
+      # Mount source code for live reloading
+      - .:/app
+      # Named volume for node_modules (faster, avoids host conflicts)
+      - node_modules:/app/node_modules
+    ports:
+      - "8080:8080"
+    environment:
+      - NODE_ENV=development
+    command: sh -c "npm install && npm run dev"
+    # Health check for development
+    healthcheck:
+      test: [ "CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+# Named volumes
+volumes:
+  node_modules:
+    name: portfolio-node-modules

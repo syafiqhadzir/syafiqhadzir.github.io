@@ -39,6 +39,7 @@ Personal portfolio website for **Syafiq Hadzir**, an AI-assisted Software QA Eng
 | **Performance** | Lighthouse CI |
 | **Code Quality** | ESLint 9 + Stylelint 16 + SonarCloud |
 | **CI/CD** | GitHub Actions (7-stage pipeline) |
+| **Container** | Docker + Nginx Alpine |
 | **Hosting** | GitHub Pages + Cloudflare CDN |
 
 ---
@@ -77,6 +78,47 @@ npm run lint                # ESLint + Stylelint
 npm run typecheck           # TypeScript type checking
 npm run validate:amp        # Validate AMP HTML
 ```
+
+---
+
+## 🐳 Docker
+
+### Quick Start
+
+```bash
+# Build and run production container
+docker compose up -d
+
+# Or build manually
+docker build -t syafiqhadzir-portfolio .
+docker run -d -p 80:80 --name portfolio syafiqhadzir-portfolio
+```
+
+### Development with Docker
+
+```bash
+# Start development server with live reload
+docker compose --profile dev up
+```
+
+### Docker Commands
+
+| Command | Description |
+|---------|-------------|
+| `docker compose up -d` | Run production container |
+| `docker compose --profile dev up` | Run development server |
+| `docker compose down` | Stop containers |
+| `docker compose build --no-cache` | Rebuild image |
+
+### Best Practices Applied
+
+- ✅ Multi-stage build (Node.js → Nginx)
+- ✅ Alpine-based images (~11MB final)
+- ✅ Non-root user (nginx)
+- ✅ Security hardening
+- ✅ Gzip compression
+- ✅ Efficient caching headers
+- ✅ Health checks
 
 ---
 
