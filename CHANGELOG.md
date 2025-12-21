@@ -1,3 +1,18 @@
+# [2.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.0.0...v2.1.0) (2025-12-21)
+
+
+### Bug Fixes
+
+* **a11y:** add link distinctions and resolve jsdoc lint warnings ([11dd139](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/11dd139bf1012a1243ce12e8b1ca1c0193b35bd5))
+* **a11y:** enhance color contrast for navigation links ([a94e301](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a94e3010858d0b31d8538544ecacc629594c47d8))
+* **ci:** enable local composite action resolution ([57dc197](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/57dc19709559375087a23ccc46c2dbf26129230a))
+* **security:** resolve dependabot tmp vulnerability ([c78fe6a](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/c78fe6a7c0665114f680ffd740e26e598e5deb5c))
+
+
+### Features
+
+* **dx:** implement git hooks and auto-formatting infrastructure ([87ca259](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/87ca2593d1fabba230017cf390e8e84da6eba4e6))
+
 # [2.0.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.1.1...v2.0.0) (2025-12-21)
 
 
