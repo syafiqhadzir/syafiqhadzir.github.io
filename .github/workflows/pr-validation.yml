@@ -1,0 +1,30 @@
+name: PR Validation
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
+        with:
+          node-version: '24'
+
+      - name: Lint Code
+        run: npm run lint
+
+      - name: Unit Tests
+        run: npm run test:unit
+
+      - name: Type Check
+        run: npm run typecheck
+
+      - name: Build Dry Run
+        run: npm run build:prod

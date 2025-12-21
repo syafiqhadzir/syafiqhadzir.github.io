@@ -4,11 +4,7 @@
  */
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
-import {
-    minifyHtml,
-    htmlMinifyTransform,
-    getMinifyStats,
-} from '../../src/transforms/htmlMinify';
+import { minifyHtml, htmlMinifyTransform, getMinifyStats } from '../../src/transforms/htmlMinify';
 
 // Mock html-minifier-terser for error handling tests
 vi.mock('html-minifier-terser', async (importOriginal) => {

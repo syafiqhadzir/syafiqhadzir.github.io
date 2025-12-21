@@ -1,0 +1,40 @@
+name: Nightly Quality
+on:
+  schedule:
+    - cron: '0 0 * * *' # Midnight UTC
+  workflow_dispatch:
+
+jobs:
+  quality-audit:
+    name: Quality Audit
+    runs-on: ubuntu-latest
+    steps:
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
+        with:
+          node-version: '24'
+
+      - name: E2E Tests (Cypress)
+        uses: cypress-io/github-action@v6
+        with:
+          install: false # Handled by bootstrap
+          start: npm run serve:static
+          wait-on: 'http://localhost:8080'
+          browser: chrome
+          config-file: cypress.config.ts
+          # Only run smoke & a11y for nightly stability
+          spec: |
+            cypress/e2e/smoke.cy.ts
+            cypress/e2e/a11y.cy.ts
+
+      - name: Upload Artifacts (On Failure)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-screenshots
+          path: cypress/screenshots
+
+      - name: SonarQube Scan
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: npm run sonar

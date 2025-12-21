@@ -2,6 +2,13 @@
     "name": "syafiqhadzir.github.io",
     "version": "2.0.0",
     "description": "Google AMP Portfolio with Eleventy - Software QA Engineer",
+    "keywords": [
+        "eleventy",
+        "amp",
+        "portfolio",
+        "typescript",
+        "docker"
+    ],
     "homepage": "https://syafiqhadzir.dev",
     "bugs": {
         "url": "https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues",
@@ -24,7 +31,7 @@
         "build:prod": "cross-env NODE_ENV=production eleventy && npm run build:size-report",
         "build:size-report": "npx ts-node scripts/build-size-report.ts _site",
         "clean": "rimraf _site coverage cypress/reports dist",
-        "compile:ts": "tsc src/filters/dateFormat.ts src/filters/readingTime.ts src/shortcodes/ampImg.ts src/transforms/cssGuard.ts src/transforms/htmlMinify.ts src/transforms/extremeMinify.ts src/build/lightningCss.ts src/build/svgoOptimize.ts --outDir dist --module ESNext --moduleResolution Bundler --declaration false --target ES2022 --esModuleInterop true",
+        "compile:ts": "tsc src/filters/dateFormat.ts src/filters/readingTime.ts src/shortcodes/ampImg.ts src/transforms/cssGuard.ts src/transforms/htmlMinify.ts src/transforms/extremeMinify.ts src/lib/lightningCss.ts src/lib/svgoOptimize.ts --outDir dist --module ESNext --moduleResolution Bundler --declaration false --target ES2022 --esModuleInterop true",
         "predev": "npm run compile:ts",
         "dev": "eleventy --serve",
         "housekeeping": "npx ts-node scripts/housekeeping.ts",
@@ -33,6 +40,9 @@
         "lint": "npm run lint:js && npm run lint:css",
         "lint:css": "stylelint src/**/*.scss --fix",
         "lint:js": "eslint src/**/*.ts test/**/*.ts --fix",
+        "perf": "npm run perf:local",
+        "perf:ci": "lhci autorun",
+        "perf:local": "lhci autorun",
         "prepare": "husky",
         "serve": "npx serve _site -l 8080",
         "serve:static": "npx serve . -l 8080",
@@ -59,6 +69,7 @@
     "devDependencies": {
         "@11ty/eleventy": "^3.1.2",
         "@eslint/js": "^9.39.2",
+        "@lhci/cli": "^0.15.1",
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/git": "^10.0.1",
         "@types/html-minifier-terser": "^7.0.2",

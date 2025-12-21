@@ -50,7 +50,7 @@ export default defineConfig({
                 'scripts/validate-amp.ts', // CLI script - integration tested
                 'scripts/build-size-report.ts', // CLI script - integration tested
                 'scripts/housekeeping.ts', // CLI script - integration tested
-                'src/build/**', // Build modules - integration tested via build
+                'src/lib/**', // Build modules - integration tested via build
                 'src/transforms/extremeMinify.ts', // Tested via build integration
             ],
 
@@ -83,7 +83,7 @@ export default defineConfig({
         watch: false,
 
         // Timeout for tests (ms)
-        testTimeout: 10000,
+        testTimeout: 10_000,
 
         // Retry failed tests
         retry: 0,
