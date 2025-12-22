@@ -1,3 +1,10 @@
+## [3.0.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.0...v3.0.1) (2025-12-22)
+
+
+### Bug Fixes
+
+* **ci:** enable full git history for accurate sonar analysis ([7b3c409](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/7b3c4094d303d7b8e72483ccfde3a0acaea98942))
+
 # [3.0.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.3...v3.0.0) (2025-12-22)
 
 
