@@ -17,11 +17,14 @@ jobs:
         with:
           node-version: '24'
 
+      - name: Build Project
+        run: npm run build
+
       - name: E2E Tests (Cypress)
         uses: cypress-io/github-action@v6
         with:
           install: false # Handled by bootstrap
-          start: npm run serve:static
+          start: npm run serve
           wait-on: 'http://localhost:8080'
           browser: chrome
           config-file: cypress.config.ts
