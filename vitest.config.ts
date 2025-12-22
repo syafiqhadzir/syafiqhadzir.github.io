@@ -48,6 +48,7 @@ export default defineConfig({
                 '**/*.d.ts',
                 '**/types/**',
                 'scripts/validate-amp.ts', // CLI script - integration tested
+                'scripts/validate-schema.ts', // CLI script - integration tested
                 'scripts/build-size-report.ts', // CLI script - integration tested
                 'scripts/housekeeping.ts', // CLI script - integration tested
                 'src/lib/**', // Build modules - integration tested via build

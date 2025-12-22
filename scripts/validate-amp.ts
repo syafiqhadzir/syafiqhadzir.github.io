@@ -7,10 +7,15 @@
  * @module scripts/validate-amp
  */
 
-import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, extname } from 'node:path';
+import { readdirSync, readFileSync, statSync } from 'node:fs';
+import { extname, join } from 'node:path';
 
-// Type definitions for amphtml-validator
+/** Directories to skip during file scanning */
+const IGNORED_DIRECTORIES = new Set(['node_modules', '.git', '.cache']);
+
+/** AMP pattern to detect AMP HTML files */
+const AMP_HTML_PATTERN = /<html\s+[^>]*(\bamp\b|⚡)/i;
+
 interface ValidatorResult {
     status: 'PASS' | 'FAIL';
     errors: ValidationError[];
@@ -29,59 +34,150 @@ interface Validator {
     validateString(html: string): ValidatorResult;
 }
 
+interface FileValidationResult {
+    file: string;
+    result: ValidatorResult;
+}
+
+interface ValidationFailure {
+    file: string;
+    errors: ValidationError[];
+}
+
+/**
+ * Check if a directory should be skipped during file scanning
+ */
+function shouldSkipDirectory(directoryName: string): boolean {
+    return IGNORED_DIRECTORIES.has(directoryName);
+}
+
 /**
  * Recursively find all HTML files in a directory
  */
-function findHtmlFiles(dir: string): string[] {
+function findHtmlFiles(directory: string): string[] {
     const files: string[] = [];
+    const entries = readdirSync(directory);
 
-    function walk(currentDir: string): void {
-        const entries = readdirSync(currentDir);
+    for (const entry of entries) {
+        const fullPath = join(directory, entry);
+        const stat = statSync(fullPath);
 
-        for (const entry of entries) {
-            const fullPath = join(currentDir, entry);
-            const stat = statSync(fullPath);
-
-            if (stat.isDirectory()) {
-                // Skip common directories
-                if (!['node_modules', '.git', '.cache'].includes(entry)) {
-                    walk(fullPath);
-                }
-            } else if (extname(entry).toLowerCase() === '.html') {
-                files.push(fullPath);
-            }
+        if (stat.isDirectory() && !shouldSkipDirectory(entry)) {
+            files.push(...findHtmlFiles(fullPath));
+        } else if (extname(entry).toLowerCase() === '.html') {
+            files.push(fullPath);
         }
     }
 
-    walk(dir);
     return files;
 }
 
 /**
- * Format validation errors for console output
+ * Format validation error for console output
  */
-function formatError(file: string, error: ValidationError): string {
-    const severity = error.severity === 'ERROR' ? '❌ ERROR' : '⚠️ WARNING';
-    const location = `${error.line}:${error.col}`;
-    return `  ${severity} at ${location}: ${error.message}`;
+function formatValidationError(validationError: ValidationError): string {
+    const severity = validationError.severity === 'ERROR' ? '❌ ERROR' : '⚠️ WARNING';
+    const location = `${validationError.line}:${validationError.col}`;
+    return `  ${severity} at ${location}: ${validationError.message}`;
+}
+
+/**
+ * Check if HTML content is an AMP document
+ */
+function isAmpDocument(htmlContent: string): boolean {
+    return AMP_HTML_PATTERN.test(htmlContent);
 }
 
 /**
  * Validate a single HTML file
  */
-async function validateFile(
-    validator: Validator,
-    filePath: string
-): Promise<{ file: string; result: ValidatorResult }> {
-    const html = readFileSync(filePath, 'utf-8');
+function validateFile(validator: Validator, filePath: string): FileValidationResult {
+    const htmlContent = readFileSync(filePath, 'utf8');
 
-    // Check if file is AMP
-    if (!/<html\s+[^>]*(\bamp\b|⚡)/i.test(html)) {
+    if (!isAmpDocument(htmlContent)) {
         return { file: filePath, result: { status: 'PASS', errors: [] } };
     }
 
-    const result = validator.validateString(html);
+    const result = validator.validateString(htmlContent);
     return { file: filePath, result };
+}
+
+/**
+ * Check if the target directory exists
+ */
+function directoryExists(targetDirectory: string): boolean {
+    try {
+        statSync(targetDirectory);
+        return true;
+    } catch {
+        return false;
+    }
+}
+
+/**
+ * Print validation summary
+ */
+function printValidationSummary(totalFiles: number, passCount: number, failCount: number): void {
+    console.log(`\n${'='.repeat(50)}`);
+    console.log('VALIDATION SUMMARY');
+    console.log('='.repeat(50));
+    console.log(`Total Files:  ${totalFiles}`);
+    console.log(`Passed:       ${passCount}`);
+    console.log(`Failed:       ${failCount}`);
+    console.log('='.repeat(50));
+}
+
+/**
+ * Print failed files report
+ */
+function printFailedFiles(failures: ValidationFailure[]): void {
+    console.log('\n❌ AMP Validation FAILED');
+    console.log('\nFailed files:');
+    for (const failure of failures) {
+        console.log(`  - ${failure.file} (${failure.errors.length} error(s))`);
+    }
+}
+
+/**
+ * Validate multiple files and report results
+ */
+function validateFiles(validator: Validator, files: string[]): void {
+    console.log(`Found ${files.length} HTML file(s) to validate\n`);
+
+    let passCount = 0;
+    let failCount = 0;
+    const failures: ValidationFailure[] = [];
+
+    for (const file of files) {
+        const { result } = validateFile(validator, file);
+
+        if (result.status === 'PASS') {
+            console.log(`✅ PASS: ${file}`);
+            passCount++;
+        } else {
+            console.log(`❌ FAIL: ${file}`);
+            failCount++;
+
+            failures.push({
+                file,
+                errors: result.errors.filter((error) => error.severity === 'ERROR'),
+            });
+
+            for (const validationError of result.errors) {
+                console.log(formatValidationError(validationError));
+            }
+        }
+    }
+
+    printValidationSummary(files.length, passCount, failCount);
+
+    if (failCount > 0) {
+        printFailedFiles(failures);
+        process.exit(1);
+    } else {
+        console.log('\n✅ All files passed AMP validation!');
+        process.exit(0);
+    }
 }
 
 /**
@@ -93,91 +189,33 @@ async function main(): Promise<void> {
     // Dynamic import of amphtml-validator
     // @ts-expect-error - amphtml-validator lacks proper ESM type exports
     const amphtmlValidator = await import('amphtml-validator');
-    const validator = await amphtmlValidator.getInstance();
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+    const validator = (await amphtmlValidator.getInstance()) as Validator;
 
-    // Get directory to validate (default: current directory or _site)
-    const targetDir = process.argv[2] || '_site';
+    const targetDirectory = process.argv[2] ?? '_site';
 
-    // Check if directory exists
-    try {
-        statSync(targetDir);
-    } catch {
-        // If _site doesn't exist, validate root HTML files
-        console.log(`Directory "${targetDir}" not found, validating root HTML files...\n`);
+    if (!directoryExists(targetDirectory)) {
+        console.log(`Directory "${targetDirectory}" not found, validating root HTML files...\n`);
         const htmlFiles = findHtmlFiles('.');
-        await validateFiles(validator, htmlFiles);
+        validateFiles(validator, htmlFiles);
         return;
     }
 
-    console.log(`Validating HTML files in: ${targetDir}\n`);
+    console.log(`Validating HTML files in: ${targetDirectory}\n`);
 
-    const htmlFiles = findHtmlFiles(targetDir);
+    const htmlFiles = findHtmlFiles(targetDirectory);
 
     if (htmlFiles.length === 0) {
         console.log('No HTML files found to validate.');
         process.exit(0);
     }
 
-    await validateFiles(validator, htmlFiles);
-}
-
-/**
- * Validate multiple files and report results
- */
-async function validateFiles(validator: Validator, files: string[]): Promise<void> {
-    console.log(`Found ${files.length} HTML file(s) to validate\n`);
-
-    let passCount = 0;
-    let failCount = 0;
-    const failures: Array<{ file: string; errors: ValidationError[] }> = [];
-
-    for (const file of files) {
-        const { result } = await validateFile(validator, file);
-
-        if (result.status === 'PASS') {
-            console.log(`✅ PASS: ${file}`);
-            passCount++;
-        } else {
-            console.log(`❌ FAIL: ${file}`);
-            failCount++;
-
-            // Store failures for detailed report
-            failures.push({
-                file,
-                errors: result.errors.filter((e) => e.severity === 'ERROR'),
-            });
-
-            // Show errors inline
-            for (const error of result.errors) {
-                console.log(formatError(file, error));
-            }
-        }
-    }
-
-    // Summary
-    console.log('\n' + '='.repeat(50));
-    console.log('VALIDATION SUMMARY');
-    console.log('='.repeat(50));
-    console.log(`Total Files:  ${files.length}`);
-    console.log(`Passed:       ${passCount}`);
-    console.log(`Failed:       ${failCount}`);
-    console.log('='.repeat(50));
-
-    if (failCount > 0) {
-        console.log('\n❌ AMP Validation FAILED');
-        console.log('\nFailed files:');
-        for (const failure of failures) {
-            console.log(`  - ${failure.file} (${failure.errors.length} error(s))`);
-        }
-        process.exit(1);
-    } else {
-        console.log('\n✅ All files passed AMP validation!');
-        process.exit(0);
-    }
+    validateFiles(validator, htmlFiles);
 }
 
 // Run main function
-main().catch((error) => {
-    console.error('Validation script error:', error.message);
+main().catch((error: unknown) => {
+    const errorMessage = error instanceof Error ? error.message : String(error);
+    console.error('Validation script error:', errorMessage);
     process.exit(1);
 });

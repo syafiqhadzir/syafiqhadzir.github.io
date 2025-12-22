@@ -58,6 +58,15 @@ describe('dateFormat filter', () => {
             expect(result).toContain('October');
             expect(result).toContain('2024');
         });
+
+        it('falls back to long format for unknown format key', () => {
+            const date = new Date('2024-01-15');
+            // @ts-expect-error - Testing invalid format key fallback behavior
+            const result = dateFormat(date, 'unknownFormat');
+            // Should fallback to 'long' format
+            expect(result).toContain('January');
+            expect(result).toContain('2024');
+        });
     });
 
     describe('isoDate()', () => {

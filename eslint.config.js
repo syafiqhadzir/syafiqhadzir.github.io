@@ -194,26 +194,33 @@ export default tseslint.config(
         },
     },
 
-    // Scripts (CLI/build tools) - Relaxed
+    // Scripts (CLI/build tools) - Strict rules with minimal CLI-only exceptions
     {
         files: ['scripts/**/*.ts'],
         rules: {
-            'no-console': 'off',
+            // CLI-only exceptions (essential for build scripts)
+            'no-console': 'off', // CLI scripts need console output
+            'unicorn/no-process-exit': 'off', // CLI scripts need exit codes
+            'unicorn/filename-case': ['error', { case: 'kebabCase' }], // CLI convention
+            'unicorn/import-style': 'off', // Named imports for node modules
+            '@typescript-eslint/no-unnecessary-type-conversion': 'off', // Defensive coding
+            '@typescript-eslint/no-unsafe-assignment': 'off', // External module types
+            'sonarjs/os-command': 'off', // Intentional shell commands (grep, knip)
+            'sonarjs/no-os-command-from-path': 'off', // CLI tools use PATH
+
+            // Slightly relaxed for CLI complexity
             'max-lines-per-function': [
                 'error',
-                { max: 80, skipBlankLines: true, skipComments: true },
+                { max: 60, skipBlankLines: true, skipComments: true },
             ],
-            '@typescript-eslint/strict-boolean-expressions': 'off',
-            '@typescript-eslint/no-unsafe-argument': 'off',
-            'unicorn/no-process-exit': 'off',
-            'unicorn/filename-case': 'off', // CLI script naming
-            'unicorn/prevent-abbreviations': 'off', // dir, fn, etc. common in scripts
-            'unicorn/import-style': 'off',
-            'jsdoc/require-jsdoc': 'off',
-            'jsdoc/require-param': 'off',
-            'jsdoc/require-returns': 'off',
-            'jsdoc/tag-lines': 'off',
-            'sonarjs/no-clear-text-protocols': 'off', // Schema.org uses http://
+            'max-statements': ['error', 20],
+            'sonarjs/cognitive-complexity': ['error', 20], // Slightly higher for CLI
+
+            // Keep strict but handle CLI patterns
+            'jsdoc/require-jsdoc': 'warn', // Encourage but don't block
+            'jsdoc/require-param': 'off', // Types are sufficient
+            'jsdoc/require-returns': 'off', // Types are sufficient
+            'jsdoc/tag-lines': 'off', // Style preference
         },
     },
 
