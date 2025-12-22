@@ -1,3 +1,10 @@
+## [2.1.3](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.2...v2.1.3) (2025-12-22)
+
+
+### Bug Fixes
+
+* resolve CI workflow failures and wrangler configuration errors ([a9991f2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a9991f251bf3a54f25d5db174ce1e22a19992492)), closes [#000](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/000)
+
 ## [2.1.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.1...v2.1.2) (2025-12-21)
 
 ### Bug Fixes
