@@ -69,6 +69,7 @@ module.exports = {
                 'render-blocking-resources': 'off', // AMP boilerplate is required
                 'unused-css-rules': 'off', // AMP CSS is already minimal
                 'unused-javascript': 'off', // AMP runtime is required
+                'is-on-https': 'off', // Localhost is HTTP
             },
         },
 
