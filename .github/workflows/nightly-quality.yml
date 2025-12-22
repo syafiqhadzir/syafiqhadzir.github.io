@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Bootstrap Environment
         uses: ./.github/actions/bootstrap-env
@@ -32,7 +32,7 @@ jobs:
 
       - name: Upload Artifacts (On Failure)
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: cypress-screenshots
           path: cypress/screenshots
