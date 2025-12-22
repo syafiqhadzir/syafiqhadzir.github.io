@@ -32,7 +32,7 @@ jobs:
 
       - name: Upload Artifacts (On Failure)
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: cypress-screenshots
           path: cypress/screenshots
