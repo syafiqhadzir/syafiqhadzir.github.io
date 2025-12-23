@@ -213,9 +213,22 @@ async function main(): Promise<void> {
     validateFiles(validator, htmlFiles);
 }
 
-// Run main function
-main().catch((error: unknown) => {
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    console.error('Validation script error:', errorMessage);
-    process.exit(1);
-});
+// Run main function only when not in test mode
+if (process.env.NODE_ENV !== 'test') {
+    main().catch((error: unknown) => {
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        console.error('Validation script error:', errorMessage);
+        process.exit(1);
+    });
+}
+
+export {
+    shouldSkipDirectory,
+    findHtmlFiles,
+    formatValidationError,
+    isAmpDocument,
+    validateFile,
+    directoryExists,
+    validateFiles,
+    main,
+};

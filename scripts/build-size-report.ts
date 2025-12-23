@@ -198,4 +198,15 @@ if (process.env.NODE_ENV !== 'test') {
     main();
 }
 
-export { generateSizeReport, getHtmlFiles, getInlinedCssSize, formatBytes };
+export {
+    generateSizeReport,
+    getHtmlFiles,
+    getInlinedCssSize,
+    formatBytes,
+    printHeader,
+    printFileBreakdown,
+    findMaxCssFile,
+    checkAmpCssLimit,
+    getFileSizes,
+    main,
+};

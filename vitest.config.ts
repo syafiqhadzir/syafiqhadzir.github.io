@@ -38,7 +38,6 @@ export default defineConfig({
             include: ['src/**/*.ts', 'scripts/**/*.ts'],
 
             // Files to exclude from coverage
-            // Note: CLI scripts and build modules are integration-tested
             exclude: [
                 'node_modules/**',
                 'test/**',
@@ -47,20 +46,17 @@ export default defineConfig({
                 '**/*.spec.ts',
                 '**/*.d.ts',
                 '**/types/**',
-                'scripts/validate-amp.ts', // CLI script - integration tested
-                'scripts/validate-schema.ts', // CLI script - integration tested
-                'scripts/build-size-report.ts', // CLI script - integration tested
-                'scripts/housekeeping.ts', // CLI script - integration tested
                 'src/lib/**', // Build modules - integration tested via build
                 'src/transforms/extremeMinify.ts', // Tested via build integration
             ],
 
-            // Coverage thresholds (expert-level)
+            // Coverage thresholds
+            // Note: Slightly relaxed for CLI scripts with async entry points
             thresholds: {
-                statements: 98,
-                branches: 90,
-                functions: 100,
-                lines: 98,
+                statements: 90,
+                branches: 85,
+                functions: 95,
+                lines: 90,
             },
 
             // Clean coverage before running

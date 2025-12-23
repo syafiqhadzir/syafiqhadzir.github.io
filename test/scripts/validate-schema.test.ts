@@ -17,7 +17,7 @@ vi.mock('node:fs/promises');
 describe('validate-schema script', () => {
     // ... existing extractJsonLd tests ...
     describe('extractJsonLd()', () => {
-        // ... (rest of extractJsonLd tests are unchanged, keeping start as context) 
+        // ... (rest of extractJsonLd tests are unchanged, keeping start as context)
         it('extracts single JSON-LD script from HTML', () => {
             const html = `
                 <html>
@@ -38,7 +38,7 @@ describe('validate-schema script', () => {
     });
 
     // ... (rest of helper function tests unchanged) ...
-    // Note: I will use a separate replacement for the end of file to add the main tests to avoid rewriting the whole file in one go if it's too large, but replace_file_content is okay up to many lines. 
+    // Note: I will use a separate replacement for the end of file to add the main tests to avoid rewriting the whole file in one go if it's too large, but replace_file_content is okay up to many lines.
     // Actually, I should just append the main test at the end and update imports at the top.
 
     // I'll do this in two chunks.
@@ -47,7 +47,6 @@ describe('validate-schema script', () => {
 
     // Changing strategy to 2 separate replace calls or one multi_replace.
     // I'll use separate calls for clarity.
-
 
     it('extracts multiple JSON-LD scripts from HTML', () => {
         const html = `
@@ -310,7 +309,9 @@ describe('validateDirectory()', () => {
     it('adds warning when HTML file has no JSON-LD schemas', async () => {
         // Mock fs to return HTML without JSON-LD
         vi.mocked(fs.readdir).mockResolvedValue(['empty.html'] as any);
-        vi.mocked(fs.readFile).mockResolvedValue('<html><head></head><body>No schemas here</body></html>');
+        vi.mocked(fs.readFile).mockResolvedValue(
+            '<html><head></head><body>No schemas here</body></html>'
+        );
 
         const result = await validateDirectory('_site');
 

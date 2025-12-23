@@ -376,4 +376,15 @@ if (process.env.NODE_ENV !== 'test') {
     main();
 }
 
-export { runKnipAudit, findUnusedAssets, findUnusedScssVariables };
+export {
+    runKnipAudit,
+    findUnusedAssets,
+    findUnusedScssVariables,
+    generateRecommendations,
+    printAuditSection,
+    printAuditSummary,
+    printRecommendations,
+    calculateTotalIssues,
+    printFinalStatus,
+    main,
+};
