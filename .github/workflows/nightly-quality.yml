@@ -44,6 +44,18 @@ jobs:
           retention-days: 14
 
       # ========================================
+      # Unit Tests & Coverage Generation
+      # ========================================
+
+      - name: 🧪 Run Unit Tests with Coverage
+        run: npm run test:unit:coverage
+
+      - name: 📊 Generate Lint Reports
+        run: |
+          npm run lint:js:report
+          npm run lint:css:report
+
+      # ========================================
       # SonarCloud Observability Strategy
       # Expert-Level Logging & Diagnostics
       # ========================================
@@ -90,11 +102,9 @@ jobs:
         run: |
           echo "Starting SonarCloud scan with verbose diagnostics..."
 
-          # Run sonar:prepare to generate reports
-          npm run sonar:prepare
-
           # Execute sonar-scanner with verbose logging and capture output
           # Using 'tee' to both display and save the log
+          # Note: Reports already generated in previous steps (test coverage, lint reports)
           sonar-scanner \
             -Dsonar.verbose=true \
             -Dsonar.log.level=DEBUG \
@@ -107,6 +117,13 @@ jobs:
         if: always()
         run: |
           echo "Parsing SonarCloud logs for errors, warnings, and hotspots..."
+
+          # Check if analysis log exists
+          if [ ! -f "sonar-analysis.log" ]; then
+            echo "⚠️ WARNING: sonar-analysis.log not found - scan may have failed early"
+            echo "Skipping log parsing step"
+            exit 0
+          fi
 
           # Make scripts executable
           chmod +x scripts/parse-sonar-log.sh
@@ -126,6 +143,12 @@ jobs:
         run: |
           echo "Generating GitHub Actions Step Summary..."
 
+          # Check if analysis log exists
+          if [ ! -f "sonar-analysis.log" ]; then
+            echo "⚠️ WARNING: sonar-analysis.log not found - skipping summary generation"
+            exit 0
+          fi
+
           # Make script executable
           chmod +x scripts/generate-sonar-summary.sh
 
@@ -138,6 +161,13 @@ jobs:
         if: always()
         run: |
           echo "Compressing verbose logs to reduce artifact size..."
+
+          # Check if analysis log exists before compressing
+          if [ ! -f "sonar-analysis.log" ]; then
+            echo "⚠️ WARNING: sonar-analysis.log not found - scan may have failed early"
+            echo "Skipping compression step"
+            exit 0
+          fi
 
           # Compress main analysis log
           gzip -k sonar-analysis.log
@@ -176,6 +206,13 @@ jobs:
       - name: ❌ Fail Build on Quality Gate Failure
         if: always()
         run: |
+          # Check if analysis log exists
+          if [ ! -f "sonar-analysis.log" ]; then
+            echo "::error::SonarCloud scan failed - no analysis log generated"
+            echo "Check previous steps for errors"
+            exit 1
+          fi
+
           # Check if Quality Gate passed by examining scanner output
           if grep -q "QUALITY GATE STATUS: FAILED" sonar-analysis.log; then
             echo "::error::SonarCloud Quality Gate FAILED"
