@@ -110,16 +110,39 @@ Refactored into a modular "Split + Reusable" architecture:
 │   └── ...
 ├── test/               # Unit Tests
 ├── cypress/            # End-to-End Tests
-└── scripts/            # CLI utilities (Housekeeping, Validation)
+├── scripts/            # CLI utilities (Housekeeping, Validation)
+└── docs/               # Documentation
 ```
+
+## 📚 Documentation
+
+Comprehensive guides for developers and contributors:
+
+- **[📖 Documentation Hub](docs/README.md)** - Central navigation for all docs
+- **[🔧 Development Guide](docs/development/README.md)** - Setup, workflows, and best practices
+- **[🧪 Testing Guide](docs/development/TESTING.md)** - Unit, E2E, and performance testing
+- **[🔍 SonarCloud Observability](docs/development/SONARCLOUD.md)** - Quality monitoring and
+  debugging
+- **[⚡ Quick References](docs/quick-reference/README.md)** - Command cheat sheets
+
+See **[`/docs`](docs/)** for complete documentation.
 
 ## 🤝 Contributing
 
+We welcome contributions! Please read our guides:
+
+- **[Contributing Guidelines](CONTRIBUTING.md)** - How to contribute
+- **[Development Guide](docs/development/README.md)** - Development workflow and setup
+- **[Testing Guide](docs/development/TESTING.md)** - Testing requirements and standards
+
+**Quick steps:**
+
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'feat: Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+3. Follow our [Testing Guide](docs/development/TESTING.md) - ensure all tests pass
+4. Commit your Changes (follow [Conventional Commits](https://www.conventionalcommits.org/))
+5. Push to the Branch (`git push origin feature/AmazingFeature`)
+6. Open a Pull Request
 
 ## 📄 License
 

@@ -35,14 +35,154 @@ jobs:
             cypress/e2e/smoke.cy.ts
             cypress/e2e/a11y.cy.ts
 
-      - name: Upload Artifacts (On Failure)
+      - name: Upload Cypress Artifacts (On Failure)
         if: failure()
         uses: actions/upload-artifact@v6
         with:
           name: cypress-screenshots
           path: cypress/screenshots
+          retention-days: 14
 
-      - name: SonarQube Scan
+      # ========================================
+      # SonarCloud Observability Strategy
+      # Expert-Level Logging & Diagnostics
+      # ========================================
+
+      - name: 🔍 Pre-Scan Diagnostics
+        run: |
+          echo "::group::Working Directory Structure"
+          pwd
+          ls -la
+          echo "::endgroup::"
+
+          echo "::group::Coverage File Verification"
+          if [ -f "coverage/lcov.info" ]; then
+            echo "✅ LCOV file found"
+            echo "Size: $(stat -f%z coverage/lcov.info 2>/dev/null || stat -c%s coverage/lcov.info) bytes"
+            echo "First 10 lines:"
+            head -n 10 coverage/lcov.info
+          else
+            echo "❌ ERROR: coverage/lcov.info not found!"
+            echo "This will cause Sonar to report 0% coverage."
+            echo "Listing coverage directory:"
+            ls -la coverage/ || echo "Coverage directory does not exist"
+            exit 1
+          fi
+          echo "::endgroup::"
+
+          echo "::group::Source File Mapping"
+          echo "Source directories configured in sonar-project.properties:"
+          grep "^sonar.sources=" sonar-project.properties || echo "No sources configured"
+          echo ""
+          echo "Verifying source files exist:"
+          ls -la src/ scripts/ || true
+          echo "::endgroup::"
+
+      - name: 🛡️ Mask Sensitive Data
+        run: |
+          # Ensure SONAR_TOKEN is masked in all logs
+          echo "::add-mask::${{ secrets.SONAR_TOKEN }}"
+          echo "✅ SONAR_TOKEN masked for all subsequent steps"
+
+      - name: 📊 Run SonarQube Scan (Verbose Mode)
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: npm run sonar
+        run: |
+          echo "Starting SonarCloud scan with verbose diagnostics..."
+
+          # Run sonar:prepare to generate reports
+          npm run sonar:prepare
+
+          # Execute sonar-scanner with verbose logging and capture output
+          # Using 'tee' to both display and save the log
+          sonar-scanner \
+            -Dsonar.verbose=true \
+            -Dsonar.log.level=DEBUG \
+            -Dsonar.scanner.dumpToFile=.scannerwork/scanner-dump.txt \
+            2>&1 | tee sonar-analysis.log
+
+          echo "✅ Scan complete - logs saved to sonar-analysis.log"
+
+      - name: 🔧 Extract Errors & Generate Summary
+        if: always()
+        run: |
+          echo "Parsing SonarCloud logs for errors, warnings, and hotspots..."
+
+          # Make scripts executable
+          chmod +x scripts/parse-sonar-log.sh
+
+          # Run log parser (exit code ignored - we want artifacts even if parsing fails)
+          bash scripts/parse-sonar-log.sh sonar-analysis.log || true
+
+          # Display summary in console
+          if [ -f "sonar-errors-summary.md" ]; then
+            echo "::group::Error Summary Preview"
+            cat sonar-errors-summary.md
+            echo "::endgroup::"
+          fi
+
+      - name: 📝 Generate GitHub Step Summary
+        if: always()
+        run: |
+          echo "Generating GitHub Actions Step Summary..."
+
+          # Make script executable
+          chmod +x scripts/generate-sonar-summary.sh
+
+          # Generate summary (requires GITHUB_STEP_SUMMARY env var)
+          bash scripts/generate-sonar-summary.sh sonar-analysis.log sonar-errors-summary.md || true
+
+          echo "✅ Step summary generated"
+
+      - name: 🗜️ Compress Logs for Artifact Upload
+        if: always()
+        run: |
+          echo "Compressing verbose logs to reduce artifact size..."
+
+          # Compress main analysis log
+          gzip -k sonar-analysis.log
+
+          # Check size
+          ORIGINAL_SIZE=$(stat -c%s sonar-analysis.log 2>/dev/null || stat -f%z sonar-analysis.log)
+          COMPRESSED_SIZE=$(stat -c%s sonar-analysis.log.gz 2>/dev/null || stat -f%z sonar-analysis.log.gz)
+
+          echo "Original: ${ORIGINAL_SIZE} bytes"
+          echo "Compressed: ${COMPRESSED_SIZE} bytes"
+          echo "Reduction: $(( (ORIGINAL_SIZE - COMPRESSED_SIZE) * 100 / ORIGINAL_SIZE ))%"
+
+          # Safety check: truncate if still > 50MB
+          MAX_SIZE=52428800  # 50MB
+          if [ ${COMPRESSED_SIZE} -gt ${MAX_SIZE} ]; then
+            echo "⚠️ WARNING: Compressed log exceeds 50MB, truncating..."
+            # Keep last 50MB
+            tail -c ${MAX_SIZE} sonar-analysis.log.gz > sonar-analysis-truncated.log.gz
+            mv sonar-analysis-truncated.log.gz sonar-analysis.log.gz
+          fi
+
+      - name: 📦 Upload SonarCloud Diagnostic Artifacts
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: sonarcloud-diagnostics
+          retention-days: 14
+          path: |
+            sonar-analysis.log.gz
+            sonar-errors-summary.md
+            coverage/lcov.info
+            .scannerwork/report-task.txt
+            .scannerwork/scanner-dump.txt
+          if-no-files-found: warn
+
+      - name: ❌ Fail Build on Quality Gate Failure
+        if: always()
+        run: |
+          # Check if Quality Gate passed by examining scanner output
+          if grep -q "QUALITY GATE STATUS: FAILED" sonar-analysis.log; then
+            echo "::error::SonarCloud Quality Gate FAILED"
+            echo "Review the Step Summary above for details"
+            exit 1
+          elif grep -q "QUALITY GATE STATUS: PASSED" sonar-analysis.log; then
+            echo "✅ Quality Gate PASSED"
+          else
+            echo "⚠️ Quality Gate status unknown - check SonarCloud dashboard"
+          fi

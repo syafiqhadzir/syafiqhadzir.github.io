@@ -3,6 +3,14 @@
 Thank you for your interest in contributing! This project is a personal portfolio, but suggestions
 and improvements are welcome.
 
+## 📚 Documentation
+
+Before contributing, please familiarize yourself with:
+
+- **[Development Guide](docs/development/README.md)** - Development setup and workflows
+- **[Testing Guide](docs/development/TESTING.md)** - Testing requirements and standards
+- **[SonarCloud Observability](docs/development/SONARCLOUD.md)** - Quality gates and monitoring
+
 ## Ways to Contribute
 
 ### 🐛 Bug Reports
@@ -66,6 +74,20 @@ This is a Google AMP site. All HTML must pass AMP validation:
 ```bash
 npm run validate:amp
 ```
+
+## 📝 Documentation Contributions
+
+Improving documentation is highly valued! When contributing to documentation:
+
+- ✅ Keep language clear and concise
+- ✅ Include code examples where helpful
+- ✅ Update the [documentation index](docs/README.md) when adding new guides
+- ✅ Use relative links for internal navigation
+- ✅ Test all code examples before submitting
+- ✅ Follow the [Google Developer Documentation Style Guide](https://developers.google.com/style)
+
+All documentation is located in the [`/docs`](docs/) directory. See the
+[Documentation Hub](docs/README.md) for the complete structure.
 
 ## License
 
