@@ -1,0 +1,104 @@
+{
+  "timestamp": "2025-12-23T10:19:13.779Z",
+  "files": [
+    {
+      "file": "_site/.github/ISSUE_TEMPLATE/bug_report/index.html",
+      "size": 738,
+      "sizeKB": "0.72"
+    },
+    {
+      "file": "_site/.github/ISSUE_TEMPLATE/feature_request/index.html",
+      "size": 565,
+      "sizeKB": "0.55"
+    },
+    {
+      "file": "_site/.github/pull_request_template/index.html",
+      "size": 1479,
+      "sizeKB": "1.44"
+    },
+    {
+      "file": "_site/404.html",
+      "size": 19646,
+      "sizeKB": "19.19"
+    },
+    {
+      "file": "_site/CHANGELOG/index.html",
+      "size": 20085,
+      "sizeKB": "19.61"
+    },
+    {
+      "file": "_site/CONTRIBUTING/index.html",
+      "size": 3570,
+      "sizeKB": "3.49"
+    },
+    {
+      "file": "_site/SECURITY/index.html",
+      "size": 1938,
+      "sizeKB": "1.89"
+    },
+    {
+      "file": "_site/contact.html",
+      "size": 20882,
+      "sizeKB": "20.39"
+    },
+    {
+      "file": "_site/docs/README/index.html",
+      "size": 4912,
+      "sizeKB": "4.80"
+    },
+    {
+      "file": "_site/docs/development/README/index.html",
+      "size": 9934,
+      "sizeKB": "9.70"
+    },
+    {
+      "file": "_site/docs/development/SONARCLOUD/index.html",
+      "size": 10962,
+      "sizeKB": "10.71"
+    },
+    {
+      "file": "_site/docs/development/TESTING/index.html",
+      "size": 13897,
+      "sizeKB": "13.57"
+    },
+    {
+      "file": "_site/docs/quick-reference/README/index.html",
+      "size": 1040,
+      "sizeKB": "1.02"
+    },
+    {
+      "file": "_site/docs/quick-reference/SONARCLOUD/index.html",
+      "size": 2212,
+      "sizeKB": "2.16"
+    },
+    {
+      "file": "_site/index.html",
+      "size": 25376,
+      "sizeKB": "24.78"
+    },
+    {
+      "file": "_site/offline.html",
+      "size": 19815,
+      "sizeKB": "19.35"
+    },
+    {
+      "file": "_site/scripts/README/index.html",
+      "size": 5737,
+      "sizeKB": "5.60"
+    },
+    {
+      "file": "_site/sitemap.html",
+      "size": 21620,
+      "sizeKB": "21.11"
+    },
+    {
+      "file": "_site/sw.html",
+      "size": 594,
+      "sizeKB": "0.58"
+    }
+  ],
+  "totalSize": 185002,
+  "totalSizeKB": "180.67",
+  "htmlFiles": 19,
+  "cssInlined": 33825
+}

@@ -1,0 +1,84 @@
+<h1>Contributing to syafiqhadzir.github.io</h1>
+<p>Thank you for your interest in contributing! This project is a personal portfolio, but suggestions
+and improvements are welcome.</p>
+<h2>📚 Documentation</h2>
+<p>Before contributing, please familiarize yourself with:</p>
+<ul>
+<li><strong><a href="docs/development/README.md">Development Guide</a></strong> - Development setup and workflows</li>
+<li><strong><a href="docs/development/TESTING.md">Testing Guide</a></strong> - Testing requirements and standards</li>
+<li><strong><a href="docs/development/SONARCLOUD.md">SonarCloud Observability</a></strong> - Quality gates and monitoring</li>
+</ul>
+<h2>Ways to Contribute</h2>
+<h3>🐛 Bug Reports</h3>
+<p>If you find a bug, please
+<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/new">open an issue</a> with:</p>
+<ul>
+<li>A clear, descriptive title</li>
+<li>Steps to reproduce the behavior</li>
+<li>Expected vs actual behavior</li>
+<li>Screenshots (if applicable)</li>
+<li>Browser/OS information</li>
+</ul>
+<h3>💡 Feature Suggestions</h3>
+<p>Feature requests are welcome! Please check existing issues first to avoid duplicates.</p>
+<h3>🔧 Pull Requests</h3>
+<ol>
+<li>Fork the repository</li>
+<li>Create a feature branch: <code>git checkout -b feature/your-feature-name</code></li>
+<li>Make your changes</li>
+<li>Run tests: <code>npm run lint &amp;&amp; npm run test:unit</code></li>
+<li>Commit with conventional format: <code>feat: add new feature</code></li>
+<li>Push and open a PR</li>
+</ol>
+<h2>Development Setup</h2>
+<pre><code class="language-bash"># Clone the repository
+git clone https://github.com/syafiqhadzir/syafiqhadzir.github.io.git
+cd syafiqhadzir.github.io
+
+# Install dependencies
+npm ci
+
+# Start development server
+npm run dev
+
+# Run tests
+npm run test
+</code></pre>
+<h2>Code Standards</h2>
+<ul>
+<li><strong>TypeScript</strong>: Strict mode enabled</li>
+<li><strong>Linting</strong>: ESLint + Stylelint (run <code>npm run lint</code>)</li>
+<li><strong>Testing</strong>:
+<ul>
+<li>Unit: <code>npm run test:unit</code> (Vitest)</li>
+<li>E2E: <code>npm run test:e2e</code> (Cypress)</li>
+</ul>
+</li>
+<li><strong>Commits</strong>: Follow <a href="https://conventionalcommits.org/">Conventional Commits</a></li>
+<li><strong>Workflows</strong>:
+<ul>
+<li><code>pr-validation</code>: Fast feedback (Lint, Unit, Build Dry Run).</li>
+<li><code>nightly-quality</code>: Deep audit (Cypress, SonarQube).</li>
+<li><code>deploy</code>: Production release (Lighthouse CI, GitHub Pages).</li>
+</ul>
+</li>
+</ul>
+<h2>AMP Compliance</h2>
+<p>This is a Google AMP site. All HTML must pass AMP validation:</p>
+<pre><code class="language-bash">npm run validate:amp
+</code></pre>
+<h2>📝 Documentation Contributions</h2>
+<p>Improving documentation is highly valued! When contributing to documentation:</p>
+<ul>
+<li>✅ Keep language clear and concise</li>
+<li>✅ Include code examples where helpful</li>
+<li>✅ Update the <a href="docs/README.md">documentation index</a> when adding new guides</li>
+<li>✅ Use relative links for internal navigation</li>
+<li>✅ Test all code examples before submitting</li>
+<li>✅ Follow the <a href="https://developers.google.com/style">Google Developer Documentation Style Guide</a></li>
+</ul>
+<p>All documentation is located in the <a href="docs/"><code>/docs</code></a> directory. See the
+<a href="docs/README.md">Documentation Hub</a> for the complete structure.</p>
+<h2>License</h2>
+<p>By contributing, you agree that your contributions will be licensed under the
+<a href="LICENSE">CC0-1.0 License</a>.</p>

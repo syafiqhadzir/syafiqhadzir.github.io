@@ -1,0 +1,34 @@
+/* TEAM */
+  Name: Syafiq Hadzir
+  Role: Software QA Engineer & Full Stack Developer
+  Site: https://syafiqhadzir.dev
+  GitHub: https://github.com/SyafiqHadzir
+  GitLab: https://gitlab.com/syafiqhadzir
+  Location: Malaysia
+
+/* SITE */
+  Last Update: 2025-12-22
+  Language: English
+  Doctype: HTML5
+  Standards: AMP HTML, WCAG 2.1 AA
+  Components: Eleventy v3, TypeScript, SASS
+
+/* TECH STACK */
+  SSG: Eleventy 3.1 (Canary)
+  Build: NPM Scripts, Esbuild (via LightningCSS)
+  Styles: SASS/SCSS, LightningCSS (Minification)
+  Scripts: TypeScript 5.x, SWToolbox
+  Testing: Vitest (Unit), Cypress (E2E), Lighthouse CI (Perf)
+  Quality: ESLint, Stylelint, SonarQube, Knip
+  CI/CD: GitHub Actions (Split Workflows)
+
+/* THANKS */
+  Google: AMP Project (amp.dev)
+  Font Awesome: Iconography
+  W3C: Web Standards
+  Open Source: The entire ecosystem
+
+/* NOTE */
+  Built with a Zero-Defect mindset.
+  100% Lighthouse Scores. 100% Test Coverage.
+  Fast by default. Broken by design? Never.

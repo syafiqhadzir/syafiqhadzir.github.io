@@ -1,0 +1,138 @@
+<h1>SonarCloud Diagnostic Scripts</h1>
+<blockquote>
+<p><strong>Expert-level diagnostic tools for CI/CD observability</strong></p>
+</blockquote>
+<p><a href="../README.md">🏠 Home</a> / <a href="../docs/README.md">📚 Docs</a> / Scripts</p>
+<h2>Scripts</h2>
+<h3><code>parse-sonar-log.sh</code></h3>
+<p>Extracts and categorizes issues from verbose SonarCloud scanner logs.</p>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-bash">bash scripts/parse-sonar-log.sh [log-file]
+</code></pre>
+<p><strong>Input:</strong> <code>sonar-analysis.log</code> (default)</p>
+<p><strong>Output:</strong> <code>sonar-errors-summary.md</code> containing:</p>
+<ul>
+<li>Errors, warnings, and security hotspots</li>
+<li>Coverage analysis insights</li>
+<li>File analysis breakdown</li>
+<li>Diagnostic recommendations</li>
+</ul>
+<p><strong>Exit Code:</strong></p>
+<ul>
+<li><code>0</code> if no errors found</li>
+<li><code>1</code> if errors detected</li>
+</ul>
+<h3><code>generate-sonar-summary.sh</code></h3>
+<p>Generates GitHub Actions Step Summary from scan results.</p>
+<p><strong>Usage:</strong></p>
+<pre><code class="language-bash">bash scripts/generate-sonar-summary.sh [log-file] [errors-summary]
+</code></pre>
+<p><strong>Input:</strong></p>
+<ul>
+<li><code>sonar-analysis.log</code> (arg 1, default)</li>
+<li><code>sonar-errors-summary.md</code> (arg 2, default)</li>
+<li><code>.scannerwork/report-task.txt</code> (auto-detected)</li>
+</ul>
+<p><strong>Output:</strong> Markdown written to <code>$GITHUB_STEP_SUMMARY</code> (or stdout)</p>
+<p><strong>Contains:</strong></p>
+<ul>
+<li>Coverage percentage vs target</li>
+<li>Security hotspots count</li>
+<li>Quality Gate status</li>
+<li>Links to artifacts</li>
+<li>Next steps recommendations</li>
+</ul>
+<h2>Local Testing</h2>
+<h3>Test Parse Script</h3>
+<pre><code class="language-bash"># Create mock log
+echo &quot;ERROR: Sample error&quot; &gt; test.log
+echo &quot;WARN: Sample warning&quot; &gt;&gt; test.log
+echo &quot;Security Hotspot found&quot; &gt;&gt; test.log
+
+# Run parser
+bash scripts/parse-sonar-log.sh test.log
+
+# Review output
+cat sonar-errors-summary.md
+</code></pre>
+<h3>Test Summary Generator</h3>
+<pre><code class="language-bash"># Mock environment (required for GitHub Actions context)
+export GITHUB_STEP_SUMMARY=&quot;test-summary.md&quot;
+export GITHUB_RUN_ID=&quot;12345&quot;
+export GITHUB_REPOSITORY=&quot;user/repo&quot;
+
+# Run generator
+bash scripts/generate-sonar-summary.sh test.log sonar-errors-summary.md
+
+# Review output
+cat test-summary.md
+</code></pre>
+<h2>CI Integration</h2>
+<p>Both scripts are integrated into <code>.github/workflows/nightly-quality.yml</code>:</p>
+<ol>
+<li><strong>Pre-Scan Diagnostics</strong> - Validates coverage file exists</li>
+<li><strong>Verbose Scanner</strong> - Captures detailed logs</li>
+<li><strong>Parse Errors</strong> - Runs <code>parse-sonar-log.sh</code></li>
+<li><strong>Generate Summary</strong> - Runs <code>generate-sonar-summary.sh</code></li>
+<li><strong>Upload Artifacts</strong> - Saves logs and summaries</li>
+</ol>
+<h2>Requirements</h2>
+<ul>
+<li>Bash 4.0+</li>
+<li>Standard Unix utilities: <code>grep</code>, <code>sed</code>, <code>awk</code>, <code>gzip</code>, <code>stat</code></li>
+<li>GitHub Actions environment for summary generation</li>
+</ul>
+<h2>Maintenance</h2>
+<h3>Updating Error Patterns</h3>
+<p>Edit <code>parse-sonar-log.sh</code> to adjust grep patterns:</p>
+<pre><code class="language-bash"># Current patterns
+grep -n &quot;ERROR&quot; &quot;${LOG_FILE}&quot;
+grep -n &quot;WARN&quot; &quot;${LOG_FILE}&quot;
+grep -n -i &quot;security hotspot&quot; &quot;${LOG_FILE}&quot;
+
+# Add new patterns as needed
+grep -n &quot;CRITICAL&quot; &quot;${LOG_FILE}&quot;
+</code></pre>
+<h3>Customizing Summary Output</h3>
+<p>Edit <code>generate-sonar-summary.sh</code> to modify the markdown template:</p>
+<pre><code class="language-bash">cat &gt;&gt; &quot;${SUMMARY_OUTPUT}&quot; &lt;&lt; EOF
+# Your custom markdown here
+EOF
+</code></pre>
+<h2>Troubleshooting</h2>
+<h3>Script Permission Denied</h3>
+<pre><code class="language-bash">chmod +x scripts/parse-sonar-log.sh
+chmod +x scripts/generate-sonar-summary.sh
+</code></pre>
+<h3>Grep Not Finding Patterns</h3>
+<ul>
+<li>Ensure log file uses UTF-8 encoding</li>
+<li>Check for CRLF line endings (Windows)</li>
+<li>Use <code>cat -A</code> to view hidden characters</li>
+</ul>
+<h3>Empty Summary Generated</h3>
+<ul>
+<li>Verify <code>GITHUB_STEP_SUMMARY</code> environment variable is set</li>
+<li>Check script has write permissions</li>
+<li>Review workflow logs for error messages</li>
+</ul>
+<h2>Best Practices</h2>
+<ol>
+<li><strong>Always run in CI</strong> - Scripts are designed for GitHub Actions</li>
+<li><strong>Review compressed logs</strong> - Decompress with <code>gunzip</code> before analyzing</li>
+<li><strong>Update patterns regularly</strong> - SonarCloud may change log format</li>
+<li><strong>Test locally first</strong> - Use mock data before committing changes</li>
+</ol>
+<h2>Related Documentation</h2>
+<ul>
+<li><strong><a href="../docs/development/README.md">Development Guide</a></strong> - Development workflows</li>
+<li><strong><a href="../docs/development/SONARCLOUD.md">SonarCloud Observability</a></strong> - Full guide</li>
+<li><strong><a href="../CONTRIBUTING.md">Contributing</a></strong> - Contribution guidelines</li>
+</ul>
+<h2>References</h2>
+<ul>
+<li><a href="https://docs.sonarcloud.io/">SonarCloud Documentation</a></li>
+<li><a href="https://docs.github.com/en/actions/using-workflows/workflow-commands-for-github-actions">GitHub Actions Workflow Commands</a></li>
+<li><a href="https://google.github.io/styleguide/shellguide.html">Bash Best Practices</a></li>
+</ul>
+<p><a href="#sonarcloud-diagnostic-scripts">↑ Back to Top</a></p>

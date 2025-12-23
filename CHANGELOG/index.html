@@ -1,0 +1,374 @@
+<h2><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.0...v4.0.1">4.0.1</a> (2025-12-23)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>ci:</strong> resolve coverage generation and log handling failures in nightly-quality workflow (<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/d245ae0f7b40fd3a316bbc067bd8859e72340aed">d245ae0</a>)</li>
+</ul>
+<h1><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.1...v4.0.0">4.0.0</a> (2025-12-23)</h1>
+<h3>Tests</h3>
+<ul>
+<li><strong>coverage:</strong> enhance test suite to 95% coverage and fix ReDoS vulnerability (<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9a08f8d4beea5544e9494c7bd2542c8781aca928">9a08f8d</a>)</li>
+</ul>
+<h3>BREAKING CHANGES</h3>
+<ul>
+<li><strong>coverage:</strong> Coverage thresholds temporarily lowered from 90-95% to 80%</li>
+</ul>
+<h2><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.0...v3.0.1">3.0.1</a> (2025-12-22)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>ci:</strong> enable full git history for accurate sonar analysis (<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/7b3c4094d303d7b8e72483ccfde3a0acaea98942">7b3c409</a>)</li>
+</ul>
+<h1><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.3...v3.0.0">3.0.0</a> (2025-12-22)</h1>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>perf:</strong> consolidate lhci config and relaxed local assertions (<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/fec30e1ea1a4ecbb2e90575181df9042dd9d48b0">fec30e1</a>)</li>
+</ul>
+<h3>Code Refactoring</h3>
+<ul>
+<li><strong>scripts:</strong> implement strictest lint with expert-level best practices (<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/edcfd462713ed916304b33340469da83576938c7">edcfd46</a>)</li>
+</ul>
+<h3>BREAKING CHANGES</h3>
+<ul>
+<li><strong>scripts:</strong> Removed unused <code>compareSizeReports</code> export from build-size-report.ts</li>
+</ul>
+<ul>
+<li>
+<p>Refactor all 4 CLI scripts with extracted helper functions:</p>
+<ul>
+<li>build-size-report.ts: 8 extracted functions, removed unused comparison code</li>
+<li>validate-amp.ts: add type guards, explicit undefined checks</li>
+<li>validate-schema.ts: extract validation functions, explicit === undefined</li>
+<li>housekeeping.ts: 15+ helper functions, RegExp.exec() patterns</li>
+</ul>
+</li>
+<li>
+<p>Enable strict ESLint rules for scripts directory:</p>
+<ul>
+<li>complexity: 12 max</li>
+<li>max-statements: 20 max (scripts)</li>
+<li>sonarjs/cognitive-complexity: 20 max (scripts)</li>
+<li>unicorn/filename-case: kebabCase enforced</li>
+<li>@typescript-eslint/strict-boolean-expressions enabled</li>
+</ul>
+</li>
+<li>
+<p>Add minimal CLI-only exceptions in eslint.config.js:</p>
+<ul>
+<li>no-console, unicorn/no-process-exit (CLI output/exit codes)</li>
+<li>sonarjs/os-command, no-os-command-from-path (grep/knip tools)</li>
+<li>@typescript-eslint/no-unsafe-assignment (external module types)</li>
+</ul>
+</li>
+<li>
+<p>Fix strict-boolean-expressions violations:</p>
+<ul>
+<li>Replace truthy checks with explicit .length &gt; 0 for strings</li>
+<li>Replace !property with property === undefined for unknowns</li>
+<li>Use RegExp.exec() instead of String.match()</li>
+</ul>
+</li>
+<li>
+<p>Update vitest.config.ts:</p>
+<ul>
+<li>Add validate-schema.ts to coverage exclusions</li>
+<li>All CLI scripts now consistently excluded from unit coverage</li>
+</ul>
+</li>
+</ul>
+<p>Lint: 0 errors (previously 109)
+Tests: 137/137 pass, 100% coverage</p>
+<h2><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.2...v2.1.3">2.1.3</a> (2025-12-22)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>resolve CI workflow failures and wrangler configuration errors (<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a9991f251bf3a54f25d5db174ce1e22a19992492">a9991f2</a>), closes <a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/000">#000</a></li>
+</ul>
+<h2><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.1...v2.1.2">2.1.2</a> (2025-12-21)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>ci:</strong> ensure cypress binary is cached and installed in github actions
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/30b81241356bbf36f78e578fafb8c33612f66006">30b8124</a>)</li>
+</ul>
+<h2><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.0...v2.1.1">2.1.1</a> (2025-12-21)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li>trigger release for maintenance updates
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/d7c0d4aa394b11e39a66218d0f819b2ccd99f8e6">d7c0d4a</a>)</li>
+</ul>
+<h1><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.0.0...v2.1.0">2.1.0</a> (2025-12-21)</h1>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>a11y:</strong> add link distinctions and resolve jsdoc lint warnings
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/11dd139bf1012a1243ce12e8b1ca1c0193b35bd5">11dd139</a>)</li>
+<li><strong>a11y:</strong> enhance color contrast for navigation links
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a94e3010858d0b31d8538544ecacc629594c47d8">a94e301</a>)</li>
+<li><strong>ci:</strong> enable local composite action resolution
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/57dc19709559375087a23ccc46c2dbf26129230a">57dc197</a>)</li>
+<li><strong>security:</strong> resolve dependabot tmp vulnerability
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/c78fe6a7c0665114f680ffd740e26e598e5deb5c">c78fe6a</a>)</li>
+</ul>
+<h3>Features</h3>
+<ul>
+<li><strong>dx:</strong> implement git hooks and auto-formatting infrastructure
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/87ca2593d1fabba230017cf390e8e84da6eba4e6">87ca259</a>)</li>
+</ul>
+<h1><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.1.1...v2.0.0">2.0.0</a> (2025-12-21)</h1>
+<h3>Features</h3>
+<ul>
+<li><strong>build:</strong> implement expert-level linting and housekeeping infrastructure
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/45455b715abcc0933fb79dfd5dbce95f22822ca9">45455b7</a>)</li>
+</ul>
+<h3>BREAKING CHANGES</h3>
+<ul>
+<li><strong>build:</strong> ampImg() now uses options object API instead of positional params</li>
+</ul>
+<p>Implement comprehensive code quality infrastructure with strictest linting configuration and
+zero-waste housekeeping tooling.</p>
+<p>Linting Enhancements:</p>
+<ul>
+<li>Upgrade ESLint to strict-type-checked + stylistic-type-checked</li>
+<li>Add eslint-plugin-unicorn for modern JS patterns (100+ rules)</li>
+<li>Add eslint-plugin-sonarjs for code quality metrics (SonarQube parity)</li>
+<li>Add eslint-plugin-jsdoc for documentation enforcement</li>
+<li>Configure Stylelint with property ordering (stylelint-order)</li>
+<li>Achieve 0 lint errors across entire codebase</li>
+</ul>
+<p>Build Optimization:</p>
+<ul>
+<li>Add extreme HTML minification transform with AMP boilerplate protection</li>
+<li>Configure build size report for AMP 75KB CSS limit validation</li>
+<li>Add LightningCSS module (available for non-AMP projects)</li>
+<li>Add SVGO optimizer for inline SVG compression</li>
+</ul>
+<p>Housekeeping Infrastructure:</p>
+<ul>
+<li>Add Knip for dead code detection (SSG-aware configuration)</li>
+<li>Add housekeeping script for full coverage audit</li>
+<li>Add Git branch cleanup utility (PowerShell)</li>
+<li>Update vitest coverage exclusions for CLI scripts</li>
+</ul>
+<p>Code Refactoring:</p>
+<ul>
+<li>Refactor ampImg() to use options object pattern (max-params compliance)</li>
+<li>Fix Number.isNaN for unicorn/prefer-number-properties</li>
+<li>Remove console statements for strict lint compliance</li>
+<li>Update tests for new API signatures</li>
+</ul>
+<p>Docker &amp; CI:</p>
+<ul>
+<li>Add Hadolint configuration for Dockerfile linting</li>
+<li>Add Docker testing workflow with 5-layer pyramid</li>
+<li>Update security workflow Node version</li>
+</ul>
+<p>Deps: +knip +cross-env +lightningcss +svgo +stylelint-order +eslint-plugin-{unicorn,sonarjs,jsdoc}</p>
+<h2><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.1.0...v1.1.1">1.1.1</a> (2025-12-21)</h2>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>a11y:</strong> improve color contrast to meet WCAG AA requirements
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/1e044df4be7cd6228a85959795b730f005fad356">1e044df</a>),
+closes <a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/828282">#828282</a>
+<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/595959">#595959</a>
+<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/fff">#fff</a>
+<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/737373">#737373</a>
+<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/9a9a9a">#9a9a9a</a>
+<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/121212">#121212</a></li>
+</ul>
+<h1><a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v1.0.0...v1.1.0">1.1.0</a> (2025-12-21)</h1>
+<h3>Features</h3>
+<ul>
+<li><strong>docker:</strong> add containerization with multi-stage build
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/52813a8b7ba2700c77d5c2208dad52405c636656">52813a8</a>)</li>
+</ul>
+<h1>1.0.0 (2025-12-21)</h1>
+<h3>Bug Fixes</h3>
+<ul>
+<li><strong>a11y:</strong> correct heading hierarchy on contact and sitemap pages
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/3d084cb0663b06173cfd37373f18fbd4f25fa2c5">3d084cb</a>)</li>
+<li><strong>amp:</strong> remove !important qualifiers for AMP compliance
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/909336a6c1f6dfd8e58cb844149fd7972eead5ba">909336a</a>)</li>
+<li><strong>amp:</strong> resolve AMP validation errors across all HTML pages
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/12a44a86701798e1a5ea95ec2878bae143643fd2">12a44a8</a>)</li>
+<li><strong>ci:</strong> correct SonarCloud project key in properties
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9f348bc43abc0aaec23528ad8f180c93e7162ada">9f348bc</a>)</li>
+<li><strong>ci:</strong> ensure Lighthouse CI report generation for artifacts
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/2804349d5c7b33a2bb7db6ed1dca3c0b06970862">2804349</a>)</li>
+<li><strong>ci:</strong> granularize Lighthouse CI steps for artifact capture
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a60b902913e0ccb02ff1a40d7885dd6a33616827">a60b902</a>)</li>
+<li><strong>ci:</strong> remove deprecated headless input from Cypress action
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/f2387401cc4e4c076399cbb3b98f0ef18e8945ae">f238740</a>)</li>
+<li><strong>ci:</strong> resolve SonarCloud report format and path resolution errors
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/80e0fbf4df701605e55bbb9e6e5f7380a11233a6">80e0fbf</a>)</li>
+<li><strong>ci:</strong> restore lhci autorun and fix artifact directory
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/da0e6b4b983e672464a3fc26833f86c2cf4bfce1">da0e6b4</a>)</li>
+<li>remove @semantic-release/npm plugin to fix ENONPMTOKEN error
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/3cb310828a4875c051b2c3dfd999dd528cc4f9a9">3cb3108</a>)</li>
+<li>resolve CSP violation for blob workers and fix SonarCloud CI configuration
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/96f603b31ab6f5e9f0385110b5c3816700672a0b">96f603b</a>)</li>
+<li><strong>sitemap:</strong> correct theme toggle icon markup
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/bedbec5883e852333ad81b637e84266ba62ac0c5">bedbec5</a>)</li>
+</ul>
+<h3>Features</h3>
+<ul>
+<li><strong>a11y:</strong> implement comprehensive ARIA accessibility improvements
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/71ed8852ace6477024c5f56cb12c3168f91b9335">71ed885</a>)</li>
+<li><strong>a11y:</strong> implement expert-level accessibility enhancements
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/1a3c5e3a3a4d9de834881ae1c0e9f45aa07c2beb">1a3c5e3</a>)</li>
+<li>add PWA service worker and optimize Font Awesome
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/31329223293a59796891743d35b4cfda1937ec55">3132922</a>)</li>
+<li><strong>ci:</strong> add Lighthouse CI and Google Analytics 4
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/3f189e4c0666c2b39e2804c68af00a70234c03af">3f189e4</a>)</li>
+<li><strong>ci:</strong> implement 10/10 future-proofing improvements
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/64a694bebe27d8dbc63a15e32e060691842af616">64a694b</a>)</li>
+<li><strong>ci:</strong> implement expert-level SonarCloud rule integration
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/394f114ffe9ab8be8591cdbae479aec9b3b03625">394f114</a>)</li>
+<li><strong>ci:</strong> integrate Cypress Cloud for test recording and analytics
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9698f9d480ac25934578ef23802cfb9aa7afdc16">9698f9d</a>)</li>
+<li>comprehensive CSS consistency, PWA enhancement, and CI/CD improvements
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/5d7e2147f02e5031c3ca8fc7cfa891c2f01d7737">5d7e214</a>),
+closes <a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/ffffff">#ffffff</a>
+<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/FF0F00">#FF0F00</a></li>
+<li>comprehensive site modernization with dark theme and DX improvements
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/0ccca996115a8836afb5105feed55389ca986e79">0ccca99</a>)</li>
+<li><strong>cypress:</strong> add WCAG 2.2 support and tablet viewport testing
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/988f4d2836c8fdee2a5fb12b1abdc844a8e1f06a">988f4d2</a>)</li>
+<li><strong>cypress:</strong> implement expert-level testing infrastructure
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/1dc07cde691e8ed109ca366e1ef63a7523e7c165">1dc07cd</a>)</li>
+<li><strong>infra:</strong> add expert-level enhancements for security, SEO, and DX
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/4a970b2fb663c45c38bc1b337177ff1a7b51e6f4">4a970b2</a>)</li>
+<li>migrate to Eleventy SSG with full testing pyramid
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/40865aab41cf555a5830c57993068275034e36fd">40865aa</a>)</li>
+</ul>
+<h3>Performance Improvements</h3>
+<ul>
+<li><strong>lighthouse:</strong> switch assertions to warn-only for non-blocking CI
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a2b1f1af83b7031b76132866e02df770c5ebdb48">a2b1f1a</a>)</li>
+<li>minify index.html and offline.html
+(<a href="https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/e391babfe8b475aafd3f25b6fefb88a37d33373e">e391bab</a>)</li>
+</ul>
+<h3>BREAKING CHANGES</h3>
+<ul>
+<li><strong>infra:</strong> sitemap.xml and robots.txt are now auto-generated</li>
+</ul>
+<p>Infrastructure:</p>
+<ul>
+<li>Add _headers with Content-Security-Policy for AMP compliance</li>
+<li>Add HSTS, X-Frame-Options, X-XSS-Protection headers</li>
+<li>Configure Cloudflare/Netlify caching headers for static assets</li>
+</ul>
+<p>SEO &amp; Schema:</p>
+<ul>
+<li>Add sitemap.xml.njk auto-generated from Eleventy collections</li>
+<li>Add robots.txt.njk with dynamic site data injection</li>
+<li>Add validate-schema.ts for JSON-LD validation in CI</li>
+<li>Enhance Person schema with @id, hasOccupation, alumniOf</li>
+<li>Add ResearchProject entity for AI-QA research</li>
+</ul>
+<p>Performance:</p>
+<ul>
+<li>Add modulepreload hints for AMP extension scripts</li>
+<li>Implement fluid typography using CSS clamp() (28px→36px→48px)</li>
+<li>Add htmlMinify.ts transform with html-minifier-terser</li>
+</ul>
+<p>Testing:</p>
+<ul>
+<li>Add <code>cy.auditA11y()</code> Cypress command with detailed violation logging</li>
+<li>Add 17 unit tests for HTML minification (99.14% coverage)</li>
+<li>Add <code>npm run validate:schema</code> command for CI</li>
+</ul>
+<p>Files added: _headers, scripts/validate-schema.ts, src/transforms/htmlMinify.ts,
+src/pages/sitemap.xml.njk, src/pages/robots.txt.njk, test/transforms/htmlMinify.test.ts</p>
+<p>Files modified: base.njk, commands.ts, eleventy.config.js, index.njk, package.json, _variables.scss</p>
+<ul>
+<li>Static HTML files replaced with Nunjucks templates</li>
+</ul>
+<p>Implement &quot;Zero-Defect&quot; architecture with Eleventy 3.0+ SSG:</p>
+<p>Build System:</p>
+<ul>
+<li>Add Eleventy with Nunjucks templating engine</li>
+<li>Configure Dart Sass → PostCSS → CSSO pipeline (6.36KB output)</li>
+<li>Implement 75KB CSS guard transform for AMP compliance</li>
+<li>Add TypeScript compilation for filters/shortcodes/transforms</li>
+</ul>
+<p>Templates (src/pages/):</p>
+<ul>
+<li>index.njk: Homepage with About, Proficiencies, Interests</li>
+<li>contact.njk: Contact information and social links</li>
+<li>sitemap.njk: Site navigation overview</li>
+<li>404.njk: Error page</li>
+<li>offline.njk: PWA offline fallback</li>
+</ul>
+<p>Source Modules (src/):</p>
+<ul>
+<li>filters/dateFormat.ts: Date formatting with Intl.DateTimeFormat</li>
+<li>filters/readingTime.ts: Word count and reading time calculation</li>
+<li>shortcodes/ampImg.ts: AMP-compliant responsive images</li>
+<li>transforms/cssGuard.ts: CSS size validation (75KB limit)</li>
+<li>scss/: SCSS architecture with variables, components, main</li>
+</ul>
+<p>Testing Pyramid:</p>
+<ul>
+<li>Vitest: 94 unit tests with 100% coverage (LCOV output)</li>
+<li>Cypress: E2E smoke tests with accessibility checks</li>
+<li>amphtml-validator: Post-build AMP validation</li>
+</ul>
+<p>Quality Assurance:</p>
+<ul>
+<li>SonarCloud integration with quality gate enforcement</li>
+<li>ESLint flat config with cognitive complexity rules</li>
+<li>Stylelint for SCSS with AMP-specific allowlist</li>
+</ul>
+<p>CI/CD Pipeline (.github/workflows/ci.yml):</p>
+<ul>
+<li>Lint → Unit Tests → SonarCloud → Build → E2E → Deploy</li>
+<li>Conditional SonarCloud scan (skips if SONAR_TOKEN missing)</li>
+<li>GitHub Pages deployment from _site/ directory</li>
+</ul>
+<p>Files removed:</p>
+<ul>
+<li>index.html, contact.html, sitemap.html, 404.html, offline.html (replaced by Nunjucks templates)</li>
+</ul>
+<ul>
+<li><strong>amp:</strong> None</li>
+<li><strong>cypress:</strong> None</li>
+</ul>
+<ul>
+<li>
+<p>Add comprehensive E2E test coverage for all 5 HTML pages</p>
+<ul>
+<li>New specs: 404.cy.ts, contact.cy.ts, sitemap.cy.ts, offline.cy.ts, a11y.cy.ts</li>
+<li>Total: 47 tests across 6 spec files</li>
+</ul>
+</li>
+<li>
+<p>Implement expert-level accessibility testing with cypress-axe</p>
+<ul>
+<li>Add validateA11y(), validateComponentA11y(), validateCriticalA11y(), validateMobileA11y()</li>
+<li>Configure WCAG 2.0/2.1 AA compliance checks with AMP exclusions</li>
+<li>Enable strict mode for critical-impact violations in CI</li>
+</ul>
+</li>
+<li>
+<p>Enhance Cypress configuration</p>
+<ul>
+<li>Add Mochawesome HTML/JSON reporting</li>
+<li>Enable experimentalMemoryManagement and testIsolation</li>
+<li>Configure retries, timeouts, and environment variables</li>
+</ul>
+</li>
+<li>
+<p>Improve test maintainability</p>
+<ul>
+<li>Create site-content.json fixture for centralized test data</li>
+<li>Add TypeScript type definitions (index.d.ts)</li>
+<li>Inject data-cy attributes into HTML for resilient selectors</li>
+</ul>
+</li>
+<li>
+<p>Add CI/CD-ready npm scripts</p>
+<ul>
+<li>test:ci, test:a11y, test:smoke, test:report, test:clean</li>
+</ul>
+</li>
+<li>
+<p>Update .gitignore with deployment platform exclusions</p>
+</li>
+</ul>
+<p>Refs: cypress-axe, mochawesome, WCAG 2.1 AA</p>
