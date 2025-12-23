@@ -4,7 +4,7 @@
 [![PR Validation](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/pr-validation.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/pr-validation.yml)
 [![Deploy Production](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/deploy.yml/badge.svg)](https://github.com/syafiqhadzir/syafiqhadzir.github.io/actions/workflows/deploy.yml)
 [![Accessibility: WCAG AA](https://img.shields.io/badge/Accessibility-WCAG%20AA-blue)](https://syafiqhadzir.dev)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=syafiqhadzir.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=syafiqhadzir_syafiqhadzir.github.io)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=syafiqhadzir.github.io&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=syafiqhadzir.github.io)
 [![License: CC0-1.0](https://img.shields.io/badge/License-CC0%201.0-lightgrey.svg)](http://creativecommons.org/publicdomain/zero/1.0/)
 
 High-performance portfolio website engineered with **Google AMP**, **Eleventy**, and **TypeScript**.

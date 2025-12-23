@@ -146,6 +146,40 @@ describe('dateFormat filter', () => {
             expect(result).toContain('5');
             expect(result.toLowerCase()).toContain('minute');
         });
+
+        it('handles future dates (positive difference)', () => {
+            const tomorrow = new Date(now.getTime() + 24 * 60 * 60 * 1000);
+            const result = relativeDate(tomorrow);
+            // RelativeTimeFormat with numeric: 'auto' should return "tomorrow" or "in 1 day"
+            expect(result.toLowerCase()).toMatch(/tomorrow|in.*day/);
+        });
+
+        it('handles just now (less than 1 minute)', () => {
+            const justNow = new Date(now.getTime() - 30 * 1000); // 30 seconds ago
+            const result = relativeDate(justNow);
+            // RelativeTimeFormat with numeric:'auto' returns "this minute" for sub-minute
+            // Using safe regex patterns to avoid ReDoS vulnerability
+            const lowerResult = result.toLowerCase();
+            expect(
+                lowerResult.includes('this minute') ||
+                    lowerResult.includes('now') ||
+                    lowerResult.includes('0 minute')
+            ).toBe(true);
+        });
+
+        it('formats timestamp number input', () => {
+            const timestamp = now.getTime() - 2 * 24 * 60 * 60 * 1000;
+            const result = relativeDate(timestamp);
+            expect(result).toContain('2');
+            expect(result.toLowerCase()).toContain('day');
+        });
+
+        it('formats string date input', () => {
+            const threeDaysAgo = new Date(now.getTime() - 3 * 24 * 60 * 60 * 1000).toISOString();
+            const result = relativeDate(threeDaysAgo);
+            expect(result).toContain('3');
+            expect(result.toLowerCase()).toContain('day');
+        });
     });
 
     describe('currentYear()', () => {

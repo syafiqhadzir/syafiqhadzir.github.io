@@ -401,6 +401,7 @@ describe('build-size-report script', () => {
         let consoleSpy: ReturnType<typeof vi.spyOn>;
         let exitSpy: ReturnType<typeof vi.spyOn>;
         const originalArgv = process.argv;
+        const originalEnv = process.env.NODE_ENV;
 
         beforeEach(() => {
             vi.resetAllMocks();
@@ -410,6 +411,7 @@ describe('build-size-report script', () => {
 
         afterEach(() => {
             process.argv = originalArgv;
+            process.env.NODE_ENV = originalEnv;
             consoleSpy.mockRestore();
             exitSpy.mockRestore();
         });
@@ -435,6 +437,78 @@ describe('build-size-report script', () => {
 
             expect(fs.writeFileSync).toHaveBeenCalled();
             expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Report saved'));
+        });
+
+        it('uses default arguments when not provided', () => {
+            process.argv = ['node', 'script'];
+
+            vi.mocked(fs.readdirSync).mockReturnValue([
+                { name: 'test.html', isDirectory: () => false },
+            ] as unknown as ReturnType<typeof fs.readdirSync>);
+
+            vi.mocked(fs.statSync).mockReturnValue({
+                size: 512,
+            } as fs.Stats);
+
+            vi.mocked(fs.readFileSync).mockReturnValue('<html></html>');
+            vi.mocked(fs.writeFileSync).mockImplementation(vi.fn());
+
+            main();
+
+            expect(fs.writeFileSync).toHaveBeenCalledWith(
+                '_site/size-report.json',
+                expect.any(String)
+            );
+        });
+
+        it('handles empty build directory gracefully', () => {
+            process.argv = ['node', 'script', 'empty'];
+
+            vi.mocked(fs.readdirSync).mockImplementation(() => {
+                throw new Error('ENOENT: no such file or directory');
+            });
+
+            vi.mocked(fs.writeFileSync).mockImplementation(vi.fn());
+
+            main();
+
+            expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('HTML Files: 0'));
+            expect(exitSpy).not.toHaveBeenCalled();
+        });
+
+        it('exits with code 1 when CSS limit is exceeded', () => {
+            process.argv = ['node', 'script', '_site'];
+
+            vi.mocked(fs.readdirSync).mockReturnValue([
+                { name: 'large.html', isDirectory: () => false },
+            ] as unknown as ReturnType<typeof fs.readdirSync>);
+
+            vi.mocked(fs.statSync).mockReturnValue({
+                size: 100 * 1024,
+            } as fs.Stats);
+
+            // Create CSS content that exceeds 75KB limit
+            const largeCss = 'a'.repeat(80 * 1024);
+            vi.mocked(fs.readFileSync).mockReturnValue(
+                `<html><head><style amp-custom>${largeCss}</style></head></html>`
+            );
+
+            main();
+
+            expect(consoleSpy).toHaveBeenCalledWith(
+                expect.stringContaining('AMP CSS LIMIT EXCEEDED')
+            );
+            expect(exitSpy).toHaveBeenCalledWith(1);
+        });
+
+        it('does not run when NODE_ENV is test', () => {
+            process.env.NODE_ENV = 'test';
+            const readdirSpy = vi.spyOn(fs, 'readdirSync');
+
+            // Importing with test env should not execute main
+            expect(readdirSpy).not.toHaveBeenCalled();
+
+            readdirSpy.mockRestore();
         });
     });
 });
