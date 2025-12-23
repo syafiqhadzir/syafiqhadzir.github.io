@@ -1,3 +1,15 @@
+# [4.0.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.1...v4.0.0) (2025-12-23)
+
+
+### Tests
+
+* **coverage:** enhance test suite to 95% coverage and fix ReDoS vulnerability ([9a08f8d](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9a08f8d4beea5544e9494c7bd2542c8781aca928))
+
+
+### BREAKING CHANGES
+
+* **coverage:** Coverage thresholds temporarily lowered from 90-95% to 80%
+
 ## [3.0.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.0...v3.0.1) (2025-12-22)
 
 
