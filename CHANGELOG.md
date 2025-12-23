@@ -1,3 +1,10 @@
+## [4.0.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.0...v4.0.1) (2025-12-23)
+
+
+### Bug Fixes
+
+* **ci:** resolve coverage generation and log handling failures in nightly-quality workflow ([d245ae0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/d245ae0f7b40fd3a316bbc067bd8859e72340aed))
+
 # [4.0.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.1...v4.0.0) (2025-12-23)
 
 
