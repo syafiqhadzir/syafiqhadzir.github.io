@@ -1,3 +1,10 @@
+# [4.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.1...v4.1.0) (2025-12-24)
+
+
+### Features
+
+* **dx:** implement 100 expert-level improvements with 7-1 Sass architecture ([2b4d84a](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/2b4d84a7e169b524d4b981fb1b3bb252d828265b))
+
 ## [4.0.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.0...v4.0.1) (2025-12-23)
 
 
