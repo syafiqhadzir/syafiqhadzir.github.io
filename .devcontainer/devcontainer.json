@@ -1,0 +1,52 @@
+// Dev Container Metadata
+{
+    "name": "Syafiq Hadzir Portfolio",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:24",
+
+    // Features to add to the dev container
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": true,
+            "configureZshAsDefaultShell": true
+        },
+        "ghcr.io/devcontainers/features/git:1": {},
+        "ghcr.io/devcontainers/features/github-cli:1": {}
+    },
+
+    // Configure tool-specific properties
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "esbenp.prettier-vscode",
+                "dbaeumer.vscode-eslint",
+                "stylelint.vscode-stylelint",
+                "ms-vscode.vscode-typescript-next",
+                "ronnidc.nunjucks",
+                "eamodio.gitlens",
+                "ZixuanChen.vitest-explorer",
+                "davidanson.vscode-markdownlint",
+                "editorconfig.editorconfig",
+                "christian-kohler.path-intellisense",
+                "pkief.material-icon-theme"
+            ],
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh"
+            }
+        }
+    },
+
+    // Forward ports for development
+    "forwardPorts": [8080],
+
+    // Post-create command: Install dependencies
+    "postCreateCommand": "npm ci",
+
+    // Post-start command: Compile TypeScript
+    "postStartCommand": "npm run compile:ts",
+
+    // Run commands as non-root user
+    "remoteUser": "node",
+
+    // Mount local npm cache for faster installs
+    "mounts": ["source=${localEnv:HOME}/.npm,target=/home/node/.npm,type=bind,consistency=cached"]
+}

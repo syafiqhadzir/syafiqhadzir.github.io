@@ -1,0 +1,285 @@
+// ============================================================================
+// COMPONENTS INDEX
+// Component styles for the portfolio site
+// ============================================================================
+
+// Import abstracts for access to variables and mixins
+@use '../abstracts' as *;
+
+// ============================================================================
+// LEGACY COMPONENT STYLES
+// These styles are migrated from the original _components.scss
+// TODO: Split into individual component files as the project grows
+// ============================================================================
+
+// ============================================================================
+// CSS CUSTOM PROPERTIES (Theme Overrides)
+// ============================================================================
+
+// Theme toggle icon visibility (Light Mode Default)
+.moon-icon {
+    display: inline-block;
+}
+
+.sun-icon {
+    display: none;
+}
+
+// Explicit Light Override
+body.light {
+    .moon-icon {
+        display: inline-block;
+    }
+
+    .sun-icon {
+        display: none;
+    }
+}
+
+// Explicit Dark Override
+body.dark {
+    .moon-icon {
+        display: none;
+    }
+
+    .sun-icon {
+        display: inline-block;
+    }
+}
+
+// System Dark Mode
+@media (prefers-color-scheme: dark) {
+    .moon-icon {
+        display: none;
+    }
+
+    .sun-icon {
+        display: inline-block;
+    }
+}
+
+// ============================================================================
+// LAYOUT COMPONENTS
+// ============================================================================
+
+// Wrapper - Full height layout
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+// Container - Centered content
+.container {
+    flex: 1;
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+}
+
+// ============================================================================
+// NAVBAR COMPONENT
+// ============================================================================
+
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--navbar-padding) 0;
+
+    a {
+        text-decoration: none;
+    }
+}
+
+#author-name {
+    font-size: 1.5rem;
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-heading);
+}
+
+.navbar-ul {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.nav-list {
+    margin-left: 15px;
+    font-size: 1rem;
+}
+
+.nav-separator {
+    margin: 0 5px;
+    color: var(--color-text-muted);
+}
+
+.active {
+    font-weight: var(--font-weight-bold);
+}
+
+// ============================================================================
+// LEGACY UTILITIES (Kept for backwards compatibility)
+// ============================================================================
+
+.alignable {
+    display: inline-block;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+hr {
+    margin: 30px 0;
+    border: 0;
+    border-top: var(--border-width) solid var(--color-border);
+}
+
+.w3-button {
+    display: inline-block;
+    padding: var(--space-xs) var(--space-md);
+    border: 0;
+    border-radius: var(--border-radius-md);
+    cursor: pointer;
+}
+
+.w3-center {
+    text-align: center;
+}
+
+// ============================================================================
+// THEME TOGGLE COMPONENT
+// ============================================================================
+
+.theme-toggle {
+    min-width: var(--touch-target-min);
+    min-height: var(--touch-target-min);
+    margin-left: 10px;
+    padding: 5px;
+    font-size: 1rem;
+    color: var(--color-text-heading);
+    background: none;
+    border: none;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:focus-visible {
+        outline: var(--focus-ring-width) solid var(--focus-ring-color);
+        outline-offset: var(--focus-ring-offset);
+    }
+}
+
+// ============================================================================
+// FOOTER COMPONENT
+// ============================================================================
+
+.footer {
+    margin-top: auto;
+    padding: var(--footer-padding) 0;
+    font-size: var(--font-size-sm);
+    text-align: center;
+    color: var(--color-text-muted);
+
+    a {
+        text-decoration: none;
+        color: var(--color-text-muted);
+        border-bottom: 1px dotted var(--color-text-muted);
+
+        &:hover {
+            color: var(--color-accent);
+            border-bottom-color: var(--color-accent);
+        }
+    }
+}
+
+// ============================================================================
+// SKIP LINK (Accessibility)
+// ============================================================================
+
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    z-index: var(--z-fixed);
+    padding: var(--space-xs) var(--space-md);
+    color: var(--color-bg-primary);
+    background: var(--color-text-primary);
+
+    &:focus {
+        top: 10px;
+        left: 10px;
+    }
+}
+
+// ============================================================================
+// IMAGE COMPONENTS
+// ============================================================================
+
+.profile-picture {
+    float: right;
+    width: 120px;
+    height: 120px;
+    margin-bottom: var(--space-lg);
+    margin-left: var(--space-lg);
+    overflow: hidden;
+    border-radius: var(--border-radius-full);
+}
+
+.content {
+    amp-img {
+        width: 100%;
+    }
+
+    ul {
+        padding: 0 var(--space-lg);
+
+        >li {
+            margin: 5px 0;
+        }
+    }
+}
+
+// ============================================================================
+// HIGH CONTRAST MODE
+// ============================================================================
+
+@media (prefers-contrast: high) {
+    a {
+        text-decoration: underline;
+    }
+}
+
+// ============================================================================
+// RESPONSIVE STYLES
+// ============================================================================
+
+@media (width <=600px) {
+    .navbar {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-ul {
+        margin-top: 15px;
+    }
+
+    .profile-picture {
+        display: block;
+        float: none;
+        margin: 0 auto var(--space-lg);
+    }
+
+    #author-name {
+        width: 100%;
+    }
+}

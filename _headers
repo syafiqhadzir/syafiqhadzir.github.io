@@ -19,10 +19,20 @@
   Referrer-Policy: strict-origin-when-cross-origin
   
   # Permissions Policy (formerly Feature-Policy)
-  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+  # Restricts browser features for security
+  Permissions-Policy: accelerometer=(), autoplay=(self), camera=(), cross-origin-isolated=(), display-capture=(), encrypted-media=(), fullscreen=(self), geolocation=(), gyroscope=(), keyboard-map=(), magnetometer=(), microphone=(), midi=(), payment=(), picture-in-picture=(self), publickey-credentials-get=(), screen-wake-lock=(), sync-xhr=(), usb=(), web-share=(self), xr-spatial-tracking=()
   
   # Strict Transport Security (HSTS)
+  # Forces HTTPS for 1 year, includes subdomains, preload eligible
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  
+  # Cross-Origin Policies
+  Cross-Origin-Opener-Policy: same-origin
+  Cross-Origin-Resource-Policy: same-origin
+  
+  # Expect-CT (Certificate Transparency)
+  # Note: Deprecated in most browsers, but still useful for older browsers
+  Expect-CT: max-age=86400, enforce
   
   # AMP Cache Optimization
   # Allows Google AMP Cache to serve optimized versions

@@ -1,0 +1,250 @@
+// ============================================================================
+// TYPOGRAPHY
+// Base typography styles using CSS custom properties
+// ============================================================================
+
+// ============================================================================
+// HEADINGS
+// ============================================================================
+
+h1 {
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-text-heading);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-heading);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-heading);
+}
+
+h4 {
+    font-size: var(--font-size-h4);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-heading);
+}
+
+h5 {
+    font-size: var(--font-size-h5);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-heading);
+}
+
+h6 {
+    font-size: var(--font-size-h6);
+    font-weight: var(--font-weight-medium);
+    line-height: var(--line-height-tight);
+    color: var(--color-text-heading);
+}
+
+// ============================================================================
+// PARAGRAPHS & BODY TEXT
+// ============================================================================
+
+p {
+    margin-block-end: var(--space-md);
+}
+
+// Lead text (larger intro paragraphs)
+.lead {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+}
+
+// Small text
+small,
+.text-small {
+    font-size: var(--font-size-sm);
+}
+
+// Extra small text
+.text-xs {
+    font-size: var(--font-size-xs);
+}
+
+// ============================================================================
+// LINKS
+// ============================================================================
+
+a {
+    text-decoration: underline;
+    color: var(--color-accent);
+    transition: color var(--transition-fast);
+    text-underline-offset: 0.2em;
+
+    &:hover,
+    &:focus {
+        color: var(--color-accent-hover);
+    }
+
+    // Links within text should be distinguishable
+    &:visited {
+        color: var(--color-accent-hover);
+    }
+}
+
+// Remove underline for navigation links
+nav a,
+.nav-link {
+    text-decoration: none;
+}
+
+// ============================================================================
+// CODE & PRE
+// ============================================================================
+
+code,
+kbd,
+samp,
+pre {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-sm);
+}
+
+code {
+    padding: var(--space-2xs) var(--space-xs);
+    color: var(--color-accent);
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--border-radius-sm);
+}
+
+pre {
+    padding: var(--space-md);
+    overflow-x: auto;
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--border-radius-md);
+
+    // Remove code background when inside pre
+    code {
+        padding: 0;
+        background-color: transparent;
+    }
+}
+
+kbd {
+    padding: var(--space-2xs) var(--space-xs);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-secondary);
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius-sm);
+    box-shadow: inset 0 -1px 0 var(--color-border);
+}
+
+// ============================================================================
+// BLOCKQUOTES
+// ============================================================================
+
+blockquote {
+    margin-block: var(--space-lg);
+    margin-inline: 0;
+    padding-inline-start: var(--space-lg);
+    font-style: italic;
+    color: var(--color-text-secondary);
+    border-inline-start: 4px solid var(--color-accent);
+}
+
+// ============================================================================
+// LISTS
+// ============================================================================
+
+ul,
+ol {
+    margin-block-end: var(--space-md);
+    padding-inline-start: var(--space-lg);
+}
+
+li {
+    margin-block-end: var(--space-xs);
+}
+
+// Definition lists
+dl {
+    margin-block-end: var(--space-md);
+}
+
+dt {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-heading);
+}
+
+dd {
+    margin-block-end: var(--space-sm);
+    margin-inline-start: var(--space-lg);
+    color: var(--color-text-secondary);
+}
+
+// ============================================================================
+// HORIZONTAL RULE
+// ============================================================================
+
+hr {
+    margin-block: var(--space-xl);
+    border: none;
+    border-block-start: var(--border-width) solid var(--color-border);
+}
+
+// ============================================================================
+// TEXT MODIFIERS
+// ============================================================================
+
+strong,
+b {
+    font-weight: var(--font-weight-bold);
+}
+
+em,
+i {
+    font-style: italic;
+}
+
+mark {
+    padding: var(--space-2xs);
+    color: inherit;
+    background-color: #fff176;
+}
+
+abbr[title] {
+    text-decoration: underline dotted;
+    cursor: help;
+}
+
+del {
+    text-decoration: line-through;
+    opacity: 70%;
+}
+
+ins {
+    text-decoration: none;
+    background-color: rgb(46 125 50 / 20%);
+}
+
+sub,
+sup {
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
+}
+
+sup {
+    top: -0.5em;
+}
+
+sub {
+    bottom: -0.25em;
+}

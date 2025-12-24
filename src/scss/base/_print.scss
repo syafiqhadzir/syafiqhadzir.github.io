@@ -1,0 +1,209 @@
+// ============================================================================
+// PRINT STYLES
+// Optimized styles for printing
+// ============================================================================
+
+@media print {
+    // ========================================================================
+    // GLOBAL RESET FOR PRINT
+    // ========================================================================
+
+    *,
+    *::before,
+    *::after {
+        color: #000;
+        text-shadow: none;
+        background: transparent;
+        box-shadow: none;
+    }
+
+    // ========================================================================
+    // BODY
+    // ========================================================================
+
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+
+    // ========================================================================
+    // TYPOGRAPHY
+    // ========================================================================
+
+    h1 {
+        font-size: 24pt;
+    }
+
+    h2 {
+        font-size: 20pt;
+    }
+
+    h3 {
+        font-size: 16pt;
+    }
+
+    h4,
+    h5,
+    h6 {
+        font-size: 14pt;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        break-after: avoid;
+    }
+
+    p {
+        orphans: 3;
+        widows: 3;
+    }
+
+    // ========================================================================
+    // LINKS
+    // ========================================================================
+
+    a {
+        text-decoration: underline;
+        color: #000;
+    }
+
+    // Show URL after links (except for fragment links and JavaScript)
+    a[href]::after {
+        font-size: 10pt;
+        color: #666;
+        content: ' (' attr(href) ')';
+    }
+
+    // Don't show URL for internal anchors or JavaScript links
+    a[href^='#']::after,
+    a[href^='javascript:']::after {
+        content: '';
+    }
+
+    // ========================================================================
+    // ABBREVIATIONS
+    // ========================================================================
+
+    abbr[title]::after {
+        content: ' (' attr(title) ')';
+    }
+
+    // ========================================================================
+    // IMAGES & MEDIA
+    // ========================================================================
+
+    img,
+    amp-img {
+        max-width: 100%;
+        break-inside: avoid;
+    }
+
+    // ========================================================================
+    // TABLES
+    // ========================================================================
+
+    table {
+        border-collapse: collapse;
+    }
+
+    thead {
+        display: table-header-group;
+    }
+
+    tr {
+        break-inside: avoid;
+    }
+
+    th,
+    td {
+        border: 1px solid #000;
+    }
+
+    // ========================================================================
+    // BLOCKQUOTES & PRE
+    // ========================================================================
+
+    blockquote {
+        break-inside: avoid;
+        border-left: 2pt solid #000;
+    }
+
+    pre {
+        overflow-wrap: break-word;
+        white-space: pre-wrap;
+        border: 1pt solid #000;
+    }
+
+    code {
+        background: none;
+    }
+
+    // ========================================================================
+    // HIDDEN ELEMENTS
+    // ========================================================================
+
+    // Hide interactive elements that don't make sense in print
+    nav,
+    .nav,
+    .navbar,
+    .navigation,
+    .theme-toggle,
+    .skip-link,
+    button:not(.print-show),
+    .no-print,
+    [data-no-print] {
+        display: none;
+    }
+
+    // stylelint-disable-next-line selector-type-no-unknown -- Valid AMP web component
+    amp-sidebar {
+        display: none;
+    }
+
+    // ========================================================================
+    // VISIBLE ELEMENTS
+    // ========================================================================
+
+    .print-only {
+        display: block;
+    }
+
+    // ========================================================================
+    // LAYOUT
+    // ========================================================================
+
+    // Remove max-width constraints for print
+    .container,
+    main,
+    article {
+        width: 100%;
+        max-width: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    // ========================================================================
+    // FOOTER
+    // ========================================================================
+
+    footer {
+        margin-top: 2cm;
+        padding-top: 0.5cm;
+        border-top: 1pt solid #000;
+    }
+
+    // ========================================================================
+    // PAGE SETUP
+    // ========================================================================
+
+    @page {
+        margin: 2cm;
+        size: a4;
+    }
+}

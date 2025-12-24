@@ -1,0 +1,228 @@
+// ============================================================================
+// CSS CUSTOM PROPERTIES (DESIGN TOKENS)
+// Runtime-configurable design tokens for theming and dynamic styling
+// ============================================================================
+
+// ============================================================================
+// ROOT TOKENS (Light Mode Default)
+// ============================================================================
+
+:root {
+    // ========================================================================
+    // COLOR TOKENS
+    // ========================================================================
+
+    // Brand Colors
+    --color-accent: #d32f2f;
+    --color-accent-hover: #b71c1c;
+    --color-accent-light: #ff6b6b;
+    --color-accent-light-hover: #ff8787;
+
+    // Background Colors
+    --color-bg-primary: #fff;
+    --color-bg-secondary: #f4f4f4;
+    --color-bg-tertiary: #e8e8e8;
+
+    // Text Colors
+    --color-text-primary: #333;
+    --color-text-secondary: #595959;
+    --color-text-muted: #595959;
+    --color-text-heading: #111;
+    --color-text-inverse: #fff;
+
+    // Border Colors
+    --color-border: #e8e8e8;
+    --color-border-light: #f0f0f0;
+
+    // State Colors
+    --color-success: #2e7d32;
+    --color-warning: #ed6c02;
+    --color-error: #d32f2f;
+    --color-info: #0288d1;
+
+    // ========================================================================
+    // TYPOGRAPHY TOKENS
+    // ========================================================================
+
+    // Font Families
+    --font-family-base: 'Inconsolata', monospace;
+    --font-family-mono: 'Inconsolata', 'Fira Code', 'Consolas', monospace;
+
+    // Font Sizes (Fluid)
+    --font-size-xs: clamp(0.625rem, 0.6rem + 0.3vw, 0.75rem);
+    --font-size-sm: clamp(0.75rem, 0.7rem + 0.4vw, 1rem);
+    --font-size-base: clamp(0.875rem, 0.8rem + 0.5vw, 1.125rem);
+    --font-size-lg: clamp(1rem, 0.95rem + 0.5vw, 1.25rem);
+    --font-size-xl: clamp(1.125rem, 1rem + 0.6vw, 1.5rem);
+
+    // Heading Sizes (Fluid)
+    --font-size-h1: clamp(1.75rem, 1.5rem + 1.5vw, 3rem);
+    --font-size-h2: clamp(1.5rem, 1.3rem + 1vw, 2.25rem);
+    --font-size-h3: clamp(1.25rem, 1.1rem + 0.75vw, 1.75rem);
+    --font-size-h4: clamp(1.125rem, 1rem + 0.5vw, 1.5rem);
+    --font-size-h5: clamp(1rem, 0.95rem + 0.4vw, 1.25rem);
+    --font-size-h6: clamp(0.875rem, 0.85rem + 0.3vw, 1.125rem);
+
+    // Font Weights
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
+
+    // Line Heights
+    --line-height-tight: 1.25;
+    --line-height-base: 1.6;
+    --line-height-relaxed: 1.75;
+
+    // Letter Spacing
+    --letter-spacing-tight: -0.025em;
+    --letter-spacing-normal: 0;
+    --letter-spacing-wide: 0.025em;
+
+    // ========================================================================
+    // SPACING TOKENS
+    // ========================================================================
+
+    --space-unit: 8px;
+    --space-3xs: calc(var(--space-unit) * 0.25); // 2px
+    --space-2xs: calc(var(--space-unit) * 0.5); // 4px
+    --space-xs: var(--space-unit); // 8px
+    --space-sm: calc(var(--space-unit) * 1.5); // 12px
+    --space-md: calc(var(--space-unit) * 2); // 16px
+    --space-lg: calc(var(--space-unit) * 3); // 24px
+    --space-xl: calc(var(--space-unit) * 4); // 32px
+    --space-2xl: calc(var(--space-unit) * 5); // 40px
+    --space-3xl: calc(var(--space-unit) * 6); // 48px
+
+    // ========================================================================
+    // LAYOUT TOKENS
+    // ========================================================================
+
+    --container-max-width: 760px;
+    --container-padding: 20px;
+    --navbar-padding: 40px;
+    --footer-padding: 40px;
+
+    // ========================================================================
+    // BORDER TOKENS
+    // ========================================================================
+
+    --border-width: 1px;
+    --border-radius-sm: 2px;
+    --border-radius-md: 4px;
+    --border-radius-lg: 8px;
+    --border-radius-xl: 12px;
+    --border-radius-full: 50%;
+
+    // ========================================================================
+    // SHADOW TOKENS
+    // ========================================================================
+
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 5%);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 10%);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 15%);
+    --shadow-xl: 0 20px 25px rgb(0 0 0 / 20%);
+
+    // ========================================================================
+    // TRANSITION TOKENS
+    // ========================================================================
+
+    --transition-fast: 0.15s ease;
+    --transition-base: 0.2s ease;
+    --transition-slow: 0.3s ease;
+    --transition-slower: 0.5s ease;
+
+    // Easing
+    --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+    --ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --ease-in: cubic-bezier(0.4, 0, 1, 1);
+
+    // ========================================================================
+    // Z-INDEX TOKENS
+    // ========================================================================
+
+    --z-dropdown: 100;
+    --z-sticky: 200;
+    --z-fixed: 300;
+    --z-modal-backdrop: 400;
+    --z-modal: 500;
+    --z-popover: 600;
+    --z-tooltip: 700;
+    --z-toast: 800;
+
+    // ========================================================================
+    // FOCUS TOKENS
+    // ========================================================================
+
+    --focus-ring-width: 3px;
+    --focus-ring-offset: 2px;
+    --focus-ring-color: var(--color-accent);
+
+    // ========================================================================
+    // TOUCH TARGET TOKENS (WCAG 2.2)
+    // ========================================================================
+
+    --touch-target-min: 44px;
+}
+
+// ============================================================================
+// DARK MODE TOKENS
+// ============================================================================
+
+[data-theme='dark'] {
+    // Background Colors
+    --color-bg-primary: #121212;
+    --color-bg-secondary: #1e1e1e;
+    --color-bg-tertiary: #2a2a2a;
+
+    // Text Colors
+    --color-text-primary: #e0e0e0;
+    --color-text-secondary: #b3b3b3;
+    --color-text-muted: #9a9a9a;
+    --color-text-heading: #fff;
+    --color-text-inverse: #121212;
+
+    // Border Colors
+    --color-border: #333;
+    --color-border-light: #222;
+
+    // Accent Colors (slightly lighter for dark mode)
+    --color-accent-light: #ff8787;
+    --color-accent-light-hover: #f99;
+
+    // Shadows (more prominent in dark mode)
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 20%);
+    --shadow-md: 0 4px 6px rgb(0 0 0 / 30%);
+    --shadow-lg: 0 10px 15px rgb(0 0 0 / 40%);
+    --shadow-xl: 0 20px 25px rgb(0 0 0 / 50%);
+}
+
+// ============================================================================
+// SYSTEM DARK MODE PREFERENCE (Fallback)
+// ============================================================================
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+        // Background Colors
+        --color-bg-primary: #121212;
+        --color-bg-secondary: #1e1e1e;
+        --color-bg-tertiary: #2a2a2a;
+
+        // Text Colors
+        --color-text-primary: #e0e0e0;
+        --color-text-secondary: #b3b3b3;
+        --color-text-muted: #9a9a9a;
+        --color-text-heading: #fff;
+        --color-text-inverse: #121212;
+
+        // Border Colors
+        --color-border: #333;
+        --color-border-light: #222;
+
+        // Shadows
+        --shadow-sm: 0 1px 2px rgb(0 0 0 / 20%);
+        --shadow-md: 0 4px 6px rgb(0 0 0 / 30%);
+        --shadow-lg: 0 10px 15px rgb(0 0 0 / 40%);
+        --shadow-xl: 0 20px 25px rgb(0 0 0 / 50%);
+    }
+}

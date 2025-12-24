@@ -1,0 +1,210 @@
+// ============================================================================
+// CSS RESET
+// Modern CSS reset based on Andy Bell's reset with AMP-safe modifications
+// @see https://piccalil.li/blog/a-more-modern-css-reset/
+// ============================================================================
+
+// ============================================================================
+// BOX SIZING
+// ============================================================================
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+// ============================================================================
+// REMOVE DEFAULT MARGINS & PADDING
+// ============================================================================
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+// ============================================================================
+// PREVENT FONT SIZE INFLATION
+// ============================================================================
+
+html {
+    text-size-adjust: none;
+}
+
+// ============================================================================
+// CORE BODY DEFAULTS
+// ============================================================================
+
+body {
+    min-height: 100vh;
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-base);
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-primary);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizelegibility;
+}
+
+// ============================================================================
+// HEADINGS
+// ============================================================================
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    overflow-wrap: break-word;
+    text-wrap: balance;
+}
+
+// ============================================================================
+// LISTS
+// ============================================================================
+
+// Remove list styles for lists with role="list"
+// (maintains accessibility while allowing custom styling)
+ul[role='list'],
+ol[role='list'] {
+    list-style: none;
+}
+
+// ============================================================================
+// LINKS
+// ============================================================================
+
+a {
+    color: inherit;
+    text-decoration-skip-ink: auto;
+}
+
+// Make links without href not interactive
+a:not([href]) {
+    cursor: not-allowed;
+}
+
+// ============================================================================
+// MEDIA ELEMENTS
+// ============================================================================
+
+img,
+picture,
+video,
+canvas,
+svg {
+    display: block;
+    max-width: 100%;
+}
+
+// AMP-specific image handling
+amp-img {
+    display: block;
+    max-width: 100%;
+}
+
+// ============================================================================
+// FORM ELEMENTS
+// ============================================================================
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+// Remove default button styles
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+// ============================================================================
+// TEXT WRAPPING
+// ============================================================================
+
+p,
+li,
+dd {
+    overflow-wrap: break-word;
+    text-wrap: pretty;
+}
+
+// ============================================================================
+// TARGET ELEMENTS
+// ============================================================================
+
+// Scroll padding for anchor links (accounts for fixed headers)
+:target {
+    scroll-margin-block: 5rem;
+}
+
+// ============================================================================
+// REDUCED MOTION
+// ============================================================================
+
+@media (prefers-reduced-motion: reduce) {
+    html:focus-within {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition-duration: 0.01ms;
+        animation-duration: 0.01ms;
+        animation-iteration-count: 1;
+        scroll-behavior: auto;
+    }
+}
+
+// ============================================================================
+// FOCUS VISIBLE
+// ============================================================================
+
+// Remove default focus outline for mouse users
+:focus:not(:focus-visible) {
+    outline: none;
+}
+
+// Restore focus outline for keyboard users
+:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring-color, currentcolor);
+    outline-offset: var(--focus-ring-offset);
+}
+
+// ============================================================================
+// SELECTION
+// ============================================================================
+
+::selection {
+    color: var(--color-text-inverse);
+    background-color: var(--color-accent);
+}
+
+// ============================================================================
+// SCROLLBAR (Optional - WebKit only)
+// ============================================================================
+
+// Subtle custom scrollbar for WebKit browsers
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-text-muted);
+    border-radius: var(--border-radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-secondary);
+}

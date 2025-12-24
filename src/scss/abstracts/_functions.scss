@@ -1,0 +1,149 @@
+// ============================================================================
+// SASS FUNCTIONS
+// Utility functions for color manipulation, spacing calculations, and units
+// ============================================================================
+
+@use 'sass:math';
+@use 'sass:color';
+@use 'sass:map';
+@use 'sass:list';
+@use 'sass:meta';
+
+// ============================================================================
+// UNIT CONVERSION FUNCTIONS
+// ============================================================================
+
+/// Convert px to rem
+/// @param {Number} $px - Pixel value to convert
+/// @param {Number} $base [16] - Base font size in pixels
+/// @return {Number} - Rem value
+@function rem($px, $base: 16) {
+    @if math.is-unitless($px) {
+        @return math.div($px, $base) * 1rem;
+    }
+
+    @return math.div($px, $base * 1px) * 1rem;
+}
+
+/// Convert px to em
+/// @param {Number} $px - Pixel value to convert
+/// @param {Number} $base [16] - Base font size in pixels
+/// @return {Number} - Em value
+@function em($px, $base: 16) {
+    @if math.is-unitless($px) {
+        @return math.div($px, $base) * 1em;
+    }
+
+    @return math.div($px, $base * 1px) * 1em;
+}
+
+// ============================================================================
+// SPACING FUNCTIONS
+// ============================================================================
+
+/// Get spacing value from scale
+/// @param {Number} $multiplier - Multiplier for base spacing unit (8px)
+/// @return {Number} - Spacing value in pixels
+@function space($multiplier) {
+    $base: 8;
+
+    @return $base * $multiplier * 1px;
+}
+
+/// Generate fluid spacing using clamp
+/// @param {Number} $min - Minimum size in px
+/// @param {Number} $max - Maximum size in px
+/// @param {Number} $min-vw [320] - Minimum viewport width
+/// @param {Number} $max-vw [1200] - Maximum viewport width
+/// @return {String} - CSS clamp() value
+@function fluid-space($min, $max, $min-vw: 320, $max-vw: 1200) {
+    $min-rem: rem($min);
+    $max-rem: rem($max);
+    $slope: math.div($max - $min, $max-vw - $min-vw);
+    $intercept: $min - ($slope * $min-vw);
+    $preferred: #{$intercept * 0.0625}rem + #{$slope * 100}vw;
+
+    @return clamp(#{$min-rem}, #{$preferred}, #{$max-rem});
+}
+
+// ============================================================================
+// COLOR FUNCTIONS
+// ============================================================================
+
+/// Lighten a color by mixing with white
+/// @param {Color} $color - Base color
+/// @param {Number} $percentage - Percentage to lighten (0-100)
+/// @return {Color} - Lightened color
+@function tint($color, $percentage) {
+    @return color.mix(white, $color, $percentage);
+}
+
+/// Darken a color by mixing with black
+/// @param {Color} $color - Base color
+/// @param {Number} $percentage - Percentage to darken (0-100)
+/// @return {Color} - Darkened color
+@function shade($color, $percentage) {
+    @return color.mix(black, $color, $percentage);
+}
+
+/// Get contrasting text color (black or white) based on background
+/// @param {Color} $background - Background color
+/// @param {Color} $dark [#111] - Dark text color
+/// @param {Color} $light [#fff] - Light text color
+/// @return {Color} - Contrasting text color
+@function contrast-color($background, $dark: #111, $light: #fff) {
+    $luminance: color.lightness($background);
+
+    @return if($luminance > 50%, $dark, $light);
+}
+
+/// Create color with opacity
+/// @param {Color} $color - Base color
+/// @param {Number} $opacity - Opacity value (0-1)
+/// @return {Color} - Color with alpha channel
+@function alpha($color, $opacity) {
+    @return color.change($color, $alpha: $opacity);
+}
+
+// ============================================================================
+// STRING FUNCTIONS
+// ============================================================================
+
+/// Strip unit from number
+/// @param {Number} $number - Number with unit
+/// @return {Number} - Unitless number
+@function strip-unit($number) {
+    @if meta.type-of($number) == 'number' and not math.is-unitless($number) {
+        @return math.div($number, $number * 0 + 1);
+    }
+
+    @return $number;
+}
+
+// ============================================================================
+// Z-INDEX FUNCTION
+// ============================================================================
+
+/// Get z-index value from scale
+/// @param {String} $layer - Layer name
+/// @return {Number} - Z-index value
+@function z($layer) {
+    $z-layers: (
+        'base': 0,
+        'dropdown': 100,
+        'sticky': 200,
+        'fixed': 300,
+        'modal-backdrop': 400,
+        'modal': 500,
+        'popover': 600,
+        'tooltip': 700,
+        'toast': 800,
+    );
+
+    @if not map.has-key($z-layers, $layer) {
+        @warn "Unknown z-index layer: #{$layer}";
+        @return 0;
+    }
+
+    @return map.get($z-layers, $layer);
+}

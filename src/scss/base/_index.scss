@@ -1,0 +1,13 @@
+// ============================================================================
+// BASE INDEX
+// Central hub for base layer styles
+// ============================================================================
+
+// Reset must come first
+@forward 'reset';
+
+// Typography
+@forward 'typography';
+
+// Print styles (loaded last to override)
+@forward 'print';

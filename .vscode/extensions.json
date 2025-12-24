@@ -1,0 +1,37 @@
+{
+    "recommendations": [
+        // Formatting & Linting
+        "esbenp.prettier-vscode",
+        "dbaeumer.vscode-eslint",
+        "stylelint.vscode-stylelint",
+
+        // Languages
+        "ms-vscode.vscode-typescript-next",
+        "ronnidc.nunjucks",
+
+        // Git
+        "eamodio.gitlens",
+        "mhutchie.git-graph",
+
+        // Testing
+        "ZixuanChen.vitest-explorer",
+        "ms-playwright.playwright",
+
+        // Documentation
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint",
+
+        // Docker
+        "ms-azuretools.vscode-docker",
+
+        // Utilities
+        "editorconfig.editorconfig",
+        "christian-kohler.path-intellisense",
+        "formulahendry.auto-rename-tag",
+        "streetsidesoftware.code-spell-checker",
+
+        // Themes & Icons
+        "pkief.material-icon-theme"
+    ],
+    "unwantedRecommendations": []
+}

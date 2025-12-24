@@ -1,16 +1,36 @@
-// SCSS Entry Point
-// Google AMP Portfolio - Researcher Theme
+// ============================================================================
+// SCSS MAIN ENTRY POINT
+// Google AMP Portfolio - 7-1 Architecture
+// ---
 // This file is compiled by Eleventy using Dart Sass
 // and injected into <style amp-custom> via base.njk
+// ---
+// Architecture: 7-1 Sass Pattern (modified for AMP)
+// - abstracts/: Variables, functions, mixins, tokens
+// - base/: Reset, typography, print styles
+// - components/: UI components (navbar, footer, etc.)
+// - utilities/: Helper classes
+// ============================================================================
 
+// 1. ABSTRACTS (Design System Foundation)
+// Must be loaded first - provides tokens, functions, mixins
+@use 'abstracts';
 
+// 2. BASE (Global Styles)
+// Reset, typography, and print styles
+@use 'base';
 
-// Design System Layers
-@forward 'variables';
-@forward 'components';
+// 3. COMPONENTS (UI Components)
+// Site-specific component styles
+@use 'components';
 
+// 4. UTILITIES (Helper Classes)
+// Single-purpose utility classes
+@use 'utilities';
+
+// ============================================================================
 // FONT FACE DEFINITIONS (Required for AMP self-hosting)
-
+// ============================================================================
 @font-face {
     font-family: 'Font Awesome 6 Free';
     font-weight: 900;
@@ -27,8 +47,9 @@
     src: url('./fonts/fa-brands-400.woff2') format('woff2');
 }
 
+// ============================================================================
 // FONT AWESOME BASE CLASSES
-
+// ============================================================================
 .fa,
 .fa-brands,
 .fa-solid {
@@ -56,7 +77,9 @@
     font-weight: 400;
 }
 
+// ============================================================================
 // FONT AWESOME ICON DEFINITIONS
+// ============================================================================
 
 // Navigation Icons
 .fa-user-tie::before {

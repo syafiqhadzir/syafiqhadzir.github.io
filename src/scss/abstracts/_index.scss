@@ -1,0 +1,13 @@
+// ============================================================================
+// ABSTRACTS INDEX
+// Central hub for all abstracts - forward to main.scss
+// ============================================================================
+
+// Functions must be loaded first (used by mixins and variables)
+@forward 'functions';
+
+// Mixins (reusable patterns)
+@forward 'mixins';
+
+// Design Tokens (CSS custom properties)
+@forward 'tokens';

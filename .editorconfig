@@ -11,21 +11,34 @@ indent_style = space
 indent_size = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
+max_line_length = 100
 
 # HTML files
 [*.html]
+indent_size = 2
+
+# Nunjucks templates
+[*.njk]
 indent_size = 2
 
 # CSS files
 [*.css]
 indent_size = 2
 
+# SCSS files
+[*.scss]
+indent_size = 4
+
 # JavaScript/TypeScript
-[*.{js,ts}]
+[*.{js,mjs,cjs,ts,mts,cts}]
 indent_size = 4
 
 # JSON files
 [*.json]
+indent_size = 2
+
+# JSONC files (JSON with comments)
+[*.jsonc]
 indent_size = 2
 
 # YAML files
@@ -35,11 +48,38 @@ indent_size = 2
 # Markdown files
 [*.md]
 trim_trailing_whitespace = false
+max_line_length = off
 
 # XML files
 [*.xml]
 indent_size = 2
 
+# SVG files
+[*.svg]
+indent_size = 2
+
+# Docker files
+[Dockerfile]
+indent_size = 4
+
+# Shell scripts
+[*.{sh,bash,zsh}]
+indent_size = 2
+
 # Makefiles require tabs
 [Makefile]
 indent_style = tab
+
+# Git config files
+[.git*]
+indent_size = 4
+
+# Ignore minified files
+[*.min.*]
+insert_final_newline = false
+trim_trailing_whitespace = false
+
+# Lock files
+[{package-lock.json,yarn.lock,pnpm-lock.yaml}]
+indent_size = 2
+insert_final_newline = false

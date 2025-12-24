@@ -1,0 +1,79 @@
+{
+    "budgets": [
+        {
+            "path": "/*",
+            "resourceSizes": [
+                {
+                    "resourceType": "document",
+                    "budget": 50
+                },
+                {
+                    "resourceType": "stylesheet",
+                    "budget": 75
+                },
+                {
+                    "resourceType": "script",
+                    "budget": 100
+                },
+                {
+                    "resourceType": "image",
+                    "budget": 200
+                },
+                {
+                    "resourceType": "font",
+                    "budget": 100
+                },
+                {
+                    "resourceType": "total",
+                    "budget": 500
+                }
+            ],
+            "resourceCounts": [
+                {
+                    "resourceType": "script",
+                    "budget": 5
+                },
+                {
+                    "resourceType": "stylesheet",
+                    "budget": 1
+                },
+                {
+                    "resourceType": "font",
+                    "budget": 3
+                },
+                {
+                    "resourceType": "third-party",
+                    "budget": 5
+                }
+            ]
+        }
+    ],
+    "timings": [
+        {
+            "metric": "first-contentful-paint",
+            "budget": 1500
+        },
+        {
+            "metric": "largest-contentful-paint",
+            "budget": 2500
+        },
+        {
+            "metric": "cumulative-layout-shift",
+            "budget": 0.1
+        },
+        {
+            "metric": "total-blocking-time",
+            "budget": 200
+        },
+        {
+            "metric": "interactive",
+            "budget": 3500
+        }
+    ],
+    "thresholds": {
+        "performance": 90,
+        "accessibility": 95,
+        "best-practices": 90,
+        "seo": 95
+    }
+}
