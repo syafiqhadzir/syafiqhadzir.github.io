@@ -1,3 +1,10 @@
+# [4.2.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.1.0...v4.2.0) (2025-12-26)
+
+
+### Features
+
+* **ci:** optimize workflows and implement script testing coverage ([89768f2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/89768f25b203fb0dc9d5d6907662179170a0bd25))
+
 # [4.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.1...v4.1.0) (2025-12-24)
 
 
