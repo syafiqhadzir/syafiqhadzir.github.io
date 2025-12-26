@@ -1,89 +1,94 @@
-# [4.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.1...v4.1.0) (2025-12-24)
-
+# [4.2.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.1.0...v4.2.0) (2025-12-26)
 
 ### Features
 
-* **dx:** implement 100 expert-level improvements with 7-1 Sass architecture ([2b4d84a](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/2b4d84a7e169b524d4b981fb1b3bb252d828265b))
+- **ci:** optimize workflows and implement script testing coverage
+  ([89768f2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/89768f25b203fb0dc9d5d6907662179170a0bd25))
+
+# [4.1.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.1...v4.1.0) (2025-12-24)
+
+### Features
+
+- **dx:** implement 100 expert-level improvements with 7-1 Sass architecture
+  ([2b4d84a](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/2b4d84a7e169b524d4b981fb1b3bb252d828265b))
 
 ## [4.0.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.0.0...v4.0.1) (2025-12-23)
 
-
 ### Bug Fixes
 
-* **ci:** resolve coverage generation and log handling failures in nightly-quality workflow ([d245ae0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/d245ae0f7b40fd3a316bbc067bd8859e72340aed))
+- **ci:** resolve coverage generation and log handling failures in nightly-quality workflow
+  ([d245ae0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/d245ae0f7b40fd3a316bbc067bd8859e72340aed))
 
 # [4.0.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.1...v4.0.0) (2025-12-23)
 
-
 ### Tests
 
-* **coverage:** enhance test suite to 95% coverage and fix ReDoS vulnerability ([9a08f8d](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9a08f8d4beea5544e9494c7bd2542c8781aca928))
-
+- **coverage:** enhance test suite to 95% coverage and fix ReDoS vulnerability
+  ([9a08f8d](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9a08f8d4beea5544e9494c7bd2542c8781aca928))
 
 ### BREAKING CHANGES
 
-* **coverage:** Coverage thresholds temporarily lowered from 90-95% to 80%
+- **coverage:** Coverage thresholds temporarily lowered from 90-95% to 80%
 
 ## [3.0.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v3.0.0...v3.0.1) (2025-12-22)
 
-
 ### Bug Fixes
 
-* **ci:** enable full git history for accurate sonar analysis ([7b3c409](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/7b3c4094d303d7b8e72483ccfde3a0acaea98942))
+- **ci:** enable full git history for accurate sonar analysis
+  ([7b3c409](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/7b3c4094d303d7b8e72483ccfde3a0acaea98942))
 
 # [3.0.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.3...v3.0.0) (2025-12-22)
 
-
 ### Bug Fixes
 
-* **perf:** consolidate lhci config and relaxed local assertions ([fec30e1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/fec30e1ea1a4ecbb2e90575181df9042dd9d48b0))
-
+- **perf:** consolidate lhci config and relaxed local assertions
+  ([fec30e1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/fec30e1ea1a4ecbb2e90575181df9042dd9d48b0))
 
 ### Code Refactoring
 
-* **scripts:** implement strictest lint with expert-level best practices ([edcfd46](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/edcfd462713ed916304b33340469da83576938c7))
-
+- **scripts:** implement strictest lint with expert-level best practices
+  ([edcfd46](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/edcfd462713ed916304b33340469da83576938c7))
 
 ### BREAKING CHANGES
 
-* **scripts:** Removed unused `compareSizeReports` export from build-size-report.ts
+- **scripts:** Removed unused `compareSizeReports` export from build-size-report.ts
 
-- Refactor all 4 CLI scripts with extracted helper functions:
+* Refactor all 4 CLI scripts with extracted helper functions:
   - build-size-report.ts: 8 extracted functions, removed unused comparison code
   - validate-amp.ts: add type guards, explicit undefined checks
   - validate-schema.ts: extract validation functions, explicit === undefined
   - housekeeping.ts: 15+ helper functions, RegExp.exec() patterns
 
-- Enable strict ESLint rules for scripts directory:
+* Enable strict ESLint rules for scripts directory:
   - complexity: 12 max
   - max-statements: 20 max (scripts)
   - sonarjs/cognitive-complexity: 20 max (scripts)
   - unicorn/filename-case: kebabCase enforced
   - @typescript-eslint/strict-boolean-expressions enabled
 
-- Add minimal CLI-only exceptions in eslint.config.js:
+* Add minimal CLI-only exceptions in eslint.config.js:
   - no-console, unicorn/no-process-exit (CLI output/exit codes)
   - sonarjs/os-command, no-os-command-from-path (grep/knip tools)
   - @typescript-eslint/no-unsafe-assignment (external module types)
 
-- Fix strict-boolean-expressions violations:
+* Fix strict-boolean-expressions violations:
   - Replace truthy checks with explicit .length > 0 for strings
   - Replace !property with property === undefined for unknowns
   - Use RegExp.exec() instead of String.match()
 
-- Update vitest.config.ts:
+* Update vitest.config.ts:
   - Add validate-schema.ts to coverage exclusions
   - All CLI scripts now consistently excluded from unit coverage
 
-Lint: 0 errors (previously 109)
-Tests: 137/137 pass, 100% coverage
+Lint: 0 errors (previously 109) Tests: 137/137 pass, 100% coverage
 
 ## [2.1.3](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.2...v2.1.3) (2025-12-22)
 
-
 ### Bug Fixes
 
-* resolve CI workflow failures and wrangler configuration errors ([a9991f2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a9991f251bf3a54f25d5db174ce1e22a19992492)), closes [#000](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/000)
+- resolve CI workflow failures and wrangler configuration errors
+  ([a9991f2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/a9991f251bf3a54f25d5db174ce1e22a19992492)),
+  closes [#000](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/000)
 
 ## [2.1.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v2.1.1...v2.1.2) (2025-12-21)
 
