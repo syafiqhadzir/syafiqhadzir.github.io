@@ -1,0 +1,25 @@
+# Code Owners
+
+# Default owners for everything in the repo
+* @syafiqhadzir
+
+# Core infrastructure
+/.github/ @syafiqhadzir
+/eleventy.config.js @syafiqhadzir
+/package.json @syafiqhadzir
+
+# Source code
+/src/ @syafiqhadzir
+
+# Tests
+/test/ @syafiqhadzir
+/cypress/ @syafiqhadzir
+
+# Documentation
+*.md @syafiqhadzir
+/docs/ @syafiqhadzir
+
+# Configuration files
+*.config.js @syafiqhadzir
+*.config.ts @syafiqhadzir
+tsconfig*.json @syafiqhadzir

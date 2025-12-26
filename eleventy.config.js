@@ -2,15 +2,18 @@
  * Eleventy Configuration
  * Google AMP Portfolio with Extreme Minification Pipeline
  *
- * Pipeline: Sass → PostCSS → CSSO → Inline → Extreme HTML Minify
+ * Pipeline: Sass → PostCSS → LightningCSS → Inline → Extreme HTML Minify
  * @see https://www.11ty.dev/docs/config/
  */
 
 import * as sass from 'sass';
 import postcss from 'postcss';
 import autoprefixer from 'autoprefixer';
-import { minify as cssoMinify } from 'csso';
+import { transform, browserslistToTargets } from 'lightningcss';
 import { existsSync } from 'node:fs';
+
+// Import shared configuration
+import { BROWSERSLIST_QUERY, SCSS_ENTRY, MAX_CSS_SIZE_BYTES } from './dist/config/index.js';
 
 // Import custom filters (compiled from TypeScript)
 import { dateFormat, isoDate, relativeDate } from './dist/filters/dateFormat.js';
@@ -22,18 +25,12 @@ import { ampImg } from './dist/shortcodes/ampImg.js';
 // Import transforms
 import { cssGuard } from './dist/transforms/cssGuard.js';
 
-/** Maximum allowed CSS size in bytes (75KB) */
-const MAX_CSS_SIZE_BYTES = 75 * 1024;
-
-/** SCSS entry point */
-const SCSS_ENTRY = './src/scss/main.scss';
+/** Browser targets for LightningCSS (derived from shared config) */
+const BROWSER_TARGETS = browserslistToTargets([...BROWSERSLIST_QUERY]);
 
 /**
- * Compile SCSS with CSSO for AMP-compatible optimization
- * Pipeline: Dart Sass → PostCSS (autoprefixer) → CSSO (minify)
- *
- * Note: LightningCSS was tested but outputs media query range syntax
- * which is not supported by AMP validator. CSSO is AMP-safe.
+ * Compile SCSS with LightningCSS for AMP-compatible optimization
+ * Pipeline: Dart Sass → PostCSS (autoprefixer) → LightningCSS (minify)
  * @returns Minified CSS string
  */
 async function compileSCSS() {
@@ -65,21 +62,27 @@ async function compileSCSS() {
             }),
         ]).process(sassResult.css, { from: undefined });
 
-        // Step 3: Minify with CSSO (aggressive restructuring)
-        const minified = cssoMinify(postcssResult.css, {
-            restructure: true,
-            forceMediaMerge: true,
+        // Step 3: Minify with LightningCSS
+        const { code: minifiedBuffer } = transform({
+            filename: 'styles.css',
+            code: Buffer.from(postcssResult.css),
+            minify: true,
+            targets: BROWSER_TARGETS,
+            drafts: { customMedia: true },
+            errorRecovery: true,
         });
 
+        const minifiedCss = minifiedBuffer.toString();
+
         // Step 4: Validate size
-        const sizeBytes = Buffer.byteLength(minified.css, 'utf8');
+        const sizeBytes = Buffer.byteLength(minifiedCss, 'utf8');
         if (sizeBytes > MAX_CSS_SIZE_BYTES) {
             throw new Error(
-                `[CSSO] CSS size (${(sizeBytes / 1024).toFixed(2)}KB) exceeds AMP limit of 75KB`
+                `[LightningCSS] CSS size (${(sizeBytes / 1024).toFixed(2)}KB) exceeds AMP limit of 75KB`
             );
         }
 
-        return minified.css;
+        return minifiedCss;
     } catch (error) {
         console.error('[11ty] CSS compilation failed:', error.message);
         throw error;

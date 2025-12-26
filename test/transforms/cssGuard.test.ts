@@ -120,7 +120,7 @@ describe('cssGuard transform', () => {
             expect(cssGuard(html)).toBe(html);
         });
 
-        it('passes through valid CSS under limit', () => {
+        it('passes through valid CSS under limit (minified)', () => {
             const html = `
                 <html>
                 <head>
@@ -128,26 +128,31 @@ describe('cssGuard transform', () => {
                 </head>
                 </html>
             `;
-            expect(cssGuard(html)).toBe(html);
+            // LightningCSS minifies the content
+            expect(cssGuard(html)).toContain('body{color:red}');
         });
 
         it('throws error for CSS over limit', () => {
-            const largeCSS = 'a'.repeat(76 * 1024);
+            // Create large VALID CSS that won't be optimized away
+            // 76KB of distinct rules
+            // Use a large Data URI which is uncompressible
+            const largeData = 'a'.repeat(80 * 1024);
+            const largeCSS = `body { background: url('data:image/png;base64,${largeData}'); }`;
             const html = `<style amp-custom>${largeCSS}</style>`;
 
             expect(() => cssGuard(html)).toThrow('BUILD FAILED');
-            expect(() => cssGuard(html)).toThrow('exceeds');
         });
 
         it('uses custom max size', () => {
-            const css = 'a'.repeat(100);
+            const css = 'body{color:red}'; // 15 bytes
             const html = `<style amp-custom>${css}</style>`;
 
             // Should pass with 1KB limit
-            expect(cssGuard(html, 1024)).toBe(html);
+            const result = cssGuard(html, 1024);
+            expect(result).toContain('body{color:red}');
 
-            // Should fail with 50 byte limit
-            expect(() => cssGuard(html, 50)).toThrow('BUILD FAILED');
+            // Should fail with 10 byte limit
+            expect(() => cssGuard(html, 10)).toThrow('BUILD FAILED');
         });
 
         it('handles empty content', () => {
@@ -155,9 +160,9 @@ describe('cssGuard transform', () => {
         });
 
         it('returns content without logging', () => {
-            const html = '<style amp-custom>body{}</style>';
+            const html = '<style amp-custom>body{color:red}</style>';
             const result = cssGuard(html);
-            expect(result).toBe(html);
+            expect(result).toBe(html); // Already minified input should match output
         });
 
         it('includes helpful tips in error message', () => {

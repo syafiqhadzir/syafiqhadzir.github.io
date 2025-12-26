@@ -5,7 +5,6 @@
  */
 
 import { browserslistToTargets, transform } from 'lightningcss';
-import { readFileSync } from 'node:fs';
 
 /** Default maximum CSS size in bytes (75KB as per AMP spec) */
 const MAX_CSS_SIZE = 75 * 1024;
@@ -80,68 +79,5 @@ export function processWithLightningCss(options: LightningCssOptions): Lightning
         sizeBytes,
         sizeKB: `${sizeKB}KB`,
         valid,
-    };
-}
-
-/**
- * Process CSS file with LightningCSS
- * @param filePath - Path to CSS file
- * @param maxSize - Maximum allowed size
- * @returns Optimized CSS result
- */
-export function processCssFile(filePath: string, maxSize = MAX_CSS_SIZE): LightningCssResult {
-    const code = readFileSync(filePath, 'utf8');
-    return processWithLightningCss({
-        code,
-        filename: filePath,
-        maxSize,
-    });
-}
-
-/**
- * Validate CSS size against AMP limit
- * @param css - CSS content
- * @param maxSize - Maximum size in bytes
- * @throws {Error} If CSS exceeds limit
- */
-export function validateCssSize(css: string, maxSize = MAX_CSS_SIZE): void {
-    const sizeBytes = Buffer.byteLength(css, 'utf8');
-    if (sizeBytes > maxSize) {
-        const sizeKB = (sizeBytes / 1024).toFixed(2);
-        const maxKB = (maxSize / 1024).toFixed(0);
-        throw new Error(
-            `[LightningCSS] CSS size (${sizeKB}KB) exceeds AMP limit of ${maxKB}KB\n` +
-                `Reduce your CSS to stay within the limit.`
-        );
-    }
-}
-
-/**
- * Get CSS optimization statistics
- * @param originalCss - Original CSS
- * @param optimizedCss - Optimized CSS
- * @returns Statistics object
- */
-export function getCssOptimizationStats(
-    originalCss: string,
-    optimizedCss: string
-): {
-    originalSize: number;
-    optimizedSize: number;
-    savings: number;
-    savingsPercent: number;
-    withinAmpLimit: boolean;
-} {
-    const originalSize = Buffer.byteLength(originalCss, 'utf8');
-    const optimizedSize = Buffer.byteLength(optimizedCss, 'utf8');
-    const savings = originalSize - optimizedSize;
-    const savingsPercent = originalSize > 0 ? (savings / originalSize) * 100 : 0;
-
-    return {
-        originalSize,
-        optimizedSize,
-        savings,
-        savingsPercent,
-        withinAmpLimit: optimizedSize <= MAX_CSS_SIZE,
     };
 }

@@ -17,14 +17,14 @@ const MIN_READING_TIME = 1;
  */
 function stripHtml(content: string): string {
     return content
-        .replaceAll(/<[^>]*>/g, ' ') // Replace HTML tags with space (preserves word boundaries)
+        .replaceAll(/<[^>]*>/gu, ' ') // Replace HTML tags with space (preserves word boundaries)
         .replaceAll('&nbsp;', ' ') // Replace HTML entities
         .replaceAll('&amp;', '&')
         .replaceAll('&lt;', '<')
         .replaceAll('&gt;', '>')
         .replaceAll('&quot;', '"')
         .replaceAll('&#39;', "'")
-        .replaceAll(/\s+/g, ' ') // Normalize multiple spaces to single space
+        .replaceAll(/\s+/gu, ' ') // Normalize multiple spaces to single space
         .trim();
 }
 
@@ -43,7 +43,7 @@ export function wordCount(content?: string | null): number {
     // Split by whitespace and filter empty strings
     const words = plainText
         .trim()
-        .split(/\s+/)
+        .split(/\s+/u)
         .filter((word) => word.length > 0);
 
     return words.length;

@@ -5,6 +5,7 @@
  */
 
 import { minify } from 'html-minifier-terser';
+import { processWithLightningCss } from '../lib/lightningCss.js';
 
 /**
  * HTML Minifier configuration optimized for AMP
@@ -31,11 +32,21 @@ const MINIFIER_OPTIONS = {
     sortClassName: true,
 
     // Content handling
-    minifyCSS: false, // CSS already minified by CSSO
+    minifyCSS: (text: string): string => {
+        try {
+            const { css } = processWithLightningCss({
+                code: text,
+                maxSize: Infinity, // No limit during minification phase, guarded later
+            });
+            return css;
+        } catch {
+            return text;
+        }
+    },
     minifyJS: false, // AMP scripts are external
 
     // AMP-specific: Keep custom amp-bind [attribute] syntax
-    customAttrAssign: [/\[.*?\]/],
+    customAttrAssign: [/\[.*?\]/u],
 
     // Safety
     keepClosingSlash: false,

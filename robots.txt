@@ -4,6 +4,9 @@
 User-agent: *
 Allow: /
 
+# Allow crawling of favicons for rich snippets
+Allow: /favicons/
+
 # Disallow utility and system pages
 Disallow: /sw.html
 Disallow: /offline.html

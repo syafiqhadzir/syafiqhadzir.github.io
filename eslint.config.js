@@ -5,6 +5,7 @@ import eslintConfigPrettier from 'eslint-config-prettier';
 import unicorn from 'eslint-plugin-unicorn';
 import sonarjs from 'eslint-plugin-sonarjs';
 import jsdoc from 'eslint-plugin-jsdoc';
+import security from 'eslint-plugin-security';
 
 /**
  * ESLint Flat Configuration - STRICTEST MODE + ADVANCED PLUGINS
@@ -15,6 +16,7 @@ import jsdoc from 'eslint-plugin-jsdoc';
  * - eslint-plugin-unicorn (modern JS patterns)
  * - eslint-plugin-sonarjs (code quality)
  * - eslint-plugin-jsdoc (documentation)
+ * - eslint-plugin-security (security best practices)
  * @see https://eslint.org/docs/latest/use/configure/configuration-files-new
  */
 export default tseslint.config(
@@ -27,6 +29,7 @@ export default tseslint.config(
             'coverage/**',
             '*.min.js',
             'cypress/reports/**',
+            '**/*.worker.js', // Web Workers have different context
         ],
     },
 
@@ -46,6 +49,9 @@ export default tseslint.config(
     // JSDoc - Documentation standards
     jsdoc.configs['flat/recommended-typescript'],
 
+    // Security - Security best practices
+    security.configs.recommended,
+
     // Prettier compatibility (must be last)
     eslintConfigPrettier,
 
@@ -63,6 +69,10 @@ export default tseslint.config(
                 project: './tsconfig.eslint.json',
                 tsconfigRootDir: import.meta.dirname,
             },
+        },
+        // Enable ESLint caching for performance
+        linterOptions: {
+            reportUnusedDisableDirectives: 'error',
         },
     },
 
@@ -119,6 +129,77 @@ export default tseslint.config(
                 },
             ],
 
+            // ========== TYPESCRIPT NAMING CONVENTION ==========
+            '@typescript-eslint/naming-convention': [
+                'error',
+                { selector: 'default', format: ['camelCase'] },
+                { selector: 'variable', format: ['camelCase', 'UPPER_CASE'] },
+                {
+                    selector: 'variable',
+                    modifiers: ['const', 'exported'],
+                    format: ['camelCase', 'UPPER_CASE', 'PascalCase'],
+                },
+                {
+                    selector: 'parameter',
+                    format: ['camelCase'],
+                    leadingUnderscore: 'allow',
+                    trailingUnderscore: 'allow',
+                },
+                { selector: 'typeLike', format: ['PascalCase'] },
+                { selector: 'enumMember', format: ['PascalCase', 'UPPER_CASE'] },
+                {
+                    selector: 'property',
+                    format: ['camelCase', 'PascalCase', 'snake_case', 'UPPER_CASE'],
+                }, // Flexible for objects
+                // Allow JSON-LD @-prefixed properties (Schema.org)
+                {
+                    selector: 'property',
+                    filter: { regex: '^@', match: true },
+                    format: [],
+                },
+            ],
+
+            // ========== TYPESCRIPT MEMBER ORDERING ==========
+            '@typescript-eslint/member-ordering': [
+                'error',
+                {
+                    default: [
+                        'public-static-field',
+                        'protected-static-field',
+                        'private-static-field',
+                        'public-instance-field',
+                        'protected-instance-field',
+                        'private-instance-field',
+                        'constructor',
+                        'public-static-method',
+                        'protected-static-method',
+                        'private-static-method',
+                        'public-instance-method',
+                        'protected-instance-method',
+                        'private-instance-method',
+                    ],
+                },
+            ],
+
+            // ========== NO MAGIC NUMBERS ==========
+            'no-magic-numbers': 'off',
+            '@typescript-eslint/no-magic-numbers': [
+                'warn',
+                {
+                    // Common values: indices, percentages, time, sizes (KB, screen widths)
+                    ignore: [-1, 0, 1, 2, 7, 10, 24, 30, 60, 75, 100, 365, 640, 1000, 1024, 1920],
+                    ignoreArrayIndexes: true,
+                    ignoreDefaultValues: true,
+                    ignoreEnums: true,
+                    ignoreNumericLiteralTypes: true,
+                    ignoreReadonlyClassProperties: true,
+                    ignoreTypeIndexes: true,
+                },
+            ],
+
+            // ========== REGEX SAFETY ==========
+            'require-unicode-regexp': 'warn',
+
             // ========== UNICORN (Modern JS) ==========
             'unicorn/filename-case': ['error', { case: 'camelCase' }],
             'unicorn/no-null': 'off', // Allow null for DOM APIs
@@ -154,6 +235,15 @@ export default tseslint.config(
             'sonarjs/slow-regex': 'off', // False positives on simple patterns
             'sonarjs/use-type-alias': 'off', // Interfaces preferred in TS
             'sonarjs/no-clear-text-protocols': 'warn', // Schema.org uses http
+
+            // ========== SECURITY ==========
+            'security/detect-object-injection': 'warn',
+            'security/detect-non-literal-regexp': 'warn',
+            'security/detect-unsafe-regex': 'error',
+            'security/detect-buffer-noassert': 'error',
+            'security/detect-eval-with-expression': 'error',
+            'security/detect-no-csrf-before-method-override': 'error',
+            'security/detect-possible-timing-attacks': 'warn',
 
             // ========== JSDOC (Documentation) ==========
             'jsdoc/require-jsdoc': [
@@ -221,6 +311,17 @@ export default tseslint.config(
             'jsdoc/require-param': 'off', // Types are sufficient
             'jsdoc/require-returns': 'off', // Types are sufficient
             'jsdoc/tag-lines': 'off', // Style preference
+
+            // Security exceptions for CLI tools (false positives)
+            'security/detect-non-literal-fs-filename': 'off', // CLI tools work with dynamic paths
+            'security/detect-non-literal-regexp': 'off', // CLI tools use dynamic patterns
+            'security/detect-object-injection': 'off', // Safe in build context
+
+            // Regex unicode flag not critical for CLI tools
+            'require-unicode-regexp': 'off',
+
+            // Magic numbers more common in CLI scripts
+            '@typescript-eslint/no-magic-numbers': 'off',
         },
     },
 

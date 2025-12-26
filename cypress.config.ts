@@ -10,10 +10,10 @@ export default defineConfig({
         viewportHeight: 720,
 
         // Performance & Stability
-        defaultCommandTimeout: 10000,
-        pageLoadTimeout: 30000,
-        requestTimeout: 10000,
-        responseTimeout: 30000,
+        defaultCommandTimeout: 10_000,
+        pageLoadTimeout: 30_000,
+        requestTimeout: 10_000,
+        responseTimeout: 30_000,
 
         // Memory Management (Cypress 12+)
         experimentalMemoryManagement: true,
@@ -26,13 +26,13 @@ export default defineConfig({
         env: {
             // A11y thresholds (can be overridden via CLI)
             a11yThreshold: 0,
-            enableA11yLogs: true
+            enableA11yLogs: true,
         },
 
         // Retries
         retries: {
             runMode: 2,
-            openMode: 0
+            openMode: 0,
         },
 
         // Screenshots & Videos
@@ -40,26 +40,29 @@ export default defineConfig({
         screenshotOnRunFailure: true,
         screenshotsFolder: 'cypress/screenshots',
 
-        // Reporter Configuration (Mochawesome)
-        reporter: 'mochawesome',
+        // Reporter Configuration (cypress-mochawesome-reporter)
+        reporter: 'cypress-mochawesome-reporter',
         reporterOptions: {
             reportDir: 'cypress/reports',
-            overwrite: false,
-            html: true,
-            json: true,
-            timestamp: 'mmddyyyy_HHMMss'
+            charts: true,
+            reportPageTitle: 'E2E Test Report',
+            embeddedScreenshots: true,
+            inlineAssets: true,
+            saveAllAttempts: false,
         },
 
         // Spec Pattern
         specPattern: 'cypress/e2e/**/*.cy.ts',
 
         setupNodeEvents(on, config) {
+            // cypress-mochawesome-reporter plugin
+            require('cypress-mochawesome-reporter/plugin')(on);
+
             // Graceful error handling for uncaught exceptions
             on('task', {
                 log(message) {
                     console.log(message);
-                    return null;
-                }
+                },
             });
 
             return config;

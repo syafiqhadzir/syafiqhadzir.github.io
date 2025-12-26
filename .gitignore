@@ -113,3 +113,47 @@ $RECYCLE.BIN/
 # AI & Local Tools
 .gemini/
 .agent/
+
+# --- Housekeeping & Reports ---
+housekeeping-report.json
+
+# --- Package Tarballs ---
+*.tgz
+
+# --- Cloudflare ---
+.wrangler/
+
+# --- Playwright ---
+.playwright/
+playwright-report/
+test-results/
+
+# --- Storybook ---
+storybook-static/
+
+# --- Bundle Analyzers ---
+stats.json
+bundle-stats.json
+webpack-stats.json
+
+# --- TypeScript Incremental ---
+tsconfig.tsbuildinfo
+
+# --- Docker ---
+*.pid
+*.seed
+*.pid.lock
+
+# --- pm2 ---
+.pm2/
+
+# --- Yarn v2+ (Berry) ---
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# --- pnpm ---
+.pnpm-store/

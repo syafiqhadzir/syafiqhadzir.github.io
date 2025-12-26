@@ -149,7 +149,7 @@ npm run test:a11y     # Accessibility tests only
 npm run test:e2e:open
 ```
 
-### Test Structure
+### E2E Test Structure
 
 ```typescript
 // cypress/e2e/smoke.cy.ts
@@ -245,20 +245,26 @@ module.exports = {
 
 ### Performance Budget
 
-Defined in `perf-budget.json`:
+Defined in `perf-budgets.json`:
 
 ```json
 {
-  "resourceSizes": [
+  "budgets": [
     {
-      "resourceType": "script",
-      "budget": 50
-    },
-    {
-      "resourceType": "stylesheet",
-      "budget": 30
+      "path": "/*",
+      "resourceSizes": [
+        { "resourceType": "document", "budget": 50 },
+        { "resourceType": "stylesheet", "budget": 75 },
+        { "resourceType": "script", "budget": 100 },
+        { "resourceType": "image", "budget": 200 },
+        { "resourceType": "total", "budget": 500 }
+      ]
     }
-  ]
+  ],
+  "thresholds": {
+    "performance": 90,
+    "accessibility": 95
+  }
 }
 ```
 
@@ -348,7 +354,7 @@ The CI pipeline runs different test suites depending on context:
 
 ### File Naming Conventions
 
-```
+```text
 test/
 ├── filters/
 │   └── dateFormat.test.ts     # Unit tests for src/filters/dateFormat.ts
@@ -455,6 +461,7 @@ describe('Logger', () => {
    - Download `sonarcloud-diagnostics` (if Sonar failed)
 
 3. **Reproduce locally:**
+
    ```bash
    # Run exact same command from CI
    npm run test:e2e:ci

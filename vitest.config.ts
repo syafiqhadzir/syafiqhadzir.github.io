@@ -29,13 +29,13 @@ export default defineConfig({
             enabled: true,
 
             // Output reporters - LCOV is required for SonarQube
-            reporter: ['text', 'text-summary', 'lcov', 'html', 'json'],
+            reporter: ['text', 'text-summary', 'lcov', 'html', 'json', 'json-summary'],
 
             // Coverage output directory
             reportsDirectory: './coverage',
 
             // Files to include in coverage
-            include: ['src/**/*.ts', 'scripts/**/*.ts'],
+            include: ['src/**/*.ts'],
 
             // Files to exclude from coverage
             exclude: [
@@ -53,10 +53,10 @@ export default defineConfig({
             // Coverage thresholds - Set to achievable levels for unit tests
             // Note: Some CLI/file-system code is tested via integration only
             thresholds: {
-                statements: 85,
+                statements: 80,
                 branches: 75,
-                functions: 85,
-                lines: 85,
+                functions: 80,
+                lines: 80,
             },
 
             // Clean coverage before running

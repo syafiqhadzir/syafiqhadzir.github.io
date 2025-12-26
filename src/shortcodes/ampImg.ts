@@ -95,6 +95,29 @@ export function ampImg(options: AmpImgShortcodeOptions): string {
     // Validate inputs
     validateOptions({ src, alt, width, height });
 
+    // Auto-generate srcset for raster images (jpg, png, webp) if responsive
+    let srcset = '';
+    const isRaster = /\.(jpe?g|png|webp)$/iu.test(src);
+
+    if (layout === 'responsive' && isRaster) {
+        // Assume optimized images exist at standard breakpoints
+        // e.g. "image.jpg" -> "image-640w.jpg 640w, image-1024w.jpg 1024w"
+        const breakpoints = [640, 1024, 1920];
+        const extension = src.slice(src.lastIndexOf('.'));
+        const basePath = src.slice(0, src.lastIndexOf('.'));
+
+        srcset = breakpoints.map((w) => `${basePath}-${w}w${extension} ${w}w`).join(', ');
+
+        // Add original as fallback/max
+        srcset += `, ${src} ${width}w`;
+    }
+
+    // Auto-generate sizes
+    let sizes = '';
+    if (layout === 'responsive') {
+        sizes = `(max-width: ${width}px) 100vw, ${width}px`;
+    }
+
     // Build attributes
     const attributes: string[] = [
         `src="${escapeAttribute(src)}"`,
@@ -103,6 +126,14 @@ export function ampImg(options: AmpImgShortcodeOptions): string {
         `height="${height}"`,
         `layout="${layout}"`,
     ];
+
+    if (srcset) {
+        attributes.push(`srcset="${escapeAttribute(srcset)}"`);
+    }
+
+    if (sizes) {
+        attributes.push(`sizes="${escapeAttribute(sizes)}"`);
+    }
 
     // Add optional class
     if (className) {

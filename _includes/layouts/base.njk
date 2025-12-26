@@ -24,15 +24,15 @@
     {# Preload Critical Resources #}
     {# AMP Core Script - Critical for rendering #}
     <link rel="preload" as="script" href="https://cdn.ampproject.org/v0.js" crossorigin>
-    
+
     {# AMP Extension Scripts - Modulepreload for better caching #}
     <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-bind-0.1.js" crossorigin>
     <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin>
-    
+
     {# Critical Fonts - WOFF2 for modern browsers #}
     <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-solid-900.woff2" crossorigin>
     <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-brands-400.woff2" crossorigin>
-    
+
     {# Google Font Preload #}
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
 
@@ -80,23 +80,36 @@
     </script>
     {% endblock %}
 
-    {# Favicons #}
-    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
-    <link rel="shortcut icon" href="/favicons/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
+    {# Favicons - Ordered largest to smallest for optimal browser selection #}
+    <link rel="preload" as="image" type="image/svg+xml" href="/favicons/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicons/favicon-16x16.png">
+    <link rel="shortcut icon" href="/favicons/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
     <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#FF0F00">
     <link rel="manifest" href="/favicons/site.webmanifest">
+
+    {# Apple iOS PWA Configuration #}
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-title" content="Syafiq Hadzir">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    {# Microsoft Tile Configuration #}
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png">
-    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+
+    {# Theme Colors - Dual mode for light/dark preference #}
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)">
     <meta name="viewport" content="width=device-width,initial-scale=1">
 
     {# AMP Runtime Optimization #}
     {# Indicates this page is AMP-first (no separate canonical) #}
     <meta name="amp-script-src" content="sha384-*">
-    
+
     {# AMP Transform Indicator - Signals to AMP Cache this is pre-optimized #}
     <meta name="amp-google-client-id-api" content="googleanalytics">
 

@@ -6,13 +6,17 @@
     },
     "include": [
         "src/**/*.ts",
+        "src/**/*.js",
         "test/**/*.ts",
-        "scripts/**/*.ts",
+        "scripts/**/*",
+        "scripts/build-production.ts",
         "cypress/**/*.ts",
         "cypress.config.ts",
         "vitest.config.ts",
+        "knip.config.ts",
         "eleventy.config.js",
         "eslint.config.js",
+        "types/**/*.d.ts",
         "stylelint.config.js",
         "*.config.js"
     ],

@@ -8,7 +8,7 @@
 const DEFAULT_MAX_SIZE = 75 * 1024;
 
 /** Regex to extract <style amp-custom> content */
-const AMP_CUSTOM_STYLE_REGEX = /<style\s+amp-custom[^>]*>([\s\S]*?)<\/style>/i;
+const AMP_CUSTOM_STYLE_REGEX = /<style\s+amp-custom[^>]*>([\s\S]*?)<\/style>/iu;
 
 /**
  * Result of CSS guard check
@@ -67,21 +67,16 @@ export function checkCssSize(css: string, maxBytes: number = DEFAULT_MAX_SIZE): 
     };
 }
 
+import { processWithLightningCss } from '../lib/lightningCss.js';
+
 /**
  * CSS Guard Transform for Eleventy
  * Fails the build if inlined CSS exceeds the specified limit
+ * Uses LightningCSS for AST-based verification and minification
  * @param content - HTML content
  * @param maxSizeBytes - Maximum allowed CSS size in bytes (default: 75KB)
  * @returns Original content if valid
  * @throws {Error} If CSS exceeds the limit
- * @example
- * // In eleventy.config.js
- * eleventyConfig.addTransform('cssGuard', (content, outputPath) => {
- *     if (outputPath?.endsWith('.html')) {
- *         return cssGuard(content, 75 * 1024);
- *     }
- *     return content;
- * });
  */
 export function cssGuard(content: string, maxSizeBytes: number = DEFAULT_MAX_SIZE): string {
     if (content === '') {
@@ -96,21 +91,35 @@ export function cssGuard(content: string, maxSizeBytes: number = DEFAULT_MAX_SIZ
         return content;
     }
 
-    // Check CSS size
-    const result = checkCssSize(css, maxSizeBytes);
-
-    // Build logging removed for strict lint compliance
+    // Process with LightningCSS (Minify + Check Size)
+    const result = processWithLightningCss({
+        code: css,
+        maxSize: maxSizeBytes,
+        filename: 'inline-amp.css',
+    });
 
     // Fail build if over limit
     if (!result.valid) {
         throw new Error(
-            `[CSS Guard] BUILD FAILED: ${result.error}\n` +
+            `[CSS Guard] BUILD FAILED: CSS size (${result.sizeKB}) exceeds AMP limit of ${(maxSizeBytes / 1024).toFixed(0)}KB\n` +
                 `Reduce your CSS to stay within the AMP limit.\n` +
                 `Tips:\n` +
                 `  - Remove unused styles\n` +
-                `  - Use CSSO for minification\n` +
                 `  - Split critical/non-critical CSS`
         );
+    }
+
+    // Replace the original CSS with the minified version (Optimization)
+    // We use a safe replacement that only touches the extracted CSS
+    // However, since we extracted via regex match[1], we need to be careful.
+    // simpler to just replace the first occurrence of the css block content if we are sure.
+    // Or better, re-construct the tag.
+
+    const match = AMP_CUSTOM_STYLE_REGEX.exec(content);
+    if (match) {
+        const fullTag = match[0];
+        const newTag = `<style amp-custom>${result.css}</style>`;
+        return content.replace(fullTag, newTag);
     }
 
     return content;

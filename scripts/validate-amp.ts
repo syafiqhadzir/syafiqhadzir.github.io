@@ -187,9 +187,8 @@ async function main(): Promise<void> {
     console.log('🔍 AMP HTML Validator\n');
 
     // Dynamic import of amphtml-validator
-    // @ts-expect-error - amphtml-validator lacks proper ESM type exports
     const amphtmlValidator = await import('amphtml-validator');
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
+
     const validator = (await amphtmlValidator.getInstance()) as Validator;
 
     const targetDirectory = process.argv[2] ?? '_site';

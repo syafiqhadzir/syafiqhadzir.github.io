@@ -7,6 +7,17 @@
 /** Locale for date formatting */
 const LOCALE = 'en-GB';
 
+/** Time constants in milliseconds */
+const MS_PER_SECOND = 1000;
+const MS_PER_MINUTE = MS_PER_SECOND * 60;
+const MS_PER_HOUR = MS_PER_MINUTE * 60;
+const MS_PER_DAY = MS_PER_HOUR * 24;
+
+/** Day thresholds for relative time */
+const DAYS_PER_WEEK = 7;
+const DAYS_PER_MONTH = 30;
+const DAYS_PER_YEAR = 365;
+
 /**
  * Format options for different date styles
  */
@@ -95,34 +106,34 @@ export function relativeDate(date: Date | string | number): string {
     const parsedDate = parseDate(date);
     const now = new Date();
     const diffMs = now.getTime() - parsedDate.getTime();
-    const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+    const diffDays = Math.floor(diffMs / MS_PER_DAY);
 
     const rtf = new Intl.RelativeTimeFormat(LOCALE, { numeric: 'auto' });
 
     if (Math.abs(diffDays) < 1) {
-        const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+        const diffHours = Math.floor(diffMs / MS_PER_HOUR);
         if (Math.abs(diffHours) < 1) {
-            const diffMinutes = Math.floor(diffMs / (1000 * 60));
+            const diffMinutes = Math.floor(diffMs / MS_PER_MINUTE);
             return rtf.format(-diffMinutes, 'minute');
         }
         return rtf.format(-diffHours, 'hour');
     }
 
-    if (Math.abs(diffDays) < 7) {
+    if (Math.abs(diffDays) < DAYS_PER_WEEK) {
         return rtf.format(-diffDays, 'day');
     }
 
-    if (Math.abs(diffDays) < 30) {
-        const diffWeeks = Math.floor(diffDays / 7);
+    if (Math.abs(diffDays) < DAYS_PER_MONTH) {
+        const diffWeeks = Math.floor(diffDays / DAYS_PER_WEEK);
         return rtf.format(-diffWeeks, 'week');
     }
 
-    if (Math.abs(diffDays) < 365) {
-        const diffMonths = Math.floor(diffDays / 30);
+    if (Math.abs(diffDays) < DAYS_PER_YEAR) {
+        const diffMonths = Math.floor(diffDays / DAYS_PER_MONTH);
         return rtf.format(-diffMonths, 'month');
     }
 
-    const diffYears = Math.floor(diffDays / 365);
+    const diffYears = Math.floor(diffDays / DAYS_PER_YEAR);
     return rtf.format(-diffYears, 'year');
 }
 
