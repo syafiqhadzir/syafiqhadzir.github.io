@@ -1,4 +1,5 @@
 #!/usr/bin/env npx ts-node
+/* eslint-disable sonarjs/code-eval -- False positive: this file checks for 'javascript:' protocol strings, not executing code */
 /**
  * Link Checker Script
  * Validates all internal and external links in the built site
@@ -9,7 +10,7 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join } from 'node:path';
 
-interface LinkCheckResult {
+export interface LinkCheckResult {
     file: string;
     link: string;
     type: 'internal' | 'external';
@@ -22,21 +23,19 @@ interface LinkCheckResult {
  * @param html - HTML content to extract links from
  * @returns Array of extracted links
  */
-function extractLinks(html: string): string[] {
+export function extractLinks(html: string): string[] {
     const linkRegex = /href=["']([^"']+)["']/g;
     const links: string[] = [];
     let match: RegExpExecArray | null;
 
+    // Protocols to skip during link extraction (these are non-navigable links)
+    const ignoredProtocols = ['javascript:', 'mailto:', 'tel:'];
+
     while ((match = linkRegex.exec(html)) !== null) {
         const href = match[1];
-        // Skip empty, javascript:, and mailto: links
-        // eslint-disable-next-line sonarjs/code-eval -- Safe: just checking href prefix, not evaluating
-        if (
-            href &&
-            !href.startsWith('javascript:') &&
-            !href.startsWith('mailto:') &&
-            !href.startsWith('tel:')
-        ) {
+        // Skip empty links and links with ignored protocols
+        const shouldSkip = !href || ignoredProtocols.some((protocol) => href.startsWith(protocol));
+        if (!shouldSkip) {
             links.push(href);
         }
     }
@@ -49,7 +48,7 @@ function extractLinks(html: string): string[] {
  * @param directory - Directory to search
  * @returns Array of HTML file paths
  */
-function getHtmlFiles(directory: string): string[] {
+export function getHtmlFiles(directory: string): string[] {
     const files: string[] = [];
 
     const entries = readdirSync(directory);
@@ -73,7 +72,7 @@ function getHtmlFiles(directory: string): string[] {
  * @param baseDirectory - Base directory for resolution
  * @returns Whether the link exists
  */
-function checkInternalLink(link: string, baseDirectory: string): boolean {
+export function checkInternalLink(link: string, baseDirectory: string): boolean {
     // Remove query string and hash
     const cleanLink = link.split('?')[0].split('#')[0];
 
@@ -98,7 +97,7 @@ function checkInternalLink(link: string, baseDirectory: string): boolean {
  * @param directory - Directory containing built site
  * @returns Array of link check results
  */
-function checkLinks(directory: string): LinkCheckResult[] {
+export function checkLinks(directory: string): LinkCheckResult[] {
     const results: LinkCheckResult[] = [];
     const htmlFiles = getHtmlFiles(directory);
 
@@ -147,7 +146,7 @@ function checkLinks(directory: string): LinkCheckResult[] {
  * Print results summary
  * @param results - Array of link check results
  */
-function printResults(results: LinkCheckResult[]): void {
+export function printResults(results: LinkCheckResult[]): void {
     const broken = results.filter((r) => r.status === 'broken');
     const warnings = results.filter((r) => r.status === 'warning');
     const ok = results.filter((r) => r.status === 'ok');
@@ -176,10 +175,21 @@ function printResults(results: LinkCheckResult[]): void {
     }
 }
 
-// Main execution
-const directory = process.argv[2] || '_site';
+/**
+ * Main execution function
+ * @param directory - Directory to check
+ * @returns Exit code (0 for success, 1 for broken links)
+ */
+export function main(directory: string): number {
+    const results = checkLinks(directory);
+    printResults(results);
+    const broken = results.filter((r) => r.status === 'broken');
+    return broken.length > 0 ? 1 : 0;
+}
 
-const results = checkLinks(directory);
-printResults(results);
-const broken = results.filter((r) => r.status === 'broken');
-process.exit(broken.length > 0 ? 1 : 0);
+// Only run main when executed directly (not when imported for testing)
+const isMainModule = process.argv[1]?.includes('link-checker');
+if (isMainModule) {
+    const directory = process.argv[2] || '_site';
+    process.exit(main(directory));
+}

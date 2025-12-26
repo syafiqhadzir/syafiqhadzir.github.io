@@ -21,14 +21,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
         with:
           node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: TypeScript Check
         run: npm run typecheck
@@ -50,20 +46,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
         with:
           node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Run Unit Tests
         run: npm run test:unit:coverage
 
       - name: Upload Coverage
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: coverage-report
           path: coverage/
@@ -80,14 +72,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
         with:
           node-version: '24'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Build
         run: npm run build:prod
@@ -96,7 +84,7 @@ jobs:
         run: npm run validate:amp:build
 
       - name: Upload Build
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: site-build
           path: _site/
@@ -113,20 +101,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
         with:
           node-version: '24'
-          cache: 'npm'
 
       - name: Download Build
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v7
         with:
           name: site-build
           path: _site/
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Cypress Run
         uses: cypress-io/github-action@v6
@@ -138,7 +122,7 @@ jobs:
 
       - name: Upload Cypress Screenshots
         if: failure()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: cypress-screenshots
           path: cypress/screenshots/
@@ -158,14 +142,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Setup Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v4
+      - name: Bootstrap Environment
+        uses: ./.github/actions/bootstrap-env
         with:
           node-version: ${{ matrix.node }}
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
 
       - name: Build
         run: npm run build

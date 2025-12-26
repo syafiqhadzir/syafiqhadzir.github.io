@@ -1,5 +1,5 @@
 name: 'Bootstrap Environment'
-description: 'Standardized setup: Checkout, Node, Cache, and Install'
+description: 'Standardized setup: Node, Cache, Install, and TypeScript compilation'
 inputs:
   node-version:
     description: 'Node.js version'
@@ -10,21 +10,42 @@ runs:
   using: 'composite'
   steps:
     - name: Setup Node.js ${{ inputs.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v6
       with:
         node-version: ${{ inputs.node-version }}
         cache: 'npm'
 
-    - name: Check for build cache
+    - name: Cache node_modules and Cypress
       id: node-modules-cache
-      uses: actions/cache@v4
+      uses: actions/cache@v5
       with:
         path: |
           node_modules
           ~/.cache/Cypress
-        key: ${{ runner.os }}-node-${{ inputs.node-version }}-modules-${{ hashFiles('package-lock.json') }}-v1
+        key: ${{ runner.os }}-node-${{ inputs.node-version }}-modules-${{ hashFiles('package-lock.json') }}-v2
+        restore-keys: |
+          ${{ runner.os }}-node-${{ inputs.node-version }}-modules-
+
+    - name: Cache TypeScript compiled output
+      id: ts-cache
+      uses: actions/cache@v5
+      with:
+        path: dist
+        key: ${{ runner.os }}-ts-${{ hashFiles('src/**/*.ts') }}-v1
+        restore-keys: |
+          ${{ runner.os }}-ts-
 
     - name: Install Dependencies
       if: steps.node-modules-cache.outputs.cache-hit != 'true'
       run: npm ci --ignore-scripts && npx cypress install
+      shell: bash
+
+    - name: Run postinstall scripts
+      if: steps.node-modules-cache.outputs.cache-hit == 'true'
+      run: npm rebuild 2>/dev/null || true
+      shell: bash
+
+    - name: Compile TypeScript
+      if: steps.ts-cache.outputs.cache-hit != 'true'
+      run: npm run compile:ts
       shell: bash

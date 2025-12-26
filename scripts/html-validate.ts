@@ -9,18 +9,18 @@
 import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { extname, join, relative } from 'node:path';
 
-interface ValidationResult {
+export interface ValidationResult {
     file: string;
     errors: ValidationError[];
     warnings: ValidationWarning[];
 }
 
-interface ValidationError {
+export interface ValidationError {
     message: string;
     line?: number;
 }
 
-interface ValidationWarning {
+export interface ValidationWarning {
     message: string;
     line?: number;
 }
@@ -30,7 +30,7 @@ interface ValidationWarning {
  * @param directory - Directory to search
  * @returns Array of HTML file paths
  */
-function getHtmlFiles(directory: string): string[] {
+export function getHtmlFiles(directory: string): string[] {
     const files: string[] = [];
 
     const entries = readdirSync(directory);
@@ -53,7 +53,7 @@ function getHtmlFiles(directory: string): string[] {
  * @param content - HTML content
  * @returns Errors and warnings
  */
-function checkBasicRequirements(content: string): {
+export function checkBasicRequirements(content: string): {
     errors: ValidationError[];
     warnings: ValidationWarning[];
 } {
@@ -94,7 +94,7 @@ function checkBasicRequirements(content: string): {
  * @param content - HTML content
  * @returns Errors for missing alt attributes
  */
-function checkImageAccessibility(content: string): ValidationError[] {
+export function checkImageAccessibility(content: string): ValidationError[] {
     const errors: ValidationError[] = [];
     const imgRegex = /<img[^>]*>/gi;
     let imgMatch: RegExpExecArray | null;
@@ -114,7 +114,7 @@ function checkImageAccessibility(content: string): ValidationError[] {
  * @param content - HTML content
  * @returns Warnings for heading issues
  */
-function checkHeadings(content: string): ValidationWarning[] {
+export function checkHeadings(content: string): ValidationWarning[] {
     const warnings: ValidationWarning[] = [];
     const h1Count = (content.match(/<h1[^>]*>/gi) ?? []).length;
 
@@ -132,7 +132,7 @@ function checkHeadings(content: string): ValidationWarning[] {
  * @param content - HTML content
  * @returns Errors and warnings
  */
-function checkDeprecatedPatterns(content: string): {
+export function checkDeprecatedPatterns(content: string): {
     errors: ValidationError[];
     warnings: ValidationWarning[];
 } {
@@ -169,7 +169,7 @@ function checkDeprecatedPatterns(content: string): {
  * @param filePath - Path to the file
  * @returns Validation result
  */
-function validateHtml(content: string, filePath: string): ValidationResult {
+export function validateHtml(content: string, filePath: string): ValidationResult {
     const basicChecks = checkBasicRequirements(content);
     const imageErrors = checkImageAccessibility(content);
     const headingWarnings = checkHeadings(content);
@@ -185,8 +185,9 @@ function validateHtml(content: string, filePath: string): ValidationResult {
 /**
  * Print error details
  * @param errors - Array of errors
+ * @returns Count of errors printed
  */
-function printErrors(errors: ValidationError[]): number {
+export function printErrors(errors: ValidationError[]): number {
     let count = 0;
     for (const error of errors) {
         const lineInfo = error.line ? `:${error.line}` : '';
@@ -199,8 +200,9 @@ function printErrors(errors: ValidationError[]): number {
 /**
  * Print warning details
  * @param warnings - Array of warnings
+ * @returns Count of warnings printed
  */
-function printWarnings(warnings: ValidationWarning[]): number {
+export function printWarnings(warnings: ValidationWarning[]): number {
     let count = 0;
     for (const warning of warnings) {
         const lineInfo = warning.line ? `:${warning.line}` : '';
@@ -215,7 +217,7 @@ function printWarnings(warnings: ValidationWarning[]): number {
  * @param results - Array of validation results
  * @param baseDirectory - Base directory for relative paths
  */
-function printResults(results: ValidationResult[], baseDirectory: string): void {
+export function printResults(results: ValidationResult[], baseDirectory: string): void {
     let totalErrors = 0;
     let totalWarnings = 0;
 
@@ -240,24 +242,36 @@ function printResults(results: ValidationResult[], baseDirectory: string): void 
     }
 }
 
-// Main execution
-const directory = process.argv[2] ?? '_site';
+/**
+ * Main execution function
+ * @param directory - Directory to validate
+ * @returns Exit code (0 for success, 1 for errors)
+ */
+export function main(directory: string): number {
+    try {
+        const htmlFiles = getHtmlFiles(directory);
+        console.log(`\n🔍 Validating ${htmlFiles.length} HTML files in ${directory}...\n`);
 
-try {
-    const htmlFiles = getHtmlFiles(directory);
-    console.log(`\n🔍 Validating ${htmlFiles.length} HTML files in ${directory}...\n`);
+        const results: ValidationResult[] = [];
+        for (const file of htmlFiles) {
+            const content = readFileSync(file, 'utf8');
+            results.push(validateHtml(content, file));
+        }
 
-    const results: ValidationResult[] = [];
-    for (const file of htmlFiles) {
-        const content = readFileSync(file, 'utf8');
-        results.push(validateHtml(content, file));
+        printResults(results, directory);
+
+        const totalErrors = results.reduce((sum, r) => sum + r.errors.length, 0);
+        return totalErrors > 0 ? 1 : 0;
+    } catch (error: unknown) {
+        console.error('Error:', (error as Error).message);
+        return 1;
     }
+}
 
-    printResults(results, directory);
-
-    const totalErrors = results.reduce((sum, r) => sum + r.errors.length, 0);
-    process.exit(totalErrors > 0 ? 1 : 0);
-} catch (error: unknown) {
-    console.error('Error:', (error as Error).message);
-    process.exit(1);
+// Only run main when executed directly (not when imported for testing)
+// Check if this file is being run directly
+const isMainModule = process.argv[1]?.includes('html-validate');
+if (isMainModule) {
+    const directory = process.argv[2] ?? '_site';
+    process.exit(main(directory));
 }

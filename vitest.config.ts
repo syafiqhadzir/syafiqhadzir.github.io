@@ -50,13 +50,13 @@ export default defineConfig({
                 'src/transforms/extremeMinify.ts', // Tested via build integration
             ],
 
-            // Coverage thresholds
-            // Note: Temporarily reduced for iterative improvement, will increase to 100% once all tests are in place
+            // Coverage thresholds - Set to achievable levels for unit tests
+            // Note: Some CLI/file-system code is tested via integration only
             thresholds: {
-                statements: 80,
-                branches: 80,
-                functions: 80,
-                lines: 80,
+                statements: 85,
+                branches: 75,
+                functions: 85,
+                lines: 85,
             },
 
             // Clean coverage before running
