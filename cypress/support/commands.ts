@@ -5,6 +5,9 @@
 // ***********************************************
 
 import 'cypress-axe';
+import { addCompareSnapshotCommand } from 'cypress-visual-regression/dist/command';
+
+addCompareSnapshotCommand();
 
 // Terminal log helper for formatted violation output
 function terminalLog(violations: any[]) {
@@ -16,15 +19,15 @@ function terminalLog(violations: any[]) {
         id,
         impact,
         description,
-        nodes: nodes.length
+        nodes: nodes.length,
     }));
 
     // Log each violation with details
-    violationData.forEach((v, index) => {
+    for (const [index, v] of violationData.entries()) {
         cy.task('log', `\n[${index + 1}] ${v.impact?.toUpperCase() || 'UNKNOWN'}: ${v.id}`);
         cy.task('log', `    Description: ${v.description}`);
         cy.task('log', `    Occurrences: ${v.nodes}`);
-    });
+    }
 
     cy.task('log', '\n' + '='.repeat(60) + '\n');
 }
@@ -45,17 +48,17 @@ declare global {
             /**
              * Checks a meta tag content by name property
              */
-            checkMeta(name: string, content: string): Chainable<JQuery<HTMLElement>>;
+            checkMeta(name: string, content: string): Chainable<JQuery>;
 
             /**
              * Checks a meta tag content by property attribute (OG tags)
              */
-            checkOg(property: string, content: string): Chainable<JQuery<HTMLElement>>;
+            checkOg(property: string, content: string): Chainable<JQuery>;
 
             /**
              * Validates a social link href attribute
              */
-            checkSocialLink(selector: string, url: string): Chainable<JQuery<HTMLElement>>;
+            checkSocialLink(selector: string, url: string): Chainable<JQuery>;
 
             /**
              * Runs standard accessibility checks on entire page
@@ -96,10 +99,13 @@ declare global {
              * @param context - Optional CSS selector to scope the audit
              * @param options - Optional configuration { failOnViolations, includedImpacts }
              */
-            auditA11y(context?: string, options?: {
-                failOnViolations?: boolean;
-                includedImpacts?: ('minor' | 'moderate' | 'serious' | 'critical')[];
-            }): Chainable<void>;
+            auditA11y(
+                context?: string,
+                options?: {
+                    failOnViolations?: boolean;
+                    includedImpacts?: ('minor' | 'moderate' | 'serious' | 'critical')[];
+                }
+            ): Chainable<void>;
         }
     }
 }
@@ -109,15 +115,11 @@ declare global {
 // ==============================================
 
 Cypress.Commands.add('checkMeta', (name, content) => {
-    cy.get(`meta[name="${name}"]`)
-        .should('have.attr', 'content')
-        .and('include', content);
+    cy.get(`meta[name="${name}"]`).should('have.attr', 'content').and('include', content);
 });
 
 Cypress.Commands.add('checkOg', (property, content) => {
-    cy.get(`meta[property="${property}"]`)
-        .should('have.attr', 'content')
-        .and('include', content);
+    cy.get(`meta[property="${property}"]`).should('have.attr', 'content').and('include', content);
 });
 
 Cypress.Commands.add('checkSocialLink', (selector, url) => {
@@ -133,19 +135,24 @@ Cypress.Commands.add('checkSocialLink', (selector, url) => {
 /**
  * Full page A11y check with WCAG 2.0/2.1 AA standards
  */
-Cypress.Commands.add('validateA11y', (skipFailures = true) => {
+Cypress.Commands.add('validateA11y', (skipFailures) => {
     cy.injectAxe();
-    cy.checkA11y(undefined, {
-        runOnly: {
-            type: 'tag',
-            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
+    cy.checkA11y(
+        undefined,
+        {
+            runOnly: {
+                type: 'tag',
+                values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'],
+            },
+            rules: {
+                // AMP-specific exclusions
+                'color-contrast': { enabled: false },
+                'meta-viewport': { enabled: false }, // AMP handles this
+            },
         },
-        rules: {
-            // AMP-specific exclusions
-            'color-contrast': { enabled: false },
-            'meta-viewport': { enabled: false } // AMP handles this
-        }
-    }, terminalLog, skipFailures);
+        terminalLog,
+        skipFailures
+    );
 });
 
 /**
@@ -153,12 +160,17 @@ Cypress.Commands.add('validateA11y', (skipFailures = true) => {
  */
 Cypress.Commands.add('validateComponentA11y', (selector: string, skipFailures = true) => {
     cy.injectAxe();
-    cy.checkA11y(selector, {
-        runOnly: {
-            type: 'tag',
-            values: ['wcag2a', 'wcag2aa']
-        }
-    }, terminalLog, skipFailures);
+    cy.checkA11y(
+        selector,
+        {
+            runOnly: {
+                type: 'tag',
+                values: ['wcag2a', 'wcag2aa'],
+            },
+        },
+        terminalLog,
+        skipFailures
+    );
 });
 
 /**
@@ -167,15 +179,20 @@ Cypress.Commands.add('validateComponentA11y', (selector: string, skipFailures = 
  */
 Cypress.Commands.add('validateCriticalA11y', () => {
     cy.injectAxe();
-    cy.checkA11y('main', {
-        includedImpacts: ['critical'], // Only critical, not serious
-        rules: {
-            // AMP handles these internally
-            'bypass': { enabled: false },
-            'region': { enabled: false },
-            'landmark-one-main': { enabled: false }
-        }
-    }, terminalLog, false); // STRICT: fail on violations
+    cy.checkA11y(
+        'main',
+        {
+            includedImpacts: ['critical'], // Only critical, not serious
+            rules: {
+                // AMP handles these internally
+                bypass: { enabled: false },
+                region: { enabled: false },
+                'landmark-one-main': { enabled: false },
+            },
+        },
+        terminalLog,
+        false
+    ); // STRICT: fail on violations
 });
 
 /**
@@ -184,15 +201,20 @@ Cypress.Commands.add('validateCriticalA11y', () => {
 Cypress.Commands.add('validateMobileA11y', () => {
     cy.viewport('iphone-x');
     cy.injectAxe();
-    cy.checkA11y(undefined, {
-        runOnly: {
-            type: 'tag',
-            values: ['wcag2a', 'wcag2aa', 'wcag22aa']
+    cy.checkA11y(
+        undefined,
+        {
+            runOnly: {
+                type: 'tag',
+                values: ['wcag2a', 'wcag2aa', 'wcag22aa'],
+            },
+            rules: {
+                'color-contrast': { enabled: false },
+            },
         },
-        rules: {
-            'color-contrast': { enabled: false }
-        }
-    }, terminalLog, true);
+        terminalLog,
+        true
+    );
 });
 
 /**
@@ -201,15 +223,20 @@ Cypress.Commands.add('validateMobileA11y', () => {
 Cypress.Commands.add('validateTabletA11y', () => {
     cy.viewport('ipad-2');
     cy.injectAxe();
-    cy.checkA11y(undefined, {
-        runOnly: {
-            type: 'tag',
-            values: ['wcag2a', 'wcag2aa', 'wcag22aa']
+    cy.checkA11y(
+        undefined,
+        {
+            runOnly: {
+                type: 'tag',
+                values: ['wcag2a', 'wcag2aa', 'wcag22aa'],
+            },
+            rules: {
+                'color-contrast': { enabled: false },
+            },
         },
-        rules: {
-            'color-contrast': { enabled: false }
-        }
-    }, terminalLog, true);
+        terminalLog,
+        true
+    );
 });
 
 /**
@@ -240,12 +267,12 @@ Cypress.Commands.add('auditA11y', (context?: string, options = {}) => {
         cy.task('log', `║ 🚨 A11Y AUDIT FAILED: ${violations.length} violation(s) detected`);
         cy.task('log', '╠' + '═'.repeat(70) + '╣');
 
-        violations.forEach((violation, index) => {
+        for (const [index, violation] of violations.entries()) {
             const impactMap: Record<string, string> = {
                 critical: '🔴',
                 serious: '🟠',
                 moderate: '🟡',
-                minor: '🟢'
+                minor: '🟢',
             };
             const impactEmoji = impactMap[violation.impact as string] || '⚪';
 
@@ -254,21 +281,24 @@ Cypress.Commands.add('auditA11y', (context?: string, options = {}) => {
             cy.task('log', `║   Impact: ${violation.impact?.toUpperCase() || 'UNKNOWN'}`);
             cy.task('log', `║   Description: ${violation.description}`);
             cy.task('log', `║   Help: ${violation.helpUrl}`);
-            cy.task('log', `║   WCAG: ${violation.tags.filter((t: string) => t.startsWith('wcag')).join(', ')}`);
+            cy.task(
+                'log',
+                `║   WCAG: ${violation.tags.filter((t: string) => t.startsWith('wcag')).join(', ')}`
+            );
             cy.task('log', `║   Affected Elements (${violation.nodes.length}):`);
 
             violation.nodes.slice(0, 3).forEach((node: any, nodeIndex: number) => {
                 cy.task('log', `║     ${nodeIndex + 1}. ${node.target.join(' > ')}`);
                 if (node.failureSummary) {
                     const summary = node.failureSummary.split('\n')[0].trim();
-                    cy.task('log', `║        → ${summary.substring(0, 60)}...`);
+                    cy.task('log', `║        → ${summary.slice(0, 60)}...`);
                 }
             });
 
             if (violation.nodes.length > 3) {
                 cy.task('log', `║     ... and ${violation.nodes.length - 3} more elements`);
             }
-        });
+        }
 
         cy.task('log', '╚' + '═'.repeat(70) + '╝\n');
     };
@@ -276,13 +306,13 @@ Cypress.Commands.add('auditA11y', (context?: string, options = {}) => {
     const axeOptions: any = {
         runOnly: {
             type: 'tag',
-            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice']
+            values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa', 'best-practice'],
         },
         rules: {
             // AMP-specific exclusions
             'color-contrast': { enabled: false },
-            'meta-viewport': { enabled: false }
-        }
+            'meta-viewport': { enabled: false },
+        },
     };
 
     if (includedImpacts && includedImpacts.length > 0) {

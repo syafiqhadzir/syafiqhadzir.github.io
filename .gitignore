@@ -32,9 +32,12 @@ cypress/reports/
 cypress/.run/
 cypress-log.txt
 
-# Lighthouse CI
+# Housekeeping
 .lighthouseci/
-lhci-reports/
+*-report.json
+coverage/
+junit.xml
+test-results/
 
 # SonarCloud / Static Analysis
 .scannerwork/

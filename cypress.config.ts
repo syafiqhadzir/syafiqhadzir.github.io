@@ -1,4 +1,5 @@
 import { defineConfig } from 'cypress';
+import { configureVisualRegression } from 'cypress-visual-regression/dist/plugin';
 
 export default defineConfig({
     // Cypress Cloud Configuration
@@ -27,6 +28,7 @@ export default defineConfig({
             // A11y thresholds (can be overridden via CLI)
             a11yThreshold: 0,
             enableA11yLogs: true,
+            visualRegressionType: 'regression',
         },
 
         // Retries
@@ -55,6 +57,7 @@ export default defineConfig({
         specPattern: 'cypress/e2e/**/*.cy.ts',
 
         setupNodeEvents(on, config) {
+            configureVisualRegression(on);
             // cypress-mochawesome-reporter plugin
             require('cypress-mochawesome-reporter/plugin')(on);
 

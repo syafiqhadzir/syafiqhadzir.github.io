@@ -56,6 +56,46 @@ This project enforces strict quality gates with comprehensive test coverage:
 - **Approach:** Build validation
 - **Purpose:** Ensure AMP compliance and output correctness
 
+### Visual Regression Tests
+
+- **Tool:** Cypress Image Snapshot
+- **Approach:** Pixel-by-pixel comparison
+- **Purpose:** Prevent UI regressions and layout shifts
+- **Commands:** `npm run test:visual` (Base), `npm run test:visual:verify` (Regression)
+
+---
+
+---
+
+## Visual Regression Testing
+
+We use pixel-diffing to catch unintentional UI changes.
+
+### Workflow
+
+1.  **Generate Base Snapshots:** Run this when UI changes are intentional and approved.
+
+    ```bash
+    npm run test:visual
+    ```
+
+    _Snapshots are saved to `cypress/snapshots/base`._
+
+2.  **Verify Against Base:** Run this in CI or locally to check for regressions.
+
+    ```bash
+    npm run test:visual:verify
+    ```
+
+    _Failures generate diff images in `cypress/snapshots/diff`._
+
+### Best Practices
+
+- **Stable Environment:** Tests run against a local server (`npm run serve`) to ensure consistent
+  data/fonts.
+- **Viewport Specific:** Snapshots are generated for both Desktop (1280x720) and Mobile (375x667).
+- **Threshold:** A small threshold (0.1) is allowed for anti-aliasing differences.
+
 ---
 
 ## Unit Testing (Vitest)

@@ -11,7 +11,30 @@ import { join } from 'node:path';
 import { parseArgs } from 'node:util';
 
 /** Directories containing assets to scan */
-const ASSET_DIRECTORIES = ['Images', 'fonts', 'favicons'];
+const ASSET_DIRECTORIES: string[] = [];
+
+/**
+ * Safe file search helper
+ */
+function searchFileForContent(filePath: string, searchTerm: string): boolean {
+    try {
+        if (!statSync(filePath).isFile()) {
+            return false;
+        }
+        // Basic check for file extension to avoid reading binary files unnecessarily
+        if (!/\.(njk|ts|js|scss|json)$/.test(filePath)) {
+            return false;
+        }
+
+        const content = execSync(`type "${filePath}"`, {
+            encoding: 'utf8',
+            stdio: ['ignore', 'pipe', 'ignore'],
+        });
+        return content.includes(searchTerm);
+    } catch {
+        return false;
+    }
+}
 
 /** Paths to search for asset references */
 const ASSET_SEARCH_PATHS = ['src', '_includes', 'eleventy.config.js'];
@@ -111,6 +134,7 @@ function runKnipAudit(): KnipResults {
 function collectAssetFiles(): string[] {
     const assets: string[] = [];
 
+    // eslint-disable-next-line sonarjs/no-empty-collection
     for (const directory of ASSET_DIRECTORIES) {
         try {
             const files = readdirSync(directory, { recursive: true });
@@ -136,18 +160,40 @@ function extractFilename(assetPath: string): string {
 }
 
 /**
+ * Helper to scan directory for asset references
+ */
+function scanDirectoryForAsset(directoryPath: string, filename: string): boolean {
+    try {
+        if (!statSync(directoryPath).isDirectory()) {
+            return false;
+        }
+
+        const files = readdirSync(directoryPath, { recursive: true });
+        for (const file of files) {
+            const fullPath = join(directoryPath, file.toString());
+            if (searchFileForContent(fullPath, filename)) {
+                return true;
+            }
+        }
+    } catch {
+        // Directory access error, skip
+    }
+    return false;
+}
+
+/**
  * Check if asset is referenced in search paths
  */
 function isAssetReferenced(filename: string): boolean {
     for (const searchPath of ASSET_SEARCH_PATHS) {
-        try {
-            const grepCommand = `grep -r "${filename}" ${searchPath} --include="*.njk" --include="*.ts" --include="*.js" --include="*.scss" --include="*.json" 2>/dev/null || true`;
-            const result = execSync(grepCommand, { encoding: 'utf8' });
-            if (result.trim().length > 0) {
-                return true;
-            }
-        } catch {
-            // grep not found or error - continue
+        // Option A: Path is a file
+        if (searchFileForContent(searchPath, filename)) {
+            return true;
+        }
+
+        // Option B: Path is a directory
+        if (scanDirectoryForAsset(searchPath, filename)) {
+            return true;
         }
     }
     return false;

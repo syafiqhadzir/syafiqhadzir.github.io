@@ -22,6 +22,10 @@ const config: KnipConfig = {
 
         // CLI scripts (run via npm scripts)
         'scripts/**/*.ts',
+
+        // PWA Entry Points
+        'src/install-sw.html',
+        'workbox-config.cjs',
     ],
 
     // ========== PROJECT FILES ==========

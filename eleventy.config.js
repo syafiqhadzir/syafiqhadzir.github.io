@@ -105,7 +105,7 @@ export default function configureEleventy(eleventyConfig) {
     eleventyConfig.addPassthroughCopy('humans.txt');
     eleventyConfig.addPassthroughCopy('browserconfig.xml');
     eleventyConfig.addPassthroughCopy('sw.js');
-    eleventyConfig.addPassthroughCopy('sw.html');
+    eleventyConfig.addPassthroughCopy({ 'src/install-sw.html': 'install-sw.html' });
     eleventyConfig.addPassthroughCopy('.well-known');
     eleventyConfig.addPassthroughCopy('_headers'); // Security headers
     eleventyConfig.addPassthroughCopy('_redirects'); // Netlify rules
@@ -175,6 +175,13 @@ export default function configureEleventy(eleventyConfig) {
     eleventyConfig.ignores.add('offline.html');
     eleventyConfig.ignores.add('sw.html');
     eleventyConfig.ignores.add('README.md');
+    eleventyConfig.ignores.add('CHANGELOG.md');
+    eleventyConfig.ignores.add('CODE_OF_CONDUCT.md');
+    eleventyConfig.ignores.add('CONTRIBUTING.md');
+    eleventyConfig.ignores.add('SECURITY.md');
+    eleventyConfig.ignores.add('.github');
+    eleventyConfig.ignores.add('docs');
+    eleventyConfig.ignores.add('scripts');
 
     // PLUGINS
     // No external plugins - keeping it minimal for AMP

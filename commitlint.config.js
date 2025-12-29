@@ -77,6 +77,7 @@ export default {
                 'lighthouse', // Performance
                 'perf', // Performance
                 'pwa', // Progressive Web App
+                'release', // Release tasks
                 'sass', // Sass/SCSS
                 'security', // Security
                 'seo', // Search engine optimization

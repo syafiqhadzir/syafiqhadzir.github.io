@@ -16,6 +16,9 @@ Designed for speed, accessibility, and zero-defect quality.
 - **Static Site Generation:** Built with Eleventy (v3) for optimal build-time rendering.
 - **Progressive Web App:** Offline-first capability with Service Workers and obscure auditing.
 - **Type-Safe:** 100% strict TypeScript codebase.
+- **Visual Testing:** Pixel-perfect regression testing with Cypress.
+- **Architecture Guardrails:** Automated strict dependency, circular dependency, and dead code
+  analysis.
 - **Advanced Minification:** Custom pipeline using `html-minifier-terser` and `lightningcss`.
 - **Dark Mode:** System-preference aware with toggle switch.
 
@@ -23,7 +26,8 @@ Designed for speed, accessibility, and zero-defect quality.
 
 - **Core:** [Eleventy](https://www.11ty.dev/) (SSG), [TypeScript](https://www.typescriptlang.org/)
 - **Styles:** [SCSS](https://sass-lang.com/), [LightningCSS](https://lightningcss.dev/)
-- **Testing:** [Vitest](https://vitest.dev/) (Unit), [Cypress](https://www.cypress.io/) (E2E)
+- **Testing:** [Vitest](https://vitest.dev/) (Unit), [Cypress](https://www.cypress.io/) (E2E &
+  Visual)
 - **Quality:** ESLint (Strict), Stylelint, SonarQube, Knip (Dead Code)
 - **CI/CD:** GitHub Actions (Split + Reusable Architecture)
 - **Performance:** Lighthouse CI (100/100 Enforcement)
@@ -67,6 +71,9 @@ npm run test:unit
 
 # E2E Tests (Cypress)
 npm run test:e2e
+
+# Visual Regression Tests
+npm run test:visual
 
 # Type Check
 npm run typecheck

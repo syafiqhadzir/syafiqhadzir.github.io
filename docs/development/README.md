@@ -201,8 +201,11 @@ npm run lint:js
 # CSS/SCSS
 npm run lint:css
 
-# Both
+# JS/CSS/HTML
 npm run lint
+
+# Visual Regression
+npm run test:visual:verify
 ```
 
 **Standards:**

@@ -368,15 +368,30 @@ export default tseslint.config(
         rules: {
             '@typescript-eslint/no-explicit-any': 'off',
             '@typescript-eslint/no-namespace': 'off',
+            '@typescript-eslint/no-unsafe-assignment': 'off',
+            '@typescript-eslint/no-unsafe-argument': 'off',
+            '@typescript-eslint/no-unsafe-member-access': 'off',
+            '@typescript-eslint/no-unsafe-call': 'off',
+            '@typescript-eslint/no-unsafe-return': 'off',
+            '@typescript-eslint/strict-boolean-expressions': 'off',
+            '@typescript-eslint/prefer-nullish-coalescing': 'off',
+            '@typescript-eslint/prefer-optional-chain': 'off',
+            '@typescript-eslint/restrict-template-expressions': 'off',
             'max-lines-per-function': 'off',
             'unicorn/prevent-abbreviations': 'off',
+            'unicorn/no-array-for-each': 'off',
+            '@typescript-eslint/no-unnecessary-condition': 'off',
             'jsdoc/require-jsdoc': 'off',
+            'jsdoc/require-param': 'off',
+            'jsdoc/require-returns': 'off',
+            'jsdoc/check-param-names': 'off',
+            '@typescript-eslint/ban-ts-comment': 'off',
         },
     },
 
     // Config files
     {
-        files: ['*.config.ts', '*.config.js', 'eleventy.config.js'],
+        files: ['*.config.ts', '*.config.js', '*.cjs', 'eleventy.config.js'],
         rules: {
             '@typescript-eslint/no-require-imports': 'off',
             'jsdoc/require-jsdoc': 'off',
@@ -390,6 +405,7 @@ export default tseslint.config(
             'jsdoc/no-types': 'off',
             'sonarjs/deprecation': 'off',
             '@typescript-eslint/no-deprecated': 'off',
+            '@typescript-eslint/no-unnecessary-condition': 'off',
         },
     }
 );

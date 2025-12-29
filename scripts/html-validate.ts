@@ -61,7 +61,7 @@ export function checkBasicRequirements(content: string): {
     const warnings: ValidationWarning[] = [];
 
     // Check for doctype
-    if (!content.toLowerCase().startsWith('<!doctype html>')) {
+    if (!content.trim().toLowerCase().startsWith('<!doctype html>')) {
         errors.push({ message: 'Missing DOCTYPE declaration', line: 1 });
     }
 
