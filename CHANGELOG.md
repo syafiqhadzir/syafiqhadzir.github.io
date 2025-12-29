@@ -1,3 +1,10 @@
+## [4.2.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.0...v4.2.1) (2025-12-29)
+
+
+### Bug Fixes
+
+* **deps:** revert to node.js 24 (active lts) ([2cd4801](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/2cd48018d7017fa90e54fa80ea1b6d39e2729810))
+
 # [4.2.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.1.0...v4.2.0) (2025-12-26)
 
 ### Features
