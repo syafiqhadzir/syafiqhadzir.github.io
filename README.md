@@ -94,6 +94,21 @@ We enforce a strict 100/100 Lighthouse score.
 npm run perf:local
 ```
 
+### 🐳 Docker
+
+Build and run locally with Docker:
+
+```bash
+# Build image
+npm run docker:build
+
+# Run container (serves on port 8080)
+npm run docker:run
+
+# Smoke test container health
+npm run docker:test
+```
+
 ## 🏗️ Architecture
 
 ### CI/CD Pipeline
