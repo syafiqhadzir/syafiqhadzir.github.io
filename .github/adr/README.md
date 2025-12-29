@@ -5,10 +5,11 @@ this project.
 
 ## Index
 
-| ADR                                     | Title                             | Status   |
-| --------------------------------------- | --------------------------------- | -------- |
-| [0001](./0001-use-amp-for-portfolio.md) | Use AMP for Portfolio Site        | Accepted |
-| [0002](./0002-eleventy-as-ssg.md)       | Eleventy as Static Site Generator | Accepted |
+| ADR                                         | Title                             | Status   |
+| ------------------------------------------- | --------------------------------- | -------- |
+| [0001](./0001-use-amp-for-portfolio.md)     | Use AMP for Portfolio Site        | Accepted |
+| [0002](./0002-eleventy-as-ssg.md)           | Eleventy as Static Site Generator | Accepted |
+| [0003](./0003-visual-regression-testing.md) | Visual Regression Testing         | Accepted |
 
 ## Creating a New ADR
 

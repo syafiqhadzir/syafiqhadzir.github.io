@@ -61,7 +61,15 @@ npm run test
 - **Testing**:
   - Unit: `npm run test:unit` (Vitest)
   - E2E: `npm run test:e2e` (Cypress)
+  - Visual: `npm run test:visual` (Cypress Visual Regression)
 - **Commits**: Follow [Conventional Commits](https://conventionalcommits.org/)
+  - Use lowercase subject: `feat: add new feature`
+  - Allowed types: `build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`, `revert`,
+    `style`, `test`
+  - Allowed scopes: `a11y`, `amp`, `build`, `ci`, `css`, `cypress`, `deps`, `docker`, `docs`, `dx`,
+    `eleventy`, `eslint`, `infra`, `lighthouse`, `perf`, `pwa`, `release`, `sass`, `security`,
+    `seo`, `sonar`, `test`, `ts`, `ui`, `vitest`
+- **Pre-commit Hooks**: Husky runs `lint-staged` and `commitlint` automatically
 - **Workflows**:
   - `pr-validation`: Fast feedback (Lint, Unit, Build Dry Run).
   - `nightly-quality`: Deep audit (Cypress, SonarQube).
