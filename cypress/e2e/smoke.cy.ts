@@ -64,7 +64,8 @@ describe('AMP Smoke Tests', () => {
                 });
 
                 it('has charset meta tag', () => {
-                    cy.get('meta[charset]').should('exist').and('have.attr', 'charset', 'utf8');
+                    // eslint-disable-next-line unicorn/text-encoding-identifier-case
+                    cy.get('meta[charset]').should('exist').and('have.attr', 'charset', 'utf-8');
                 });
 
                 it('has noscript with amp-boilerplate', () => {

@@ -61,6 +61,10 @@ describe('Performance', () => {
     });
 
     describe('JavaScript', () => {
+        beforeEach(() => {
+            cy.visit('/');
+        });
+
         it('should only load AMP scripts and allowed domains', () => {
             cy.get('script[src]').each(($el) => {
                 const src = $el.attr('src') || '';
