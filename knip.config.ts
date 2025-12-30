@@ -56,13 +56,7 @@ const config: KnipConfig = {
         'types/**',
     ],
 
-    // ========== IGNORE DEPENDENCIES ==========
-    // Only packages invisible to Knip's auto-detection
-
-    ignoreDependencies: [
-        // Commitlint CLI (invoked via husky hooks, not detected by Knip)
-        '@commitlint/cli',
-    ],
+    ignoreDependencies: [],
 
     // ========== IGNORE BINARIES ==========
     // Only binaries not auto-detected
