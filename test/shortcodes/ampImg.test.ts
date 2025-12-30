@@ -157,8 +157,12 @@ describe('ampImg shortcode', () => {
         it('throws error for missing alt', async () => {
             await expect(
                 async () =>
-                    // @ts-expect-error Testing invalid input
-                    await ampImg({ src: '/img.webp', alt: undefined, width: 100, height: 100 })
+                    await ampImg({
+                        src: '/img.webp',
+                        alt: undefined as unknown as string,
+                        width: 100,
+                        height: 100,
+                    })
             ).rejects.toThrow('[ampImg] alt is required');
         });
 
