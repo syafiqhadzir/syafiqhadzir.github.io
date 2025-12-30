@@ -9,36 +9,53 @@ import { spawnSync } from 'node:child_process';
 process.env.NODE_ENV = 'production';
 
 /**
- * Execute a command synchronously
+ * Get current timestamp for logging
+ */
+function getTimestamp(): string {
+    return new Date().toISOString();
+}
+
+/**
+ * Execute a command synchronously with enhanced logging
+ * @param name - Human-readable name of the step
  * @param command - Command to run
  * @param inputArguments - Arguments
  */
-function runCommand(command: string, inputArguments: readonly string[]): void {
+function runStep(name: string, command: string, inputArguments: readonly string[]): void {
+    console.log(`\n[${getTimestamp()}] ⏩ STEP: ${name}`);
+    console.log(`[${getTimestamp()}] 💻 Executing: ${command} ${inputArguments.join(' ')}`);
+
     const result = spawnSync(command, inputArguments, {
         stdio: 'inherit',
         shell: true,
     });
 
     if (result.status !== 0) {
-        throw new Error(
-            `Command failed: ${command} ${inputArguments.join(' ')}\nExit code: ${result.status ?? 'unknown'}`
-        );
+        console.error(`\n[${getTimestamp()}] ❌ ERROR: ${name} failed!`);
+        throw new Error(`Step "${name}" failed with exit code: ${result.status ?? 'unknown'}`);
     }
+
+    console.log(`[${getTimestamp()}] ✅ SUCCESS: ${name} completed.`);
 }
 
 try {
-    console.log('🚀 Starting Production Build...');
+    console.log('═'.repeat(60));
+    console.log(`🚀 PRODUCTION BUILD START - ${getTimestamp()}`);
+    console.log('═'.repeat(60));
 
     // 1. Compile TS
-    console.log('Compiling TypeScript...');
-    runCommand('npm', ['run', 'compile:ts']);
+    runStep('TypeScript Compilation', 'npm', ['run', 'compile:ts']);
 
     // 2. Run Eleventy
-    console.log('Running Eleventy...');
-    runCommand('npx', ['eleventy']);
+    runStep('Eleventy SSG Build', 'npx', ['eleventy']);
 
-    console.log('✅ Build Complete!');
+    console.log(`\n${'═'.repeat(60)}`);
+    console.log(`✅ ALL STEPS COMPLETED SUCCESSFULLY - ${getTimestamp()}`);
+    console.log('═'.repeat(60));
 } catch (error) {
-    console.error('❌ Build Failed:', error instanceof Error ? error.message : String(error));
+    console.error(`\n${'═'.repeat(60)}`);
+    console.error(`💥 CRITICAL BUILD FAILURE - ${getTimestamp()}`);
+    console.error(`Details: ${error instanceof Error ? error.message : String(error)}`);
+    console.error('═'.repeat(60));
     process.exit(1);
 }

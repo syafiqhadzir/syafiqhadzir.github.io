@@ -1,4 +1,3 @@
-/** @type {import('dependency-cruiser').IConfiguration} */
 module.exports = {
     forbidden: [
         /* RULES: CIRCULAR */
@@ -21,15 +20,15 @@ module.exports = {
             from: {
                 orphan: true,
                 pathNot: [
-                    '(^|/)\\.[^/]+\\.(js|cjs|mjs|ts|json)$', // .config.js, .eslintrc.js
-                    '\\.d\\.ts$', // type definitions
-                    'eleventy\\.config\\.js',
+                    String.raw`(^|/)\.[^/]+\.(js|cjs|mjs|ts|json)$`, // .config.js, .eslintrc.js
+                    String.raw`\.d\.ts$`, // type definitions
+                    String.raw`eleventy\.config\.js`,
                     'src/pages/', // pages are entry points
                     'scripts/', // scripts are entry points
-                    'src/components/.*\\.worker\\.js', // workers are entry points
-                    'knip\\.config\\.ts',
-                    'vitest\\.config\\.ts',
-                    'cypress\\.config\\.ts',
+                    String.raw`src/components/.*\.worker\.js`, // workers are entry points
+                    String.raw`knip\.config\.ts`,
+                    String.raw`vitest\.config\.ts`,
+                    String.raw`cypress\.config\.ts`,
                 ],
             },
             to: {},

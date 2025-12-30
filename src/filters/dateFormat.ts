@@ -77,7 +77,9 @@ export function dateFormat(
     format: keyof typeof DATE_FORMATS = 'long'
 ): string {
     const parsedDate = parseDate(date);
-    const formatOptions = DATE_FORMATS[format] ?? DATE_FORMATS.long;
+
+    const formatOptions =
+        (DATE_FORMATS as Record<string, Intl.DateTimeFormatOptions>)[format] ?? DATE_FORMATS.long;
 
     return new Intl.DateTimeFormat(LOCALE, formatOptions).format(parsedDate);
 }
@@ -92,7 +94,30 @@ export function dateFormat(
  */
 export function isoDate(date: Date | string | number): string {
     const parsedDate = parseDate(date);
-    return parsedDate.toISOString().split('T')[0];
+    const isoString = parsedDate.toISOString();
+    return isoString.includes('T') ? (isoString.split('T')[0] ?? isoString) : isoString;
+}
+
+/**
+ * Format a date as a relative time string (e.g., "2 days ago")
+ * @param date - Date to format
+ * @returns Relative time string
+ * @example
+ * relativeDate(new Date(Date.now() - 86400000)) // "yesterday"
+ */
+/**
+ * Helper to handle sub-day relative time
+ * @param diffMs - Difference in milliseconds
+ * @param rtf - RelativeTimeFormat instance
+ * @returns Formatted string or null if not sub-day
+ */
+function formatSubDayTime(diffMs: number, rtf: Intl.RelativeTimeFormat): string | null {
+    const diffHours = Math.floor(diffMs / MS_PER_HOUR);
+    if (Math.abs(diffHours) < 1) {
+        const diffMinutes = Math.floor(diffMs / MS_PER_MINUTE);
+        return rtf.format(-diffMinutes, 'minute');
+    }
+    return rtf.format(-diffHours, 'hour');
 }
 
 /**
@@ -111,12 +136,7 @@ export function relativeDate(date: Date | string | number): string {
     const rtf = new Intl.RelativeTimeFormat(LOCALE, { numeric: 'auto' });
 
     if (Math.abs(diffDays) < 1) {
-        const diffHours = Math.floor(diffMs / MS_PER_HOUR);
-        if (Math.abs(diffHours) < 1) {
-            const diffMinutes = Math.floor(diffMs / MS_PER_MINUTE);
-            return rtf.format(-diffMinutes, 'minute');
-        }
-        return rtf.format(-diffHours, 'hour');
+        return formatSubDayTime(diffMs, rtf) ?? rtf.format(0, 'second');
     }
 
     if (Math.abs(diffDays) < DAYS_PER_WEEK) {
@@ -124,17 +144,14 @@ export function relativeDate(date: Date | string | number): string {
     }
 
     if (Math.abs(diffDays) < DAYS_PER_MONTH) {
-        const diffWeeks = Math.floor(diffDays / DAYS_PER_WEEK);
-        return rtf.format(-diffWeeks, 'week');
+        return rtf.format(-Math.floor(diffDays / DAYS_PER_WEEK), 'week');
     }
 
     if (Math.abs(diffDays) < DAYS_PER_YEAR) {
-        const diffMonths = Math.floor(diffDays / DAYS_PER_MONTH);
-        return rtf.format(-diffMonths, 'month');
+        return rtf.format(-Math.floor(diffDays / DAYS_PER_MONTH), 'month');
     }
 
-    const diffYears = Math.floor(diffDays / DAYS_PER_YEAR);
-    return rtf.format(-diffYears, 'year');
+    return rtf.format(-Math.floor(diffDays / DAYS_PER_YEAR), 'year');
 }
 
 /**

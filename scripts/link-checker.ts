@@ -74,7 +74,8 @@ export function getHtmlFiles(directory: string): string[] {
  */
 export function checkInternalLink(link: string, baseDirectory: string): boolean {
     // Remove query string and hash
-    const cleanLink = link.split('?')[0].split('#')[0];
+    const linkWithoutQuery = link.split('?')[0] ?? '';
+    const cleanLink = linkWithoutQuery.split('#')[0] ?? '';
 
     // Handle root-relative links
     let targetPath = cleanLink.startsWith('/') ? join(baseDirectory, cleanLink) : cleanLink;
@@ -93,6 +94,41 @@ export function checkInternalLink(link: string, baseDirectory: string): boolean 
 }
 
 /**
+ * Process a single link for validation
+ * @param link - Link to check
+ * @param file - Source file
+ * @param directory - Base directory
+ * @returns Link check result or null if skipped
+ */
+function processLink(link: string, file: string, directory: string): LinkCheckResult | null {
+    const isExternal = link.startsWith('http://') || link.startsWith('https://');
+    const isAnchor = link.startsWith('#');
+
+    if (isAnchor) {
+        return null;
+    }
+
+    if (isExternal) {
+        return {
+            file,
+            link,
+            type: 'external',
+            status: 'warning',
+            message: 'External link - verify manually',
+        };
+    }
+
+    const exists = checkInternalLink(link, directory);
+    return {
+        file,
+        link,
+        type: 'internal',
+        status: exists ? 'ok' : 'broken',
+        message: exists ? undefined : 'File not found',
+    };
+}
+
+/**
  * Main link checker function
  * @param directory - Directory containing built site
  * @returns Array of link check results
@@ -108,33 +144,9 @@ export function checkLinks(directory: string): LinkCheckResult[] {
         const links = extractLinks(content);
 
         for (const link of links) {
-            const isExternal = link.startsWith('http://') || link.startsWith('https://');
-            const isAnchor = link.startsWith('#');
-
-            if (isAnchor) {
-                // Skip anchor-only links
-                continue;
-            }
-
-            if (isExternal) {
-                // For external links, just log them (actual checking requires HTTP requests)
-                results.push({
-                    file,
-                    link,
-                    type: 'external',
-                    status: 'warning',
-                    message: 'External link - verify manually',
-                });
-            } else {
-                // Check internal links
-                const exists = checkInternalLink(link, directory);
-                results.push({
-                    file,
-                    link,
-                    type: 'internal',
-                    status: exists ? 'ok' : 'broken',
-                    message: exists ? undefined : 'File not found',
-                });
+            const result = processLink(link, file, directory);
+            if (result) {
+                results.push(result);
             }
         }
     }
@@ -188,8 +200,10 @@ export function main(directory: string): number {
 }
 
 // Only run main when executed directly (not when imported for testing)
-const isMainModule = process.argv[1]?.includes('link-checker');
+const mainFile = process.argv[1];
+
+const isMainModule = (mainFile ?? '').includes('link-checker');
 if (isMainModule) {
-    const directory = process.argv[2] || '_site';
-    process.exit(main(directory));
+    const directoryArgument = process.argv[2] ?? '_site';
+    process.exit(main(directoryArgument));
 }

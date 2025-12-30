@@ -1,7 +1,6 @@
 /// <reference types="cypress" />
 
 describe('Homepage E2E & Accessibility', () => {
-
     beforeEach(() => {
         cy.visit('/');
         // Load fixture data for assertions
@@ -13,12 +12,17 @@ describe('Homepage E2E & Accessibility', () => {
         cy.title().should('eq', 'Syafiq Hadzir');
 
         // Custom command usages
-        cy.checkMeta('description', 'Portfolio of Syafiq Hadzir - AI-assisted Software QA Engineer specializing in test automation and quality assurance.');
+        cy.checkMeta(
+            'description',
+            'Portfolio of Syafiq Hadzir - AI-assisted Software QA Engineer specializing in test automation and quality assurance.'
+        );
         cy.checkMeta('keywords', 'Syafiq Hadzir');
         cy.checkOg('og:title', 'Syafiq Hadzir');
 
         // Canonical link
-        cy.get('link[rel="canonical"]').should('have.attr', 'href').and('include', 'syafiqhadzir.dev');
+        cy.get('link[rel="canonical"]')
+            .should('have.attr', 'href')
+            .and('include', 'syafiqhadzir.dev');
     });
 
     it('has accessible contrast and structure (A11y)', () => {
@@ -31,16 +35,14 @@ describe('Homepage E2E & Accessibility', () => {
             .should('have.attr', 'alt', 'Syafiq Hadzir')
             .and('be.visible');
 
-        cy.get('[data-cy=author-name]')
-            .should('contain', 'Syafiq Hadzir');
+        cy.get('[data-cy=author-name]').should('contain', 'Syafiq Hadzir');
 
         cy.contains('Software QA Engineer').should('be.visible');
     });
 
     it('verify external links', function () {
         // Verify Company Link
-        cy.contains('Cloud Connect')
-            .should('have.attr', 'href', 'https://www.cloud-connect.asia/');
+        cy.contains('Cloud Connect').should('have.attr', 'href', 'https://www.cloud-connect.asia/');
 
         // Verify Social Links
         cy.get('a[href*="github.com"]').should('be.visible');
@@ -53,11 +55,11 @@ describe('Homepage E2E & Accessibility', () => {
         const proficiencies = [
             'Designing and executing comprehensive test plans',
             'Identifying critical defects',
-            'Ensuring the delivery of high-quality software products'
+            'Ensuring the delivery of high-quality software products',
         ];
 
         cy.get('[data-cy=proficiencies-list]').within(() => {
-            proficiencies.forEach(skill => {
+            proficiencies.forEach((skill) => {
                 cy.contains(skill).should('be.visible');
             });
         });
@@ -68,11 +70,11 @@ describe('Homepage E2E & Accessibility', () => {
             'CI/CD Integration',
             'Code Assessment',
             'Test Automation',
-            'Web Application'
+            'Web Application',
         ];
 
         cy.get('[data-cy=interests-list]').within(() => {
-            interests.forEach(interest => {
+            interests.forEach((interest) => {
                 cy.contains(interest).should('be.visible');
             });
         });

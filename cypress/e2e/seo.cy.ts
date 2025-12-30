@@ -9,6 +9,27 @@ interface JsonLdSchema {
     '@graph'?: { '@type': string }[];
 }
 
+/**
+ * Validates a single JSON-LD schema item
+ */
+function validateSchemaItem(item: JsonLdSchema): void {
+    expect(item).to.have.property('@context');
+    expect(item).to.have.property('@type');
+}
+
+/**
+ * Checks if a schema contains a Person type
+ */
+function checkPersonInSchema(schema: JsonLdSchema | JsonLdSchema[]): boolean {
+    if (Array.isArray(schema)) {
+        return schema.some((item) => item['@type'] === 'Person');
+    }
+    if (schema['@graph']) {
+        return schema['@graph'].some((item) => item['@type'] === 'Person');
+    }
+    return schema['@type'] === 'Person';
+}
+
 describe('SEO Validation', () => {
     const pages = ['/', '/contact', '/sitemap', '/404'];
 
@@ -79,29 +100,32 @@ describe('SEO Validation', () => {
         });
 
         it('should have valid JSON-LD schema', () => {
-            cy.get('script[type="application/ld+json"]')
-                .should('exist')
-                .invoke('text')
-                .then((jsonText) => {
-                    const schema = JSON.parse(jsonText) as JsonLdSchema;
-                    expect(schema).to.have.property('@context');
-                    expect(schema).to.have.property('@type');
-                });
+            cy.get('script[type="application/ld+json"]').each(($el) => {
+                const jsonText = $el.text();
+                const schema = JSON.parse(jsonText) as JsonLdSchema | JsonLdSchema[];
+
+                if (Array.isArray(schema)) {
+                    schema.forEach((item) => {
+                        validateSchemaItem(item);
+                    });
+                } else {
+                    validateSchemaItem(schema);
+                }
+            });
         });
 
         it('should have Person schema on homepage', () => {
+            let foundPerson = false;
             cy.get('script[type="application/ld+json"]')
-                .invoke('text')
-                .then((jsonText) => {
-                    const schema = JSON.parse(jsonText) as JsonLdSchema;
-                    // Could be Person directly or in @graph
-                    let hasPerson = schema['@type'] === 'Person';
-                    if (!hasPerson && Array.isArray(schema['@graph'])) {
-                        const graph = schema['@graph'];
-                        // eslint-disable-next-line sonarjs/no-nested-functions -- Required structure for Cypress test
-                        hasPerson = graph.some((item) => item['@type'] === 'Person');
+                .each(($el) => {
+                    const jsonText = $el.text();
+                    const schema = JSON.parse(jsonText) as JsonLdSchema | JsonLdSchema[];
+                    if (checkPersonInSchema(schema)) {
+                        foundPerson = true;
                     }
-                    expect(hasPerson).to.equal(true);
+                })
+                .then(() => {
+                    expect(foundPerson).to.equal(true);
                 });
         });
     });

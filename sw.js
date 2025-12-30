@@ -18,13 +18,14 @@ const PRECACHE_ASSETS = [
     '/favicons/favicon.ico',
     '/favicons/android-chrome-192x192.png',
     '/favicons/android-chrome-512x512.png',
-    '/Images/headshot.webp'
+    '/Images/headshot.webp',
 ];
 
 // Install event - cache core assets
 self.addEventListener('install', (event) => {
     event.waitUntil(
-        caches.open(CACHE_NAME)
+        caches
+            .open(CACHE_NAME)
             .then((cache) => {
                 console.log('[SW] Precaching assets');
                 return cache.addAll(PRECACHE_ASSETS);
@@ -36,11 +37,14 @@ self.addEventListener('install', (event) => {
 // Activate event - cleanup old caches
 self.addEventListener('activate', (event) => {
     event.waitUntil(
-        caches.keys()
+        caches
+            .keys()
             .then((cacheNames) => {
                 return Promise.all(
                     cacheNames
-                        .filter((name) => name.startsWith('syafiq-portfolio-') && name !== CACHE_NAME)
+                        .filter(
+                            (name) => name.startsWith('syafiq-portfolio-') && name !== CACHE_NAME
+                        )
                         .map((name) => {
                             console.log('[SW] Deleting old cache:', name);
                             return caches.delete(name);
@@ -65,7 +69,8 @@ self.addEventListener('fetch', (event) => {
                 // Clone and cache successful responses
                 if (response.status === 200) {
                     const responseClone = response.clone();
-                    caches.open(CACHE_NAME)
+                    caches
+                        .open(CACHE_NAME)
                         .then((cache) => cache.put(event.request, responseClone));
                 }
                 return response;

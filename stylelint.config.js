@@ -5,23 +5,16 @@
  * Plugins:
  * - stylelint-config-standard-scss (base)
  * - stylelint-order (property ordering)
- *
- * @see https://stylelint.io/user-guide/configure
  */
 
-/** @type {import('stylelint').Config} */
+// @ts-check
 export default {
     extends: ['stylelint-config-standard-scss'],
 
     plugins: ['stylelint-order'],
 
     // Ignore patterns
-    ignoreFiles: [
-        '_site/**',
-        'node_modules/**',
-        'coverage/**',
-        '**/*.min.css',
-    ],
+    ignoreFiles: ['_site/**', 'node_modules/**', 'coverage/**', '**/*.min.css'],
 
     // STRICTEST Rule Configuration
     rules: {
@@ -72,7 +65,7 @@ export default {
         // ========== COLOR STRICTNESS ==========
         'color-hex-length': 'short',
         'color-named': 'never',
-        'color-no-hex': null, // Allow hex colors
+        'color-no-hex': undefined, // Allow hex colors
         'color-function-notation': 'modern',
         'alpha-value-notation': 'percentage',
 
@@ -108,8 +101,8 @@ export default {
 
         // ========== PATTERN RULES ==========
         'custom-property-pattern': '^[a-z][a-z0-9]*(-[a-z0-9]+)*$',
-        'scss/percent-placeholder-pattern': null,
-        'scss/dollar-variable-pattern': null,
+        'scss/percent-placeholder-pattern': undefined,
+        'scss/dollar-variable-pattern': undefined,
         'keyframes-name-pattern': '^[a-z][a-z0-9]*(-[a-z0-9]+)*$',
 
         // ========== FORMATTING STRICTNESS ==========
@@ -239,9 +232,8 @@ export default {
         ],
 
         // ========== OVERRIDES (AMP compatibility) ==========
-        'at-rule-no-unknown': null,
-        'no-descending-specificity': null,
-        'scss/at-import-partial-extension': null,
+        'no-descending-specificity': true,
+        'scss/at-import-partial-extension': undefined,
         'function-name-case': [
             'lower',
             {

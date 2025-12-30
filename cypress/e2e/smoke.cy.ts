@@ -3,7 +3,6 @@
 /**
  * AMP Smoke Test Suite
  * Validates AMP attributes and accessibility compliance
- *
  * @module cypress/e2e/smoke
  */
 
@@ -28,8 +27,9 @@ describe('AMP Smoke Tests', () => {
                 it('has <html> with AMP attribute', () => {
                     // AMP pages use either 'amp' or '⚡' attribute
                     cy.get('html').then(($html) => {
-                        const hasAmp = $html.attr('amp') !== undefined || $html.attr('⚡') !== undefined;
-                        expect(hasAmp).to.be.true;
+                        const hasAmp =
+                            $html.attr('amp') !== undefined || $html.attr('⚡') !== undefined;
+                        expect(hasAmp).to.equal(true);
                     });
                 });
 
@@ -64,9 +64,7 @@ describe('AMP Smoke Tests', () => {
                 });
 
                 it('has charset meta tag', () => {
-                    cy.get('meta[charset]')
-                        .should('exist')
-                        .and('have.attr', 'charset', 'UTF-8');
+                    cy.get('meta[charset]').should('exist').and('have.attr', 'charset', 'utf8');
                 });
 
                 it('has noscript with amp-boilerplate', () => {
@@ -91,7 +89,7 @@ describe('AMP Smoke Tests', () => {
 
                 it('passes automated A11y checks', () => {
                     cy.validateA11y(true); // Log only, don't fail strictly yet to match previous behavior if desired, or false to fail.
-                    // The plan implied relying on the centralized command. 
+                    // The plan implied relying on the centralized command.
                     // Given the previous failures were timeouts, not A11y violations, we can try robust check.
                 });
 
@@ -185,9 +183,7 @@ describe('AMP Smoke Tests', () => {
         });
 
         it('has theme toggle button', () => {
-            cy.get('[data-cy=theme-toggle]')
-                .should('exist')
-                .and('be.visible');
+            cy.get('[data-cy=theme-toggle]').should('exist').and('be.visible');
         });
 
         it('toggle button is accessible', () => {
@@ -195,24 +191,19 @@ describe('AMP Smoke Tests', () => {
             cy.get('[data-cy=theme-toggle]').then(($btn) => {
                 const hasAriaLabel = $btn.attr('aria-label') !== undefined;
                 const hasTitle = $btn.attr('title') !== undefined;
-                expect(hasAriaLabel || hasTitle).to.be.true;
+                expect(hasAriaLabel || hasTitle).to.equal(true);
             });
         });
 
         it('toggle switches theme state', () => {
-            // Get initial state
-            cy.get('body').then(($body) => {
-                const initialClass = $body.attr('class') || '';
+            // Click toggle
+            cy.get('[data-cy=theme-toggle]').click();
 
-                // Click toggle
-                cy.get('[data-cy=theme-toggle]').click();
+            // Wait for AMP-bind to process
+            cy.wait(300);
 
-                // Wait for AMP-bind to process
-                cy.wait(300);
-
-                // Verify state changed or action didn't error
-                cy.get('body').should('exist');
-            });
+            // Verify state changed or action didn't error
+            cy.get('body').should('exist');
         });
     });
 
@@ -229,9 +220,7 @@ describe('AMP Smoke Tests', () => {
 
         it('navigation links are functional', () => {
             cy.get('[data-cy=nav-list] a').each(($link) => {
-                cy.wrap($link)
-                    .should('have.attr', 'href')
-                    .and('not.be.empty');
+                cy.wrap($link).should('have.attr', 'href').and('not.be.empty');
             });
         });
 

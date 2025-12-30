@@ -4,16 +4,17 @@
  */
 
 import { describe, it, expect } from 'vitest';
-import {
-    ampImg,
-    ampImgResponsive,
-    ampImgWithFallback,
-} from '../../src/shortcodes/ampImg';
+import { ampImg, ampImgResponsive, ampImgWithFallback } from '../../src/shortcodes/ampImg';
 
 describe('ampImg shortcode', () => {
     describe('ampImg()', () => {
         it('generates basic amp-img element', () => {
-            const result = ampImg({ src: '/images/test.webp', alt: 'Test image', width: 800, height: 600 });
+            const result = ampImg({
+                src: '/images/test.webp',
+                alt: 'Test image',
+                width: 800,
+                height: 600,
+            });
             expect(result).toContain('<amp-img');
             expect(result).toContain('src="/images/test.webp"');
             expect(result).toContain('alt="Test image"');
@@ -29,47 +30,92 @@ describe('ampImg shortcode', () => {
         });
 
         it('uses custom layout', () => {
-            const result = ampImg({ src: '/img.webp', alt: 'Alt', width: 100, height: 100, layout: 'fixed' });
+            const result = ampImg({
+                src: '/img.webp',
+                alt: 'Alt',
+                width: 100,
+                height: 100,
+                layout: 'fixed',
+            });
             expect(result).toContain('layout="fixed"');
         });
 
         it('adds custom className', () => {
-            const result = ampImg({ src: '/img.webp', alt: 'Alt', width: 100, height: 100, layout: 'responsive', className: 'profile-picture' });
+            const result = ampImg({
+                src: '/img.webp',
+                alt: 'Alt',
+                width: 100,
+                height: 100,
+                layout: 'responsive',
+                className: 'profile-picture',
+            });
             expect(result).toContain('class="profile-picture"');
         });
 
         it('adds loading="lazy" for responsive layouts', () => {
-            const result = ampImg({ src: '/img.webp', alt: 'Alt', width: 100, height: 100, layout: 'responsive' });
+            const result = ampImg({
+                src: '/img.webp',
+                alt: 'Alt',
+                width: 100,
+                height: 100,
+                layout: 'responsive',
+            });
             expect(result).toContain('loading="lazy"');
         });
 
         it('adds loading="lazy" for intrinsic layouts', () => {
-            const result = ampImg({ src: '/img.webp', alt: 'Alt', width: 100, height: 100, layout: 'intrinsic' });
+            const result = ampImg({
+                src: '/img.webp',
+                alt: 'Alt',
+                width: 100,
+                height: 100,
+                layout: 'intrinsic',
+            });
             expect(result).toContain('loading="lazy"');
         });
 
         it('does not add loading="lazy" for fixed layouts', () => {
-            const result = ampImg({ src: '/img.webp', alt: 'Alt', width: 100, height: 100, layout: 'fixed' });
+            const result = ampImg({
+                src: '/img.webp',
+                alt: 'Alt',
+                width: 100,
+                height: 100,
+                layout: 'fixed',
+            });
             expect(result).not.toContain('loading="lazy"');
         });
 
         it('escapes HTML special characters in alt text', () => {
-            const result = ampImg({ src: '/img.webp', alt: 'Image "with" <special> chars', width: 100, height: 100 });
+            const result = ampImg({
+                src: '/img.webp',
+                alt: 'Image "with" <special> chars',
+                width: 100,
+                height: 100,
+            });
             expect(result).toContain('alt="Image &quot;with&quot; &lt;special&gt; chars"');
         });
 
         it('escapes HTML special characters in src', () => {
-            const result = ampImg({ src: '/img.webp?a=1&b=2', alt: 'Alt', width: 100, height: 100 });
+            const result = ampImg({
+                src: '/img.webp?a=1&b=2',
+                alt: 'Alt',
+                width: 100,
+                height: 100,
+            });
             expect(result).toContain('src="/img.webp?a=1&amp;b=2"');
         });
 
         it('throws error for missing src', () => {
-            expect(() => ampImg({ src: '', alt: 'Alt', width: 100, height: 100 })).toThrow('[ampImg] src is required');
+            expect(() => ampImg({ src: '', alt: 'Alt', width: 100, height: 100 })).toThrow(
+                '[ampImg] src is required'
+            );
         });
 
         it('throws error for missing alt', () => {
-            // @ts-expect-error Testing invalid input
-            expect(() => ampImg({ src: '/img.webp', alt: undefined, width: 100, height: 100 })).toThrow('[ampImg] alt is required');
+            expect(() =>
+                // @ts-expect-error Testing invalid input
+                ampImg({ src: '/img.webp', alt: undefined, width: 100, height: 100 })
+            ).toThrow('[ampImg] alt is required');
         });
 
         it('allows empty string alt (for decorative images)', () => {
@@ -78,11 +124,15 @@ describe('ampImg shortcode', () => {
         });
 
         it('throws error for invalid width', () => {
-            expect(() => ampImg({ src: '/img.webp', alt: 'Alt', width: 0, height: 100 })).toThrow('[ampImg] width must be a positive number');
+            expect(() => ampImg({ src: '/img.webp', alt: 'Alt', width: 0, height: 100 })).toThrow(
+                '[ampImg] width must be a positive number'
+            );
         });
 
         it('throws error for invalid height', () => {
-            expect(() => ampImg({ src: '/img.webp', alt: 'Alt', width: 100, height: -10 })).toThrow('[ampImg] height must be a positive number');
+            expect(() => ampImg({ src: '/img.webp', alt: 'Alt', width: 100, height: -10 })).toThrow(
+                '[ampImg] height must be a positive number'
+            );
         });
     });
 
@@ -161,19 +211,37 @@ describe('ampImg shortcode', () => {
         });
 
         it('uses default responsive layout', () => {
-            const result = ampImgWithFallback({ webpSrc: '/img.webp', fallbackSrc: '/img.jpg', alt: 'Test', width: 100, height: 100 });
+            const result = ampImgWithFallback({
+                webpSrc: '/img.webp',
+                fallbackSrc: '/img.jpg',
+                alt: 'Test',
+                width: 100,
+                height: 100,
+            });
             expect(result).toContain('layout="responsive"');
         });
 
         it('uses custom layout', () => {
-            const result = ampImgWithFallback({ webpSrc: '/img.webp', fallbackSrc: '/img.jpg', alt: 'Test', width: 100, height: 100, layout: 'fixed' });
+            const result = ampImgWithFallback({
+                webpSrc: '/img.webp',
+                fallbackSrc: '/img.jpg',
+                alt: 'Test',
+                width: 100,
+                height: 100,
+                layout: 'fixed',
+            });
             expect(result).toContain('layout="fixed"');
         });
 
         it('adds loading="lazy"', () => {
-            const result = ampImgWithFallback({ webpSrc: '/img.webp', fallbackSrc: '/img.jpg', alt: 'Test', width: 100, height: 100 });
+            const result = ampImgWithFallback({
+                webpSrc: '/img.webp',
+                fallbackSrc: '/img.jpg',
+                alt: 'Test',
+                width: 100,
+                height: 100,
+            });
             expect(result).toContain('loading="lazy"');
         });
     });
 });
-

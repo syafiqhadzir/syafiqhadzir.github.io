@@ -24,6 +24,8 @@ describe('404 Page E2E', () => {
     });
 
     it('contains canonical link', () => {
-        cy.get('link[rel="canonical"]').should('have.attr', 'href').and('include', 'syafiqhadzir.dev/404.html');
+        cy.get('link[rel="canonical"]')
+            .should('have.attr', 'href')
+            .and('include', 'syafiqhadzir.dev/404.html');
     });
 });

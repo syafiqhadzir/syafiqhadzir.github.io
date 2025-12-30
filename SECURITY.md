@@ -30,15 +30,18 @@ If you discover a security vulnerability, please report it responsibly:
 This project implements the following security practices:
 
 ### Content Security Policy
+
 - Strict CSP headers in `_headers` file
 - Restricted script sources to AMP CDN only
 
 ### Dependency Management
+
 - Automated updates via Dependabot
 - Security overrides for known vulnerabilities
 - Regular `npm audit` checks in CI
 
 ### CI/CD Security
+
 - All secrets managed via GitHub Secrets
 - No hardcoded credentials
 - Minimal permissions in workflows
@@ -50,7 +53,8 @@ This project implements the following security practices:
 
 ## Recognition
 
-Security researchers who responsibly disclose vulnerabilities will be acknowledged in this file (with permission).
+Security researchers who responsibly disclose vulnerabilities will be acknowledged in this file
+(with permission).
 
 ---
 

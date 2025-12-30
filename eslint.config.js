@@ -30,6 +30,7 @@ export default tseslint.config(
             '*.min.js',
             'cypress/reports/**',
             '**/*.worker.js', // Web Workers have different context
+            'sw.js', // Service worker - plain JS, not type-checked
         ],
     },
 
@@ -119,7 +120,7 @@ export default tseslint.config(
             '@typescript-eslint/no-misused-promises': 'error',
             '@typescript-eslint/prefer-nullish-coalescing': 'error',
             '@typescript-eslint/prefer-optional-chain': 'error',
-            '@typescript-eslint/no-unnecessary-condition': 'off',
+            '@typescript-eslint/no-unnecessary-condition': 'error',
             '@typescript-eslint/no-non-null-assertion': 'error',
             '@typescript-eslint/restrict-template-expressions': [
                 'error',
@@ -198,7 +199,7 @@ export default tseslint.config(
             ],
 
             // ========== REGEX SAFETY ==========
-            'require-unicode-regexp': 'warn',
+            'require-unicode-regexp': 'error',
 
             // ========== UNICORN (Modern JS) ==========
             'unicorn/filename-case': ['error', { case: 'camelCase' }],
@@ -229,7 +230,7 @@ export default tseslint.config(
             'unicorn/no-array-for-each': 'warn', // Prefer for-of
 
             // ========== SONARJS (Code Quality) ==========
-            'sonarjs/cognitive-complexity': ['error', 15],
+            'sonarjs/cognitive-complexity': ['error', 12],
             'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
             'sonarjs/no-identical-functions': 'error',
             'sonarjs/slow-regex': 'off', // False positives on simple patterns
@@ -304,7 +305,7 @@ export default tseslint.config(
                 { max: 60, skipBlankLines: true, skipComments: true },
             ],
             'max-statements': ['error', 20],
-            'sonarjs/cognitive-complexity': ['error', 20], // Slightly higher for CLI
+            'sonarjs/cognitive-complexity': ['error', 15], // Slightly higher for CLI
 
             // Keep strict but handle CLI patterns
             'jsdoc/require-jsdoc': 'warn', // Encourage but don't block
@@ -377,6 +378,7 @@ export default tseslint.config(
             '@typescript-eslint/prefer-nullish-coalescing': 'off',
             '@typescript-eslint/prefer-optional-chain': 'off',
             '@typescript-eslint/restrict-template-expressions': 'off',
+            '@typescript-eslint/no-unused-expressions': 'off',
             'max-lines-per-function': 'off',
             'unicorn/prevent-abbreviations': 'off',
             'unicorn/no-array-for-each': 'off',
@@ -386,6 +388,12 @@ export default tseslint.config(
             'jsdoc/require-returns': 'off',
             'jsdoc/check-param-names': 'off',
             '@typescript-eslint/ban-ts-comment': 'off',
+            // Cypress tests naturally have deep nesting (describe > forEach > describe > it)
+            'sonarjs/no-nested-functions': 'off',
+            'sonarjs/no-unused-vars': 'off',
+            'sonarjs/no-dead-store': 'off',
+            // Regex warnings not critical in tests
+            'security/detect-unsafe-regex': 'off',
         },
     },
 

@@ -82,25 +82,25 @@ small,
 
 a {
     text-decoration: underline;
+    text-decoration-skip-ink: auto;
+    text-underline-offset: 0.2em;
     color: var(--color-accent);
     transition: color var(--transition-fast);
-    text-underline-offset: 0.2em;
-
-    &:hover,
-    &:focus {
-        color: var(--color-accent-hover);
-    }
-
-    // Links within text should be distinguishable
-    &:visited {
-        color: var(--color-accent-hover);
-    }
 }
 
 // Remove underline for navigation links
 nav a,
 .nav-link {
     text-decoration: none;
+}
+
+a:visited {
+    color: var(--color-accent-hover);
+}
+
+a:hover,
+a:focus {
+    color: var(--color-accent-hover);
 }
 
 // ============================================================================
@@ -197,6 +197,10 @@ hr {
     border: none;
     border-block-start: var(--border-width) solid var(--color-border);
 }
+
+// ============================================================================
+// RESPONSIVE STYLES
+// ============================================================================
 
 // ============================================================================
 // TEXT MODIFIERS

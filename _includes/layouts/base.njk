@@ -73,15 +73,15 @@
         {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "name": "{{ title }}",
-            "description": "{{ description | default(site.description) }}",
+            "name": {{ title | dump | safe }},
+            "description": {{ description | default(site.description) | dump | safe }},
             "url": "{{ site.url }}{{ page.url }}"
         }
     </script>
     {% endblock %}
 
     {# Favicons - Ordered largest to smallest for optimal browser selection #}
-    <link rel="preload" as="image" type="image/svg+xml" href="/favicons/favicon.svg">
+
     <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg">
     <link rel="icon" type="image/png" sizes="192x192" href="/favicons/android-chrome-192x192.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicons/favicon-32x32.png">
@@ -92,7 +92,7 @@
     <link rel="manifest" href="/favicons/site.webmanifest">
 
     {# Apple iOS PWA Configuration #}
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="Syafiq Hadzir">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
@@ -114,10 +114,10 @@
     <meta name="amp-google-client-id-api" content="googleanalytics">
 
     {# AMP Scripts #}
-    <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js"></script>
-    <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js"></script>
-    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js"></script>
+    <script async src="https://cdn.ampproject.org/v0.js" crossorigin="anonymous"></script>
+    <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js" crossorigin="anonymous"></script>
+    <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin="anonymous"></script>
+    <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js" crossorigin="anonymous"></script>
 
     {# Google Fonts #}
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
@@ -214,7 +214,7 @@
 
     {# Google Analytics 4 via amp-analytics #}
     {# Measurement ID: G-8B9YX48TMV #}
-    <amp-analytics type="gtag" data-credentials="include">
+    <amp-analytics type="gtag">
         <script type="application/json">
         {
             "vars": {
@@ -224,7 +224,7 @@
                         "groups": "default",
                         "page_title": "{{ title }}",
                         "page_location": "{{ site.url }}{{ page.url }}",
-                        "send_page_view": true
+                        "send_page_view": false
                     }
                 }
             },

@@ -12,18 +12,16 @@ describe('Sitemap Page E2E', () => {
     });
 
     it('contains canonical link', () => {
-        cy.get('link[rel="canonical"]').should('have.attr', 'href').and('include', 'syafiqhadzir.dev/sitemap.html');
+        cy.get('link[rel="canonical"]')
+            .should('have.attr', 'href')
+            .and('include', 'syafiqhadzir.dev/sitemap.html');
     });
 
     it('lists all core pages', () => {
-        const pages = [
-            'Home',
-            'Contact',
-            'Sitemap'
-        ];
+        const pages = ['Home', 'Contact', 'Sitemap'];
 
         cy.get('[data-cy=pages-list]').within(() => {
-            pages.forEach(page => {
+            pages.forEach((page) => {
                 cy.contains(page).should('be.visible');
             });
         });

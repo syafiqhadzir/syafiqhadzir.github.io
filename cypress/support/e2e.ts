@@ -23,17 +23,11 @@ import 'cypress-axe';
 
 // Graceful handling of uncaught exceptions
 // Prevents test failures due to third-party script errors
-Cypress.on('uncaught:exception', (err, runnable) => {
+Cypress.on('uncaught:exception', (err) => {
     // Log the error for debugging
     console.error('Uncaught exception:', err.message);
 
     // Returning false prevents Cypress from failing the test
     // Only for known non-critical errors (e.g., AMP runtime issues)
-    if (err.message.includes('ampproject') || err.message.includes('Script error')) {
-        return false;
-    }
-
-    // Let other errors fail the test
-    return true;
+    return !err.message.includes('ampproject') && !err.message.includes('Script error');
 });
-

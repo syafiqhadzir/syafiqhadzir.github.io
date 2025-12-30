@@ -24,6 +24,8 @@ describe('Offline Page E2E', () => {
     });
 
     it('contains canonical link', () => {
-        cy.get('link[rel="canonical"]').should('have.attr', 'href').and('include', 'syafiqhadzir.dev/offline.html');
+        cy.get('link[rel="canonical"]')
+            .should('have.attr', 'href')
+            .and('include', 'syafiqhadzir.dev/offline.html');
     });
 });

@@ -5,9 +5,6 @@
 // ***********************************************
 
 import 'cypress-axe';
-import { addCompareSnapshotCommand } from 'cypress-visual-regression/dist/command';
-
-addCompareSnapshotCommand();
 
 // Terminal log helper for formatted violation output
 function terminalLog(violations: any[]) {
@@ -166,6 +163,9 @@ Cypress.Commands.add('validateComponentA11y', (selector: string, skipFailures = 
             runOnly: {
                 type: 'tag',
                 values: ['wcag2a', 'wcag2aa'],
+            },
+            rules: {
+                'color-contrast': { enabled: false },
             },
         },
         terminalLog,

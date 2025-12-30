@@ -142,14 +142,14 @@ describe('link-checker script', () => {
         it('removes query string before checking', () => {
             // The function should strip ?param=value
             const link = '/page.html?param=value';
-            const cleanedLink = link.split('?')[0];
+            const cleanedLink = link.split('?')[0] ?? '';
             expect(cleanedLink).toBe('/page.html');
         });
 
         it('removes hash fragment before checking', () => {
             // The function should strip #section
             const link = '/page.html#section';
-            const cleanedLink = link.split('#')[0];
+            const cleanedLink = link.split('#')[0] ?? '';
             expect(cleanedLink).toBe('/page.html');
         });
 
@@ -158,7 +158,9 @@ describe('link-checker script', () => {
             const link = '/about';
 
             // Verify the logic
-            const cleanLink = link.split('?')[0].split('#')[0];
+            const linkPaths = link.split('?');
+            const pathPart = linkPaths[0] ?? '';
+            const cleanLink = pathPart.split('#')[0] ?? '';
             const isRootRelative = cleanLink.startsWith('/');
             expect(isRootRelative).toBe(true);
         });
@@ -167,7 +169,9 @@ describe('link-checker script', () => {
             // Testing that non-root-relative links are kept as-is
             const link = 'about/page.html';
 
-            const cleanLink = link.split('?')[0].split('#')[0];
+            const linkPaths = link.split('?');
+            const pathPart = linkPaths[0] ?? '';
+            const cleanLink = pathPart.split('#')[0] ?? '';
             const isRootRelative = cleanLink.startsWith('/');
             expect(isRootRelative).toBe(false);
         });
@@ -198,7 +202,9 @@ describe('link-checker script', () => {
 
         it('handles links with both query string and hash', () => {
             const link = '/page.html?query=1#section';
-            const cleanLink = link.split('?')[0].split('#')[0];
+            const linkPaths = link.split('?');
+            const pathPart = linkPaths[0] ?? '';
+            const cleanLink = pathPart.split('#')[0] ?? '';
 
             expect(cleanLink).toBe('/page.html');
         });
