@@ -1,3 +1,10 @@
+## [4.2.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.1...v4.2.2) (2025-12-30)
+
+
+### Bug Fixes
+
+* resolve amp analytics errors and sw installation ([5a41c0f](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/5a41c0fd34cada2d791b0ce15fcfb055363f3b99))
+
 ## [4.2.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.0...v4.2.1) (2025-12-29)
 
 ### Bug Fixes
