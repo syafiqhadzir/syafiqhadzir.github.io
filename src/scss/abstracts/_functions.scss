@@ -94,7 +94,11 @@
 @function contrast-color($background, $dark: #111, $light: #fff) {
     $luminance: color.lightness($background);
 
-    @return if($luminance > 50%, $dark, $light);
+    @if $luminance > 50% {
+        @return $dark;
+    } @else {
+        @return $light;
+    }
 }
 
 /// Create color with opacity

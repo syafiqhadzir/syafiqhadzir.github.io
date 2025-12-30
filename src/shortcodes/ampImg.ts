@@ -37,6 +37,8 @@ interface AmpImgOptions {
     srcset?: string;
     /** Sizes attribute */
     sizes?: string;
+    /** Is this a hero image? (LCP optimization) */
+    hero?: boolean;
 }
 
 /**
@@ -80,6 +82,7 @@ interface AmpImgShortcodeOptions {
     height: number;
     layout?: AmpLayout;
     className?: string;
+    hero?: boolean;
 }
 
 /**
@@ -89,73 +92,12 @@ interface AmpImgShortcodeOptions {
  * @example
  * {% ampImg { src: "./images/hero.webp", alt: "Hero image", width: 1200, height: 600 } %}
  */
-export function ampImg(options: AmpImgShortcodeOptions): string {
-    const { src, alt, width, height, layout = 'responsive', className = '' } = options;
-
-    // Validate inputs
-    validateOptions({ src, alt, width, height });
-
-    // Auto-generate srcset for raster images (jpg, png, webp) if responsive
-    let srcset = '';
-    const isRaster = /\.(jpe?g|png|webp)$/iu.test(src);
-
-    if (layout === 'responsive' && isRaster) {
-        // Assume optimized images exist at standard breakpoints
-        // e.g. "image.jpg" -> "image-640w.jpg 640w, image-1024w.jpg 1024w"
-        const breakpoints = [640, 1024, 1920];
-        const extension = src.slice(src.lastIndexOf('.'));
-        const basePath = src.slice(0, src.lastIndexOf('.'));
-
-        srcset = breakpoints.map((w) => `${basePath}-${w}w${extension} ${w}w`).join(', ');
-
-        // Add original as fallback/max
-        srcset += `, ${src} ${width}w`;
-    }
-
-    // Auto-generate sizes
-    let sizes = '';
-    if (layout === 'responsive') {
-        sizes = `(max-width: ${width}px) 100vw, ${width}px`;
-    }
-
-    // Build attributes
-    const attributes: string[] = [
-        `src="${escapeAttribute(src)}"`,
-        `alt="${escapeAttribute(alt)}"`,
-        `width="${width}"`,
-        `height="${height}"`,
-        `layout="${layout}"`,
-    ];
-
-    if (srcset) {
-        attributes.push(`srcset="${escapeAttribute(srcset)}"`);
-    }
-
-    if (sizes) {
-        attributes.push(`sizes="${escapeAttribute(sizes)}"`);
-    }
-
-    // Add optional class
-    if (className) {
-        attributes.push(`class="${escapeAttribute(className)}"`);
-    }
-
-    // Add loading strategy for responsive/intrinsic layouts
-    if (layout === 'responsive' || layout === 'intrinsic') {
-        attributes.push('loading="lazy"');
-    }
-
-    return `<amp-img ${attributes.join(' ')}></amp-img>`;
-}
-
 /**
- * Generate amp-img with srcset for multiple resolutions
- * @param options - Full image options
- * @returns HTML string for amp-img element with srcset
+ * Build AMP attributes array
+ * @param options - Image options
+ * @returns Array of attribute strings
  */
-export function ampImgResponsive(options: AmpImgOptions): string {
-    validateOptions(options);
-
+function buildAmpAttributes(options: AmpImgOptions): string[] {
     const {
         src,
         alt,
@@ -163,6 +105,7 @@ export function ampImgResponsive(options: AmpImgOptions): string {
         height,
         layout = 'responsive',
         className = '',
+        hero = false,
         srcset,
         sizes,
     } = options;
@@ -175,22 +118,67 @@ export function ampImgResponsive(options: AmpImgOptions): string {
         `layout="${layout}"`,
     ];
 
+    if (srcset) {
+        attributes.push(`srcset="${escapeAttribute(srcset)}"`);
+    }
+    if (sizes) {
+        attributes.push(`sizes="${escapeAttribute(sizes)}"`);
+    }
     if (className) {
         attributes.push(`class="${escapeAttribute(className)}"`);
     }
 
-    if (srcset) {
-        attributes.push(`srcset="${escapeAttribute(srcset)}"`);
+    // Add LCP optimizations for hero images
+    if (hero) {
+        attributes.push('data-hero');
+    }
+    return attributes;
+}
+
+import { optimizeImage } from '../lib/imageOptimizer.js';
+
+/**
+ * Generate an AMP-compliant image element
+ * @param options - Image options
+ * @returns HTML string for amp-img element
+ */
+export async function ampImg(options: AmpImgShortcodeOptions): Promise<string> {
+    const { src, alt, width, height } = options;
+
+    // Validate inputs
+    validateOptions({ src, alt, width, height });
+
+    // Optimize image (generate WebP/AVIF variants)
+    // Note: optimization is async and requires file system access
+    let optimized;
+    try {
+        optimized = await optimizeImage(src, width);
+    } catch (error) {
+        // eslint-disable-next-line no-console
+        console.warn(`[ampImg] Failed to optimize ${src}, falling back to original`, error);
+        // Fallback to original if optimization fails (e.g. during dry run or missing file)
+        optimized = { src, srcset: '', width, height };
     }
 
-    if (sizes) {
-        attributes.push(`sizes="${escapeAttribute(sizes)}"`);
-    }
+    const attributes = buildAmpAttributes({
+        ...options,
+        src: optimized.src,
+        srcset: optimized.srcset,
+        width: optimized.width,
+        height: optimized.height,
+    });
 
-    if (layout === 'responsive' || layout === 'intrinsic') {
-        attributes.push('loading="lazy"');
-    }
+    return `<amp-img ${attributes.join(' ')}></amp-img>`;
+}
 
+/**
+ * Generate amp-img with srcset for multiple resolutions
+ * @param options - Full image options
+ * @returns HTML string for amp-img element with srcset
+ */
+export function ampImgResponsive(options: AmpImgOptions): string {
+    validateOptions(options);
+    const attributes = buildAmpAttributes(options);
     return `<amp-img ${attributes.join(' ')}></amp-img>`;
 }
 
@@ -220,7 +208,6 @@ export function ampImgWithFallback(options: AmpImgFallbackOptions): string {
     width="${width}"
     height="${height}"
     layout="${layout}"
-    loading="lazy"
 >
     <amp-img
         fallback

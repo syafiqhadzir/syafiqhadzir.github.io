@@ -105,8 +105,16 @@ permalink: /
 </h2>
 <p>
     <span class="profile-picture">
-        <amp-img width="85" height="85" src="/Images/headshot.webp" alt="Syafiq Hadzir" title="Syafiq Hadzir"
-            layout="responsive" data-cy="profile-picture"></amp-img>
+        {% ampImg {
+            src: "/images/headshot.webp",
+            alt: "Syafiq Hadzir",
+            title: "Syafiq Hadzir",
+            width: 85,
+            height: 85,
+            layout: "responsive",
+            "data-cy": "profile-picture",
+            "data-hero": true
+        } %}
     </span>
     Hi! I am <span data-cy="author-name">Syafiq Hadzir</span>, an AI-assisted Software QA Engineer at <a href="{{ site.company.url }}"
         rel="nofollow noreferrer noopener external" aria-label="Cloud Connect company website">Cloud Connect</a>. I

@@ -132,7 +132,7 @@ export default function configureEleventy(eleventyConfig) {
 
     // SHORTCODES
     // AMP Image shortcode: {% ampImg src, alt, width, height, layout %}
-    eleventyConfig.addShortcode('ampImg', ampImg);
+    eleventyConfig.addAsyncShortcode('ampImg', ampImg);
 
     // TRANSFORMS
     // CSS Size Guard Transform (75KB limit for AMP)
@@ -179,6 +179,7 @@ export default function configureEleventy(eleventyConfig) {
     eleventyConfig.ignores.add('CODE_OF_CONDUCT.md');
     eleventyConfig.ignores.add('CONTRIBUTING.md');
     eleventyConfig.ignores.add('SECURITY.md');
+    eleventyConfig.ignores.add('ARCHITECTURE.md');
     eleventyConfig.ignores.add('.github');
     eleventyConfig.ignores.add('docs');
     eleventyConfig.ignores.add('scripts');

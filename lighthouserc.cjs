@@ -34,9 +34,16 @@ module.exports = {
                     '--disable-gpu',
                     '--disable-dev-shm-usage',
                 ],
-                // AMP pages should be tested with throttling disabled
-                throttlingMethod: 'provided',
-                disableNetworkThrottling: true,
+                // Use devtools throttling for realistic mobile 4G simulation
+                throttlingMethod: 'simulate',
+                screenEmulation: {
+                    mobile: true,
+                    width: 412,
+                    height: 823,
+                    deviceScaleFactor: 1.75,
+                    disabled: false,
+                },
+                formFactor: 'mobile',
             },
         },
 

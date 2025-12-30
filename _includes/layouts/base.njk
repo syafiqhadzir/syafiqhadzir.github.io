@@ -29,9 +29,7 @@
     <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-bind-0.1.js" crossorigin>
     <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin>
 
-    {# Critical Fonts - WOFF2 for modern browsers #}
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-solid-900.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-brands-400.woff2" crossorigin>
+
 
     {# Google Font Preload #}
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
@@ -204,13 +202,6 @@
 
     {# Footer #}
     {% include "partials/footer.njk" %}
-
-    {# Service Worker Installation #}
-    <amp-install-serviceworker
-        src="/sw.js"
-        data-iframe-src="/sw.html"
-        layout="nodisplay">
-    </amp-install-serviceworker>
 
     {# Google Analytics 4 via amp-analytics #}
     {# Measurement ID: G-8B9YX48TMV #}

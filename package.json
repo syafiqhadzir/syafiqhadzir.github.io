@@ -35,7 +35,7 @@
         "check:html": "npx tsx scripts/html-validate.ts _site",
         "check:links": "npx tsx scripts/link-checker.ts _site",
         "clean": "node scripts/clean.js _site coverage cypress/reports dist",
-        "compile:ts": "tsc src/filters/dateFormat.ts src/filters/readingTime.ts src/shortcodes/ampImg.ts src/shortcodes/chessBoard.ts src/transforms/cssGuard.ts src/transforms/htmlMinify.ts src/lib/lightningCss.ts src/config/browserTargets.ts src/config/projectPaths.ts src/config/index.ts --outDir dist --module ESNext --moduleResolution Bundler --declaration false --target ES2022 --esModuleInterop true",
+        "compile:ts": "tsc src/filters/dateFormat.ts src/filters/readingTime.ts src/shortcodes/ampImg.ts src/shortcodes/chessBoard.ts src/transforms/cssGuard.ts src/transforms/htmlMinify.ts src/lib/lightningCss.ts src/lib/imageOptimizer.ts src/config/browserTargets.ts src/config/projectPaths.ts src/config/index.ts --outDir dist --module ESNext --moduleResolution Bundler --declaration false --target ES2022 --esModuleInterop true",
         "predev": "npm run compile:ts",
         "dev": "eleventy --serve",
         "docker:build": "docker build -t syafiqhadzir-portfolio .",
@@ -82,6 +82,7 @@
     },
     "devDependencies": {
         "@11ty/eleventy": "^3.1.2",
+        "@11ty/eleventy-img": "^5.0.0",
         "@commitlint/cli": "^20.2.0",
         "@commitlint/config-conventional": "^20.2.0",
         "@eslint/js": "^9.39.2",
