@@ -24,6 +24,8 @@ module.exports = {
                     String.raw`\.d\.ts$`, // type definitions
                     String.raw`eleventy\.config\.js`,
                     'src/pages/', // pages are entry points
+                    'src/filters/', // used by eleventy config
+                    'src/shortcodes/', // used by eleventy config
                     'scripts/', // scripts are entry points
                     String.raw`src/components/.*\.worker\.js`, // workers are entry points
                     String.raw`knip\.config\.ts`,
