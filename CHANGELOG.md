@@ -1,3 +1,17 @@
+# [4.3.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.1...v4.3.0) (2025-12-30)
+
+
+### Bug Fixes
+
+* resolve eslint errors blocking commit ([9fdbc30](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9fdbc305536c8c331426376257259476b5f20424))
+* **test:** resolve lint violation in unit test ([6922dde](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/6922dde273c2a592f552fc469b1243d56423a082))
+* **test:** rewrite amp-img unit test with dynamic imports for reliable mocking ([ca70ab4](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/ca70ab4150fee89354733f49cd1046e13879a93a))
+
+
+### Features
+
+* **perf:** implement automated image optimization pipeline ([093b55c](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/093b55cead8920005dee3de653820178eb2daf47))
+
 ## [4.2.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.1...v4.2.2) (2025-12-30)
 
 ### Bug Fixes
