@@ -1,3 +1,10 @@
+## [4.2.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.1...v4.2.2) (2025-12-30)
+
+
+### Bug Fixes
+
+* resolve eslint errors blocking commit ([9fdbc30](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/9fdbc305536c8c331426376257259476b5f20424))
+
 ## [4.2.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.0...v4.2.1) (2025-12-29)
 
 ### Bug Fixes
