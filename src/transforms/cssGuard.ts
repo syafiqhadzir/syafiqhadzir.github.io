@@ -42,7 +42,7 @@ function getByteSize(string_: string): number {
  */
 export function extractAmpCustomCSS(html: string): string | null {
     const match = AMP_CUSTOM_STYLE_REGEX.exec(html);
-    return match ? match[1] : null;
+    return match?.[1] ?? null;
 }
 
 /**

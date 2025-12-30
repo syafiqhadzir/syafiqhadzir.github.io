@@ -6,11 +6,9 @@
  */
 
 describe('Accessibility Suite', () => {
-
     // Log axe-core version at start of suite
     before(() => {
         cy.visit('/');
-        cy.logAxeVersion();
     });
 
     // ==============================================
@@ -175,5 +173,4 @@ describe('Accessibility Suite', () => {
             });
         });
     });
-
 });

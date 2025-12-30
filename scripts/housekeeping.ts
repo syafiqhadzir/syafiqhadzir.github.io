@@ -37,7 +37,13 @@ function searchFileForContent(filePath: string, searchTerm: string): boolean {
 }
 
 /** Paths to search for asset references */
-const ASSET_SEARCH_PATHS = ['src', '_includes', 'eleventy.config.js'];
+const ASSET_SEARCH_PATHS = [
+    'src',
+    '_includes',
+    'eleventy.config.js',
+    'favicons',
+    '.', // Include root for sw.js, manifest, etc.
+];
 
 /** Output report file path */
 const REPORT_OUTPUT_PATH = 'housekeeping-report.json';
@@ -170,7 +176,15 @@ function scanDirectoryForAsset(directoryPath: string, filename: string): boolean
 
         const files = readdirSync(directoryPath, { recursive: true });
         for (const file of files) {
-            const fullPath = join(directoryPath, file.toString());
+            const fileString = file.toString();
+            // Ignore build and library directories
+            const isIgnored = ['node_modules', '_site'].some((directoryName) =>
+                fileString.includes(directoryName)
+            );
+            if (isIgnored) {
+                continue;
+            }
+            const fullPath = join(directoryPath, fileString);
             if (searchFileForContent(fullPath, filename)) {
                 return true;
             }

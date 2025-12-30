@@ -119,7 +119,7 @@ export default tseslint.config(
             '@typescript-eslint/no-misused-promises': 'error',
             '@typescript-eslint/prefer-nullish-coalescing': 'error',
             '@typescript-eslint/prefer-optional-chain': 'error',
-            '@typescript-eslint/no-unnecessary-condition': 'off',
+            '@typescript-eslint/no-unnecessary-condition': 'error',
             '@typescript-eslint/no-non-null-assertion': 'error',
             '@typescript-eslint/restrict-template-expressions': [
                 'error',
@@ -198,7 +198,7 @@ export default tseslint.config(
             ],
 
             // ========== REGEX SAFETY ==========
-            'require-unicode-regexp': 'warn',
+            'require-unicode-regexp': 'error',
 
             // ========== UNICORN (Modern JS) ==========
             'unicorn/filename-case': ['error', { case: 'camelCase' }],
@@ -229,7 +229,7 @@ export default tseslint.config(
             'unicorn/no-array-for-each': 'warn', // Prefer for-of
 
             // ========== SONARJS (Code Quality) ==========
-            'sonarjs/cognitive-complexity': ['error', 15],
+            'sonarjs/cognitive-complexity': ['error', 12],
             'sonarjs/no-duplicate-string': ['error', { threshold: 3 }],
             'sonarjs/no-identical-functions': 'error',
             'sonarjs/slow-regex': 'off', // False positives on simple patterns
@@ -304,7 +304,7 @@ export default tseslint.config(
                 { max: 60, skipBlankLines: true, skipComments: true },
             ],
             'max-statements': ['error', 20],
-            'sonarjs/cognitive-complexity': ['error', 20], // Slightly higher for CLI
+            'sonarjs/cognitive-complexity': ['error', 15], // Slightly higher for CLI
 
             // Keep strict but handle CLI patterns
             'jsdoc/require-jsdoc': 'warn', // Encourage but don't block

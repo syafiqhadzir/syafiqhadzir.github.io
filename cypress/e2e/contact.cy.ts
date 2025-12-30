@@ -24,8 +24,12 @@ describe('Contact Page E2E', () => {
 
     it('verifies social links', function () {
         const links = this.content.links;
-        cy.get('[data-cy=social-github]').should('have.attr', 'href', links.github).and('be.visible');
-        cy.get('[data-cy=social-gitlab]').should('have.attr', 'href', links.gitlab).and('be.visible');
+        cy.get('[data-cy=social-github]')
+            .should('have.attr', 'href', links.github)
+            .and('be.visible');
+        cy.get('[data-cy=social-gitlab]')
+            .should('have.attr', 'href', links.gitlab)
+            .and('be.visible');
         cy.get('[data-cy=blog-link]').should('have.attr', 'href', links.blog).and('be.visible');
     });
 });

@@ -232,8 +232,10 @@ describe('build-size-report script', () => {
             const result = getFileSizes(['file1.html', 'file2.html']);
 
             expect(result).toHaveLength(2);
-            expect(result[0].size).toBe(1024);
-            expect(result[0].sizeKB).toBe('1.00');
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const firstResult = result[0]!;
+            expect(firstResult.size).toBe(1024);
+            expect(firstResult.sizeKB).toBe('1.00');
         });
 
         it('normalizes file paths', () => {
@@ -243,7 +245,9 @@ describe('build-size-report script', () => {
 
             const result = getFileSizes([String.raw`path\to\file.html`]);
 
-            expect(result[0].file).toBe('path/to/file.html');
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const firstResult = result[0]!;
+            expect(firstResult.file).toBe('path/to/file.html');
         });
     });
 

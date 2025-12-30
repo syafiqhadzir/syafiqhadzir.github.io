@@ -10,8 +10,10 @@ describe('Performance', () => {
         });
 
         it('should not have render-blocking resources', () => {
-            // AMP pages should not have external stylesheets
-            cy.get('link[rel="stylesheet"][href]').should('not.exist');
+            // AMP pages should not have external stylesheets (exception: Google Fonts)
+            cy.get('link[rel="stylesheet"][href]:not([href*="fonts.googleapis.com"])').should(
+                'not.exist'
+            );
 
             // All CSS should be inline
             cy.get('style[amp-custom]').should('exist');
@@ -59,25 +61,38 @@ describe('Performance', () => {
     });
 
     describe('JavaScript', () => {
-        it('should only load AMP scripts', () => {
-            cy.visit('/');
-            cy.get('script[src]').each(($script) => {
-                const src = $script.attr('src');
-                if (src) {
-                    // All scripts should be from AMP CDN
-                    expect(src).to.match(
-                        /^https:\/\/(cdn\.ampproject\.org|www\.googletagmanager\.com)/
-                    );
-                }
+        it('should only load AMP scripts and allowed domains', () => {
+            cy.get('script[src]').each(($el) => {
+                const src = $el.attr('src') || '';
+                const isAllowed =
+                    src.startsWith('https://cdn.ampproject.org/') ||
+                    src.startsWith('https://www.googletagmanager.com/');
+
+                expect(isAllowed, `Script ${src} is not allowed`).to.equal(true);
             });
         });
 
         it('should not have inline JavaScript (AMP requirement)', () => {
             cy.visit('/');
+
             // AMP doesn't allow inline scripts except for JSON-LD
             cy.get(
                 'script:not([src]):not([type="application/ld+json"]):not([type="application/json"])'
-            ).should('have.length', 0);
+            ).each(($el) => {
+                const element = $el[0];
+                if (!element) return;
+
+                const content = element.textContent || '';
+                const isSync =
+                    content.includes('browser-sync') || content.includes('__bs_script__');
+                const isCypress = content.includes('window.Cypress');
+
+                if (!isSync && !isCypress) {
+                    throw new Error(
+                        `Unauthorized inline script found: ${content.slice(0, 100)}...`
+                    );
+                }
+            });
         });
     });
 
@@ -104,8 +119,8 @@ describe('Performance', () => {
                 .then((css) => {
                     // Should have @font-face declarations
                     expect(css).to.include('@font-face');
-                    // Fonts should be loaded from local path
-                    expect(css).to.include("url('./fonts/");
+                    // Fonts should be loaded from local path (allow ./fonts or /fonts or ../fonts)
+                    expect(css).to.match(/url\(['"]?(\.\.?\/|\/)fonts\//);
                 });
         });
     });

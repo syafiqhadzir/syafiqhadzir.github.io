@@ -116,7 +116,9 @@ describe('html-validate script', () => {
             const result = checkImageAccessibility(html);
 
             expect(result).toHaveLength(1);
-            expect(result[0].message).toBe('<img> missing alt attribute');
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const firstResult = result[0]!;
+            expect(firstResult.message).toBe('<img> missing alt attribute');
         });
 
         it('includes line number in error', () => {
@@ -124,7 +126,9 @@ describe('html-validate script', () => {
 
             const result = checkImageAccessibility(html);
 
-            expect(result[0].line).toBe(3);
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            const firstResult = result[0]!;
+            expect(firstResult.line).toBe(3);
         });
 
         it('finds multiple images missing alt', () => {

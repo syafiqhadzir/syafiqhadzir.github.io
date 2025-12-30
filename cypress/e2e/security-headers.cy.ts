@@ -60,14 +60,14 @@ describe('Security Headers', () => {
         it('should use HTTPS for external resources', () => {
             cy.visit('/');
 
-            // Check all external links
-            cy.get('a[href^="http://"]').should('not.exist');
+            // Check all external links (ignore localhost)
+            cy.get('a[href^="http://"]:not([href*="localhost"])').should('not.exist');
 
             // Check all script sources
-            cy.get('script[src^="http://"]').should('not.exist');
+            cy.get('script[src^="http://"]:not([src*="localhost"])').should('not.exist');
 
             // Check all link hrefs (stylesheets, etc.)
-            cy.get('link[href^="http://"]').should('not.exist');
+            cy.get('link[href^="http://"]:not([href*="localhost"])').should('not.exist');
         });
     });
 

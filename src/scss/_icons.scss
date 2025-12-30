@@ -1,0 +1,158 @@
+// ============================================================================
+// FONT FACE DEFINITIONS (Required for AMP self-hosting)
+// ============================================================================
+@font-face {
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+    src: url('./fonts/fa-solid-900.woff2') format('woff2');
+}
+
+@font-face {
+    font-family: 'Font Awesome 6 Brands';
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+    src: url('./fonts/fa-brands-400.woff2') format('woff2');
+}
+
+// ============================================================================
+// FONT AWESOME BASE CLASSES
+// ============================================================================
+.fa,
+.fa-brands,
+.fa-solid {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    display: var(--fa-display, inline-block);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+}
+
+.fa-fw {
+    width: 1.25em;
+    text-align: center;
+}
+
+.fa-solid {
+    font-family: 'Font Awesome 6 Free', sans-serif;
+    font-weight: 900;
+}
+
+.fa-brands {
+    font-family: 'Font Awesome 6 Brands', sans-serif;
+    font-weight: 400;
+}
+
+// ============================================================================
+// FONT AWESOME ICON DEFINITIONS
+// ============================================================================
+
+// Navigation Icons
+.fa-user-tie::before {
+    content: '\f508';
+}
+
+.fa-envelope::before {
+    content: '\f0e0';
+}
+
+.fa-sitemap::before {
+    content: '\f0e8';
+}
+
+.fa-house::before {
+    content: '\f015';
+}
+
+// Social Icons
+.fa-github::before {
+    content: '\f09b';
+}
+
+.fa-gitlab::before {
+    content: '\f296';
+}
+
+.fa-rss::before {
+    content: '\f09e';
+}
+
+.fa-google::before {
+    content: '\f1a0';
+}
+
+.fa-cloudflare::before {
+    content: '\e07d';
+}
+
+// Feature Icons
+.fa-diagram-project::before {
+    content: '\f542';
+}
+
+.fa-hexagon-nodes::before {
+    content: '\e699';
+}
+
+.fa-brain::before {
+    content: '\f5dc';
+}
+
+.fa-infinity::before {
+    content: '\f534';
+}
+
+.fa-code::before {
+    content: '\f121';
+}
+
+.fa-robot::before {
+    content: '\f544';
+}
+
+.fa-window-maximize::before {
+    content: '\f2d0';
+}
+
+// License Icons
+.fa-creative-commons::before {
+    content: '\f25e';
+}
+
+.fa-creative-commons-zero::before {
+    content: '\f4f3';
+}
+
+// Utility Icons
+.fa-link::before {
+    content: '\f0c1';
+}
+
+.fa-signature::before {
+    content: '\f5b7';
+}
+
+.fa-file-lines::before {
+    content: '\f15c';
+}
+
+.fa-triangle-exclamation::before {
+    content: '\f071';
+}
+
+.fa-wifi::before {
+    content: '\f1eb';
+}
+
+// Theme Toggle Icons
+.fa-moon::before {
+    content: '\f186';
+}
+
+.fa-sun::before {
+    content: '\f185';
+}

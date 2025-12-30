@@ -28,7 +28,12 @@ module.exports = {
                 // Hardcode mobile factors for consistent AMP auditing
                 emulatedFormFactor: 'mobile',
                 // Headless flags for CI environment
-                chromeFlags: ['--headless', '--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
+                chromeFlags: [
+                    '--headless',
+                    '--no-sandbox',
+                    '--disable-gpu',
+                    '--disable-dev-shm-usage',
+                ],
                 // AMP pages should be tested with throttling disabled
                 throttlingMethod: 'provided',
                 disableNetworkThrottling: true,
