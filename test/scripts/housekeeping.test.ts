@@ -178,7 +178,7 @@ describe('housekeeping script', () => {
         it('excludes referenced assets', () => {
             vi.mocked(fs.readdirSync).mockImplementation((dir) => {
                 const dirStr = dir.toString();
-                if (dirStr === 'Images') {
+                if (dirStr === 'images') {
                     return ['headshot.webp'] as unknown as ReturnType<typeof fs.readdirSync>;
                 }
                 throw new Error('ENOENT');

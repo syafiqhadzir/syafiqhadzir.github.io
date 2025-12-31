@@ -48,7 +48,7 @@ const config: KnipConfig = {
         'src/pages/**',
 
         // Static assets
-        'Images/**',
+        'images/**',
         'fonts/**',
         'favicons/**',
 
