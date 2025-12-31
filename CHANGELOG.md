@@ -1,3 +1,10 @@
+## [4.3.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.0...v4.3.1) (2025-12-31)
+
+
+### Bug Fixes
+
+* **cypress:** resolve failing e2e tests with data-cy and font-display ([63ba65e](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/63ba65e2a8a77ce569f6d0380b5c1c858cfac3d8))
+
 # [4.3.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.2.1...v4.3.0) (2025-12-30)
 
 
