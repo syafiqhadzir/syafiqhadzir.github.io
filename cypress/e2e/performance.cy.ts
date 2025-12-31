@@ -100,7 +100,7 @@ describe('Performance', () => {
         });
     });
 
-    describe('Images', () => {
+    describe('images', () => {
         it('should have width and height on all images', () => {
             cy.visit('/');
             cy.get('amp-img').each(($img) => {
