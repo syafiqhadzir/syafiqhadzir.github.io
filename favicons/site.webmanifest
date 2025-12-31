@@ -20,6 +20,7 @@
     "share_target": {
         "action": "/contact",
         "method": "GET",
+        "enctype": "application/x-www-form-urlencoded",
         "params": {
             "title": "subject",
             "text": "message",
@@ -80,14 +81,14 @@
     ],
     "screenshots": [
         {
-            "src": "/Images/screenshot-desktop.png",
+            "src": "/images/screenshot-desktop.png",
             "sizes": "1280x720",
             "type": "image/png",
             "form_factor": "wide",
             "label": "Syafiq Hadzir Portfolio - Desktop View"
         },
         {
-            "src": "/Images/screenshot-mobile.png",
+            "src": "/images/screenshot-mobile.png",
             "sizes": "375x667",
             "type": "image/png",
             "form_factor": "narrow",
