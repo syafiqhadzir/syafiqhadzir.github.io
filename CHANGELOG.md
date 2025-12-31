@@ -1,3 +1,10 @@
+## [4.3.6](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.5...v4.3.6) (2025-12-31)
+
+
+### Bug Fixes
+
+* **perf:** eliminate production console errors and optimize resource loading ([be36656](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/be36656e2bb9a54ef4d3a0e212e4f59b25b5a4a9))
+
 ## [4.3.5](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.4...v4.3.5) (2025-12-31)
 
 
