@@ -1,3 +1,10 @@
+## [4.3.8](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.7...v4.3.8) (2025-12-31)
+
+
+### Bug Fixes
+
+* **amp:** resolve connect-src violations and harden console audit ([10c5b49](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/10c5b49cdf802c427acab22957c2b1868ab95d6b))
+
 ## [4.3.7](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.6...v4.3.7) (2025-12-31)
 
 
