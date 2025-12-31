@@ -1,3 +1,10 @@
+## [4.3.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.1...v4.3.2) (2025-12-31)
+
+
+### Bug Fixes
+
+* **security:** resolve console errors and update dependencies ([4f75071](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/4f75071ddcc9315024b7fa72a3274babb6953b5c))
+
 ## [4.3.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.0...v4.3.1) (2025-12-31)
 
 
