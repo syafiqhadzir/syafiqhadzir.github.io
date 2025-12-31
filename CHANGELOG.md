@@ -1,3 +1,10 @@
+## [4.3.7](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.6...v4.3.7) (2025-12-31)
+
+
+### Bug Fixes
+
+* resolve eslint security warning and production console errors ([16d44a1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/16d44a16976aa9adff05d85153be8b070bf31579))
+
 ## [4.3.6](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.5...v4.3.6) (2025-12-31)
 
 
