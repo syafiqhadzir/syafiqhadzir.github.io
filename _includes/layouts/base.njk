@@ -55,7 +55,7 @@
     <meta property="og:title" content="{{ ogTitle | default(title) }}">
     <meta property="og:description" content="{{ ogDescription | default(description) | default(site.description) }}">
     <meta property="og:url" content="{{ site.url }}{{ page.url }}">
-    <meta property="og:image" content="{{ ogImage | default(site.url + '/Images/headshot.webp') }}">
+    <meta property="og:image" content="{{ ogImage | default(site.url + '/images/headshot.webp') }}">
     <meta property="og:site_name" content="{{ site.title }}">
     <meta property="og:locale" content="en_GB">
 
@@ -63,7 +63,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="{{ title }}">
     <meta name="twitter:description" content="{{ description | default(site.description) }}">
-    <meta name="twitter:image" content="{{ site.url }}/Images/headshot.webp">
+    <meta name="twitter:image" content="{{ site.url }}/images/headshot.webp">
 
     {# Structured Data #}
     {% block structuredData %}
