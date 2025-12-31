@@ -42,7 +42,7 @@ COPY _includes/ ./_includes/
 # Copy static assets and configuration files
 COPY favicons/ ./favicons/
 COPY fonts/ ./fonts/
-COPY Images/ ./Images/
+COPY images/ ./images/
 COPY .well-known/ ./.well-known/
 COPY CNAME humans.txt browserconfig.xml robots.txt sitemap.xml ror.xml ./
 COPY sw.js sw.html _headers ./

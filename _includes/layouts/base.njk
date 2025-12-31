@@ -31,9 +31,6 @@
 
 
 
-    {# Google Font Preload #}
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
-
     {# Required Meta Tags #}
     <meta charset="utf-8">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -208,6 +205,11 @@
     <amp-analytics type="gtag">
         <script type="application/json">
         {
+            "transport": {
+                "beacon": false,
+                "xhrpost": false,
+                "image": true
+            },
             "vars": {
                 "gtag_id": "G-8B9YX48TMV",
                 "config": {

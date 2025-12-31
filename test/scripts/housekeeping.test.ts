@@ -190,7 +190,7 @@ describe('housekeeping script', () => {
 
             // Mock grep to return a match (file is referenced)
             vi.mocked(childProcess.execSync).mockReturnValue(
-                'src/pages/index.njk:10:<amp-img src="/Images/headshot.webp"'
+                'src/pages/index.njk:10:<amp-img src="/images/headshot.webp"'
             );
 
             const result = findUnusedAssets();
