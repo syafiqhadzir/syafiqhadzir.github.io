@@ -1,3 +1,10 @@
+## [4.3.9](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.8...v4.3.9) (2025-12-31)
+
+
+### Bug Fixes
+
+* **security:** whitelist ga4 regional endpoints and doubleclick in connect-src ([869117e](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/869117ee73b13051b532fd59018834b0ad03f652))
+
 ## [4.3.8](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.7...v4.3.8) (2025-12-31)
 
 
