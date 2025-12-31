@@ -1,3 +1,10 @@
+# [4.4.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.9...v4.4.0) (2025-12-31)
+
+
+### Features
+
+* implement production-grade security headers ([c401a8f](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/c401a8f52335e5983efa9f30253a92162523be51))
+
 ## [4.3.9](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.8...v4.3.9) (2025-12-31)
 
 
