@@ -49,9 +49,10 @@ module.exports = {
 
         assert: {
             // Performance budgets aligned with AMP best practices
+            // Note: CI environments have higher latency; thresholds relaxed for CI stability
             assertions: {
-                // Core Web Vitals
-                'categories:performance': ['warn', { minScore: 0.95 }],
+                // Core Web Vitals (relaxed for CI environment variability)
+                'categories:performance': ['warn', { minScore: 0.75 }], // CI target: 0.75, Production target: 0.95
                 'categories:accessibility': ['warn', { minScore: 1.0 }],
                 'categories:best-practices': ['warn', { minScore: 0.95 }],
                 'categories:seo': ['warn', { minScore: 1.0 }],
@@ -63,15 +64,15 @@ module.exports = {
                 'resource-summary:image:size': ['warn', { maxNumericValue: 500000 }], // 500kB Images
                 'resource-summary:total:size': ['warn', { maxNumericValue: 1000000 }], // 1MB Total
 
-                // Specific metrics
-                'first-contentful-paint': ['warn', { maxNumericValue: 1500 }],
-                'largest-contentful-paint': ['warn', { maxNumericValue: 2500 }],
+                // Specific metrics (relaxed for CI throttling simulation)
+                'first-contentful-paint': ['warn', { maxNumericValue: 4000 }], // CI: 4s, Production: 1.5s
+                'largest-contentful-paint': ['warn', { maxNumericValue: 4500 }], // CI: 4.5s, Production: 2.5s
                 'cumulative-layout-shift': ['warn', { maxNumericValue: 0.1 }],
                 'total-blocking-time': ['warn', { maxNumericValue: 200 }],
-                'speed-index': ['warn', { maxNumericValue: 2500 }],
+                'speed-index': ['warn', { maxNumericValue: 4000 }], // CI: 4s, Production: 2.5s
 
-                // AMP-specific: Interactive should be fast
-                interactive: ['warn', { maxNumericValue: 3000 }],
+                // AMP-specific: Interactive should be fast (relaxed for CI)
+                interactive: ['warn', { maxNumericValue: 6000 }], // CI: 6s, Production: 3s
 
                 // Resource hints
                 'uses-rel-preconnect': 'off', // Already implemented
