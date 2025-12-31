@@ -1,3 +1,10 @@
+## [4.3.3](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.2...v4.3.3) (2025-12-31)
+
+
+### Performance Improvements
+
+* **ci:** relax lighthouse thresholds for ci environment stability ([ffbdc2f](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/ffbdc2fe11868b3aac94e744037c921aedf09dc3))
+
 ## [4.3.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.1...v4.3.2) (2025-12-31)
 
 
