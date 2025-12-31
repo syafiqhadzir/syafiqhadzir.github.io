@@ -1,3 +1,10 @@
+## [4.3.4](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.3...v4.3.4) (2025-12-31)
+
+
+### Bug Fixes
+
+* **seo:** correct image path case sensitivity in meta tags ([dc5dfa5](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/dc5dfa57f9e0819c532ec307d827eebb5ffd7605))
+
 ## [4.3.3](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.2...v4.3.3) (2025-12-31)
 
 
