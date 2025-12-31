@@ -1,3 +1,10 @@
+## [4.3.5](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.4...v4.3.5) (2025-12-31)
+
+
+### Bug Fixes
+
+* **pwa:** correct image path in service worker precache list ([569043f](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/569043fe0f5765ba78fd31815092e6014d51a588))
+
 ## [4.3.4](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.3...v4.3.4) (2025-12-31)
 
 
