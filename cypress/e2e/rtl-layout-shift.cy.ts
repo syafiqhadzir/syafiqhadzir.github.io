@@ -56,10 +56,14 @@ describe('RTL Layout Stability', () => {
     });
 
     it('should use correct font-display strategy', () => {
-        cy.document().then((doc) => {
-            // Check if preload links exist for fonts
-            const preloads = doc.querySelectorAll('link[rel="preload"][as="font"]');
-            expect(preloads.length).to.be.gt(0, 'Critical fonts should be preloaded');
-        });
+        cy.get('style[amp-custom]')
+            .invoke('text')
+            .then((css) => {
+                // Verify font-display: swap is used for self-hosted fonts
+                expect(css).to.include(
+                    'font-display:swap',
+                    'Fonts should use font-display: swap for FOIT prevention'
+                );
+            });
     });
 });

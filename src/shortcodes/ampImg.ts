@@ -39,6 +39,8 @@ interface AmpImgOptions {
     sizes?: string;
     /** Is this a hero image? (LCP optimization) */
     hero?: boolean;
+    /** Cypress test selector (outputs as data-cy attribute) */
+    dataCy?: string;
 }
 
 /**
@@ -83,6 +85,8 @@ interface AmpImgShortcodeOptions {
     layout?: AmpLayout;
     className?: string;
     hero?: boolean;
+    /** Cypress test selector (outputs as data-cy attribute) */
+    dataCy?: string;
 }
 
 /**
@@ -132,6 +136,12 @@ function buildAmpAttributes(options: AmpImgOptions): string[] {
     if (hero) {
         attributes.push('data-hero');
     }
+
+    // Data attributes for testing
+    if (options.dataCy) {
+        attributes.push(`data-cy="${escapeAttribute(options.dataCy)}"`);
+    }
+
     return attributes;
 }
 
