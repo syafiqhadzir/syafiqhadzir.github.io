@@ -100,7 +100,7 @@ export default function configureEleventy(eleventyConfig) {
     // Static assets
     eleventyConfig.addPassthroughCopy('favicons');
     eleventyConfig.addPassthroughCopy('fonts');
-    eleventyConfig.addPassthroughCopy('Images');
+    eleventyConfig.addPassthroughCopy('images');
     eleventyConfig.addPassthroughCopy('CNAME');
     eleventyConfig.addPassthroughCopy('humans.txt');
     eleventyConfig.addPassthroughCopy('browserconfig.xml');

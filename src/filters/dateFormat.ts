@@ -78,8 +78,26 @@ export function dateFormat(
 ): string {
     const parsedDate = parseDate(date);
 
-    const formatOptions =
-        (DATE_FORMATS as Record<string, Intl.DateTimeFormatOptions>)[format] ?? DATE_FORMATS.long;
+    let formatOptions: Intl.DateTimeFormatOptions;
+
+    switch (format) {
+        case 'short': {
+            formatOptions = DATE_FORMATS.short;
+            break;
+        }
+        case 'yearMonth': {
+            formatOptions = DATE_FORMATS.yearMonth;
+            break;
+        }
+        case 'monthDay': {
+            formatOptions = DATE_FORMATS.monthDay;
+            break;
+        }
+        default: {
+            formatOptions = DATE_FORMATS.long;
+            break;
+        }
+    }
 
     return new Intl.DateTimeFormat(LOCALE, formatOptions).format(parsedDate);
 }
