@@ -26,7 +26,6 @@ self.addEventListener('install', (event) => {
         caches
             .open(CACHE_NAME)
             .then((cache) => {
-                console.log('[SW] Precaching assets');
                 return cache.addAll(PRECACHE_ASSETS);
             })
             .then(() => self.skipWaiting())
@@ -44,10 +43,7 @@ self.addEventListener('activate', (event) => {
                         .filter(
                             (name) => name.startsWith('syafiq-portfolio-') && name !== CACHE_NAME
                         )
-                        .map((name) => {
-                            console.log('[SW] Deleting old cache:', name);
-                            return caches.delete(name);
-                        })
+                        .map((name) => caches.delete(name))
                 );
             })
             .then(() => self.clients.claim())

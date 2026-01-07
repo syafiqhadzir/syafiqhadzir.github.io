@@ -199,17 +199,15 @@
 
     {# Google Analytics 4 via amp-analytics #}
     {# Measurement ID: G-8B9YX48TMV #}
-    <amp-analytics type="gtag">
+    <amp-analytics type="gtag" data-credentials="include">
         <script type="application/json">
         {
             "vars": {
                 "gtag_id": "G-8B9YX48TMV",
                 "config": {
                     "G-8B9YX48TMV": {
-                        "groups": "default",
                         "page_title": "{{ title }}",
-                        "page_location": "{{ site.url }}{{ page.url }}",
-                        "send_page_view": false
+                        "page_location": "{{ site.url }}{{ page.url }}"
                     }
                 }
             },
@@ -277,7 +275,7 @@
                     "vars": {
                         "event_name": "click",
                         "event_category": "Outbound",
-                        "event_label": "${outboundLink}"
+                        "event_label": "${href}"
                     }
                 },
                 "themeToggle": {
