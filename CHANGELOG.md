@@ -1,3 +1,10 @@
+# [4.5.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.4.2...v4.5.0) (2026-01-07)
+
+
+### Features
+
+* **amp:** resolve analytics errors and implement expert-level ga4 configuration ([3e5d125](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/3e5d12533943e92752c40318859343c1c169ed15))
+
 ## [4.4.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.4.1...v4.4.2) (2026-01-07)
 
 
