@@ -1,61 +1,51 @@
-# Security Policy
+# 🛡️ Security Policy
 
 ## Supported Versions
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 2.x     | :white_check_mark: |
-| < 2.0   | :x:                |
+Only the latest `main` branch and the latest production deployment are currently supported with
+security updates.
 
-## Reporting a Vulnerability
+|      Version      | Supported |
+| :---------------: | :-------: |
+|       Main        |    ✅     |
+| Production (`v*`) |    ✅     |
+|    Older Tags     |    ❌     |
 
-If you discover a security vulnerability, please report it responsibly:
+## 🐛 Reporting a Vulnerability
 
-1. **Do NOT** open a public GitHub issue
-2. Email: [syafiqhadzir@live.com.my](mailto:syafiqhadzir@live.com.my)
-3. Include:
-   - Description of the vulnerability
-   - Steps to reproduce
-   - Potential impact
-   - Suggested fix (if any)
+We take security seriously. If you discover a vulnerability, please follow these steps:
 
-## Response Timeline
+1.  **Do NOT open a public issue.** This gives potential attackers a window to exploit the
+    vulnerability before a fix is ready.
+2.  **Email** the details to [syafiqhadzir@live.com.my](mailto:syafiqhadzir@live.com.my).
+3.  Include as much detail as possible:
+    - Description of the vulnerability.
+    - Steps to reproduce.
+    - Potential impact.
+    - Any Proof of Concept (PoC) code.
 
-- **Acknowledgment**: Within 48 hours
-- **Initial Assessment**: Within 7 days
-- **Resolution**: Depends on severity
+### Response Timeline
 
-## Security Measures
+- **Acknowledgment:** We will acknowledge your report within 48 hours.
+- **Assessment:** We will assess the severity and impact within 1 week.
+- **Resolution:** We aim to release a fix for critical vulnerabilities within 2 weeks of assessment.
 
-This project implements the following security practices:
+## 🔐 Security Measures
 
-### Content Security Policy
+This project implements several security best practices:
 
-- Strict CSP headers in `_headers` file
-- Restricted script sources to AMP CDN only
+- **Content Security Policy (CSP):** Strictly enforced headers in `_headers`.
+- **Dependency Scanning:** `npm audit` and Snyk/SonarCloud analysis.
+- **Static Analysis:** `eslint-plugin-security` to detect unsafe code patterns.
+- **XSS Protection:** Output escaping in Nunjucks templates.
+- **Permissions Policy:** Restricting browser features (camera, mic, etc.).
 
-### Dependency Management
+## 🚫 Out of Scope
 
-- Automated updates via Dependabot
-- Security overrides for known vulnerabilities
-- Regular `npm audit` checks in CI
+The following are generally strictly out of scope:
 
-### CI/CD Security
+- Attacks requiring physical access to the user's device.
+- Social engineering attacks against users.
+- Denial of Service (DoS) attacks (mitigated by Cloudflare).
 
-- All secrets managed via GitHub Secrets
-- No hardcoded credentials
-- Minimal permissions in workflows
-
-## Known Security Considerations
-
-- **AMP Runtime**: Third-party scripts from `cdn.ampproject.org` are required
-- **Google Analytics**: Data sent to Google for analytics purposes
-
-## Recognition
-
-Security researchers who responsibly disclose vulnerabilities will be acknowledged in this file
-(with permission).
-
----
-
-Thank you for helping keep this project secure! 🔒
+Thank you for helping keep our project safe!

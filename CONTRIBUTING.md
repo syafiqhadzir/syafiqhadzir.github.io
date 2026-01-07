@@ -1,103 +1,95 @@
-# Contributing to syafiqhadzir.github.io
+# 🤝 Contributing to Syafiq Hadzir's Portfolio
 
-Thank you for your interest in contributing! This project is a personal portfolio, but suggestions
-and improvements are welcome.
+First off, thanks for taking the time to contribute! 🎉
 
-## 📚 Documentation
+The following is a set of guidelines for contributing to this project. These are mostly guidelines,
+not rules. Use your best judgment, and feel free to propose changes to this document in a pull
+request.
 
-Before contributing, please familiarize yourself with:
+## 📄 Documentation
 
-- **[Development Guide](docs/development/README.md)** - Development setup and workflows
-- **[Testing Guide](docs/development/TESTING.md)** - Testing requirements and standards
-- **[SonarCloud Observability](docs/development/SONARCLOUD.md)** - Quality gates and monitoring
+Before contributing, please read:
 
-## Ways to Contribute
+1.  **[Architecture Guide](ARCHITECTURE.md)** - Understand the system design.
+2.  **[Technnical Documentation](docs/README.md)** - Core documentation hub.
+3.  **[Style Guide](docs/STYLE_GUIDE.md)** - Coding conventions.
+4.  **[Testing Guide](docs/development/TESTING.md)** - How to test your changes.
 
-### 🐛 Bug Reports
+## 🛠️ Development Workflow
 
-If you find a bug, please
-[open an issue](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/new) with:
+1.  **Fork the repository** on GitHub.
+2.  **Clone** your fork locally.
+3.  **Install dependencies**: `npm ci`
+4.  **Create a branch** for your feature: `git checkout -b feat/amazing-feature`
+5.  **Develop** your changes.
+6.  **Verify** your changes:
+    - `npm run lint` (Must pass)
+    - `npm run typecheck` (Must pass)
+    - `npm run test:unit` (Must pass)
+7.  **Commit** your changes using [Conventional Commits](https://www.conventionalcommits.org/).
+8.  **Push** to your fork.
+9.  **Submit a Pull Request**.
 
-- A clear, descriptive title
-- Steps to reproduce the behavior
-- Expected vs actual behavior
-- Screenshots (if applicable)
-- Browser/OS information
+## 🧪 Testing Requirements
 
-### 💡 Feature Suggestions
+We have a **strict zero-regression policy**.
 
-Feature requests are welcome! Please check existing issues first to avoid duplicates.
+- **New Features:** Must include unit tests (`test/`) and E2E tests (`cypress/`) if applicable.
+- **Bug Fixes:** Must include a regression test that fails without the fix and passes with it.
+- **Coverage:** Unit test coverage must remain above 80%.
 
-### 🔧 Pull Requests
+## 📝 Commit Messages
 
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/your-feature-name`
-3. Make your changes
-4. Run tests: `npm run lint && npm run test:unit`
-5. Commit with conventional format: `feat: add new feature`
-6. Push and open a PR
+We use **Commitlint** to enforce the [Conventional Commits](https://www.conventionalcommits.org/)
+specification.
 
-## Development Setup
+**Structure:**
 
-```bash
-# Clone the repository
-git clone https://github.com/syafiqhadzir/syafiqhadzir.github.io.git
-cd syafiqhadzir.github.io
+```
+<type>(<scope>): <subject>
 
-# Install dependencies
-npm ci
+[optional body]
 
-# Start development server
-npm run dev
-
-# Run tests
-npm run test
+[optional footer(s)]
 ```
 
-## Code Standards
+**Types:**
 
-- **TypeScript**: Strict mode enabled
-- **Linting**: ESLint + Stylelint (run `npm run lint`)
-- **Testing**:
-  - Unit: `npm run test:unit` (Vitest)
-  - E2E: `npm run test:e2e` (Cypress)
-  - Visual: `npm run test:visual` (Cypress Visual Regression)
-- **Commits**: Follow [Conventional Commits](https://conventionalcommits.org/)
-  - Use lowercase subject: `feat: add new feature`
-  - Allowed types: `build`, `chore`, `ci`, `docs`, `feat`, `fix`, `perf`, `refactor`, `revert`,
-    `style`, `test`
-  - Allowed scopes: `a11y`, `amp`, `build`, `ci`, `css`, `cypress`, `deps`, `docker`, `docs`, `dx`,
-    `eleventy`, `eslint`, `infra`, `lighthouse`, `perf`, `pwa`, `release`, `sass`, `security`,
-    `seo`, `sonar`, `test`, `ts`, `ui`, `vitest`
-- **Pre-commit Hooks**: Husky runs `lint-staged` and `commitlint` automatically
-- **Workflows**:
-  - `pr-validation`: Fast feedback (Lint, Unit, Build Dry Run).
-  - `nightly-quality`: Deep audit (Cypress, SonarQube).
-  - `deploy`: Production release (Lighthouse CI, GitHub Pages).
+- `feat`: A new feature
+- `fix`: A bug fix
+- `docs`: Documentation only changes
+- `style`: Changes that do not affect the meaning of the code (white-space, formatting, etc)
+- `refactor`: A code change that neither fixes a bug nor adds a feature
+- `perf`: A code change that improves performance
+- `test`: Adding missing tests or correcting existing tests
+- `build`: Changes that affect the build system or external dependencies
+- `ci`: Changes to our CI configuration files and scripts
+- `chore`: Other changes that don't modify src or test files
 
-## AMP Compliance
+**Example:**
 
-This is a Google AMP site. All HTML must pass AMP validation:
+```
+feat(search): add amp-autocomplete support for search bar
 
-```bash
-npm run validate:amp
+- Implements amp-autocomplete with custom source
+- Adds debouncing for performance
+- Updates tests
+
+Closes #123
 ```
 
-## 📝 Documentation Contributions
+## 🐛 Reporting Bugs
 
-Improving documentation is highly valued! When contributing to documentation:
+1.  **Search** existing issues to prevent duplicates.
+2.  **Create** a new issue using the "Bug Report" template.
+3.  **Provide** clear reproduction steps, expected behavior, and screenshots if possible.
 
-- ✅ Keep language clear and concise
-- ✅ Include code examples where helpful
-- ✅ Update the [documentation index](docs/README.md) when adding new guides
-- ✅ Use relative links for internal navigation
-- ✅ Test all code examples before submitting
-- ✅ Follow the [Google Developer Documentation Style Guide](https://developers.google.com/style)
+## 💡 Feature Requests
 
-All documentation is located in the [`/docs`](docs/) directory. See the
-[Documentation Hub](docs/README.md) for the complete structure.
+1.  **Search** existing issues.
+2.  **Create** a new issue using the "Feature Request" template.
+3.  **Explain** the "Why" and "What" clearly.
 
-## License
+---
 
-By contributing, you agree that your contributions will be licensed under the
-[CC0-1.0 License](LICENSE).
+Thanks for helping make this project better! 🚀
