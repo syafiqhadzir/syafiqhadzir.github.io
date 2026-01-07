@@ -1,3 +1,10 @@
+## [4.4.2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.4.1...v4.4.2) (2026-01-07)
+
+
+### Bug Fixes
+
+* **site:** resolve headshot.webp 404 and amp-analytics transport warnings ([4d2385b](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/4d2385bc0fe30548588530ceeca5b774a3fd2833))
+
 ## [4.4.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.4.0...v4.4.1) (2026-01-07)
 
 
