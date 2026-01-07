@@ -17,12 +17,7 @@
     <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-bind-0.1.js" crossorigin>
     <link rel="preload" as="script" href="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin>
 
-    
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-solid-900.woff2" crossorigin>
-    <link rel="preload" as="font" type="font/woff2" href="/fonts/fa-brands-400.woff2" crossorigin>
 
-    
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
 
     
     <meta charset="utf-8">
@@ -45,7 +40,7 @@
     <meta property="og:title" content="Offline">
     <meta property="og:description" content="You are currently offline. Please check your internet connection.">
     <meta property="og:url" content="https://syafiqhadzir.dev/offline.html">
-    <meta property="og:image" content="https://syafiqhadzir.dev/Images/headshot.webp">
+    <meta property="og:image" content="https://syafiqhadzir.dev/images/optimized/headshot-170w.webp">
     <meta property="og:site_name" content="Syafiq Hadzir">
     <meta property="og:locale" content="en_GB">
 
@@ -53,7 +48,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Offline">
     <meta name="twitter:description" content="You are currently offline. Please check your internet connection.">
-    <meta name="twitter:image" content="https://syafiqhadzir.dev/Images/headshot.webp">
+    <meta name="twitter:image" content="https://syafiqhadzir.dev/images/optimized/headshot-170w.webp">
 
     
     
@@ -92,11 +87,8 @@
     
     <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
     <meta name="theme-color" content="#1a1a2e" media="(prefers-color-scheme: dark)">
+    
     <meta name="viewport" content="width=device-width,initial-scale=1">
-
-    
-    
-    <meta name="amp-script-src" content="sha384-*">
 
     
     <meta name="amp-google-client-id-api" content="googleanalytics">
@@ -265,13 +257,6 @@
 
 
     
-    <amp-install-serviceworker
-        src="/sw.js"
-        data-iframe-src="/sw.html"
-        layout="nodisplay">
-    </amp-install-serviceworker>
-
-    
     
     <amp-analytics type="gtag">
         <script type="application/json">
@@ -286,6 +271,11 @@
                         "send_page_view": false
                     }
                 }
+            },
+            "transport": {
+                "beacon": true,
+                "xhrpost": true,
+                "image": false
             },
             "triggers": {
                 "pageView": {

@@ -1,7 +1,7 @@
 // Service Worker for Syafiq Hadzir Portfolio
-// Version: 2.1.0 (2025-12-20)
+// Version: 2.3.0 (2026-01-07)
 
-const CACHE_VERSION = '2025-12-20';
+const CACHE_VERSION = '2026-01-07';
 const CACHE_NAME = `syafiq-portfolio-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
 
@@ -18,7 +18,6 @@ const PRECACHE_ASSETS = [
     '/favicons/favicon.ico',
     '/favicons/android-chrome-192x192.png',
     '/favicons/android-chrome-512x512.png',
-    '/Images/headshot.webp',
 ];
 
 // Install event - cache core assets
