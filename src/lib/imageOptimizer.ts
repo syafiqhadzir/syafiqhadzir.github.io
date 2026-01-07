@@ -1,5 +1,6 @@
 import eleventyImage from '@11ty/eleventy-img';
 import path from 'node:path';
+import { IMAGE_SCALES } from '../config/constants.js';
 
 export interface ImageOptimizationResult {
     src: string;
@@ -8,9 +9,6 @@ export interface ImageOptimizationResult {
     height: number;
     fallbackSrc?: string;
 }
-
-const SCALE_RETINA = 1.5;
-const SCALE_DOUBLE = 2;
 
 /**
  * Optimize an image using 11ty-img
@@ -28,7 +26,7 @@ export async function optimizeImage(
     const sourcePath = src.startsWith('/') ? `.${src}` : src;
 
     const options = {
-        widths: [width, width * SCALE_RETINA, width * SCALE_DOUBLE], // 1x, 1.5x, 2x for retina
+        widths: [width, width * IMAGE_SCALES.RETINA, width * IMAGE_SCALES.RETINA_2X], // 1x, 1.5x, 2x for retina
         formats,
         outputDir: './_site/images/optimized/',
         urlPath: '/images/optimized/',

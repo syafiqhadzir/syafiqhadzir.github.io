@@ -4,8 +4,7 @@
  * @module transforms/cssGuard
  */
 
-/** Default maximum CSS size in bytes (75KB as per AMP spec) */
-const DEFAULT_MAX_SIZE = 75 * 1024;
+import { COMMON, CSS_LIMITS } from '../config/constants.js';
 
 /** Regex to extract <style amp-custom> content */
 const AMP_CUSTOM_STYLE_REGEX = /<style\s+amp-custom[^>]*>([\s\S]*?)<\/style>/iu;
@@ -51,9 +50,12 @@ export function extractAmpCustomCSS(html: string): string | null {
  * @param maxBytes - Maximum allowed size in bytes
  * @returns Validation result
  */
-export function checkCssSize(css: string, maxBytes: number = DEFAULT_MAX_SIZE): CssGuardResult {
+export function checkCssSize(
+    css: string,
+    maxBytes: number = CSS_LIMITS.MAX_SIZE_BYTES
+): CssGuardResult {
     const sizeBytes = getByteSize(css);
-    const sizeKB = (sizeBytes / 1024).toFixed(2);
+    const sizeKB = (sizeBytes / COMMON.BYTES_PER_KB).toFixed(COMMON.DECIMAL_PRECISION);
     const valid = sizeBytes <= maxBytes;
 
     return {
@@ -63,7 +65,7 @@ export function checkCssSize(css: string, maxBytes: number = DEFAULT_MAX_SIZE): 
         maxBytes,
         error: valid
             ? undefined
-            : `CSS size (${sizeKB}KB) exceeds AMP limit of ${(maxBytes / 1024).toFixed(0)}KB`,
+            : `CSS size (${sizeKB}KB) exceeds AMP limit of ${CSS_LIMITS.MAX_SIZE_KB}KB`,
     };
 }
 
@@ -78,7 +80,10 @@ import { processWithLightningCss } from '../lib/lightningCss.js';
  * @returns Original content if valid
  * @throws {Error} If CSS exceeds the limit
  */
-export function cssGuard(content: string, maxSizeBytes: number = DEFAULT_MAX_SIZE): string {
+export function cssGuard(
+    content: string,
+    maxSizeBytes: number = CSS_LIMITS.MAX_SIZE_BYTES
+): string {
     if (content === '') {
         return content;
     }
@@ -101,7 +106,7 @@ export function cssGuard(content: string, maxSizeBytes: number = DEFAULT_MAX_SIZ
     // Fail build if over limit
     if (!result.valid) {
         throw new Error(
-            `[CSS Guard] BUILD FAILED: CSS size (${result.sizeKB}) exceeds AMP limit of ${(maxSizeBytes / 1024).toFixed(0)}KB\n` +
+            `[CSS Guard] BUILD FAILED: CSS size (${result.sizeKB}) exceeds AMP limit of ${CSS_LIMITS.MAX_SIZE_KB}KB\n` +
                 `Reduce your CSS to stay within the AMP limit.\n` +
                 `Tips:\n` +
                 `  - Remove unused styles\n` +
@@ -134,11 +139,13 @@ export function cssGuard(content: string, maxSizeBytes: number = DEFAULT_MAX_SIZ
  */
 export function getCssStats(
     html: string,
-    maxBytes: number = DEFAULT_MAX_SIZE
+    maxBytes: number = CSS_LIMITS.MAX_SIZE_BYTES
 ): CssGuardResult & { percentage: string } {
     const css = extractAmpCustomCSS(html) ?? '';
     const result = checkCssSize(css, maxBytes);
-    const percentage = ((result.sizeBytes / maxBytes) * 100).toFixed(1);
+    const percentage = ((result.sizeBytes / maxBytes) * COMMON.PERCENTAGE_MAX).toFixed(
+        COMMON.PERCENTAGE_PRECISION
+    );
 
     return {
         ...result,

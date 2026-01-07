@@ -5,9 +5,7 @@
  */
 
 import { browserslistToTargets, transform } from 'lightningcss';
-
-/** Default maximum CSS size in bytes (75KB as per AMP spec) */
-const MAX_CSS_SIZE = 75 * 1024;
+import { COMMON, CSS_LIMITS } from '../config/constants.js';
 
 /**
  * Browser targets for AMP compatibility
@@ -56,7 +54,7 @@ interface LightningCssResult {
  * @returns Optimized CSS result
  */
 export function processWithLightningCss(options: LightningCssOptions): LightningCssResult {
-    const { code, filename = 'styles.css', maxSize = MAX_CSS_SIZE } = options;
+    const { code, filename = 'styles.css', maxSize = CSS_LIMITS.MAX_SIZE_BYTES } = options;
 
     const { code: minifiedBuffer } = transform({
         filename,
@@ -71,7 +69,7 @@ export function processWithLightningCss(options: LightningCssOptions): Lightning
 
     const css = minifiedBuffer.toString();
     const sizeBytes = Buffer.byteLength(css, 'utf8');
-    const sizeKB = (sizeBytes / 1024).toFixed(2);
+    const sizeKB = (sizeBytes / COMMON.BYTES_PER_KB).toFixed(COMMON.DECIMAL_PRECISION);
     const valid = sizeBytes <= maxSize;
 
     return {
