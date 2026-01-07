@@ -199,6 +199,7 @@
 
     {# Google Analytics 4 via amp-analytics #}
     {# Measurement ID: G-8B9YX48TMV #}
+    {# Expert-level GA4 configuration with conversion tracking and custom dimensions #}
     <amp-analytics type="gtag" data-credentials="include">
         <script type="application/json">
         {
@@ -207,17 +208,91 @@
                 "config": {
                     "G-8B9YX48TMV": {
                         "page_title": "{{ title }}",
-                        "page_location": "{{ site.url }}{{ page.url }}"
+                        "page_location": "{{ site.url }}{{ page.url }}",
+                        "page_referrer": "${documentReferrer}",
+                        "send_page_view": true
                     }
                 }
             },
             "triggers": {
-                "pageView": {
+                "trackPageview": {
                     "on": "visible",
-                    "request": "pageview",
                     "vars": {
-                        "page_title": "{{ title }}",
-                        "page_path": "{{ page.url }}"
+                        "event_name": "page_view",
+                        "page_type": "{% if page.url == '/' %}home{% elif page.url == '/contact.html' %}contact{% elif page.url == '/sitemap.html' %}sitemap{% elif page.url == '/404.html' %}error{% else %}general{% endif %}"
+                    }
+                },
+                "contactIntent": {
+                    "on": "visible",
+                    "vars": {
+                        "event_name": "contact_intent",
+                        "page_type": "contact"
+                    },
+                    "selector": "body",
+                    "visibilitySpec": {
+                        "selector": "#main-content[aria-label='Contact information']",
+                        "visiblePercentageMin": 1,
+                        "totalTimeMin": 100,
+                        "continuousTimeMin": 100
+                    }
+                },
+                "emailContactClick": {
+                    "on": "click",
+                    "selector": "a[href^='mailto:']",
+                    "vars": {
+                        "event_name": "generate_lead",
+                        "link_type": "email",
+                        "contact_method": "email"
+                    }
+                },
+                "githubProfileClick": {
+                    "on": "click",
+                    "selector": "a[href*='github.com/SyafiqHadzir']",
+                    "vars": {
+                        "event_name": "view_portfolio",
+                        "link_type": "github",
+                        "content_category": "professional",
+                        "portfolio_platform": "github"
+                    }
+                },
+                "gitlabProfileClick": {
+                    "on": "click",
+                    "selector": "a[href*='gitlab.com/syafiqhadzir']",
+                    "vars": {
+                        "event_name": "view_portfolio",
+                        "link_type": "gitlab",
+                        "content_category": "professional",
+                        "portfolio_platform": "gitlab"
+                    }
+                },
+                "blogClick": {
+                    "on": "click",
+                    "selector": "a[href*='blog.syafiqhadzir.dev']",
+                    "vars": {
+                        "event_name": "read_content",
+                        "link_type": "blog",
+                        "content_category": "blog",
+                        "link_url": "${href}"
+                    }
+                },
+                "companyLinkClick": {
+                    "on": "click",
+                    "selector": "a[href*='cloud-connect.asia']",
+                    "vars": {
+                        "event_name": "click",
+                        "link_type": "company",
+                        "content_category": "external",
+                        "link_url": "${href}"
+                    }
+                },
+                "navigationMenuClick": {
+                    "on": "click",
+                    "selector": "#navlist a",
+                    "vars": {
+                        "event_name": "navigation_click",
+                        "link_type": "navigation",
+                        "link_text": "${text}",
+                        "link_url": "${href}"
                     }
                 },
                 "scrollDepth25": {
@@ -225,11 +300,10 @@
                     "scrollSpec": {
                         "verticalBoundaries": [25]
                     },
-                    "request": "event",
                     "vars": {
                         "event_name": "scroll",
-                        "event_category": "Engagement",
-                        "event_label": "25%"
+                        "percent_scrolled": 25,
+                        "engagement_type": "scroll"
                     }
                 },
                 "scrollDepth50": {
@@ -237,11 +311,10 @@
                     "scrollSpec": {
                         "verticalBoundaries": [50]
                     },
-                    "request": "event",
                     "vars": {
                         "event_name": "scroll",
-                        "event_category": "Engagement",
-                        "event_label": "50%"
+                        "percent_scrolled": 50,
+                        "engagement_type": "scroll"
                     }
                 },
                 "scrollDepth75": {
@@ -249,11 +322,10 @@
                     "scrollSpec": {
                         "verticalBoundaries": [75]
                     },
-                    "request": "event",
                     "vars": {
                         "event_name": "scroll",
-                        "event_category": "Engagement",
-                        "event_label": "75%"
+                        "percent_scrolled": 75,
+                        "engagement_type": "scroll"
                     }
                 },
                 "scrollDepth100": {
@@ -261,31 +333,85 @@
                     "scrollSpec": {
                         "verticalBoundaries": [100]
                     },
-                    "request": "event",
                     "vars": {
                         "event_name": "scroll",
-                        "event_category": "Engagement",
-                        "event_label": "100%"
+                        "percent_scrolled": 100,
+                        "engagement_type": "scroll"
                     }
                 },
-                "outboundLinks": {
+                "sectionAboutView": {
+                    "on": "visible",
+                    "selector": "#about-me",
+                    "visibilitySpec": {
+                        "selector": "#about-me",
+                        "visiblePercentageMin": 50,
+                        "totalTimeMin": 1000
+                    },
+                    "vars": {
+                        "event_name": "section_view",
+                        "section_name": "about",
+                        "content_category": "portfolio"
+                    }
+                },
+                "sectionProficienciesView": {
+                    "on": "visible",
+                    "selector": "#proficiencies",
+                    "visibilitySpec": {
+                        "selector": "#proficiencies",
+                        "visiblePercentageMin": 50,
+                        "totalTimeMin": 1000
+                    },
+                    "vars": {
+                        "event_name": "section_view",
+                        "section_name": "proficiencies",
+                        "content_category": "portfolio"
+                    }
+                },
+                "sectionInterestsView": {
+                    "on": "visible",
+                    "selector": "#interest",
+                    "visibilitySpec": {
+                        "selector": "#interest",
+                        "visiblePercentageMin": 50,
+                        "totalTimeMin": 1000
+                    },
+                    "vars": {
+                        "event_name": "section_view",
+                        "section_name": "interests",
+                        "content_category": "portfolio"
+                    }
+                },
+                "sectionReferencesView": {
+                    "on": "visible",
+                    "selector": "#references",
+                    "visibilitySpec": {
+                        "selector": "#references",
+                        "visiblePercentageMin": 50,
+                        "totalTimeMin": 1000
+                    },
+                    "vars": {
+                        "event_name": "section_view",
+                        "section_name": "references",
+                        "content_category": "portfolio"
+                    }
+                },
+                "trackOutboundLinks": {
                     "on": "click",
-                    "selector": "a[rel*='external']",
-                    "request": "event",
+                    "selector": "a[rel*='external']:not([href*='github.com']):not([href*='gitlab.com']):not([href*='blog.syafiqhadzir.dev']):not([href*='cloud-connect.asia'])",
                     "vars": {
                         "event_name": "click",
-                        "event_category": "Outbound",
-                        "event_label": "${href}"
+                        "link_type": "external_other",
+                        "content_category": "external",
+                        "link_url": "${href}"
                     }
                 },
-                "themeToggle": {
+                "trackThemeToggle": {
                     "on": "click",
                     "selector": ".theme-toggle",
-                    "request": "event",
                     "vars": {
                         "event_name": "theme_toggle",
-                        "event_category": "Engagement",
-                        "event_label": "Theme Changed"
+                        "engagement_type": "theme_preference",
+                        "ui_element": "theme_toggle"
                     }
                 }
             }
