@@ -1,3 +1,10 @@
+## [4.4.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.4.0...v4.4.1) (2026-01-07)
+
+
+### Bug Fixes
+
+* **sw:** remove missing headshot.webp from precache and bump version to 2.3.0 ([c381dd2](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/c381dd2300db9711ed8efc573cd0a60a3da49cc2))
+
 # [4.4.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.3.9...v4.4.0) (2025-12-31)
 
 
