@@ -199,7 +199,7 @@
 
     {# Google Analytics 4 via amp-analytics #}
     {# Measurement ID: G-8B9YX48TMV #}
-    {# Expert-level GA4 configuration with conversion tracking and custom dimensions #}
+    {# Simplified GA4 configuration - universal triggers only #}
     <amp-analytics type="gtag" data-credentials="include">
         <script type="application/json">
         {
@@ -207,211 +207,57 @@
                 "gtag_id": "G-8B9YX48TMV",
                 "config": {
                     "G-8B9YX48TMV": {
-                        "page_title": "{{ title }}",
-                        "page_location": "{{ site.url }}{{ page.url }}",
-                        "page_referrer": "${documentReferrer}",
-                        "send_page_view": true
+                        "groups": "default"
                     }
                 }
             },
             "triggers": {
-                "trackPageview": {
+                "defaultPageview": {
                     "on": "visible",
                     "vars": {
                         "event_name": "page_view",
-                        "page_type": "{% if page.url == '/' %}home{% elif page.url == '/contact.html' %}contact{% elif page.url == '/sitemap.html' %}sitemap{% elif page.url == '/404.html' %}error{% else %}general{% endif %}"
+                        "page_title": "{{ title }}",
+                        "page_location": "{{ site.url }}{{ page.url }}"
                     }
                 },
-                "contactIntent": {
-                    "on": "visible",
-                    "vars": {
-                        "event_name": "contact_intent",
-                        "page_type": "contact"
-                    },
-                    "selector": "body",
-                    "visibilitySpec": {
-                        "selector": "#main-content[aria-label='Contact information']",
-                        "visiblePercentageMin": 1,
-                        "totalTimeMin": 100,
-                        "continuousTimeMin": 100
-                    }
-                },
-                "emailContactClick": {
+                "emailClick": {
                     "on": "click",
                     "selector": "a[href^='mailto:']",
                     "vars": {
                         "event_name": "generate_lead",
-                        "link_type": "email",
-                        "contact_method": "email"
+                        "method": "email"
                     }
                 },
-                "githubProfileClick": {
+                "githubClick": {
                     "on": "click",
-                    "selector": "a[href*='github.com/SyafiqHadzir']",
-                    "vars": {
-                        "event_name": "view_portfolio",
-                        "link_type": "github",
-                        "content_category": "professional",
-                        "portfolio_platform": "github"
-                    }
-                },
-                "gitlabProfileClick": {
-                    "on": "click",
-                    "selector": "a[href*='gitlab.com/syafiqhadzir']",
-                    "vars": {
-                        "event_name": "view_portfolio",
-                        "link_type": "gitlab",
-                        "content_category": "professional",
-                        "portfolio_platform": "gitlab"
-                    }
-                },
-                "blogClick": {
-                    "on": "click",
-                    "selector": "a[href*='blog.syafiqhadzir.dev']",
-                    "vars": {
-                        "event_name": "read_content",
-                        "link_type": "blog",
-                        "content_category": "blog",
-                        "link_url": "${href}"
-                    }
-                },
-                "companyLinkClick": {
-                    "on": "click",
-                    "selector": "a[href*='cloud-connect.asia']",
+                    "selector": "a[href*='github.com']",
                     "vars": {
                         "event_name": "click",
-                        "link_type": "company",
-                        "content_category": "external",
-                        "link_url": "${href}"
+                        "link_id": "github"
                     }
                 },
-                "navigationMenuClick": {
+                "gitlabClick": {
                     "on": "click",
-                    "selector": "#navlist a",
-                    "vars": {
-                        "event_name": "navigation_click",
-                        "link_type": "navigation",
-                        "link_text": "${text}",
-                        "link_url": "${href}"
-                    }
-                },
-                "scrollDepth25": {
-                    "on": "scroll",
-                    "scrollSpec": {
-                        "verticalBoundaries": [25]
-                    },
-                    "vars": {
-                        "event_name": "scroll",
-                        "percent_scrolled": 25,
-                        "engagement_type": "scroll"
-                    }
-                },
-                "scrollDepth50": {
-                    "on": "scroll",
-                    "scrollSpec": {
-                        "verticalBoundaries": [50]
-                    },
-                    "vars": {
-                        "event_name": "scroll",
-                        "percent_scrolled": 50,
-                        "engagement_type": "scroll"
-                    }
-                },
-                "scrollDepth75": {
-                    "on": "scroll",
-                    "scrollSpec": {
-                        "verticalBoundaries": [75]
-                    },
-                    "vars": {
-                        "event_name": "scroll",
-                        "percent_scrolled": 75,
-                        "engagement_type": "scroll"
-                    }
-                },
-                "scrollDepth100": {
-                    "on": "scroll",
-                    "scrollSpec": {
-                        "verticalBoundaries": [100]
-                    },
-                    "vars": {
-                        "event_name": "scroll",
-                        "percent_scrolled": 100,
-                        "engagement_type": "scroll"
-                    }
-                },
-                "sectionAboutView": {
-                    "on": "visible",
-                    "selector": "#about-me",
-                    "visibilitySpec": {
-                        "selector": "#about-me",
-                        "visiblePercentageMin": 50,
-                        "totalTimeMin": 1000
-                    },
-                    "vars": {
-                        "event_name": "section_view",
-                        "section_name": "about",
-                        "content_category": "portfolio"
-                    }
-                },
-                "sectionProficienciesView": {
-                    "on": "visible",
-                    "selector": "#proficiencies",
-                    "visibilitySpec": {
-                        "selector": "#proficiencies",
-                        "visiblePercentageMin": 50,
-                        "totalTimeMin": 1000
-                    },
-                    "vars": {
-                        "event_name": "section_view",
-                        "section_name": "proficiencies",
-                        "content_category": "portfolio"
-                    }
-                },
-                "sectionInterestsView": {
-                    "on": "visible",
-                    "selector": "#interest",
-                    "visibilitySpec": {
-                        "selector": "#interest",
-                        "visiblePercentageMin": 50,
-                        "totalTimeMin": 1000
-                    },
-                    "vars": {
-                        "event_name": "section_view",
-                        "section_name": "interests",
-                        "content_category": "portfolio"
-                    }
-                },
-                "sectionReferencesView": {
-                    "on": "visible",
-                    "selector": "#references",
-                    "visibilitySpec": {
-                        "selector": "#references",
-                        "visiblePercentageMin": 50,
-                        "totalTimeMin": 1000
-                    },
-                    "vars": {
-                        "event_name": "section_view",
-                        "section_name": "references",
-                        "content_category": "portfolio"
-                    }
-                },
-                "trackOutboundLinks": {
-                    "on": "click",
-                    "selector": "a[rel*='external']:not([href*='github.com']):not([href*='gitlab.com']):not([href*='blog.syafiqhadzir.dev']):not([href*='cloud-connect.asia'])",
+                    "selector": "a[href*='gitlab.com']",
                     "vars": {
                         "event_name": "click",
-                        "link_type": "external_other",
-                        "content_category": "external",
-                        "link_url": "${href}"
+                        "link_id": "gitlab"
                     }
                 },
-                "trackThemeToggle": {
+                "externalLinkClick": {
+                    "on": "click",
+                    "selector": "a[rel*='external']",
+                    "vars": {
+                        "event_name": "click",
+                        "link_id": "external"
+                    }
+                },
+                "themeToggleClick": {
                     "on": "click",
                     "selector": ".theme-toggle",
                     "vars": {
-                        "event_name": "theme_toggle",
-                        "engagement_type": "theme_preference",
-                        "ui_element": "theme_toggle"
+                        "event_name": "select_content",
+                        "content_type": "theme_toggle"
                     }
                 }
             }
