@@ -1,3 +1,10 @@
+## [4.5.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.5.0...v4.5.1) (2026-01-08)
+
+
+### Bug Fixes
+
+* **analytics:** resolve AMP analytics errors and simplify GA4 config ([37eaac4](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/37eaac4b13c0d24d589224b02732e34d91945ed1))
+
 # [4.5.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.4.2...v4.5.0) (2026-01-07)
 
 
