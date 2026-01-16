@@ -1,3 +1,10 @@
+# [4.6.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.5.1...v4.6.0) (2026-01-16)
+
+
+### Features
+
+* move research link and upgrade to tailwind v4 ([d6c9add](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/d6c9add0528c5ff62418e4db98f6239e357b2538))
+
 ## [4.5.1](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.5.0...v4.5.1) (2026-01-08)
 
 
