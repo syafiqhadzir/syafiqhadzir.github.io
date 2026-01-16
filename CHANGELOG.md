@@ -1,3 +1,15 @@
+# [4.8.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.7.0...v4.8.0) (2026-01-16)
+
+
+### Features
+
+* adapt portfolio to researcher template style ([4c98c75](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/4c98c75d1ab98a2953cce61a78a5ecb7f8cb8400))
+
+
+### Reverts
+
+* downgrade to tailwind css v3.4.19 for amp compatibility ([f6d2fc3](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/f6d2fc329d25059311b0584fbbd3ef172400d23e))
+
 # [4.6.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.5.1...v4.6.0) (2026-01-16)
 
 
