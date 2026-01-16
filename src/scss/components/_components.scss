@@ -1,32 +1,24 @@
 // ============================================================================
-// COMPONENTS INDEX
-// Component styles for the portfolio site
+// COMPONENTS - TAILWIND V4 COMPATIBLE
+// Expert-Level: Standard CSS with Tailwind utilities, minimal @apply
+// ---
+// Best Practice: Use utility classes in HTML; @apply only for base/core patterns
+// V4 Philosophy: Utility-first in templates, component classes only when necessary
 // ============================================================================
 
-// Import abstracts for access to variables and mixins
+// Import abstracts for Sass mixins (media queries, a11y, etc.)
 @use '../abstracts' as *;
 
 // ============================================================================
-// LEGACY COMPONENT STYLES
-// These styles are migrated from the original _components.scss
-// TODO: Split into individual component files as the project grows
+// COMPONENT LAYER - V4 SYNTAX
 // ============================================================================
 
-// ============================================================================
-// CSS CUSTOM PROPERTIES (Theme Overrides)
-// ============================================================================
+@layer components {
+    // ========================================================================
+    // THEME TOGGLE VISIBILITY
+    // Standard CSS for better compatibility
+    // ========================================================================
 
-// Theme toggle icon visibility (Light Mode Default)
-.moon-icon {
-    display: inline-block;
-}
-
-.sun-icon {
-    display: none;
-}
-
-// Explicit Light Override
-body.light {
     .moon-icon {
         display: inline-block;
     }
@@ -34,252 +26,234 @@ body.light {
     .sun-icon {
         display: none;
     }
-}
 
-// Explicit Dark Override
-body.dark {
-    .moon-icon {
-        display: none;
-    }
+    body.light {
+        .moon-icon {
+            display: inline-block;
+        }
 
-    .sun-icon {
-        display: inline-block;
-    }
-}
-
-// System Dark Mode
-@media (prefers-color-scheme: dark) {
-    .moon-icon {
-        display: none;
-    }
-
-    .sun-icon {
-        display: inline-block;
-    }
-}
-
-// ============================================================================
-// LAYOUT COMPONENTS
-// ============================================================================
-
-// Wrapper - Full height layout
-.wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
-}
-
-// Container - Centered content
-.container {
-    flex: 1;
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    padding: 0 var(--container-padding);
-}
-
-// ============================================================================
-// NAVBAR COMPONENT
-// ============================================================================
-
-.navbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    align-items: center;
-    padding: var(--navbar-padding) 0;
-
-    a {
-        text-decoration: none;
-    }
-}
-
-#author-name {
-    font-size: 1.5rem;
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-heading);
-}
-
-.navbar-ul {
-    display: flex;
-    align-items: center;
-    margin: 0;
-    padding: 0;
-    list-style: none;
-}
-
-.nav-list {
-    margin-left: 15px;
-    font-size: 1rem;
-}
-
-.nav-separator {
-    margin: 0 5px;
-    color: var(--color-text-muted);
-}
-
-.active {
-    font-weight: var(--font-weight-bold);
-}
-
-// ============================================================================
-// LEGACY UTILITIES (Kept for backwards compatibility)
-// ============================================================================
-
-.alignable {
-    display: inline-block;
-}
-
-.pull-right {
-    float: right;
-}
-
-.pull-left {
-    float: left;
-}
-
-hr {
-    margin: 30px 0;
-    border: 0;
-    border-top: var(--border-width) solid var(--color-border);
-}
-
-.w3-button {
-    display: inline-block;
-    padding: var(--space-xs) var(--space-md);
-    border: 0;
-    border-radius: var(--border-radius-md);
-    cursor: pointer;
-}
-
-.w3-center {
-    text-align: center;
-}
-
-// ============================================================================
-// THEME TOGGLE COMPONENT
-// ============================================================================
-
-.theme-toggle {
-    min-width: var(--touch-target-min);
-    min-height: var(--touch-target-min);
-    margin-left: 10px;
-    padding: 5px;
-    font-size: 1rem;
-    color: var(--color-text-heading);
-    background: none;
-    border: none;
-    cursor: pointer;
-
-    &:focus {
-        outline: none;
-    }
-
-    &:focus-visible {
-        outline: var(--focus-ring-width) solid var(--focus-ring-color);
-        outline-offset: var(--focus-ring-offset);
-    }
-}
-
-// ============================================================================
-// FOOTER COMPONENT
-// ============================================================================
-
-.footer {
-    margin-top: auto;
-    padding: var(--footer-padding) 0;
-    font-size: var(--font-size-sm);
-    text-align: center;
-    color: var(--color-text-muted);
-
-    a {
-        text-decoration: none;
-        color: var(--color-text-muted);
-        border-bottom: 1px dotted var(--color-text-muted);
-
-        &:hover {
-            color: var(--color-accent);
-            border-bottom-color: var(--color-accent);
+        .sun-icon {
+            display: none;
         }
     }
-}
 
-// ============================================================================
-// SKIP LINK (Accessibility)
-// ============================================================================
+    body.dark {
+        .moon-icon {
+            display: none;
+        }
 
-.skip-link {
-    position: absolute;
-    left: -9999px;
-    z-index: var(--z-fixed);
-    padding: var(--space-xs) var(--space-md);
-    color: var(--color-bg-primary);
-    background: var(--color-text-primary);
-
-    &:focus {
-        top: 10px;
-        left: 10px;
-    }
-}
-
-// ============================================================================
-// IMAGE COMPONENTS
-// ============================================================================
-
-.profile-picture {
-    float: right;
-    width: 120px;
-    height: 120px;
-    margin-bottom: var(--space-lg);
-    margin-left: var(--space-lg);
-    overflow: hidden;
-    border-radius: var(--border-radius-full);
-}
-
-.content {
-    amp-img {
-        width: 100%;
-    }
-
-    ul {
-        padding: 0 var(--space-lg);
-
-        > li {
-            margin: 5px 0;
+        .sun-icon {
+            display: inline-block;
         }
     }
-}
 
-// ============================================================================
-// HIGH CONTRAST MODE
-// ============================================================================
+    // ========================================================================
+    // LAYOUT COMPONENTS
+    // Standard CSS + CSS custom properties
+    // ========================================================================
 
-@media (prefers-contrast: high) {
-    a {
-        text-decoration: underline;
-    }
-}
-
-// ============================================================================
-// RESPONSIVE STYLES
-// ============================================================================
-
-@media (width <=600px) {
-    .navbar {
+    .wrapper {
+        display: flex;
         flex-direction: column;
-        text-align: center;
+        min-height: 100%;
     }
 
-    .navbar-ul {
-        margin-top: 15px;
+    .container {
+        flex: 1;
+        max-width: var(--container-max-width);
+        margin-right: auto;
+        margin-left: auto;
+        padding-right: var(--container-padding);
+        padding-left: var(--container-padding);
     }
 
-    .profile-picture {
-        display: block;
-        float: none;
-        margin: 0 auto var(--space-lg);
+    // ========================================================================
+    // NAVBAR COMPONENT
+    // Standard CSS properties for maximum compatibility
+    // ========================================================================
+
+    .navbar {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: var(--navbar-padding);
+        padding-bottom: var(--navbar-padding);
+
+        a {
+            text-decoration: none;
+        }
     }
 
     #author-name {
-        width: 100%;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: var(--color-text-heading);
+    }
+
+    .navbar-ul {
+        display: flex;
+        align-items: center;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .nav-list {
+        margin-left: 15px;
+        font-size: 1rem;
+    }
+
+    .nav-separator {
+        margin-right: 5px;
+        margin-left: 5px;
+        color: var(--color-text-muted);
+    }
+
+    .active {
+        font-weight: 700;
+    }
+
+    // ========================================================================
+    // LEGACY UTILITIES (Backwards Compatibility)
+    // ========================================================================
+
+    .alignable {
+        display: inline-block;
+    }
+
+    .pull-right {
+        float: right;
+    }
+
+    .pull-left {
+        float: left;
+    }
+
+    hr {
+        margin-top: 30px;
+        margin-bottom: 30px;
+        border-width: 0;
+        border-top-width: 1px;
+        border-color: var(--color-border);
+    }
+
+    .w3-button {
+        display: inline-block;
+        padding: var(--space-xs) var(--space-md);
+        border: 0;
+        border-radius: var(--border-radius-md);
+        cursor: pointer;
+    }
+
+    .w3-center {
+        text-align: center;
+    }
+
+    // ========================================================================
+    // THEME TOGGLE BUTTON
+    // Accessible button with native CSS focus states
+    // ========================================================================
+
+    .theme-toggle {
+        min-width: var(--touch-target-min);
+        min-height: var(--touch-target-min);
+        margin-left: 10px;
+        padding: 5px;
+        font-size: 1rem;
+        color: var(--color-text-heading);
+        background-color: transparent;
+        border: 0;
+        cursor: pointer;
+
+        &:focus {
+            outline: none;
+        }
+
+        &:focus-visible {
+            outline: var(--focus-ring-width) solid var(--focus-ring-color);
+            outline-offset: var(--focus-ring-offset);
+        }
+    }
+
+    // ========================================================================
+    // FOOTER COMPONENT
+    // ========================================================================
+
+    .footer {
+        margin-top: auto;
+        padding-top: var(--footer-padding);
+        padding-bottom: var(--footer-padding);
+        font-size: 0.875rem;
+        text-align: center;
+        color: var(--color-text-muted);
+
+        a {
+            text-decoration: none;
+            color: var(--color-text-muted);
+            border-bottom: 1px dotted var(--color-text-muted);
+
+            &:hover {
+                color: var(--color-accent);
+                border-color: var(--color-accent);
+            }
+        }
+    }
+
+    // ========================================================================
+    // SKIP LINK (Accessibility)
+    // ========================================================================
+
+    .skip-link {
+        position: absolute;
+        left: -9999px;
+        z-index: var(--z-fixed);
+        padding: var(--space-md) var(--space-xs);
+        color: var(--color-bg-primary);
+        background-color: var(--color-text-primary);
+
+        &:focus {
+            top: 10px;
+            left: 10px;
+        }
+    }
+
+    // ========================================================================
+    // CONTACT FORM (Future Enhancement)
+    // ========================================================================
+
+    .contact-form {
+        max-width: 600px;
+        margin-right: auto;
+        margin-left: auto;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input,
+        textarea {
+            display: block;
+            width: 100%;
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius-md);
+        }
+
+        button {
+            padding: 0.75rem 1.5rem;
+            color: #fff;
+            background-color: var(--color-accent);
+            border: 0;
+            border-radius: var(--border-radius-md);
+            cursor: pointer;
+
+            &:hover {
+                background-color: var(--color-accent-hover);
+            }
+        }
     }
 }

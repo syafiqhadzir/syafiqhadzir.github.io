@@ -8,6 +8,7 @@
 
 import * as sass from 'sass';
 import postcss from 'postcss';
+import tailwindcssPlugin from '@tailwindcss/postcss';
 import autoprefixer from 'autoprefixer';
 import { transform, browserslistToTargets } from 'lightningcss';
 import { existsSync } from 'node:fs';
@@ -29,8 +30,8 @@ import { cssGuard } from './dist/transforms/cssGuard.js';
 const BROWSER_TARGETS = browserslistToTargets([...BROWSERSLIST_QUERY]);
 
 /**
- * Compile SCSS with LightningCSS for AMP-compatible optimization
- * Pipeline: Dart Sass → PostCSS (autoprefixer) → LightningCSS (minify)
+ * Compile SCSS with Tailwind CSS and LightningCSS for AMP-compatible optimization
+ * Pipeline: Dart Sass → PostCSS (Tailwind + Autoprefixer) → LightningCSS (minify)
  * @returns Minified CSS string
  */
 async function compileSCSS() {
@@ -48,8 +49,9 @@ async function compileSCSS() {
             loadPaths: ['./src/scss', './node_modules'],
         });
 
-        // Step 2: Process with PostCSS (autoprefixer for modern browsers)
+        // Step 2: Process with PostCSS (Tailwind CSS v4 + Autoprefixer)
         const postcssResult = await postcss([
+            tailwindcssPlugin(),
             autoprefixer({
                 overrideBrowserslist: [
                     'last 2 Chrome versions',

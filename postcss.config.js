@@ -1,10 +1,14 @@
 /**
  * PostCSS Configuration
- * Centralized PostCSS plugin configuration
+ * Expert-level PostCSS + Tailwind CSS v4 integration
+ * Optimized for AMP constraints (75KB inline CSS limit)
  */
 
 export default {
     plugins: {
+        // Tailwind CSS v4 - New @tailwindcss/postcss plugin
+        '@tailwindcss/postcss': {},
+
         // Autoprefixer for browser compatibility
         autoprefixer: {
             overrideBrowserslist: [

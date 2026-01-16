@@ -48,10 +48,8 @@ export default {
         'selector-max-combinators': 3,
         'selector-max-pseudo-class': 3,
         'selector-no-qualifying-type': [true, { ignore: ['attribute', 'class'] }],
-        'selector-class-pattern': [
-            '^[a-z][a-z0-9]*(-[a-z0-9]+)*$',
-            { message: 'Class names must be kebab-case' },
-        ],
+        // Allow kebab-case AND Tailwind's special characters - disabled due to complexity with escaped selectors
+        'selector-class-pattern': undefined,
 
         // ========== NESTING STRICTNESS ==========
         'max-nesting-depth': [
@@ -71,7 +69,13 @@ export default {
 
         // ========== DECLARATION STRICTNESS ==========
         'declaration-block-no-redundant-longhand-properties': true,
-        'declaration-no-important': true, // Stricter: no !important
+        'declaration-no-important': [
+            true,
+            {
+                // Allow !important in utility classes (Tailwind pattern)
+                ignoreAtRules: ['layer'],
+            },
+        ],
         'shorthand-property-no-redundant-values': true,
         'declaration-block-single-line-max-declarations': 1,
 
@@ -89,7 +93,21 @@ export default {
         'at-rule-no-vendor-prefix': true,
 
         // ========== SCSS STRICTNESS ==========
-        'scss/at-rule-no-unknown': true,
+        'scss/at-rule-no-unknown': [
+            true,
+            {
+                // Allow Tailwind v4 directives (@import, @theme, @layer, @apply)
+                ignoreAtRules: [
+                    'tailwind',
+                    'theme',
+                    'apply',
+                    'layer',
+                    'variants',
+                    'responsive',
+                    'screen',
+                ],
+            },
+        ],
         'scss/selector-no-redundant-nesting-selector': true,
         'scss/no-duplicate-dollar-variables': true,
         'scss/no-duplicate-mixins': true,
@@ -233,7 +251,6 @@ export default {
 
         // ========== OVERRIDES (AMP compatibility) ==========
         'no-descending-specificity': true,
-        'scss/at-import-partial-extension': undefined,
         'function-name-case': [
             'lower',
             {
