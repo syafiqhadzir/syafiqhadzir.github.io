@@ -256,4 +256,54 @@
             }
         }
     }
+
+    // ========================================================================
+    // PROFILE PICTURE (Researcher Template Style)
+    // Round profile picture with float for text wrap
+    // ========================================================================
+
+    .profile-picture {
+        display: block;
+        float: right;
+        width: 85px;
+        height: 85px;
+        margin-bottom: var(--space-sm);
+        margin-left: var(--space-md);
+        overflow: hidden;
+        border-radius: var(--border-radius-full);
+
+        amp-img {
+            width: 85px;
+            height: 85px;
+            border-radius: var(--border-radius-full);
+        }
+
+        // Center on mobile
+        @include media-down('sm') {
+            float: none;
+            margin-right: auto;
+            margin-left: auto;
+        }
+    }
+
+    // ========================================================================
+    // PUBLICATIONS LIST (Researcher Template Style)
+    // Numbered list with proper styling
+    // ========================================================================
+
+    ol[data-cy='publications-list'] {
+        padding-left: var(--space-lg);
+
+        li {
+            margin-bottom: var(--space-sm);
+
+            strong {
+                color: var(--color-text-heading);
+            }
+
+            em {
+                color: var(--color-accent);
+            }
+        }
+    }
 }

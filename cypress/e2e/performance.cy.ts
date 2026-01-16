@@ -111,7 +111,21 @@ describe('Performance', () => {
 
         it('should use responsive layout for large images', () => {
             cy.visit('/');
-            cy.get('amp-img[layout="responsive"]').should('exist');
+            // Check that images use appropriate layout
+            // Large images should use responsive, small fixed images (like profile) are allowed
+            cy.get('amp-img').each(($img) => {
+                const layout = $img.attr('layout');
+                const width = Number.parseInt($img.attr('width') || '0', 10);
+                const height = Number.parseInt($img.attr('height') || '0', 10);
+
+                // Small images (<=100px) can use fixed layout
+                if (width <= 100 && height <= 100) {
+                    expect(layout).to.be.oneOf(['fixed', 'responsive', 'intrinsic']);
+                } else {
+                    // Large images should use responsive layout
+                    expect(layout).to.eq('responsive');
+                }
+            });
         });
     });
 

@@ -167,9 +167,10 @@
 
 // ============================================================================
 // DARK MODE TOKENS
+// Uses body.dark class set by AMP theme toggle
 // ============================================================================
 
-[data-theme='dark'] {
+body.dark {
     // Background Colors
     --color-bg-primary: #121212;
     --color-bg-secondary: #1e1e1e;
@@ -199,10 +200,11 @@
 
 // ============================================================================
 // SYSTEM DARK MODE PREFERENCE (Fallback)
+// Applies when user has system dark preference and hasn't manually set light mode
 // ============================================================================
 
 @media (prefers-color-scheme: dark) {
-    :root:not([data-theme='light']) {
+    body:not(.light) {
         // Background Colors
         --color-bg-primary: #121212;
         --color-bg-secondary: #1e1e1e;
