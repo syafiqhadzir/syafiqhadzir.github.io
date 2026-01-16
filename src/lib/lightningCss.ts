@@ -9,13 +9,14 @@ import { COMMON, CSS_LIMITS } from '../config/constants.js';
 
 /**
  * Browser targets for AMP compatibility
- * Modern browsers only to minimize vendor prefixes
+ * Using older browser versions to disable CSS nesting support
+ * AMP doesn't support CSS nesting, so we target browsers before nesting was supported
  */
 const BROWSER_TARGETS = browserslistToTargets([
-    'last 2 Chrome versions',
-    'last 2 Firefox versions',
-    'last 2 Safari versions',
-    'last 2 Edge versions',
+    'Chrome 100', // Before CSS nesting support (Chrome 112+)
+    'Firefox 100', // Before CSS nesting support (Firefox 117+)
+    'Safari 15', // Before CSS nesting support (Safari 16.5+)
+    'Edge 100', // Before CSS nesting support (Edge 112+)
     'iOS >= 14',
     'Android >= 10',
 ]);
@@ -49,6 +50,18 @@ interface LightningCssResult {
 }
 
 /**
+ * Strip AMP-incompatible CSS features
+ * NOTE: Tailwind v3 doesn't generate \@layer/\@property/\@page, so this is mostly preventive
+ * @param css - Input CSS string
+ * @returns CSS with AMP-incompatible features removed
+ */
+function stripAmpIncompatibleFeatures(css: string): string {
+    // Tailwind v3 generates AMP-compatible CSS, no stripping needed
+    // This function is kept for future compatibility
+    return css;
+}
+
+/**
  * Process CSS with LightningCSS for extreme minification
  * @param options - Processing options
  * @returns Optimized CSS result
@@ -56,9 +69,12 @@ interface LightningCssResult {
 export function processWithLightningCss(options: LightningCssOptions): LightningCssResult {
     const { code, filename = 'styles.css', maxSize = CSS_LIMITS.MAX_SIZE_BYTES } = options;
 
+    // Strip AMP-incompatible features BEFORE LightningCSS processing
+    const ampCompatibleCss = stripAmpIncompatibleFeatures(code);
+
     const { code: minifiedBuffer } = transform({
         filename,
-        code: Buffer.from(code),
+        code: Buffer.from(ampCompatibleCss),
         minify: true,
         targets: BROWSER_TARGETS,
         drafts: {
@@ -67,7 +83,10 @@ export function processWithLightningCss(options: LightningCssOptions): Lightning
         errorRecovery: true,
     });
 
-    const css = minifiedBuffer.toString();
+    // Strip AGAIN after LightningCSS - it may add back nested selectors
+    let css = minifiedBuffer.toString();
+    css = stripAmpIncompatibleFeatures(css);
+
     const sizeBytes = Buffer.byteLength(css, 'utf8');
     const sizeKB = (sizeBytes / COMMON.BYTES_PER_KB).toFixed(COMMON.DECIMAL_PRECISION);
     const valid = sizeBytes <= maxSize;

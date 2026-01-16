@@ -1,13 +1,13 @@
 /**
  * PostCSS Configuration
- * Expert-level PostCSS + Tailwind CSS v4 integration
+ * Expert-level PostCSS + Tailwind CSS v3 integration
  * Optimized for AMP constraints (75KB inline CSS limit)
  */
 
 export default {
     plugins: {
-        // Tailwind CSS v4 - New @tailwindcss/postcss plugin
-        '@tailwindcss/postcss': {},
+        // Tailwind CSS v3
+        tailwindcss: {},
 
         // Autoprefixer for browser compatibility
         autoprefixer: {
@@ -19,6 +19,12 @@ export default {
                 'iOS >= 14',
                 'Android >= 10',
             ],
+        },
+
+        // Optimize and deduplicate CSS
+        'postcss-discard-duplicates': {},
+        'postcss-sort-media-queries': {
+            sort: 'mobile-first',
         },
     },
 };

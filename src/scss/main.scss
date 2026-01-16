@@ -23,68 +23,11 @@
 @use 'icons';
 
 // ============================================================================
-// TAILWIND V4 - CSS-FIRST CONFIGURATION
-// Import Tailwind and configure theme using @theme directive
+// TAILWIND CSS V3
+// Using standard @tailwind directives for v3 compatibility
 // These must come after @use statements due to Sass rules
 // ============================================================================
 
-@import 'tailwindcss';
-
-// Tailwind v4 CSS-first theme configuration
-@theme {
-    /* Colors mapped from CSS custom properties */
-    --color-accent: var(--color-accent);
-    --color-accent-hover: var(--color-accent-hover);
-    --color-accent-light: var(--color-accent-light);
-    --color-accent-light-hover: var(--color-accent-light-hover);
-    --color-bg-primary: var(--color-bg-primary);
-    --color-bg-secondary: var(--color-bg-secondary);
-    --color-bg-tertiary: var(--color-bg-tertiary);
-    --color-text-primary: var(--color-text-primary);
-    --color-text-secondary: var(--color-text-secondary);
-    --color-text-muted: var(--color-text-muted);
-    --color-text-heading: var(--color-text-heading);
-    --color-text-inverse: var(--color-text-inverse);
-    --color-border: var(--color-border);
-    --color-border-light: var(--color-border-light);
-    --color-success: var(--color-success);
-    --color-warning: var(--color-warning);
-    --color-error: var(--color-error);
-    --color-info: var(--color-info);
-    
-    /* Font families */
-    --font-family-sans: var(--font-family-base);
-    --font-family-mono: var(--font-family-mono);
-    
-    /* Spacing scale (8px base) */
-    --spacing-3xs: var(--space-3xs);
-    --spacing-2xs: var(--space-2xs);
-    --spacing-xs: var(--space-xs);
-    --spacing-sm: var(--space-sm);
-    --spacing-md: var(--space-md);
-    --spacing-lg: var(--space-lg);
-    --spacing-xl: var(--space-xl);
-    --spacing-2xl: var(--space-2xl);
-    --spacing-3xl: var(--space-3xl);
-    
-    /* Border radius */
-    --radius-sm: var(--border-radius-sm);
-    --radius-md: var(--border-radius-md);
-    --radius-lg: var(--border-radius-lg);
-    --radius-xl: var(--border-radius-xl);
-    --radius-full: var(--border-radius-full);
-    
-    /* Transitions */
-    --duration-fast: var(--transition-fast);
-    --duration-base: var(--transition-base);
-    --duration-slow: var(--transition-slow);
-    
-    /* Z-index */
-    --z-dropdown: var(--z-dropdown);
-    --z-sticky: var(--z-sticky);
-    --z-fixed: var(--z-fixed);
-    --z-modal: var(--z-modal);
-    
-    /* Max widths */
-    --max-width-container: var(--container-max-width);
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

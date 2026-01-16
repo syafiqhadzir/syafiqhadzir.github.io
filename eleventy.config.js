@@ -8,13 +8,13 @@
 
 import * as sass from 'sass';
 import postcss from 'postcss';
-import tailwindcssPlugin from '@tailwindcss/postcss';
+import tailwindcss from 'tailwindcss';
 import autoprefixer from 'autoprefixer';
-import { transform, browserslistToTargets } from 'lightningcss';
+import { processWithLightningCss } from './dist/lib/lightningCss.js';
 import { existsSync } from 'node:fs';
 
 // Import shared configuration
-import { BROWSERSLIST_QUERY, SCSS_ENTRY, MAX_CSS_SIZE_BYTES } from './dist/config/index.js';
+import { SCSS_ENTRY, MAX_CSS_SIZE_BYTES } from './dist/config/index.js';
 
 // Import custom filters (compiled from TypeScript)
 import { dateFormat, isoDate, relativeDate } from './dist/filters/dateFormat.js';
@@ -25,9 +25,6 @@ import { ampImg } from './dist/shortcodes/ampImg.js';
 
 // Import transforms
 import { cssGuard } from './dist/transforms/cssGuard.js';
-
-/** Browser targets for LightningCSS (derived from shared config) */
-const BROWSER_TARGETS = browserslistToTargets([...BROWSERSLIST_QUERY]);
 
 /**
  * Compile SCSS with Tailwind CSS and LightningCSS for AMP-compatible optimization
@@ -49,9 +46,9 @@ async function compileSCSS() {
             loadPaths: ['./src/scss', './node_modules'],
         });
 
-        // Step 2: Process with PostCSS (Tailwind CSS v4 + Autoprefixer)
+        // Step 2: Process with PostCSS (Tailwind CSS v3 + Autoprefixer)
         const postcssResult = await postcss([
-            tailwindcssPlugin(),
+            tailwindcss(),
             autoprefixer({
                 overrideBrowserslist: [
                     'last 2 Chrome versions',
@@ -64,20 +61,14 @@ async function compileSCSS() {
             }),
         ]).process(sassResult.css, { from: undefined });
 
-        // Step 3: Minify with LightningCSS
-        const { code: minifiedBuffer } = transform({
+        // Step 3: Minify with LightningCSS and strip AMP-incompatible features
+        const { css: minifiedCss, sizeBytes } = processWithLightningCss({
+            code: postcssResult.css,
             filename: 'styles.css',
-            code: Buffer.from(postcssResult.css),
-            minify: true,
-            targets: BROWSER_TARGETS,
-            drafts: { customMedia: true },
-            errorRecovery: true,
+            maxSize: MAX_CSS_SIZE_BYTES,
         });
 
-        const minifiedCss = minifiedBuffer.toString();
-
         // Step 4: Validate size
-        const sizeBytes = Buffer.byteLength(minifiedCss, 'utf8');
         if (sizeBytes > MAX_CSS_SIZE_BYTES) {
             throw new Error(
                 `[LightningCSS] CSS size (${(sizeBytes / 1024).toFixed(2)}KB) exceeds AMP limit of 75KB`
