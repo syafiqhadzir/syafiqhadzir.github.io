@@ -1,3 +1,10 @@
+# [4.9.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.8.0...v4.9.0) (2026-01-16)
+
+
+### Features
+
+* implement wcag aaa color contrast standards ([5aef3d7](https://github.com/syafiqhadzir/syafiqhadzir.github.io/commit/5aef3d7f9fdfae1a20b30b643609de7e64a1a1f1)), closes [#ffffff](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/ffffff) [#0a0a0a](https://github.com/syafiqhadzir/syafiqhadzir.github.io/issues/0a0a0a)
+
 # [4.8.0](https://github.com/syafiqhadzir/syafiqhadzir.github.io/compare/v4.7.0...v4.8.0) (2026-01-16)
 
 
