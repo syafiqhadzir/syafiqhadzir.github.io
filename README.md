@@ -20,7 +20,7 @@ Designed for speed, accessibility, and zero-defect quality.
 - **Architecture Guardrails:** Automated strict dependency, circular dependency, and dead code
   analysis.
 - **Advanced Minification:** Custom pipeline using `html-minifier-terser` and `lightningcss`.
-- **Dark Mode:** System-preference aware with toggle switch.
+- **Dark Mode:** System-preference aware with persistent toggle switch (localStorage).
 
 ## 🛠️ Tech Stack
 

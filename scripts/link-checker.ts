@@ -1,5 +1,5 @@
 #!/usr/bin/env npx ts-node
-/* eslint-disable sonarjs/code-eval -- False positive: this file checks for 'javascript:' protocol strings, not executing code */
+ 
 /**
  * Link Checker Script
  * Validates all internal and external links in the built site

@@ -4,16 +4,25 @@
 
     @module _includes/partials/footer.njk
 #}
-<footer class="footer" role="contentinfo" aria-label="Site footer" data-cy="site-footer">
-    <i class="fa-brands fa-creative-commons fa-fw" aria-hidden="true"></i>
-    <i class="fa-brands fa-creative-commons-zero fa-fw" aria-hidden="true"></i>
-    © 2017-2025 {{ site.author }}<br>
-    <span id="powered-by-amp">
-        Powered by <i class="fa-brands fa-google fa-fw" aria-hidden="true"></i> AMP
-        & <i class="fa-brands fa-cloudflare fa-fw" aria-hidden="true"></i> Cloudflare
-    </span><br>
-    <span id="design-credits">
-        Design inspired by <a href="https://github.com/ankitsultana/researcher" rel="noopener noreferrer external" aria-label="Researcher template by Ankit Sultana">Researcher</a>
-    </span><br>
-    Last Update: {{ site.buildTime | dateFormat("long") }}
+<footer class="footer" role="contentinfo">
+    <hr class="section-divider">
+    <div class="footer-grid">
+        <div class="footer-info">
+            <p>&copy; {{ site.buildTime | dateFilter("YYYY") }} {{ site.author }}. 
+            Built with <a href="https://www.11ty.dev/" target="_blank" rel="noopener">Eleventy</a> 
+            &amp; <a href="https://amp.dev/" target="_blank" rel="noopener">AMP</a>.</p>
+            <p><small>Licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a>.</small></p>
+        </div>
+        <div class="social-links">
+            <a href="{{ site.social.github }}" target="_blank" rel="noopener" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="{{ site.social.blog }}" target="_blank" rel="noopener" aria-label="Blog">
+                <i class="fas fa-rss"></i>
+            </a>
+            <a href="mailto:{{ site.email }}" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </div>
 </footer>

@@ -2,7 +2,7 @@
  * AMP HTML Validator Script Tests
  * @module test/scripts/validate-amp.test
  */
-/* eslint-disable sonarjs/no-nested-functions -- Test mocks require nested function definitions */
+ 
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {

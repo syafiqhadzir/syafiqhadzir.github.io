@@ -2,7 +2,7 @@
  * Build Size Report Script Tests
  * @module test/scripts/build-size-report.test
  */
-/* eslint-disable sonarjs/no-nested-functions -- Test mocks require nested function definitions */
+ 
 
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 import {

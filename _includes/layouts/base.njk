@@ -105,14 +105,14 @@
     {# AMP Transform Indicator - Signals to AMP Cache this is pre-optimized #}
     <meta name="amp-google-client-id-api" content="googleanalytics">
 
-    {# AMP Scripts #}
+    {# AMP Scripts - Must be first! #}
     <script async src="https://cdn.ampproject.org/v0.js" crossorigin="anonymous"></script>
     <script async custom-element="amp-bind" src="https://cdn.ampproject.org/v0/amp-bind-0.1.js" crossorigin="anonymous"></script>
     <script async custom-element="amp-install-serviceworker" src="https://cdn.ampproject.org/v0/amp-install-serviceworker-0.1.js" crossorigin="anonymous"></script>
     <script async custom-element="amp-analytics" src="https://cdn.ampproject.org/v0/amp-analytics-0.1.js" crossorigin="anonymous"></script>
 
     {# Google Fonts #}
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inconsolata:400,700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap">
 
     {# AMP Boilerplate (Required) #}
     <style amp-boilerplate>
@@ -168,8 +168,61 @@
 <body [class]="theme.mode || ''">
     {# Theme State Management #}
     <amp-state id="theme">
-        <script type="application/json">{"mode": null}</script>
+        <script type="application/json">
+            {
+                "mode": null
+            }
+        </script>
     </amp-state>
+    
+    {# 
+        Theme Persistence Implementation
+        ================================
+        Note: This uses inline JavaScript which violates strict AMP validation.
+        Trade-off: Persistent dark mode (user experience) vs AMP compliance.
+        
+        The script below:
+        - Loads saved theme from localStorage on page load
+        - Saves theme changes to localStorage when user toggles
+        - Uses MutationObserver to detect body class changes
+    #}
+    <script>
+    (function(){
+        function init(){
+            try{
+                var t=localStorage.getItem('theme');
+                if(t==='dark'||t==='light'){
+                    if(typeof AMP!=='undefined'&&AMP.setState){
+                        AMP.setState({theme:{mode:t}});
+                    }
+                }
+            }catch(e){}
+            
+            var obs=new MutationObserver(function(){
+                var c=document.body.className;
+                if(c.indexOf('dark')!==-1){
+                    try{localStorage.setItem('theme','dark')}catch(e){}
+                }else if(c.indexOf('light')!==-1){
+                    try{localStorage.setItem('theme','light')}catch(e){}
+                }
+            });
+            
+            if(document.body){
+                obs.observe(document.body,{attributes:true,attributeFilter:['class']});
+            }
+        }
+        
+        if(typeof AMP!=='undefined'){
+            (window.AMP=window.AMP||[]).push(init);
+        }else{
+            if(document.readyState==='loading'){
+                document.addEventListener('DOMContentLoaded',init);
+            }else{
+                init();
+            }
+        }
+    })();
+    </script>
 
     {# Skip Link for Accessibility #}
     <a href="#main-content" class="skip-link" data-cy="skip-link">Skip to main content</a>
@@ -185,14 +238,14 @@
             {% include "partials/nav.njk" %}
 
             {# Main Content Area #}
-            <main id="main-content" class="content" role="main" aria-label="{{ contentLabel | default('Page content') }}" data-cy="main-content">
+            <main id="main-content" class="content" aria-label="{{ contentLabel | default('Page content') }}" data-cy="main-content">
                 {{ content | safe }}
             </main>
         </div>
     </div>
 
     {# Horizontal Rule Before Footer #}
-    <hr>
+    <hr role="separator">
 
     {# Footer #}
     {% include "partials/footer.njk" %}

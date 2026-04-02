@@ -13,18 +13,10 @@ permalink: /
         "@context": "https://schema.org",
         "@type": "Person",
         "@id": "{{ site.url }}/#person",
-        "name": "Syafiq Hadzir",
-        "givenName": "Syafiq",
-        "familyName": "Hadzir",
-        "jobTitle": "Software QA Engineer",
-        "description": "AI-assisted Software QA Engineer specializing in test automation and quality assurance.",
+        "name": "{{ site.author }}",
+        "jobTitle": "{{ site.jobTitle }}",
+        "description": "{{ site.description }}",
         "url": "{{ site.url }}",
-        "image": {
-            "@type": "ImageObject",
-            "url": "{{ site.url }}/images/optimized/headshot-170w.webp",
-            "width": 170,
-            "height": 170
-        },
         "email": "{{ site.email }}",
         "sameAs": [
             "{{ site.social.github }}",
@@ -35,156 +27,73 @@ permalink: /
             "@type": "Organization",
             "name": "{{ site.company.name }}",
             "url": "{{ site.company.url }}"
-        },
-        "alumniOf": {
-            "@type": "Organization",
-            "name": "University of Cyberjaya"
-        },
-        "knowsAbout": [
-            "Software Testing",
-            "Test Automation",
-            "Quality Assurance",
-            "CI/CD Integration",
-            "AI in Testing",
-            "Network Security",
-            "Static Code Analysis"
-        ],
-        "hasOccupation": {
-            "@type": "Occupation",
-            "name": "Software Development Engineer in Test",
-            "occupationalCategory": "15-1256.00",
-            "skills": ["Test Automation", "CI/CD", "Cypress", "Vitest", "SonarQube"]
         }
-    },
-    {
-        "@context": "https://schema.org",
-        "@type": "ResearchProject",
-        "@id": "{{ site.url }}/#research",
-        "name": "AI-Assisted Quality Assurance Research",
-        "description": "Exploring the intersection of artificial intelligence and software testing methodologies to enhance defect detection and test automation efficiency.",
-        "url": "{{ site.url }}",
-        "funder": {
-            "@type": "Person",
-            "@id": "{{ site.url }}/#person"
-        },
-        "member": {
-            "@type": "Person",
-            "@id": "{{ site.url }}/#person"
-        },
-        "keywords": [
-            "AI Testing",
-            "Machine Learning QA",
-            "Automated Test Generation",
-            "Defect Prediction",
-            "Continuous Testing"
-        ],
-        "startDate": "2020-01",
-        "about": [
-            {
-                "@type": "Thing",
-                "name": "Artificial Intelligence"
-            },
-            {
-                "@type": "Thing",
-                "name": "Software Quality Assurance"
-            },
-            {
-                "@type": "Thing",
-                "name": "Test Automation"
-            }
-        ]
     }
 ]
 </script>
 {% endblock %}
 
-<h1 class="sr-only">Portfolio of Syafiq Hadzir</h1>
-
-<h2 id="about-me">
-    <i class="fa-solid fa-user-tie fa-fw" aria-hidden="true"></i>&nbsp;About Me
-</h2>
-<p>
-    <span class="profile-picture">
+<section class="profile-section">
+    <div class="profile-picture">
         {% ampImg {
             src: "/images/headshot.webp",
-            alt: "Syafiq Hadzir",
-            title: "Syafiq Hadzir",
-            width: 85,
-            height: 85,
-            layout: "fixed",
-            dataCy: "profile-picture",
+            alt: site.author,
+            width: 120,
+            height: 120,
+            layout: "responsive",
             "data-hero": true
         } %}
-    </span>
-    Hi! I am <span data-cy="author-name">Syafiq Hadzir</span>, an AI-assisted Software QA Engineer at <a href="{{ site.company.url }}"
-        rel="nofollow noreferrer noopener external" aria-label="Cloud Connect company website">Cloud Connect</a>. I
-    actively leverage cutting-edge AI tools and methodologies to enhance the efficiency and effectiveness of the software testing lifecycle.
-</p>
+    </div>
+    <div class="hero-content">
+        <h1 class="gradient-text">{{ site.author }}</h1>
+        <p class="lead">{{ site.jobTitle }} @ <a href="{{ site.company.url }}" target="_blank" rel="noopener">{{ site.company.name }}</a></p>
+        <div class="status-badge">
+            <span class="badge"><i class="fas fa-check-circle"></i> Available for collaboration</span>
+        </div>
+    </div>
+</section>
 
-<h2 id="research-interest">
-    <i class="fa-solid fa-flask fa-fw" aria-hidden="true"></i>&nbsp;Research Interest
-</h2>
-<p>My research focuses on the intersection of artificial intelligence and software quality assurance. I explore how
-    machine learning models can enhance test automation, improve defect prediction, and optimize the overall testing
-    process. Current areas of investigation include:</p>
-<ul data-cy="research-interest-list">
-    <li>AI-driven test case generation and optimization</li>
-    <li>Machine learning for defect prediction and classification</li>
-    <li>Intelligent test prioritization algorithms</li>
-    <li>Natural language processing for requirements analysis</li>
-</ul>
+<div class="prose">
+    <p>Hi! I am <strong>{{ site.author }}</strong>, an <abbr title="Artificial Intelligence">AI</abbr>-assisted Software <abbr title="Quality Assurance">QA</abbr> Engineer. I actively leverage cutting-edge <abbr title="Artificial Intelligence">AI</abbr> tools and methodologies to enhance the efficiency and effectiveness of the software testing lifecycle.</p>
+</div>
 
-<h2 id="publications">
-    <i class="fa-solid fa-book fa-fw" aria-hidden="true"></i>&nbsp;Publications
-</h2>
-<ol data-cy="publications-list">
-    <li><strong>S. Hadzir</strong>: <em>Exploring AI-Assisted Test Automation Frameworks</em> - A comprehensive study on integrating AI tools into existing test automation pipelines.</li>
-    <li><strong>S. Hadzir</strong>: <em>Network Security Testing Methodologies</em> - Research on automated security testing approaches for web applications.</li>
-</ol>
+<hr class="section-divider">
 
-<h2 id="proficiencies">
-    <i class="fa-solid fa-diagram-project fa-fw" aria-hidden="true"></i>&nbsp;Proficiencies
-</h2>
-<p>As an experienced software QA engineer with 5+ years of experience in software development and 3+ years in
-    network security research, I have a keen eye for detail and an aptitude for quickly understanding complex
-    software systems. My expertise lies in:</p>
-<ul data-cy="proficiencies-list">
-    <li>Designing and executing comprehensive test plans</li>
-    <li>Identifying critical defects</li>
-    <li>Ensuring the delivery of high-quality software products</li>
-</ul>
-<p>Note: kindly visit my <a href="{{ site.social.github }}" rel="noopener noreferrer external">GitHub profile</a> for more information.</p>
+<div class="grid md:grid-cols-2 gap-6">
+    <section class="card">
+        <h3><i class="fa-solid fa-flask fa-fw"></i> Research</h3>
+        <p>Exploring the intersections of AI and software quality assurance, specifically machine learning for defect prediction and test optimization.</p>
+        <a href="https://research.syafiqhadzir.dev">View Research Portfolio &rarr;</a>
+    </section>
 
-<h2 id="interests">
-    <i class="fa-solid fa-hexagon-nodes fa-fw" aria-hidden="true"></i>&nbsp;Interests
-</h2>
-<p>At the forefront of evolving technology, I constantly learn and adapt to the dynamic interplay between AI
-    and software testing, focusing specifically on these areas:</p>
-<ul data-cy="interests-list">
-    <li><i class="fa-solid fa-brain fa-fw" aria-hidden="true"></i>&emsp;AI Exploration</li>
-    <li><i class="fa-solid fa-infinity fa-fw" aria-hidden="true"></i>&emsp;CI/CD Integration</li>
-    <li><i class="fa-solid fa-code fa-fw" aria-hidden="true"></i>&emsp;Code Assessment</li>
-    <li><i class="fa-solid fa-robot fa-fw" aria-hidden="true"></i>&emsp;Test Automation</li>
-    <li><i class="fa-solid fa-window-maximize fa-fw" aria-hidden="true"></i>&emsp;Web Application</li>
-</ul>
+    <section class="card">
+        <h3><i class="fa-solid fa-code fa-fw"></i> Projects</h3>
+        <p>Open-source contributions and personal projects focusing on developer tooling, automation, and performance.</p>
+        <a href="{{ site.social.github }}">Explore on GitHub &rarr;</a>
+    </section>
+</div>
 
-<hr>
+<section class="mt-12">
+    <h2>Proficiencies</h2>
+    <div class="flex flex-wrap mt-4">
+        <span class="badge">TypeScript</span>
+        <span class="badge">Node.js</span>
+        <span class="badge">Eleventy</span>
+        <span class="badge">AMP</span>
+        <span class="badge">Cypress</span>
+        <span class="badge">Test Automation</span>
+        <span class="badge">CI/CD</span>
+        <span class="badge">Sass</span>
+    </div>
+</section>
 
-<h2 id="references">
-    <i class="fa-solid fa-link fa-fw" aria-hidden="true"></i>&nbsp;References
-</h2>
-<ul>
-    <li><i class="fa-solid fa-signature fa-fw" aria-hidden="true"></i>&nbsp;<a href="{{ site.social.blog }}"
-            rel="noopener noreferrer external" aria-label="Syafiq's Blog">Blog</a>: My blog where I share my thoughts
-        and experiences</li>
-    <li><i class="fa-solid fa-flask fa-fw" aria-hidden="true"></i>&nbsp;<a href="https://research.syafiqhadzir.dev"
-            rel="noopener noreferrer external" aria-label="Syafiq's Research">Research</a>: My research projects and publications</li>
-    <li><i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;<a href="{{ site.social.github }}"
-            rel="noopener noreferrer external" aria-label="Syafiq's GitHub profile">GitHub</a>: View my open source
-        contributions and projects</li>
-    <li><i class="fa-brands fa-gitlab fa-fw" aria-hidden="true"></i>&nbsp;<a href="{{ site.social.gitlab }}"
-            rel="noopener noreferrer external" aria-label="Syafiq's GitLab profile">GitLab</a>: Additional
-        repositories and work</li>
-</ul>
-
-<hr>
+<section class="mt-12">
+    <h2>Interests</h2>
+    <ul class="grid grid-cols-2 md:grid-cols-3 gap-2 list-none p-0">
+        <li><i class="fa-solid fa-brain fa-fw text-accent mr-2"></i> AI Exploration</li>
+        <li><i class="fa-solid fa-infinity fa-fw text-accent mr-2"></i> CI/CD</li>
+        <li><i class="fa-solid fa-code fa-fw text-accent mr-2"></i> Code Assessment</li>
+        <li><i class="fa-solid fa-window-maximize fa-fw text-accent mr-2"></i> Web Apps</li>
+        <li><i class="fa-solid fa-signature fa-fw text-accent mr-2"></i> Tech Writing</li>
+    </ul>
+</section>

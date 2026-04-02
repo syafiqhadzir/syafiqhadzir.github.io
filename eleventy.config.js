@@ -32,6 +32,7 @@ import { cssGuard } from './dist/transforms/cssGuard.js';
  * @returns Minified CSS string
  */
 async function compileSCSS() {
+    /* eslint-disable security/detect-non-literal-fs-filename, @typescript-eslint/restrict-template-expressions */
     // Check if SCSS file exists
     if (!existsSync(SCSS_ENTRY)) {
         console.warn(`[11ty] SCSS entry not found: ${SCSS_ENTRY}`);
@@ -98,37 +99,34 @@ export default function configureEleventy(eleventyConfig) {
     eleventyConfig.addPassthroughCopy('humans.txt');
     eleventyConfig.addPassthroughCopy('browserconfig.xml');
     eleventyConfig.addPassthroughCopy('sw.js');
-    eleventyConfig.addPassthroughCopy({ 'src/install-sw.html': 'install-sw.html' });
+    // install-sw.html is generated from .njk template
     eleventyConfig.addPassthroughCopy('.well-known');
-    eleventyConfig.addPassthroughCopy('_headers'); // Security headers
-    eleventyConfig.addPassthroughCopy('_redirects'); // Netlify rules
+    eleventyConfig.addPassthroughCopy('_headers');
+    eleventyConfig.addPassthroughCopy('_redirects');
 
     // GLOBAL DATA
-
     // Add compiled CSS as global data
+
+    // @ts-expect-error - Eleventy 3.x API mismatch
     eleventyConfig.addGlobalData('compiledCSS', async () => {
         return await compileSCSS();
     });
 
-    // Note: Site metadata is loaded automatically from src/_data/site.json
-
     // FILTERS
-
-    // Date formatting filters
     eleventyConfig.addFilter('dateFormat', dateFormat);
     eleventyConfig.addFilter('isoDate', isoDate);
     eleventyConfig.addFilter('relativeDate', relativeDate);
-
-    // Reading time filters
     eleventyConfig.addFilter('readingTime', readingTime);
     eleventyConfig.addFilter('wordCount', wordCount);
 
     // SHORTCODES
-    // AMP Image shortcode: {% ampImg src, alt, width, height, layout %}
+
+    // @ts-expect-error - Eleventy 3.x API mismatch
     eleventyConfig.addAsyncShortcode('ampImg', ampImg);
 
     // TRANSFORMS
-    // CSS Size Guard Transform (75KB limit for AMP)
+
+    // @ts-expect-error - Eleventy 3.x API mismatch
     eleventyConfig.addTransform('cssGuard', (content, outputPath) => {
         if (outputPath?.endsWith('.html')) {
             return cssGuard(content, MAX_CSS_SIZE_BYTES);
@@ -136,50 +134,24 @@ export default function configureEleventy(eleventyConfig) {
         return content;
     });
 
-    // HTML Minification Transform (production only)
-    // Note: Implemented in src/transforms/htmlMinify.ts
-    // Uncomment below and add import when ready for production minification:
-    // import { htmlMinifyTransform } from './dist/transforms/htmlMinify.js';
-    // eleventyConfig.addTransform('htmlMinify', htmlMinifyTransform);
-
     // WATCH TARGETS
     eleventyConfig.addWatchTarget('./src/scss/');
     eleventyConfig.addWatchTarget('./src/filters/');
     eleventyConfig.addWatchTarget('./src/shortcodes/');
     eleventyConfig.addWatchTarget('./src/pages/');
 
-    // IGNORES (don't process these as templates)
+    // IGNORES
     eleventyConfig.ignores.add('node_modules');
     eleventyConfig.ignores.add('dist');
     eleventyConfig.ignores.add('coverage');
     eleventyConfig.ignores.add('cypress');
     eleventyConfig.ignores.add('test');
-    eleventyConfig.ignores.add('src/filters');
-    eleventyConfig.ignores.add('src/shortcodes');
-    eleventyConfig.ignores.add('src/transforms');
-    eleventyConfig.ignores.add('src/scss');
-    eleventyConfig.ignores.add('src/_data');
-
-    // Ignore existing static HTML files (replaced by Nunjucks templates)
-    eleventyConfig.ignores.add('index.html');
-    eleventyConfig.ignores.add('contact.html');
-    eleventyConfig.ignores.add('sitemap.html');
-    eleventyConfig.ignores.add('404.html');
-    eleventyConfig.ignores.add('offline.html');
-    eleventyConfig.ignores.add('sw.html');
     eleventyConfig.ignores.add('README.md');
-    eleventyConfig.ignores.add('CHANGELOG.md');
-    eleventyConfig.ignores.add('CODE_OF_CONDUCT.md');
-    eleventyConfig.ignores.add('CONTRIBUTING.md');
-    eleventyConfig.ignores.add('SECURITY.md');
-    eleventyConfig.ignores.add('ARCHITECTURE.md');
     eleventyConfig.ignores.add('.github');
     eleventyConfig.ignores.add('docs');
     eleventyConfig.ignores.add('scripts');
 
-    // PLUGINS
-    // No external plugins - keeping it minimal for AMP
-    // BROWSER SYNC (Development)
+    // BROWSER SYNC
     eleventyConfig.setServerOptions({
         port: 8080,
         showAllHosts: true,
@@ -188,14 +160,9 @@ export default function configureEleventy(eleventyConfig) {
 
     // CONFIGURATION RETURN
     return {
-        // Template formats to process
         templateFormats: ['njk', 'md', 'html'],
-
-        // Default template engine
         markdownTemplateEngine: 'njk',
         htmlTemplateEngine: 'njk',
-
-        // Directory configuration
         dir: {
             input: '.',
             includes: '_includes',
@@ -203,8 +170,6 @@ export default function configureEleventy(eleventyConfig) {
             data: 'src/_data',
             output: '_site',
         },
-
-        // Pathprefix for deployment
         pathPrefix: '/',
     };
 }

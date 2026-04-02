@@ -4,39 +4,29 @@
 
     @module _includes/partials/nav.njk
 #}
-<header class="navbar" role="banner">
-    <a id="author-name" class="alignable" href="/" aria-label="Homepage" data-cy="author-name">{{ site.title }}</a>
-    <nav role="navigation" aria-label="Main navigation" class="alignable pull-right">
-        <ul id="navlist" class="navbar-ul" data-cy="nav-list">
-            <li class="alignable pull-left nav-list">
-                <a href="/" {% if page.url == "/" %}class="active" aria-current="page"{% endif %} data-cy="nav-about">
-                    <i class="fa-solid fa-user-tie fa-fw" aria-hidden="true"></i>&nbsp;About
-                </a>
-            </li>
-            <li class="alignable pull-left nav-list">
-                <span class="nav-separator" aria-hidden="true">/</span>
-            </li>
-            <li class="alignable pull-left nav-list">
-                <a href="/contact.html" {% if page.url == "/contact.html" or page.url == "/contact/" %}class="active" aria-current="page"{% endif %} data-cy="nav-contact">
-                    <i class="fa-solid fa-envelope fa-fw" aria-hidden="true"></i>&nbsp;Contact
-                </a>
-            </li>
-            <li class="alignable pull-left nav-list">
-                <span class="nav-separator" aria-hidden="true">/</span>
-            </li>
-            <li class="alignable pull-left nav-list">
-                <a href="/sitemap.html" {% if page.url == "/sitemap.html" or page.url == "/sitemap/" %}class="active" aria-current="page"{% endif %} data-cy="nav-sitemap">
-                    <i class="fa-solid fa-sitemap fa-fw" aria-hidden="true"></i>&nbsp;Sitemap
-                </a>
-            </li>
-            <li class="alignable pull-left nav-list">
-                <button class="theme-toggle" data-cy="theme-toggle"
-                    on="tap:AMP.setState({theme: {mode: theme.mode == 'dark' ? 'light' : 'dark'}})"
-                    aria-label="Toggle Dark Mode">
-                    <i class="fa-solid fa-moon moon-icon" aria-hidden="true"></i>
-                    <i class="fa-solid fa-sun sun-icon" aria-hidden="true"></i>
-                </button>
-            </li>
-        </ul>
-    </nav>
-</header>
+<nav class="navbar" aria-label="Main Navigation">
+    <a href="/" id="author-name" {{ 'class=active' if page.url === '/' }} aria-label="Home page">
+        {{ site.title }}
+    </a>
+
+    <ul class="navbar-ul">
+        <li>
+            <a href="/contact.html" class="nav-link {{ 'active' if page.url === '/contact.html' or page.url === '/contact/' }}" aria-label="Contact page">
+                Contact
+            </a>
+        </li>
+        <li>
+            <a href="/sitemap.html" class="nav-link {{ 'active' if page.url === '/sitemap.html' or page.url === '/sitemap/' }}" aria-label="Sitemap page">
+                Sitemap
+            </a>
+        </li>
+        <li>
+            <button class="theme-toggle"
+                on="tap:AMP.setState({theme: {mode: theme.mode == 'dark' ? 'light' : 'dark'}})"
+                aria-label="Toggle dark mode">
+                <i class="fas fa-moon moon-icon" aria-hidden="true"></i>
+                <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
+            </button>
+        </li>
+    </ul>
+</nav>

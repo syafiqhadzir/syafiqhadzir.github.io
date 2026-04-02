@@ -10,28 +10,16 @@ approach of Tailwind with the power of Sass preprocessor features.
 
 ### Hybrid Approach: Tailwind-First with Sass Enhancement
 
-```
-┌─────────────────────────────────────────────────┐
-│  Design System Foundation (CSS Custom Props)    │
-│  src/scss/abstracts/_tokens.scss                │
-└─────────────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────────┐
-│  Tailwind CSS (Utility Generation)              │
-│  @tailwind base, components, utilities          │
-└─────────────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────────┐
-│  Sass Enhancement Layer                         │
-│  - Component @apply patterns                    │
-│  - Dynamic utility generation                   │
-│  - Complex mixins & functions                   │
-└─────────────────────────────────────────────────┘
-                    ↓
-┌─────────────────────────────────────────────────┐
-│  Build Pipeline                                 │
-│  Sass → PostCSS (Tailwind) → LightningCSS      │
-└─────────────────────────────────────────────────┘
+```markdown
+┌─────────────────────────────────────────────────┐ │ Design System Foundation (CSS Custom Props) │
+│ src/scss/abstracts/\_tokens.scss │ └─────────────────────────────────────────────────┘ ↓
+┌─────────────────────────────────────────────────┐ │ Tailwind CSS (Utility Generation) │ │
+@tailwind base, components, utilities │ └─────────────────────────────────────────────────┘ ↓
+┌─────────────────────────────────────────────────┐ │ Sass Enhancement Layer │ │ - Component @apply
+patterns │ │ - Dynamic utility generation │ │ - Complex mixins & functions │
+└─────────────────────────────────────────────────┘ ↓
+┌─────────────────────────────────────────────────┐ │ Build Pipeline │ │ Sass → PostCSS (Tailwind) →
+LightningCSS │ └─────────────────────────────────────────────────┘
 ```
 
 ## Build Pipeline
@@ -61,26 +49,15 @@ approach of Tailwind with the power of Sass preprocessor features.
 
 ## File Structure
 
-```
-src/scss/
-├── main.scss                    # Entry point with @tailwind directives
-├── abstracts/
-│   ├── _tokens.scss            # CSS custom properties (design tokens)
-│   ├── _mixins.scss            # Sass mixins (breakpoints, a11y)
-│   ├── _functions.scss         # Sass functions
-│   └── _index.scss             # Module exports
-├── base/
-│   ├── _reset.scss             # Modern CSS reset
-│   ├── _typography.scss        # Base typography (@layer base)
-│   ├── _print.scss             # Print styles
-│   └── _index.scss             # Module exports
-├── components/
-│   ├── _components.scss        # Components using @apply
-│   └── _index.scss             # Module exports
-├── utilities/
-│   ├── _utilities.scss         # Custom utilities (@layer utilities)
-│   └── _index.scss             # Module exports
-└── _icons.scss                  # Font Awesome icons
+```markdown
+src/scss/ ├── main.scss # Entry point with @tailwind directives ├── abstracts/ │ ├── \_tokens.scss #
+CSS custom properties (design tokens) │ ├── \_mixins.scss # Sass mixins (breakpoints, a11y) │ ├──
+\_functions.scss # Sass functions │ └── \_index.scss # Module exports ├── base/ │ ├── \_reset.scss #
+Modern CSS reset │ ├── \_typography.scss # Base typography (@layer base) │ ├── \_print.scss # Print
+styles │ └── \_index.scss # Module exports ├── components/ │ ├── \_components.scss # Components
+using @apply │ └── \_index.scss # Module exports ├── utilities/ │ ├── \_utilities.scss # Custom
+utilities (@layer utilities) │ └── \_index.scss # Module exports └── \_icons.scss # Font Awesome
+icons
 ```
 
 ## Key Concepts
@@ -237,6 +214,7 @@ Enhanced beyond Tailwind's defaults:
    ```
 
 4. **Use CSS custom properties** for theme values
+
    ```scss
    color: var(--color-accent);
    padding: var(--space-lg);
@@ -361,6 +339,9 @@ body.dark {
 ```
 
 **Why?** AMP uses `amp-bind` for theme switching with body class.
+
+**Persistence:** Theme preference is saved to localStorage and automatically restored on page load,
+providing a consistent experience across sessions.
 
 ## Migration from Pure Sass
 

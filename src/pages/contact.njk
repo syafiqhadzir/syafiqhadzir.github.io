@@ -22,40 +22,41 @@ permalink: /contact.html
         "url": "{{ site.url }}",
         "sameAs": [
             "{{ site.social.github }}",
-            "{{ site.social.gitlab }}"
+            "{{ site.social.gitlab }}",
+            "{{ site.social.blog }}"
         ]
     }
 }
 </script>
 {% endblock %}
 
-<h1 id="contact">
-    <i class="fa-solid fa-envelope fa-fw" aria-hidden="true"></i>&nbsp;Contact
-</h1>
-<p>Feel free to reach out to me via email or connect with me on social media.</p>
-<p class="email-address">
-    <i class="fa-solid fa-envelope" aria-hidden="true"></i>&nbsp;
-    <a href="mailto:{{ site.email }}" data-cy="email-link">{{ site.email }}</a>
-</p>
+<h1 id="contact">Contact</h1>
+<p class="lead">Feel free to reach out to me via email or connect with me on social media.</p>
 
-<h2 id="professional">Professional</h2>
-<ul>
-    <li>
-        <i class="fa-brands fa-github fa-fw" aria-hidden="true"></i>&nbsp;
-        <a href="{{ site.social.github }}" rel="noopener noreferrer external" aria-label="Syafiq's GitHub" data-cy="social-github">GitHub</a>
-    </li>
-    <li>
-        <i class="fa-brands fa-gitlab fa-fw" aria-hidden="true"></i>&nbsp;
-        <a href="{{ site.social.gitlab }}" rel="noopener noreferrer external" aria-label="Syafiq's GitLab" data-cy="social-gitlab">GitLab</a>
-    </li>
-</ul>
+<div class="grid md:grid-cols-2 gap-6 mt-8">
+    <div class="card">
+        <h3><i class="fa-solid fa-envelope fa-fw"></i> Email</h3>
+        <p>For professional inquiries and collaboration.</p>
+        <a href="mailto:{{ site.email }}">{{ site.email }}</a>
+    </div>
 
-<h2 id="blog">Blog</h2>
-<ul>
-    <li>
-        <i class="fa-solid fa-signature fa-fw" aria-hidden="true"></i>&nbsp;
-        <a href="{{ site.social.blog }}" rel="noopener noreferrer external" aria-label="Syafiq's Blog" data-cy="blog-link">blog.syafiqhadzir.dev</a>
-    </li>
-</ul>
+    <div class="card">
+        <h3><i class="fa-brands fa-github fa-fw"></i> GitHub</h3>
+        <p>Explore my open-source work and contributions.</p>
+        <a href="{{ site.social.github }}" target="_blank" rel="noopener">@SyafiqHadzir &rarr;</a>
+    </div>
 
-<hr>
+    <div class="card">
+        <h3><i class="fa-solid fa-signature fa-fw"></i> Blog</h3>
+        <p>Insights on software testing and test automation.</p>
+        <a href="{{ site.social.blog }}" target="_blank" rel="noopener">blog.syafiqhadzir.dev &rarr;</a>
+    </div>
+
+    <div class="card">
+        <h3><i class="fa-brands fa-gitlab fa-fw"></i> GitLab</h3>
+        <p>Alternative repositories and legacy projects.</p>
+        <a href="{{ site.social.gitlab }}" target="_blank" rel="noopener">GitLab Profile &rarr;</a>
+    </div>
+</div>
+
+<hr class="section-divider">

@@ -206,6 +206,40 @@ describe('AMP Smoke Tests', () => {
             // Verify state changed or action didn't error
             cy.get('body').should('exist');
         });
+
+        it('persists theme preference to localStorage', () => {
+            // Clear localStorage first
+            cy.clearLocalStorage();
+
+            // Toggle to dark mode
+            cy.get('[data-cy=theme-toggle]').click();
+
+            // Wait for AMP-bind and MutationObserver to process
+            cy.wait(500);
+
+            // Verify theme is saved to localStorage
+            cy.window().then((win) => {
+                const savedTheme = win.localStorage.getItem('theme');
+                expect(savedTheme).to.exist;
+                expect(savedTheme).to.match(/^(dark|light)$/);
+            });
+        });
+
+        it('restores theme preference on page load', () => {
+            // Set a theme in localStorage before visiting
+            cy.window().then((win) => {
+                win.localStorage.setItem('theme', 'dark');
+            });
+
+            // Visit the page
+            cy.visit('/');
+
+            // Wait for theme initialization
+            cy.wait(500);
+
+            // Verify body has dark class
+            cy.get('body').should('have.class', 'dark');
+        });
     });
 
     // NAVIGATION

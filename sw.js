@@ -1,7 +1,7 @@
 // Service Worker for Syafiq Hadzir Portfolio
-// Version: 2.3.0 (2026-01-07)
+// Version: 2.4.0 (2026-03-17)
 
-const CACHE_VERSION = '2026-01-07';
+const CACHE_VERSION = '2026-03-17';
 const CACHE_NAME = `syafiq-portfolio-${CACHE_VERSION}`;
 const OFFLINE_URL = '/offline.html';
 
@@ -20,8 +20,17 @@ const PRECACHE_ASSETS = [
     '/favicons/android-chrome-512x512.png',
 ];
 
+// Handle messages from pages (for theme persistence)
+self.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'SAVE_THEME') {
+        // Theme is saved via localStorage in the page context
+        // Service worker just acknowledges
+        event.ports[0].postMessage({ success: true });
+    }
+});
+
 // Install event - cache core assets
-self.addEventListener('install', (event) => {
+const INSTALL_EVENT = (event) => {
     event.waitUntil(
         caches
             .open(CACHE_NAME)
@@ -30,7 +39,8 @@ self.addEventListener('install', (event) => {
             })
             .then(() => self.skipWaiting())
     );
-});
+};
+self.addEventListener('install', INSTALL_EVENT);
 
 // Activate event - cleanup old caches
 self.addEventListener('activate', (event) => {
