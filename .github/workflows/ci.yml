@@ -149,7 +149,7 @@ jobs:
           path: _site/
 
       - name: Cypress Run
-        uses: cypress-io/github-action@v6
+        uses: cypress-io/github-action@v7
         with:
           install: false
           start: npm run serve
